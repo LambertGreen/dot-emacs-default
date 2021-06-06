@@ -3,7 +3,8 @@
 thumbs.db
 
 # Emacs generated state files
-bookmarks/
+*~
+bookmarks
 elpa/
 eshell/
-semantic/
+semanticdb/

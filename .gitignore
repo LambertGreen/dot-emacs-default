@@ -1,0 +1,9 @@
+# Operating system files
+.DS_Store
+thumbs.db
+
+# Emacs generated state files
+bookmarks/
+elpa/
+eshell/
+semantic/

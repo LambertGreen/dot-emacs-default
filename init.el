@@ -87,7 +87,7 @@
                 :map evil-visual-state-map
                 ("gr" . evil-replace-with-register)))
 
-  ;; * operator in vusual mode
+  ;; * operator in visual mode
   (use-package evil-visualstar
     :ensure t
     :bind (:map evil-visual-state-map

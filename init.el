@@ -24,11 +24,11 @@
 
 (package-initialize)
 (unless package-archive-contents
- (package-refresh-contents))
+  (package-refresh-contents))
 
 ;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+  (package-install 'use-package))
 
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -48,77 +48,77 @@
   :config
   (evil-mode))
 
-  ;; vim-like keybindings everywhere in emacs
-  (use-package evil-collection
-    :after evil
-    :ensure t
-    :config
-    (evil-collection-init))
+;; vim-like keybindings everywhere in emacs
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
-  ;; gl and gL operators, like vim-lion
-  (use-package evil-lion
-    :ensure t
-    :bind (:map evil-normal-state-map
-                ("g l " . evil-lion-left)
-                ("g L " . evil-lion-right)
-                :map evil-visual-state-map
-                ("g l " . evil-lion-left)
-                ("g L " . evil-lion-right)))
+;; gl and gL operators, like vim-lion
+(use-package evil-lion
+  :ensure t
+  :bind (:map evil-normal-state-map
+         ("g l " . evil-lion-left)
+         ("g L " . evil-lion-right)
+         :map evil-visual-state-map
+         ("g l " . evil-lion-left)
+         ("g L " . evil-lion-right)))
 
-  ;; gc operator, like vim-commentary
-  (use-package evil-commentary
-    :ensure t
-    :after evil
-    :config (evil-commentary-mode))
+;; gc operator, like vim-commentary
+(use-package evil-commentary
+  :ensure t
+  :after evil
+  :config (evil-commentary-mode))
 
-  ;; gx operator, like vim-exchange
-  ;; NOTE using cx like vim-exchange is possible but not as straightforward
-  (use-package evil-exchange
-    :ensure t
-    :bind (:map evil-normal-state-map
-                ("gx" . evil-exchange)
-                ("gX" . evil-exchange-cancel)))
+;; gx operator, like vim-exchange
+;; NOTE using cx like vim-exchange is possible but not as straightforward
+(use-package evil-exchange
+  :ensure t
+  :bind (:map evil-normal-state-map
+         ("gx" . evil-exchange)
+         ("gX" . evil-exchange-cancel)))
 
-  ;; gr operator, like vim's ReplaceWithRegister
-  (use-package evil-replace-with-register
-    :ensure t
-    :bind (:map evil-normal-state-map
-                ("gr" . evil-replace-with-register)
-                :map evil-visual-state-map
-                ("gr" . evil-replace-with-register)))
+;; gr operator, like vim's ReplaceWithRegister
+(use-package evil-replace-with-register
+  :ensure t
+  :bind (:map evil-normal-state-map
+         ("gr" . evil-replace-with-register)
+         :map evil-visual-state-map
+         ("gr" . evil-replace-with-register)))
 
-  ;; * operator in visual mode
-  (use-package evil-visualstar
-    :ensure t
-    :bind (:map evil-visual-state-map
-                ("*" . evil-visualstar/begin-search-forward)
-                ("#" . evil-visualstar/begin-search-backward)))
+;; * operator in visual mode
+(use-package evil-visualstar
+  :ensure t
+  :bind (:map evil-visual-state-map
+         ("*" . evil-visualstar/begin-search-forward)
+         ("#" . evil-visualstar/begin-search-backward)))
 
-  ;; ex commands, which a vim user is likely to be familiar with
-  (use-package evil-expat
-    :ensure t
-    :defer t)
+;; ex commands, which a vim user is likely to be familiar with
+(use-package evil-expat
+  :ensure t
+  :defer t)
 
-  ;; visual hints while editing
-  (use-package evil-goggles
-    :ensure t
-    :config
-    (evil-goggles-use-diff-faces)
-    (evil-goggles-mode))
+;; visual hints while editing
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-use-diff-faces)
+  (evil-goggles-mode))
 
-  ;; like vim-surround
-  (use-package evil-surround
-    :ensure t
-    :commands
-    (evil-surround-edit
-     evil-Surround-edit
-     evil-surround-region
-     evil-Surround-region)
-    :init
-    (evil-define-key 'operator global-map "s" 'evil-surround-edit)
-    (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-    (evil-define-key 'visual global-map "S" 'evil-surround-region)
-    (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+;; like vim-surround
+(use-package evil-surround
+  :ensure t
+  :commands
+  (evil-surround-edit
+   evil-Surround-edit
+   evil-surround-region
+   evil-Surround-region)
+  :init
+  (evil-define-key 'operator global-map "s" 'evil-surround-edit)
+  (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
+  (evil-define-key 'visual global-map "S" 'evil-surround-region)
+  (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
 
 ;; Add Doom's modeline
 (use-package doom-modeline
@@ -143,7 +143,7 @@
 (use-package which-key
   :init (which-key-mode)
   :diminish
- )
+  )
 
 (use-package google-this
   :config
@@ -158,7 +158,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(dired-narrow google-this evil-surround evil-goggles evil-expat evil-visualstar evil-replace-with-register evil-exchange evil-commentary evil-lion evil-collection which-key rainbow-delimiters swiper doom-modeline ivy use-package evil)))
+   '(magit dired-narrow google-this evil-surround evil-goggles evil-expat evil-visualstar evil-replace-with-register evil-exchange evil-commentary evil-lion evil-collection which-key rainbow-delimiters swiper doom-modeline ivy use-package evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

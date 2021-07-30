@@ -67,6 +67,7 @@
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
   :config
   (evil-mode))
 

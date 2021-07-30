@@ -43,8 +43,19 @@
                         ('light (modus-themes-load-operandi))
                         ('dark (modus-themes-load-vivendi))))))
 
-;; Packages
-;;
+;; Dired - tell it to use 'gls
+(setq ls-lisp-use-insert-directory-program t)
+(setq insert-directory-program "gls")
+
+;;; Packages
+
+;; Set a useful $PATH
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
+
+;; Get a beautiful and functional theme
 (use-package modus-themes
   :ensure
   :init

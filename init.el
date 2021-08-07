@@ -120,6 +120,14 @@
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
+;; use the powerful 'undo-tree'
+;; "What good is a mind if you can't change it"
+(use-package undo-tree
+  :custom
+  (evil-undo-system 'undo-tree)
+  :init
+  (undo-tree-mode))
+
 ;; ;; like vim-surround
 ;; (use-package evil-surround
 ;;   :ensure t

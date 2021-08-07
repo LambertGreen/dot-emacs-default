@@ -34,6 +34,15 @@
 ;; Font
 (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 120)
 
+;; Get a beautiful and functional theme
+(use-package modus-themes
+  :ensure
+  :init
+  (modus-themes-load-themes)
+  :config
+  (modus-themes-load-operandi)
+  :bind ("<f5>" . modus-themes-toggle))
+
 ;; macOS: Change dark/light theme
 (if (eq system-type 'darwin)
     (add-hook 'ns-system-appearance-change-functions
@@ -54,15 +63,6 @@
   :if (memq window-system '(mac ns))
   :config
   (exec-path-from-shell-initialize))
-
-;; Get a beautiful and functional theme
-(use-package modus-themes
-  :ensure
-  :init
-  (modus-themes-load-themes)
-  :config
-  (modus-themes-load-operandi)
-  :bind ("<f5>" . modus-themes-toggle))
 
 (use-package evil
   :init
@@ -167,8 +167,7 @@
 ;; (use-package dired-narrow)
 
 ;; Set transparency of emacs
- (defun transparency (value)
-   "Sets the transparency of the frame window. 0=transparent/100=opaque"
-   (interactive "nTransparency Value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
-
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))

@@ -65,10 +65,13 @@
   :config
   (exec-path-from-shell-initialize))
 
+;; TODO We can't disable insert state bindings as some are useful
+;; however it would be good to restore 'C-a' and 'C-e'.
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
+  ;; (setq evil-disable-insert-state-bindings t)
   :config
   (evil-mode))
 

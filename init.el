@@ -180,6 +180,21 @@
   :init (which-key-mode)
   :diminish)
 
+;; Keybindings using the 'general'
+;; "Space cadet follow your leader's orders!"
+(use-package general
+  :config
+  (general-create-definer my-leader-def
+    :prefix "SPC")
+  (my-leader-def
+   :keymaps 'normal
+   ":" '(execute-extended-command :which-key "M-x")
+   "/" '(swiper :which-key "Swiper")
+   "SPC" '(find-file :which-key "find-file"))
+
+;; (general-create-definer my-local-leader-def
+;;   :prefix "SPC m")
+
 ;; (use-package google-this
 ;;   :config
 ;;   (google-this-mode 1))

@@ -138,10 +138,14 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Add Doom's modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1)
+;;   :custom ((doom-modeline-height 15)))
+
+;; Let's try this other modeline shall we?
+(use-package telephone-line
+  :init (telephone-line-mode 1))
 
 (use-package counsel
   :ensure t)

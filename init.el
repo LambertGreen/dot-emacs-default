@@ -148,7 +148,8 @@
   :init (telephone-line-mode 1))
 
 (use-package counsel
-  :ensure t)
+  :config
+  (counsel-mode))
 
 (use-package ivy
   :diminish

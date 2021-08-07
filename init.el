@@ -36,12 +36,13 @@
 
 ;; Get a beautiful and functional theme
 (use-package modus-themes
-  :ensure
   :init
   (modus-themes-load-themes)
   :config
   (modus-themes-load-operandi)
   :bind ("<f5>" . modus-themes-toggle))
+
+(use-package doom-themes)
 
 ;; macOS: Change dark/light theme
 (if (eq system-type 'darwin)

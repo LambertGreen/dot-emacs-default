@@ -121,14 +121,6 @@
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
-;; use the powerful 'undo-tree'
-;; "What good is a mind if you can't change it"
-(use-package undo-tree
-  :custom
-  (evil-undo-system 'undo-tree)
-  :init
-  (undo-tree-mode))
-
 ;; ;; like vim-surround
 ;; (use-package evil-surround
 ;;   :ensure t
@@ -142,6 +134,14 @@
 ;;   (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
 ;;   (evil-define-key 'visual global-map "S" 'evil-surround-region)
 ;;   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+
+;; use the powerful 'undo-tree'
+;; "What good is a mind if you can't change it"
+(use-package undo-tree
+  :custom
+  (evil-undo-system 'undo-tree)
+  :init
+  (global-undo-tree-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))

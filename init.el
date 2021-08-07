@@ -32,7 +32,7 @@
 (set-fringe-mode 10)        ; Give some breathing room
 
 ;; Font
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 170)
+(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 120)
 
 ;; macOS: Change dark/light theme
 (if (eq system-type 'darwin)

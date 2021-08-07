@@ -162,6 +162,11 @@
 (use-package swiper
   :ensure t)
 
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable))
+
 (use-package which-key
   :init (which-key-mode)
   :diminish)

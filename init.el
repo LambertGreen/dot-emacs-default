@@ -208,7 +208,7 @@
 
 (use-package magit)
 
-;; (use-package dired-narrow)
+(use-package dired-narrow)
 
 ;; Set transparency of emacs
 (defun transparency (value)

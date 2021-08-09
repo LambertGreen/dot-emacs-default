@@ -24,6 +24,10 @@
 (setq user-full-name "Lambert Green"
       user-mail-address "lambert.green@gmail.com")
 
+;; Set custom file so that customizations are not written here
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
 ;; Visuals
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar

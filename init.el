@@ -36,7 +36,7 @@
 (set-fringe-mode 10)        ; Give some breathing room
 
 ;; Font
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 120)
+(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
 
 ;; Get a beautiful and functional theme
 (use-package modus-themes

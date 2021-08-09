@@ -193,14 +193,14 @@
   :config
   (general-create-definer my-leader-def
     :prefix "SPC")
+  (general-create-definer my-local-leader-def
+    :prefix "SPC m")
   (my-leader-def
-   :keymaps 'normal
-   ":" '(execute-extended-command :which-key "M-x")
-   "/" '(swiper :which-key "Swiper")
-   "SPC" '(find-file :which-key "find-file"))
+    :keymaps 'normal
+    ":" '(execute-extended-command :which-key "M-x")
+    "/" '(swiper :which-key "Swiper")
+    "SPC" '(find-file :which-key "find-file")))
 
-;; (general-create-definer my-local-leader-def
-;;   :prefix "SPC m")
 
 ;; (use-package google-this
 ;;   :config

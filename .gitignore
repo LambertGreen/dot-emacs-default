@@ -9,3 +9,5 @@ elpa/
 eshell/
 semanticdb/
 /transient/
+
+custom.el

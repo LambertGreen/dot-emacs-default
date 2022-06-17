@@ -215,3 +215,5 @@
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
+
+(setq native-comp-async-report-warnings-errors nil)

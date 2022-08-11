@@ -210,6 +210,8 @@
 
 (use-package dired-narrow)
 
+(use-package origami)
+
 ;; Set transparency of emacs
 (defun transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"

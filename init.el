@@ -212,6 +212,8 @@
 
 (use-package origami)
 
+(use-package company)
+
 ;; Set transparency of emacs
 (defun transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"

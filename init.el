@@ -4,6 +4,9 @@
 
 ;;; Code:
 
+;; Disable native comp warnings showing as errors
+(setq native-comp-async-report-warnings-errors nil)
+
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -215,4 +218,3 @@
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
 
-(setq native-comp-async-report-warnings-errors nil)

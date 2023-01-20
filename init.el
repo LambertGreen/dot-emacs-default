@@ -39,13 +39,9 @@
 
 ;; Get a beautiful and functional theme
 (use-package modus-themes
-  :init
-  (modus-themes-load-themes)
   :config
-  (modus-themes-load-operandi)
+  (modus-themes-load-theme 'modus-operandi)
   :bind ("<f5>" . modus-themes-toggle))
-
-(use-package doom-themes)
 
 ;; macOS: Change dark/light theme
 (if (eq system-type 'darwin)
@@ -53,14 +49,15 @@
         #'(lambda (appearance)
                 (mapc #'disable-theme custom-enabled-themes)
                 (pcase appearance
-                        ('light (modus-themes-load-operandi))
-                        ('dark (modus-themes-load-vivendi))))))
+                        ('light (modus-themes-load-theme 'modus-operandi))
+                        ('dark (modus-themes-load-theme 'modus-vivendi))))))
 
 ;; Dired - tell it to use 'gls
 (setq ls-lisp-use-insert-directory-program t)
 (setq insert-directory-program "gls")
 
 ;;; Packages
+(use-package lsp-mode)
 
 ;; Set a useful $PATH
 (use-package exec-path-from-shell

@@ -59,6 +59,7 @@
 (setq insert-directory-program "gls")
 
 ;;; Packages
+(use-package lsp-mode)
 
 ;; Set a useful $PATH
 (use-package exec-path-from-shell

@@ -4,6 +4,9 @@
 
 ;;; Code:
 
+;; Disable native comp warnings showing as errors
+(setq native-comp-async-report-warnings-errors nil)
+
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -32,7 +35,6 @@
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
-(menu-bar-mode -1)          ; Disable the menu bar
 (set-fringe-mode 10)        ; Give some breathing room
 
 ;; Font
@@ -40,22 +42,17 @@
 
 ;; Get a beautiful and functional theme
 (use-package modus-themes
-  :init
-  (modus-themes-load-themes)
   :config
-  (modus-themes-load-operandi)
+  (modus-themes-load-theme 'modus-operandi)
   :bind ("<f5>" . modus-themes-toggle))
-
-(use-package doom-themes)
 
 ;; macOS: Change dark/light theme
 (if (eq system-type 'darwin)
     (add-hook 'ns-system-appearance-change-functions
         #'(lambda (appearance)
-                (mapc #'disable-theme custom-enabled-themes)
                 (pcase appearance
-                        ('light (modus-themes-load-operandi))
-                        ('dark (modus-themes-load-vivendi))))))
+                        ('light (modus-themes-load-theme 'modus-operandi))
+                        ('dark (modus-themes-load-theme 'modus-vivendi))))))
 
 ;; Dired - tell it to use 'gls
 (setq ls-lisp-use-insert-directory-program t)
@@ -215,7 +212,8 @@
 (use-package company)
 
 ;; Set transparency of emacs
-(defun transparency (value)
+(defun lgreen/transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
+

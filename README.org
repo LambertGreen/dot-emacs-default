@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :exports code :results none :tangle init.el
 
 * In the beginning
-We are going to bootstrap our literate config by copying our old init into one big source block.
+A package manager got boostrapped and started sending things packing.
 #+begin_src emacs-lisp
   ;;; init.el --- -*- lexical-binding: t; -*-
 
@@ -32,204 +32,245 @@ We are going to bootstrap our literate config by copying our old init into one b
 * Who are you?
 I am him.
 #+begin_src emacs-lisp
-;; Set personal info
-(setq user-full-name "Lambert Green"
-      user-mail-address "lambert.green@gmail.com")
+  ;; Set personal info
+  (setq user-full-name "Lambert Green"
+	user-mail-address "lambert.green@gmail.com")
 #+end_src
 
-* It' customary
+* It's customary
 #+begin_src emacs-lisp
-;; Set custom file so that customizations are not written here
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
+  ;; Set custom file so that customizations are not written here
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (load custom-file)
 #+end_src
 
+* UI settings
+** Fonts
+#+begin_src emacs-lisp
+  ;; Font
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+#+end_src
+
+** Basic settings
+#+begin_src emacs-lisp
+  ;; Visuals
+  (scroll-bar-mode -1)        ; Disable visible scrollbar
+  (tool-bar-mode -1)          ; Disable the toolbar
+  (tooltip-mode -1)           ; Disable tooltips
+  (set-fringe-mode 10)        ; Give some breathing room
+#+end_src
+** Themes
+*** Modus Themes
+#+begin_src emacs-lisp :tangle no
+  ;; Get a beautiful and functional theme
+  (use-package modus-themes
+    :config
+    (modus-themes-load-theme 'modus-operandi)
+    :bind ("<f5>" . modus-themes-toggle))
+
+  ;; macOS: Change dark/light theme
+  (if (eq system-type 'darwin)
+      (add-hook 'ns-system-appearance-change-functions
+	  #'(lambda (appearance)
+		  (pcase appearance
+			  ('light (modus-themes-load-theme 'modus-operandi))
+			  ('dark (modus-themes-load-theme 'modus-vivendi))))))
+#+end_src
+*** Catppuccin Theme
+#+begin_src emacs-lisp
+  ;; Get a beautiful and functional theme
+  (use-package catppuccin-theme
+    :ensure t
+    :config (load-theme 'catppuccin :no-confirm))
+#+end_src
+
+** Modeline
+#+begin_src emacs-lisp
+  ;; Add Doom's modeline
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 20)))
+
+  ;; Let's try this other modeline shall we?
+  ;; (use-package telephone-line
+  ;;   :init (telephone-line-mode 1))
+#+end_src
+
+* Environment
+#+begin_src emacs-lisp
+  ;; Set a useful $PATH
+  (use-package exec-path-from-shell
+    :if (memq window-system '(mac ns))
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
+
+* Editing
+** Evil
+#+begin_src emacs-lisp
+  ;; TODO We can't disable insert state bindings as some are useful
+  ;; however it would be good to restore 'C-a' and 'C-e'.
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    ;; (setq evil-disable-insert-state-bindings t)
+    :config
+    (evil-mode))
+
+  ;; vim-like keybindings everywhere in emacs
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+
+  ;; gl and gL operators, like vim-lion
+  (use-package evil-lion
+    :bind (:map evil-normal-state-map
+		("gl " . evil-lion-left)
+		("gL " . evil-lion-right)
+		:map evil-visual-state-map
+		("gl " . evil-lion-left)
+		("gL " . evil-lion-right)))
+
+  ;; gc operator, like vim-commentary
+  (use-package evil-commentary
+    :after evil
+    :config (evil-commentary-mode))
+
+  ;; gx operator, like vim-exchange
+  ;; NOTE using cx like vim-exchange is possible but not as straightforward
+  (use-package evil-exchange
+    :bind (:map evil-normal-state-map
+		("gx" . evil-exchange)
+		("gX" . evil-exchange-cancel)))
+
+  ;; gr operator, like vim's ReplaceWithRegister
+  (use-package evil-replace-with-register
+    :bind (:map evil-normal-state-map
+		("gr" . evil-replace-with-register)
+		:map evil-visual-state-map
+		("gr" . evil-replace-with-register)))
+
+  ;; * operator in visual mode
+  (use-package evil-visualstar
+    :bind (:map evil-visual-state-map
+		("*" . evil-visualstar/begin-search-forward)
+		("#" . evil-visualstar/begin-search-backward)))
+
+  ;; ex commands, which a vim user is likely to be familiar with
+  (use-package evil-expat)
+
+  ;; visual hints while editing
+  (use-package evil-goggles
+    :config
+    (evil-goggles-use-diff-faces)
+    (evil-goggles-mode))
+
+  ;; ;; like vim-surround
+  ;; (use-package evil-surround
+  ;;   :ensure t
+  ;;   :commands
+  ;;   (evil-surround-edit
+  ;;    evil-Surround-edit
+  ;;    evil-surround-region
+  ;;    evil-Surround-region)
+  ;;   :init
+  ;;   (evil-define-key 'operator global-map "s" 'evil-surround-edit)
+  ;;   (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
+  ;;   (evil-define-key 'visual global-map "S" 'evil-surround-region)
+  ;;   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+#+end_src
+** Undo
+#+begin_src emacs-lisp
+  ;; use the powerful 'undo-tree'
+  ;; "What good is a mind if you can't change it"
+  (use-package undo-tree
+    :custom
+    (evil-undo-system 'undo-tree)
+    :init
+    (global-undo-tree-mode))
+#+end_src
+
+* Keybindings
+  Space cadet follow your leader's orders!
+#+begin_src emacs-lisp
+  ;; Keybindings using the 'general'
+  (use-package general
+    :config
+    (general-create-definer my-leader-def
+      :prefix "SPC")
+    (general-create-definer my-local-leader-def
+      :prefix "SPC m")
+    (my-leader-def
+      :keymaps 'normal
+      ":" '(execute-extended-command :which-key "M-x")
+      "/" '(swiper :which-key "Swiper")
+      "SPC" '(find-file :which-key "find-file")))
+
+#+end_src
+* File Explorer
+#+begin_src emacs-lisp
+  ;; Dired - tell it to use 'gls
+  (setq ls-lisp-use-insert-directory-program t)
+  (setq insert-directory-program "gls")
+#+end_src
+
+* Programming
+** Version Control
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+** LSP
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+#+end_src
+* My Functions
+#+begin_src emacs-lisp
+  ;; Set transparency of emacs
+  (defun lgreen/transparency (value)
+    "Sets the transparency of the frame window. 0=transparent/100=opaque"
+    (interactive "nTransparency Value 0 - 100 opaque:")
+    (set-frame-parameter (selected-frame) 'alpha value))
+#+end_src
 * Rest
+We are slowly migrating our conifg into a literate config.  This section is the unmigrated stuff.
 #+begin_src emacs-lisp
-;; Visuals
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 
-;; Font
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+  (use-package counsel
+    :config
+    (counsel-mode))
 
-;; Get a beautiful and functional theme
-(use-package modus-themes
-  :config
-  (modus-themes-load-theme 'modus-operandi)
-  :bind ("<f5>" . modus-themes-toggle))
+  (use-package ivy
+    :diminish
+    :config
+    (ivy-mode 1))
 
-;; macOS: Change dark/light theme
-(if (eq system-type 'darwin)
-    (add-hook 'ns-system-appearance-change-functions
-        #'(lambda (appearance)
-                (pcase appearance
-                        ('light (modus-themes-load-theme 'modus-operandi))
-                        ('dark (modus-themes-load-theme 'modus-vivendi))))))
+  (use-package ivy-rich
+    :init (ivy-rich-mode 1))
 
-;; Dired - tell it to use 'gls
-(setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "gls")
+  (use-package swiper
+    :ensure t)
 
-;;; Packages
-(use-package lsp-mode)
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable))
 
-;; Set a useful $PATH
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize))
+  (use-package which-key
+    :init (which-key-mode)
+    :diminish)
 
-;; TODO We can't disable insert state bindings as some are useful
-;; however it would be good to restore 'C-a' and 'C-e'.
-(use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  ;; (setq evil-disable-insert-state-bindings t)
-  :config
-  (evil-mode))
+  ;; (use-package google-this
+  ;;   :config
+  ;;   (google-this-mode 1))
 
-;; vim-like keybindings everywhere in emacs
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+  (use-package dired-narrow)
 
-;; gl and gL operators, like vim-lion
-(use-package evil-lion
-  :bind (:map evil-normal-state-map
-         ("gl " . evil-lion-left)
-         ("gL " . evil-lion-right)
-         :map evil-visual-state-map
-         ("gl " . evil-lion-left)
-         ("gL " . evil-lion-right)))
+  (use-package origami)
 
-;; gc operator, like vim-commentary
-(use-package evil-commentary
-  :after evil
-  :config (evil-commentary-mode))
-
-;; gx operator, like vim-exchange
-;; NOTE using cx like vim-exchange is possible but not as straightforward
-(use-package evil-exchange
-  :bind (:map evil-normal-state-map
-         ("gx" . evil-exchange)
-         ("gX" . evil-exchange-cancel)))
-
-;; gr operator, like vim's ReplaceWithRegister
-(use-package evil-replace-with-register
-  :bind (:map evil-normal-state-map
-         ("gr" . evil-replace-with-register)
-         :map evil-visual-state-map
-         ("gr" . evil-replace-with-register)))
-
-;; * operator in visual mode
-(use-package evil-visualstar
-  :bind (:map evil-visual-state-map
-         ("*" . evil-visualstar/begin-search-forward)
-         ("#" . evil-visualstar/begin-search-backward)))
-
-;; ex commands, which a vim user is likely to be familiar with
-(use-package evil-expat)
-
-;; visual hints while editing
-(use-package evil-goggles
-  :config
-  (evil-goggles-use-diff-faces)
-  (evil-goggles-mode))
-
-;; ;; like vim-surround
-;; (use-package evil-surround
-;;   :ensure t
-;;   :commands
-;;   (evil-surround-edit
-;;    evil-Surround-edit
-;;    evil-surround-region
-;;    evil-Surround-region)
-;;   :init
-;;   (evil-define-key 'operator global-map "s" 'evil-surround-edit)
-;;   (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-;;   (evil-define-key 'visual global-map "S" 'evil-surround-region)
-;;   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
-
-;; use the powerful 'undo-tree'
-;; "What good is a mind if you can't change it"
-(use-package undo-tree
-  :custom
-  (evil-undo-system 'undo-tree)
-  :init
-  (global-undo-tree-mode))
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-;; Add Doom's modeline
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :init (doom-modeline-mode 1)
-;;   :custom ((doom-modeline-height 15)))
-
-;; Let's try this other modeline shall we?
-(use-package telephone-line
-  :init (telephone-line-mode 1))
-
-(use-package counsel
-  :config
-  (counsel-mode))
-
-(use-package ivy
-  :diminish
-  :config
-  (ivy-mode 1))
-
-(use-package ivy-rich
-  :init (ivy-rich-mode 1))
-
-(use-package swiper
-  :ensure t)
-
-(use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable))
-
-(use-package which-key
-  :init (which-key-mode)
-  :diminish)
-
-;; Keybindings using the 'general'
-;; "Space cadet follow your leader's orders!"
-(use-package general
-  :config
-  (general-create-definer my-leader-def
-    :prefix "SPC")
-  (general-create-definer my-local-leader-def
-    :prefix "SPC m")
-  (my-leader-def
-    :keymaps 'normal
-    ":" '(execute-extended-command :which-key "M-x")
-    "/" '(swiper :which-key "Swiper")
-    "SPC" '(find-file :which-key "find-file")))
-
-
-;; (use-package google-this
-;;   :config
-;;   (google-this-mode 1))
-
-(use-package magit)
-
-(use-package dired-narrow)
-
-(use-package origami)
-
-(use-package company)
-
-;; Set transparency of emacs
-(defun lgreen/transparency (value)
-  "Sets the transparency of the frame window. 0=transparent/100=opaque"
-  (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha value))
+  (use-package company)
 #+end_src

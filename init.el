@@ -27,35 +27,29 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;; Font
+(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+
 ;; Visuals
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
 
-;; Font
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
-
 ;; Get a beautiful and functional theme
-(use-package modus-themes
-  :config
-  (modus-themes-load-theme 'modus-operandi)
-  :bind ("<f5>" . modus-themes-toggle))
+(use-package catppuccin-theme
+  :ensure t
+  :config (load-theme 'catppuccin :no-confirm))
 
-;; macOS: Change dark/light theme
-(if (eq system-type 'darwin)
-    (add-hook 'ns-system-appearance-change-functions
-        #'(lambda (appearance)
-                (pcase appearance
-                        ('light (modus-themes-load-theme 'modus-operandi))
-                        ('dark (modus-themes-load-theme 'modus-vivendi))))))
+;; Add Doom's modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 20)))
 
-;; Dired - tell it to use 'gls
-(setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "gls")
-
-;;; Packages
-(use-package lsp-mode)
+;; Let's try this other modeline shall we?
+;; (use-package telephone-line
+;;   :init (telephone-line-mode 1))
 
 ;; Set a useful $PATH
 (use-package exec-path-from-shell
@@ -82,11 +76,11 @@
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
   :bind (:map evil-normal-state-map
-         ("gl " . evil-lion-left)
-         ("gL " . evil-lion-right)
-         :map evil-visual-state-map
-         ("gl " . evil-lion-left)
-         ("gL " . evil-lion-right)))
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)
+	      :map evil-visual-state-map
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)))
 
 ;; gc operator, like vim-commentary
 (use-package evil-commentary
@@ -97,21 +91,21 @@
 ;; NOTE using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
   :bind (:map evil-normal-state-map
-         ("gx" . evil-exchange)
-         ("gX" . evil-exchange-cancel)))
+	      ("gx" . evil-exchange)
+	      ("gX" . evil-exchange-cancel)))
 
 ;; gr operator, like vim's ReplaceWithRegister
 (use-package evil-replace-with-register
   :bind (:map evil-normal-state-map
-         ("gr" . evil-replace-with-register)
-         :map evil-visual-state-map
-         ("gr" . evil-replace-with-register)))
+	      ("gr" . evil-replace-with-register)
+	      :map evil-visual-state-map
+	      ("gr" . evil-replace-with-register)))
 
 ;; * operator in visual mode
 (use-package evil-visualstar
   :bind (:map evil-visual-state-map
-         ("*" . evil-visualstar/begin-search-forward)
-         ("#" . evil-visualstar/begin-search-backward)))
+	      ("*" . evil-visualstar/begin-search-forward)
+	      ("#" . evil-visualstar/begin-search-backward)))
 
 ;; ex commands, which a vim user is likely to be familiar with
 (use-package evil-expat)
@@ -144,18 +138,35 @@
   :init
   (global-undo-tree-mode))
 
+;; Keybindings using the 'general'
+(use-package general
+  :config
+  (general-create-definer my-leader-def
+    :prefix "SPC")
+  (general-create-definer my-local-leader-def
+    :prefix "SPC m")
+  (my-leader-def
+    :keymaps 'normal
+    ":" '(execute-extended-command :which-key "M-x")
+    "/" '(swiper :which-key "Swiper")
+    "SPC" '(find-file :which-key "find-file")))
+
+;; Dired - tell it to use 'gls
+(setq ls-lisp-use-insert-directory-program t)
+(setq insert-directory-program "gls")
+
+(use-package magit)
+
+(use-package lsp-mode)
+
+;; Set transparency of emacs
+(defun lgreen/transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
-;; Add Doom's modeline
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :init (doom-modeline-mode 1)
-;;   :custom ((doom-modeline-height 15)))
-
-;; Let's try this other modeline shall we?
-(use-package telephone-line
-  :init (telephone-line-mode 1))
 
 (use-package counsel
   :config
@@ -181,35 +192,12 @@
   :init (which-key-mode)
   :diminish)
 
-;; Keybindings using the 'general'
-;; "Space cadet follow your leader's orders!"
-(use-package general
-  :config
-  (general-create-definer my-leader-def
-    :prefix "SPC")
-  (general-create-definer my-local-leader-def
-    :prefix "SPC m")
-  (my-leader-def
-    :keymaps 'normal
-    ":" '(execute-extended-command :which-key "M-x")
-    "/" '(swiper :which-key "Swiper")
-    "SPC" '(find-file :which-key "find-file")))
-
-
 ;; (use-package google-this
 ;;   :config
 ;;   (google-this-mode 1))
-
-(use-package magit)
 
 (use-package dired-narrow)
 
 (use-package origami)
 
 (use-package company)
-
-;; Set transparency of emacs
-(defun lgreen/transparency (value)
-  "Sets the transparency of the frame window. 0=transparent/100=opaque"
-  (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha value))

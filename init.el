@@ -1,17 +1,13 @@
 ;;; init.el --- -*- lexical-binding: t; -*-
 
-;; My personal emacs 'default' config.
-
-;;; Code:
-
 ;; Disable native comp warnings showing as errors
 (setq native-comp-async-report-warnings-errors nil)
 
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -217,4 +213,3 @@
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
-

@@ -69,9 +69,9 @@
 
 ;; vim-like keybindings everywhere in emacs
 (use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+    :after evil
+    :config
+    (evil-collection-init))
 
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
@@ -116,19 +116,19 @@
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
-;; ;; like vim-surround
-;; (use-package evil-surround
-;;   :ensure t
-;;   :commands
-;;   (evil-surround-edit
-;;    evil-Surround-edit
-;;    evil-surround-region
-;;    evil-Surround-region)
-;;   :init
-;;   (evil-define-key 'operator global-map "s" 'evil-surround-edit)
-;;   (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-;;   (evil-define-key 'visual global-map "S" 'evil-surround-region)
-;;   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+;; like vim-surround
+(use-package evil-surround
+  :ensure t
+  :commands
+  (evil-surround-edit
+   evil-Surround-edit
+   evil-surround-region
+   evil-Surround-region)
+  :init
+  (evil-define-key 'operator global-map "s" 'evil-surround-edit)
+  (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
+  (evil-define-key 'visual global-map "S" 'evil-surround-region)
+  (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
 
 (use-package general
   :config
@@ -143,8 +143,13 @@
 
   (lgreen/leader-keys
     "SPC" '(execute-extended-command :which-key "M-x")
-    "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config")
     "." '(find-file :which-key "find-file"))
+
+  ;; find
+  (lgreen/leader-keys
+    "f" '(:ignore t :wk "file")
+    "f f" '(find-file :which-key "Find file")
+    "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
   ;; Buffers
   (lgreen/leader-keys
@@ -180,11 +185,6 @@
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
     "w L" '(evil-window-move-far-right :wk "Move window far right"))
 
-  ;; Magit
-  (lgreen/leader-keys
-    "g" '(:ignore t :wk "magit")
-    "g g" '(magit-status :wk "Show status"))
-
   ;; Quit
   (lgreen/leader-keys
     "q" '(:ignore t :wk "quit")
@@ -192,7 +192,7 @@
 
   ;; Toggles
   (lgreen/leader-keys
-    "t" '(:ignore t :wk "Toggle")
+    "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t t" '(visual-line-mode :wk "Toggle truncated lines"))
   )
@@ -310,18 +310,18 @@
 
   ;; By default `consult-project-function' uses `project-root' from project.el.
   ;; Optionally configure a different project root function.
-  ;;;; 1. project.el (the default)
+    ;;;; 1. project.el (the default)
   ;; (setq consult-project-function #'consult--default-project--function)
-  ;;;; 2. vc.el (vc-root-dir)
+    ;;;; 2. vc.el (vc-root-dir)
   ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-  ;;;; 3. locate-dominating-file
+    ;;;; 3. locate-dominating-file
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-  ;;;; 4. projectile.el (projectile-project-root)
+    ;;;; 4. projectile.el (projectile-project-root)
   ;; (autoload 'projectile-project-root "projectile")
   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-  ;;;; 5. No project support
+    ;;;; 5. No project support
   ;; (setq consult-project-function nil)
-)
+  )
 
 ;; Enable vertico
 (use-package vertico
@@ -329,16 +329,16 @@
   (vertico-mode)
 
   ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
+  (setq vertico-scroll-margin 0)
 
   ;; Show more candidates
-  ;; (setq vertico-count 20)
+  (setq vertico-count 20)
 
   ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
+  (setq vertico-resize t)
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
+  (setq vertico-cycle t)
   )
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
@@ -353,16 +353,16 @@
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
     (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
+		  (replace-regexp-in-string
+		   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+		   crm-separator)
+		  (car args))
+	  (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
+	'(read-only t cursor-intangible t face minibuffer-prompt))
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
@@ -373,32 +373,25 @@
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
-;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
+	      ("M-A" . marginalia-cycle))
 
-  ;; The :init section is always executed.
-  :init
-
-  ;; Marginalia must be activated in the :init section of use-package such that
-  ;; the mode gets enabled right away. Note that this forces loading the
-  ;; package.
-  (marginalia-mode))
+  :init (marginalia-mode))
 
 (use-package helpful
   :ensure t
   :after general
-  :general
-  (:keymaps 'lgreen/leader-keys
-	    "h" '(:ignore t :wk "Help")
-	    "h f" '(helpful-callable :wk "Find function")
-	    "h v" '(helpful-variable :wk "Find variable")
-	    "h k" '(helpful-key :wk "Find key")
-	    "h x" '(helpful-command :wk "Find command")))
+  :config
+  (lgreen/leader-keys
+    "h" '(:ignore t :wk "help")
+    "h f" '(helpful-callable :wk "Describe function")
+    "h v" '(helpful-variable :wk "Describe variable")
+    "h k" '(helpful-key :wk "Describe key")
+    "h x" '(helpful-command :wk "Describe command")))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -423,9 +416,11 @@
 
 (use-package magit
   :ensure t
-  :general
-  (:keymaps 'lgreen/leader-keys
-            "g g" 'magit-status))
+  :after general
+  :config
+  (lgreen/leader-keys
+    "g" '(:ignore t :wk "git")
+    "g g" 'magit-status))
 
 (use-package lsp-mode)
 

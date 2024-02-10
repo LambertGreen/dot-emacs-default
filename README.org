@@ -139,6 +139,7 @@ A package manager got boostrapped and started sending things packing.
     #+begin_src emacs-lisp
       ;; gl and gL operators, like vim-lion
       (use-package evil-lion
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gl " . evil-lion-left)
 		    ("gL " . evil-lion-right)
@@ -160,6 +161,7 @@ A package manager got boostrapped and started sending things packing.
       ;; gx operator, like vim-exchange
       ;; NOTE using cx like vim-exchange is possible but not as straightforward
       (use-package evil-exchange
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gx" . evil-exchange)
 		    ("gX" . evil-exchange-cancel)))
@@ -169,6 +171,7 @@ A package manager got boostrapped and started sending things packing.
     #+begin_src emacs-lisp
       ;; gr operator, like vim's ReplaceWithRegister
       (use-package evil-replace-with-register
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gr" . evil-replace-with-register)
 		    :map evil-visual-state-map
@@ -179,6 +182,7 @@ A package manager got boostrapped and started sending things packing.
     #+begin_src emacs-lisp
       ;; * operator in visual mode
       (use-package evil-visualstar
+	:after evil
 	:bind (:map evil-visual-state-map
 		    ("*" . evil-visualstar/begin-search-forward)
 		    ("#" . evil-visualstar/begin-search-backward)))
@@ -187,13 +191,15 @@ A package manager got boostrapped and started sending things packing.
 *** Evil Expat
     #+begin_src emacs-lisp
       ;; ex commands, which a vim user is likely to be familiar with
-      (use-package evil-expat)
+      (use-package evil-expat
+	:after evil)
     #+end_src
 
 *** Evil Goggles
     #+begin_src emacs-lisp
       ;; visual hints while editing
       (use-package evil-goggles
+	:after evil
 	:config
 	(evil-goggles-use-diff-faces)
 	(evil-goggles-mode))
@@ -204,6 +210,7 @@ A package manager got boostrapped and started sending things packing.
       ;; like vim-surround
       (use-package evil-surround
 	:ensure t
+	:after evil
 	:commands
 	(evil-surround-edit
 	 evil-Surround-edit

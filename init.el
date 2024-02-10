@@ -77,6 +77,7 @@
 
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
+  :after evil
   :bind (:map evil-normal-state-map
 	      ("gl " . evil-lion-left)
 	      ("gL " . evil-lion-right)
@@ -92,12 +93,14 @@
 ;; gx operator, like vim-exchange
 ;; NOTE using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
+  :after evil
   :bind (:map evil-normal-state-map
 	      ("gx" . evil-exchange)
 	      ("gX" . evil-exchange-cancel)))
 
 ;; gr operator, like vim's ReplaceWithRegister
 (use-package evil-replace-with-register
+  :after evil
   :bind (:map evil-normal-state-map
 	      ("gr" . evil-replace-with-register)
 	      :map evil-visual-state-map
@@ -105,15 +108,18 @@
 
 ;; * operator in visual mode
 (use-package evil-visualstar
+  :after evil
   :bind (:map evil-visual-state-map
 	      ("*" . evil-visualstar/begin-search-forward)
 	      ("#" . evil-visualstar/begin-search-backward)))
 
 ;; ex commands, which a vim user is likely to be familiar with
-(use-package evil-expat)
+(use-package evil-expat
+  :after evil)
 
 ;; visual hints while editing
 (use-package evil-goggles
+  :after evil
   :config
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
@@ -121,6 +127,7 @@
 ;; like vim-surround
 (use-package evil-surround
   :ensure t
+  :after evil
   :commands
   (evil-surround-edit
    evil-Surround-edit

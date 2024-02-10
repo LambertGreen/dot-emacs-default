@@ -112,7 +112,8 @@ A package manager got boostrapped and started sending things packing.
     #+end_src
 
 * Keybindings
-** Evil
+** Evil Stuff
+*** Evil
     #+begin_src emacs-lisp
       ;; TODO We can't disable insert state bindings as some are useful
       ;; however it would be good to restore 'C-a' and 'C-e'.
@@ -125,7 +126,7 @@ A package manager got boostrapped and started sending things packing.
 	(evil-mode))
     #+end_src
 
-** Evil Collection
+*** Evil Collection
     #+begin_src emacs-lisp
     ;; vim-like keybindings everywhere in emacs
     (use-package evil-collection
@@ -134,7 +135,7 @@ A package manager got boostrapped and started sending things packing.
 	(evil-collection-init))
     #+end_src
 
-** Evil Lion
+*** Evil Lion
     #+begin_src emacs-lisp
       ;; gl and gL operators, like vim-lion
       (use-package evil-lion
@@ -146,7 +147,7 @@ A package manager got boostrapped and started sending things packing.
 		    ("gL " . evil-lion-right)))
     #+end_src
 
-** Evil Commentary
+*** Evil Commentary
     #+begin_src emacs-lisp
       ;; gc operator, like vim-commentary
       (use-package evil-commentary
@@ -154,7 +155,7 @@ A package manager got boostrapped and started sending things packing.
 	:config (evil-commentary-mode))
     #+end_src
 
-** Evil Exchange
+*** Evil Exchange
     #+begin_src emacs-lisp
       ;; gx operator, like vim-exchange
       ;; NOTE using cx like vim-exchange is possible but not as straightforward
@@ -164,7 +165,7 @@ A package manager got boostrapped and started sending things packing.
 		    ("gX" . evil-exchange-cancel)))
     #+end_src
 
-** Evil Replace-with-register
+*** Evil Replace-with-register
     #+begin_src emacs-lisp
       ;; gr operator, like vim's ReplaceWithRegister
       (use-package evil-replace-with-register
@@ -174,7 +175,7 @@ A package manager got boostrapped and started sending things packing.
 		    ("gr" . evil-replace-with-register)))
     #+end_src
 
-** Evil VisualStar
+*** Evil VisualStar
     #+begin_src emacs-lisp
       ;; * operator in visual mode
       (use-package evil-visualstar
@@ -183,13 +184,13 @@ A package manager got boostrapped and started sending things packing.
 		    ("#" . evil-visualstar/begin-search-backward)))
     #+end_src
 
-** Evil Expat
+*** Evil Expat
     #+begin_src emacs-lisp
       ;; ex commands, which a vim user is likely to be familiar with
       (use-package evil-expat)
     #+end_src
 
-** Evil Goggles
+*** Evil Goggles
     #+begin_src emacs-lisp
       ;; visual hints while editing
       (use-package evil-goggles
@@ -198,7 +199,7 @@ A package manager got boostrapped and started sending things packing.
 	(evil-goggles-mode))
     #+end_src
 
-** Evil Surround
+*** Evil Surround
     #+begin_src emacs-lisp
       ;; like vim-surround
       (use-package evil-surround
@@ -215,12 +216,12 @@ A package manager got boostrapped and started sending things packing.
 	(evil-define-key 'visual global-map "gS" 'evil-Surround-region))
     #+end_src
 
-** Evil Org
+*** Evil Org
     #+begin_src emacs-lisp
       (use-package evil-org
 	:ensure t
-	:after org
-	:hook (org-mode . (lambda () evil-org-mode))
+	:after (evil org)
+	:hook (org-mode . evil-org-mode)
 	:config
 	(require 'evil-org-agenda)
 	(evil-org-agenda-set-keys))

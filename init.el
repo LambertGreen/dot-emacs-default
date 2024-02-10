@@ -23,6 +23,8 @@
 (setq user-full-name "Lambert Green"
       user-mail-address "lambert.green@gmail.com")
 
+(use-package no-littering)
+
 ;; Set custom file so that customizations are not written here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
@@ -201,12 +203,13 @@
   :ensure t
   :init (which-key-mode)
   :config
+  (setq which-key-min-display-lines 3)
   (setq which-key-sort-uppercase-first nil))
 
-;; Example configuration for Consult
 (use-package consult
-  ;; Replace bindings. Lazily loaded due by `use-package'.
-  :bind (;; C-c bindings in `mode-specific-map'
+  :after general
+  :bind (
+	 ;; C-c bindings in `mode-specific-map'
 	 ("C-c M-x" . consult-mode-command)
 	 ("C-c h" . consult-history)
 	 ("C-c k" . consult-kmacro)
@@ -247,81 +250,76 @@
 	 ("M-s L" . consult-line-multi)
 	 ("M-s k" . consult-keep-lines)
 	 ("M-s u" . consult-focus-lines)
-	 ;; Isearch integration
-	 ("M-s e" . consult-isearch-history)
-	 :map isearch-mode-map
-	 ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-	 ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-	 ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-	 ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-	 ;; Minibuffer history
-	 :map minibuffer-local-map
-	 ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-	 ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+	  )
+	 ;; Enable automatic preview at point in the *Completions* buffer. This is
+	 ;; relevant when you use the default completion UI.
+	 :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
+	 ;; The :init configuration is always executed (Not lazy)
+	 :init
 
-  ;; The :init configuration is always executed (Not lazy)
-  :init
+	 ;; Optionally configure the register formatting. This improves the register
+	 ;; preview for `consult-register', `consult-register-load',
+	 ;; `consult-register-store' and the Emacs built-ins.
+	 (setq register-preview-delay 0.5
+	       register-preview-function #'consult-register-format)
 
-  ;; Optionally configure the register formatting. This improves the register
-  ;; preview for `consult-register', `consult-register-load',
-  ;; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.5
-	register-preview-function #'consult-register-format)
+	 ;; Optionally tweak the register preview window.
+	 ;; This adds thin lines, sorting and hides the mode line of the window.
+	 (advice-add #'register-preview :override #'consult-register-window)
 
-  ;; Optionally tweak the register preview window.
-  ;; This adds thin lines, sorting and hides the mode line of the window.
-  (advice-add #'register-preview :override #'consult-register-window)
+	 ;; Use Consult to select xref locations with preview
+	 (setq xref-show-xrefs-function #'consult-xref
+	       xref-show-definitions-function #'consult-xref)
 
-  ;; Use Consult to select xref locations with preview
-  (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref)
+	 ;; Configure other variables and modes in the :config section,
+	 ;; after lazily loading the package.
+	 :config
 
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
-  :config
+	 (lgreen/leader-keys
+	   "s" '(:ignore t :wk "search")
+	   "s b" '(consult-line :wk "Search buffer")
+	   "s p" '(consult-ripgrep :wk "Search project files")
+	   "s d" '(consult-locate :wk "Search current directory"))
 
-  ;; Optionally configure preview. The default value
-  ;; is 'any, such that any key triggers the preview.
-  ;; (setq consult-preview-key 'any)
-  ;; (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-  ;; For some commands and buffer sources it is useful to configure the
-  ;; :preview-key on a per-command basis using the `consult-customize' macro.
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any))
+	 ;; Optionally configure preview. The default value
+	 ;; is 'any, such that any key triggers the preview.
+	 ;; (setq consult-preview-key 'any)
+	 ;; (setq consult-preview-key "M-.")
+	 ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+	 ;; For some commands and buffer sources it is useful to configure the
+	 ;; :preview-key on a per-command basis using the `consult-customize' macro.
+	 (consult-customize
+	  consult-theme :preview-key '(:debounce 0.2 any)
+	  consult-ripgrep consult-git-grep consult-grep
+	  consult-bookmark consult-recent-file consult-xref
+	  consult--source-bookmark consult--source-file-register
+	  consult--source-recent-file consult--source-project-recent-file
+	  ;; :preview-key "M-."
+	  :preview-key '(:debounce 0.4 any))
 
-  ;; Optionally configure the narrowing key.
-  ;; Both < and C-+ work reasonably well.
-  (setq consult-narrow-key "<") ;; "C-+"
+	 ;; Optionally configure the narrowing key.
+	 ;; Both < and C-+ work reasonably well.
+	 (setq consult-narrow-key "<") ;; "C-+"
 
-  ;; Optionally make narrowing help available in the minibuffer.
-  ;; You may want to use `embark-prefix-help-command' or which-key instead.
-  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+	 ;; Optionally make narrowing help available in the minibuffer.
+	 ;; You may want to use `embark-prefix-help-command' or which-key instead.
+	 ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
 
-  ;; By default `consult-project-function' uses `project-root' from project.el.
-  ;; Optionally configure a different project root function.
-    ;;;; 1. project.el (the default)
-  ;; (setq consult-project-function #'consult--default-project--function)
-    ;;;; 2. vc.el (vc-root-dir)
-  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-    ;;;; 3. locate-dominating-file
-  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-    ;;;; 4. projectile.el (projectile-project-root)
-  ;; (autoload 'projectile-project-root "projectile")
-  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-    ;;;; 5. No project support
-  ;; (setq consult-project-function nil)
-  )
+	 ;; By default `consult-project-function' uses `project-root' from project.el.
+	 ;; Optionally configure a different project root function.
+	;;;; 1. project.el (the default)
+	 ;; (setq consult-project-function #'consult--default-project--function)
+	;;;; 2. vc.el (vc-root-dir)
+	 ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+	;;;; 3. locate-dominating-file
+	 ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+	;;;; 4. projectile.el (projectile-project-root)
+	 (autoload 'projectile-project-root "projectile")
+	 (setq consult-project-function (lambda (_) (projectile-project-root)))
+	;;;; 5. No project support
+	 ;; (setq consult-project-function nil)
+	 )
 
 ;; Enable vertico
 (use-package vertico
@@ -373,6 +371,12 @@
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
+(use-package orderless
+    :ensure t
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles basic partial-completion)))))
+
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
@@ -421,6 +425,18 @@
   (lgreen/leader-keys
     "g" '(:ignore t :wk "git")
     "g g" 'magit-status))
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (setq projectile-project-search-path '(("~/dev" . 7)))
+  (lgreen/leader-keys
+    "p" '(:ignore t :wk "project")
+    "p p" '(projectile-switch-project :wk "Switch project")
+    "p f" '(projectile-find-file :wk "Find file in project")
+    "p d" '(projectile-dired :wk "Dired in project")
+    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")))
 
 (use-package lsp-mode)
 

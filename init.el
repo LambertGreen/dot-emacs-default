@@ -132,6 +132,14 @@
   (evil-define-key 'visual global-map "S" 'evil-surround-region)
   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
 
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 (use-package general
   :config
   (general-evil-setup)

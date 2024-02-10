@@ -215,6 +215,17 @@ A package manager got boostrapped and started sending things packing.
 	(evil-define-key 'visual global-map "gS" 'evil-Surround-region))
     #+end_src
 
+** Evil Org
+    #+begin_src emacs-lisp
+      (use-package evil-org
+	:ensure t
+	:after org
+	:hook (org-mode . (lambda () evil-org-mode))
+	:config
+	(require 'evil-org-agenda)
+	(evil-org-agenda-set-keys))
+    #+end_src
+
 ** General
   Space cadet follow your leader's orders!
     #+begin_src emacs-lisp

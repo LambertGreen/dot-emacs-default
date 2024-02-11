@@ -566,6 +566,7 @@ A package manager got boostrapped and started sending things packing.
 	:ensure t
 	:after general
 	:config
+	(setq magit-diff-refine-hunk t)
 	(lgreen/leader-keys
 	  "g" '(:ignore t :wk "git")
 	  "g g" 'magit-status))

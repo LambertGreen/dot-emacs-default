@@ -249,13 +249,13 @@ A package manager got boostrapped and started sending things packing.
 	  :global-prefix "M-SPC") ;; access leader in insert mode
 
 	(lgreen/leader-keys
-	  "SPC" '(execute-extended-command :which-key "M-x")
-	  "." '(find-file :which-key "find-file"))
+	  "SPC" '(execute-extended-command :wk "M-x")
+	  "." '(find-file :wk "find-file"))
 
 	;; find
 	(lgreen/leader-keys
 	  "f" '(:ignore t :wk "file")
-	  "f f" '(find-file :which-key "Find file")
+	  "f f" '(find-file :wk "Find file")
 	  "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
 	;; Buffers

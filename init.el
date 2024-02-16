@@ -1,153 +1,53 @@
 ;;; init.el --- -*- lexical-binding: t; -*-
 
-;; Disable native comp warnings showing as errors
-(setq native-comp-async-report-warnings-errors nil)
+;; Use Elpaca for our package manager
+(defvar elpaca-installer-version 0.6)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+				:ref nil
+				:files (:defaults "elpaca-test.el" (:exclude "extensions"))
+				:build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+	(build (expand-file-name "elpaca/" elpaca-builds-directory))
+	(order (cdr elpaca-order))
+	(default-directory repo))
+    (add-to-list 'load-path (if (file-exists-p build) build repo))
+    (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (< emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+	(if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+		((zerop (call-process "git" nil buffer t "clone"
+					(plist-get order :repo) repo)))
+		((zerop (call-process "git" nil buffer t "checkout"
+					(or (plist-get order :ref) "--"))))
+		(emacs (concat invocation-directory invocation-name))
+		((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+					"--eval" "(byte-recompile-directory \".\" 0 'force)")))
+		((require 'elpaca))
+		((elpaca-generate-autoloads "elpaca" repo)))
+	    (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+	    (error "%s" (with-current-buffer buffer (buffer-string))))
+	((error) (warn "%s" err) (delete-directory repo 'recursive))))
+    (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (load "./elpaca-autoloads")))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
 
-;; Initialize package sources
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+;; Install use-package support
+(elpaca elpaca-use-package
+    ;; Enable use-package :ensure support for Elpaca.
+    (elpaca-use-package-mode))
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
-(setq use-package-always-ensure t)
-
-;; Set personal info
-(setq user-full-name "Lambert Green"
-      user-mail-address "lambert.green@gmail.com")
-
-(use-package no-littering)
-
-;; Set custom file so that customizations are not written here
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
-
-;; Font
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
-
-;; Visuals
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
-
-;; Get a beautiful and functional theme
-(use-package catppuccin-theme
-  :ensure t
-  :config (load-theme 'catppuccin :no-confirm))
-
-;; Add Doom's modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 20)))
-
-;; Let's try this other modeline shall we?
-;; (use-package telephone-line
-;;   :init (telephone-line-mode 1))
-
-;; Set a useful $PATH
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize))
-
-;; TODO We can't disable insert state bindings as some are useful
-;; however it would be good to restore 'C-a' and 'C-e'.
-(use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  ;; (setq evil-disable-insert-state-bindings t)
-  :config
-  (evil-mode))
-
-;; vim-like keybindings everywhere in emacs
-(use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-
-;; gl and gL operators, like vim-lion
-(use-package evil-lion
-  :after evil
-  :bind (:map evil-normal-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)
-	      :map evil-visual-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)))
-
-;; gc operator, like vim-commentary
-(use-package evil-commentary
-  :after evil
-  :config (evil-commentary-mode))
-
-;; gx operator, like vim-exchange
-;; NOTE using cx like vim-exchange is possible but not as straightforward
-(use-package evil-exchange
-  :after evil
-  :bind (:map evil-normal-state-map
-	      ("gx" . evil-exchange)
-	      ("gX" . evil-exchange-cancel)))
-
-;; gr operator, like vim's ReplaceWithRegister
-(use-package evil-replace-with-register
-  :after evil
-  :bind (:map evil-normal-state-map
-	      ("gr" . evil-replace-with-register)
-	      :map evil-visual-state-map
-	      ("gr" . evil-replace-with-register)))
-
-;; * operator in visual mode
-(use-package evil-visualstar
-  :after evil
-  :bind (:map evil-visual-state-map
-	      ("*" . evil-visualstar/begin-search-forward)
-	      ("#" . evil-visualstar/begin-search-backward)))
-
-;; ex commands, which a vim user is likely to be familiar with
-(use-package evil-expat
-  :after evil)
-
-;; visual hints while editing
-(use-package evil-goggles
-  :after evil
-  :config
-  (evil-goggles-use-diff-faces)
-  (evil-goggles-mode))
-
-;; like vim-surround
-(use-package evil-surround
-  :ensure t
-  :after evil
-  :commands
-  (evil-surround-edit
-   evil-Surround-edit
-   evil-surround-region
-   evil-Surround-region)
-  :init
-  (evil-define-key 'operator global-map "s" 'evil-surround-edit)
-  (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-  (evil-define-key 'visual global-map "S" 'evil-surround-region)
-  (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
-
-(use-package evil-org
-  :ensure t
-  :after (evil org)
-  :hook (org-mode . evil-org-mode)
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+;; Block until current queue processed.
+(elpaca-wait)
 
 (use-package general
+  :ensure t
   :config
   (general-evil-setup)
 
@@ -159,13 +59,13 @@
     :global-prefix "M-SPC") ;; access leader in insert mode
 
   (lgreen/leader-keys
-    "SPC" '(execute-extended-command :which-key "M-x")
-    "." '(find-file :which-key "find-file"))
+    "SPC" '(execute-extended-command :wk "M-x")
+    "." '(find-file :wk "find-file"))
 
   ;; find
   (lgreen/leader-keys
     "f" '(:ignore t :wk "file")
-    "f f" '(find-file :which-key "Find file")
+    "f f" '(find-file :wk "Find file")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
   ;; Buffers
@@ -214,6 +114,141 @@
     "t t" '(visual-line-mode :wk "Toggle truncated lines"))
   )
 
+;; Block until current queue processed.
+(elpaca-wait)
+
+(use-package emacs
+    :ensure nil
+    :config
+
+    ;; Set personal info
+    (setq user-full-name "Lambert Green"
+	user-mail-address "lambert.green@gmail.com")
+
+    ;; Font
+    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+
+    ;; Visuals
+    (scroll-bar-mode -1)        ; Disable visible scrollbar
+    (tool-bar-mode -1)          ; Disable the toolbar
+    (tooltip-mode -1)           ; Disable tooltips
+    (set-fringe-mode 10)        ; Give some breathing room
+
+    ;; Set custom file so that customizations are not written here
+    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+    (load custom-file)
+
+    ;; Dired - tell it to use 'gls
+    (setq ls-lisp-use-insert-directory-program t)
+    (setq insert-directory-program "gls")
+    )
+
+(use-package no-littering
+    :ensure t)
+
+;; Get a beautiful and functional theme
+(use-package catppuccin-theme
+  :ensure t
+  :config (load-theme 'catppuccin :no-confirm))
+
+;; Add Doom's modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 20)))
+
+;; Let's try this other modeline shall we?
+;; (use-package telephone-line
+;;   :init (telephone-line-mode 1))
+
+;; Set a useful $PATH
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
+
+;; TODO We can't disable insert state bindings as some are useful
+;; however it would be good to restore 'C-a' and 'C-e'.
+(use-package evil
+ :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  ;; (setq evil-disable-insert-state-bindings t)
+  :config
+  (evil-mode))
+
+;; vim-like keybindings everywhere in emacs
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init))
+
+;; gl and gL operators, like vim-lion
+(use-package evil-lion
+  :ensure t
+  :bind (:map evil-normal-state-map
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)
+	      :map evil-visual-state-map
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)))
+
+;; gc operator, like vim-commentary
+(use-package evil-commentary
+  :ensure t
+  :after evil
+  :config (evil-commentary-mode))
+
+;; gx operator, like vim-exchange
+;; NOTE using cx like vim-exchange is possible but not as straightforward
+(use-package evil-exchange
+  :ensure t
+  :bind (:map evil-normal-state-map
+	      ("gx" . evil-exchange)
+	      ("gX" . evil-exchange-cancel)))
+
+;; gr operator, like vim's ReplaceWithRegister
+(use-package evil-replace-with-register
+  :ensure t
+  :bind (:map evil-normal-state-map
+	      ("gr" . evil-replace-with-register)
+	      :map evil-visual-state-map
+	      ("gr" . evil-replace-with-register)))
+
+;; * operator in visual mode
+(use-package evil-visualstar
+  :ensure t
+  :bind (:map evil-visual-state-map
+	      ("*" . evil-visualstar/begin-search-forward)
+	      ("#" . evil-visualstar/begin-search-backward)))
+
+;; ex commands, which a vim user is likely to be familiar with
+(use-package evil-expat :ensure t)
+
+;; visual hints while editing
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-use-diff-faces)
+  (evil-goggles-mode))
+
+;; like vim-surround
+(use-package evil-surround
+  :ensure t
+  :commands
+  (evil-surround-edit
+   evil-Surround-edit
+   evil-surround-region
+   evil-Surround-region)
+  :init
+  (evil-define-key 'operator global-map "s" 'evil-surround-edit)
+  (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
+  (evil-define-key 'visual global-map "S" 'evil-surround-region)
+  (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+
 (use-package which-key
   :ensure t
   :init (which-key-mode)
@@ -222,6 +257,7 @@
   (setq which-key-sort-uppercase-first nil))
 
 (use-package consult
+  :ensure t
   :after general
   :bind (
 	 ;; C-c bindings in `mode-specific-map'
@@ -265,79 +301,80 @@
 	 ("M-s L" . consult-line-multi)
 	 ("M-s k" . consult-keep-lines)
 	 ("M-s u" . consult-focus-lines)
-	  )
-	 ;; Enable automatic preview at point in the *Completions* buffer. This is
-	 ;; relevant when you use the default completion UI.
-	 :hook (completion-list-mode . consult-preview-at-point-mode)
-
-	 ;; The :init configuration is always executed (Not lazy)
-	 :init
-
-	 ;; Optionally configure the register formatting. This improves the register
-	 ;; preview for `consult-register', `consult-register-load',
-	 ;; `consult-register-store' and the Emacs built-ins.
-	 (setq register-preview-delay 0.5
-	       register-preview-function #'consult-register-format)
-
-	 ;; Optionally tweak the register preview window.
-	 ;; This adds thin lines, sorting and hides the mode line of the window.
-	 (advice-add #'register-preview :override #'consult-register-window)
-
-	 ;; Use Consult to select xref locations with preview
-	 (setq xref-show-xrefs-function #'consult-xref
-	       xref-show-definitions-function #'consult-xref)
-
-	 ;; Configure other variables and modes in the :config section,
-	 ;; after lazily loading the package.
-	 :config
-
-	 (lgreen/leader-keys
-	   "s" '(:ignore t :wk "search")
-	   "s b" '(consult-line :wk "Search buffer")
-	   "s p" '(consult-ripgrep :wk "Search project files")
-	   "s d" '(consult-locate :wk "Search current directory"))
-
-	 ;; Optionally configure preview. The default value
-	 ;; is 'any, such that any key triggers the preview.
-	 ;; (setq consult-preview-key 'any)
-	 ;; (setq consult-preview-key "M-.")
-	 ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-	 ;; For some commands and buffer sources it is useful to configure the
-	 ;; :preview-key on a per-command basis using the `consult-customize' macro.
-	 (consult-customize
-	  consult-theme :preview-key '(:debounce 0.2 any)
-	  consult-ripgrep consult-git-grep consult-grep
-	  consult-bookmark consult-recent-file consult-xref
-	  consult--source-bookmark consult--source-file-register
-	  consult--source-recent-file consult--source-project-recent-file
-	  ;; :preview-key "M-."
-	  :preview-key '(:debounce 0.4 any))
-
-	 ;; Optionally configure the narrowing key.
-	 ;; Both < and C-+ work reasonably well.
-	 (setq consult-narrow-key "<") ;; "C-+"
-
-	 ;; Optionally make narrowing help available in the minibuffer.
-	 ;; You may want to use `embark-prefix-help-command' or which-key instead.
-	 ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
-
-	 ;; By default `consult-project-function' uses `project-root' from project.el.
-	 ;; Optionally configure a different project root function.
-	;;;; 1. project.el (the default)
-	 ;; (setq consult-project-function #'consult--default-project--function)
-	;;;; 2. vc.el (vc-root-dir)
-	 ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-	;;;; 3. locate-dominating-file
-	 ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-	;;;; 4. projectile.el (projectile-project-root)
-	 (autoload 'projectile-project-root "projectile")
-	 (setq consult-project-function (lambda (_) (projectile-project-root)))
-	;;;; 5. No project support
-	 ;; (setq consult-project-function nil)
 	 )
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  ;; The :init configuration is always executed (Not lazy)
+  :init
+
+  ;; Optionally configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0.5
+	register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+	xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
+  :config
+
+  (lgreen/leader-keys
+    "s" '(:ignore t :wk "search")
+    "s b" '(consult-line :wk "Search buffer")
+    "s p" '(consult-ripgrep :wk "Search project files")
+    "s d" '(consult-locate :wk "Search current directory"))
+
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
+
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; "C-+"
+
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+  ;; By default `consult-project-function' uses `project-root' from project.el.
+  ;; Optionally configure a different project root function.
+	;;;; 1. project.el (the default)
+  ;; (setq consult-project-function #'consult--default-project--function)
+	;;;; 2. vc.el (vc-root-dir)
+  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+	;;;; 3. locate-dominating-file
+  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+	;;;; 4. projectile.el (projectile-project-root)
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root)))
+	;;;; 5. No project support
+  ;; (setq consult-project-function nil)
+  )
 
 ;; Enable vertico
 (use-package vertico
+  :ensure t
   :init
   (vertico-mode)
 
@@ -361,6 +398,7 @@
 
 ;; A few more useful configurations...
 (use-package emacs
+  :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -387,12 +425,13 @@
   (setq enable-recursive-minibuffers t))
 
 (use-package orderless
-    :ensure t
-    :custom
-    (completion-styles '(orderless basic))
-    (completion-category-overrides '((file (styles basic partial-completion)))))
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package marginalia
+  :ensure t
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
@@ -413,30 +452,27 @@
     "h x" '(helpful-command :wk "Describe command")))
 
 (use-package rainbow-delimiters
+  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; use the powerful 'undo-tree'
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
+  :ensure t
   :custom
   (evil-undo-system 'undo-tree)
   :init
   (global-undo-tree-mode))
 
-;; Dired - tell it to use 'gls
-(setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "gls")
-
 (use-package org-bullets
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-(require 'org-tempo)
 
 (use-package magit
   :ensure t
   :after general
   :config
+  (setq magit-diff-refine-hunk t)
   (lgreen/leader-keys
     "g" '(:ignore t :wk "git")
     "g g" 'magit-status))
@@ -455,14 +491,11 @@
 
 (use-package lsp-mode)
 
-(use-package lorem-ipsum)
+(use-package eat
+  :ensure t)
 
-;; Set transparency of emacs
-(defun lgreen/transparency (value)
-  "Sets the transparency of the frame window. 0=transparent/100=opaque"
-  (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha value))
+(use-package lorem-ipsum :ensure t)
 
-(use-package dired-narrow)
-(use-package origami)
-(use-package company)
+(use-package dired-narrow :ensure t)
+(use-package origami :ensure t)
+(use-package company :ensure t)

@@ -5,239 +5,65 @@
 #+PROPERTY: header-args:emacs-lisp :exports code :results none :tangle init.el
 
 * In the beginning
-A package manager got boostrapped and started sending things packing.
-#+begin_src emacs-lisp
-  ;;; init.el --- -*- lexical-binding: t; -*-
-
-  ;; Disable native comp warnings showing as errors
-  (setq native-comp-async-report-warnings-errors nil)
-
-  ;; Initialize package sources
-  (require 'package)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("org" . "https://orgmode.org/elpa/")
-			   ("elpa" . "https://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
-
-  ;; Initialize use-package on non-Linux platforms
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-  (eval-when-compile
-    (require 'use-package))
-  (setq use-package-always-ensure t)
-#+end_src
-
-* Who we are
-"I am him." - Anon
-#+begin_src emacs-lisp
-  ;; Set personal info
-  (setq user-full-name "Lambert Green"
-	user-mail-address "lambert.green@gmail.com")
-#+end_src
-
-* Our customs
-** No littering
-#+begin_src emacs-lisp
-  (use-package no-littering)
-
-  ;; Set custom file so that customizations are not written here
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (load custom-file)
-#+end_src
-
-* UI settings
-** Fonts
+** Bootstrap Elpaca Package Manager
+    A package manager got bootstrapped and started sending things packing.
     #+begin_src emacs-lisp
-      ;; Font
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+    ;;; init.el --- -*- lexical-binding: t; -*-
+
+    ;; Use Elpaca for our package manager
+    (defvar elpaca-installer-version 0.6)
+    (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+    (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+    (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+    (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+				    :ref nil
+				    :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+				    :build (:not elpaca--activate-package)))
+    (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+	    (build (expand-file-name "elpaca/" elpaca-builds-directory))
+	    (order (cdr elpaca-order))
+	    (default-directory repo))
+	(add-to-list 'load-path (if (file-exists-p build) build repo))
+	(unless (file-exists-p repo)
+	(make-directory repo t)
+	(when (< emacs-major-version 28) (require 'subr-x))
+	(condition-case-unless-debug err
+	    (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+		    ((zerop (call-process "git" nil buffer t "clone"
+					    (plist-get order :repo) repo)))
+		    ((zerop (call-process "git" nil buffer t "checkout"
+					    (or (plist-get order :ref) "--"))))
+		    (emacs (concat invocation-directory invocation-name))
+		    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+					    "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+		    ((require 'elpaca))
+		    ((elpaca-generate-autoloads "elpaca" repo)))
+		(progn (message "%s" (buffer-string)) (kill-buffer buffer))
+		(error "%s" (with-current-buffer buffer (buffer-string))))
+	    ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+	(unless (require 'elpaca-autoloads nil t)
+	(require 'elpaca)
+	(elpaca-generate-autoloads "elpaca" repo)
+	(load "./elpaca-autoloads")))
+    (add-hook 'after-init-hook #'elpaca-process-queues)
+    (elpaca `(,@elpaca-order))
     #+end_src
 
-** Basic settings
+** Install ~use-package~ support for ~elpaca~
     #+begin_src emacs-lisp
-      ;; Visuals
-      (scroll-bar-mode -1)        ; Disable visible scrollbar
-      (tool-bar-mode -1)          ; Disable the toolbar
-      (tooltip-mode -1)           ; Disable tooltips
-      (set-fringe-mode 10)        ; Give some breathing room
+    ;; Install use-package support
+    (elpaca elpaca-use-package
+	;; Enable use-package :ensure support for Elpaca.
+	(elpaca-use-package-mode))
+
+    ;; Block until current queue processed.
+    (elpaca-wait)
     #+end_src
-
-** Themes
-*** Modus Themes
-    #+begin_src emacs-lisp :tangle no
-      ;; Get a beautiful and functional theme
-      (use-package modus-themes
-	:config
-	(modus-themes-load-theme 'modus-operandi)
-	:bind ("<f5>" . modus-themes-toggle))
-
-      ;; macOS: Change dark/light theme
-      (if (eq system-type 'darwin)
-	  (add-hook 'ns-system-appearance-change-functions
-		    #'(lambda (appearance)
-			(pcase appearance
-			  ('light (modus-themes-load-theme 'modus-operandi))
-			  ('dark (modus-themes-load-theme 'modus-vivendi))))))
-    #+end_src
-
-*** Catppuccin Theme
-    #+begin_src emacs-lisp
-      ;; Get a beautiful and functional theme
-      (use-package catppuccin-theme
-	:ensure t
-	:config (load-theme 'catppuccin :no-confirm))
-    #+end_src
-
-** Modeline
-    #+begin_src emacs-lisp
-      ;; Add Doom's modeline
-      (use-package doom-modeline
-	:ensure t
-	:init (doom-modeline-mode 1)
-	:custom ((doom-modeline-height 20)))
-
-      ;; Let's try this other modeline shall we?
-      ;; (use-package telephone-line
-      ;;   :init (telephone-line-mode 1))
-    #+end_src
-
-* Environment
-    #+begin_src emacs-lisp
-      ;; Set a useful $PATH
-      (use-package exec-path-from-shell
-	:if (memq window-system '(mac ns))
-	:config
-	(exec-path-from-shell-initialize))
-    #+end_src
-
-* Keybindings
-** Evil Stuff
-*** Evil
-    #+begin_src emacs-lisp
-      ;; TODO We can't disable insert state bindings as some are useful
-      ;; however it would be good to restore 'C-a' and 'C-e'.
-      (use-package evil
-	:init
-	(setq evil-want-keybinding nil)
-	(setq evil-want-C-u-scroll t)
-	;; (setq evil-disable-insert-state-bindings t)
-	:config
-	(evil-mode))
-    #+end_src
-
-*** Evil Collection
-    #+begin_src emacs-lisp
-    ;; vim-like keybindings everywhere in emacs
-    (use-package evil-collection
-	:after evil
-	:config
-	(evil-collection-init))
-    #+end_src
-
-*** Evil Lion
-    #+begin_src emacs-lisp
-      ;; gl and gL operators, like vim-lion
-      (use-package evil-lion
-	:after evil
-	:bind (:map evil-normal-state-map
-		    ("gl " . evil-lion-left)
-		    ("gL " . evil-lion-right)
-		    :map evil-visual-state-map
-		    ("gl " . evil-lion-left)
-		    ("gL " . evil-lion-right)))
-    #+end_src
-
-*** Evil Commentary
-    #+begin_src emacs-lisp
-      ;; gc operator, like vim-commentary
-      (use-package evil-commentary
-	:after evil
-	:config (evil-commentary-mode))
-    #+end_src
-
-*** Evil Exchange
-    #+begin_src emacs-lisp
-      ;; gx operator, like vim-exchange
-      ;; NOTE using cx like vim-exchange is possible but not as straightforward
-      (use-package evil-exchange
-	:after evil
-	:bind (:map evil-normal-state-map
-		    ("gx" . evil-exchange)
-		    ("gX" . evil-exchange-cancel)))
-    #+end_src
-
-*** Evil Replace-with-register
-    #+begin_src emacs-lisp
-      ;; gr operator, like vim's ReplaceWithRegister
-      (use-package evil-replace-with-register
-	:after evil
-	:bind (:map evil-normal-state-map
-		    ("gr" . evil-replace-with-register)
-		    :map evil-visual-state-map
-		    ("gr" . evil-replace-with-register)))
-    #+end_src
-
-*** Evil VisualStar
-    #+begin_src emacs-lisp
-      ;; * operator in visual mode
-      (use-package evil-visualstar
-	:after evil
-	:bind (:map evil-visual-state-map
-		    ("*" . evil-visualstar/begin-search-forward)
-		    ("#" . evil-visualstar/begin-search-backward)))
-    #+end_src
-
-*** Evil Expat
-    #+begin_src emacs-lisp
-      ;; ex commands, which a vim user is likely to be familiar with
-      (use-package evil-expat
-	:after evil)
-    #+end_src
-
-*** Evil Goggles
-    #+begin_src emacs-lisp
-      ;; visual hints while editing
-      (use-package evil-goggles
-	:after evil
-	:config
-	(evil-goggles-use-diff-faces)
-	(evil-goggles-mode))
-    #+end_src
-
-*** Evil Surround
-    #+begin_src emacs-lisp
-      ;; like vim-surround
-      (use-package evil-surround
-	:ensure t
-	:after evil
-	:commands
-	(evil-surround-edit
-	 evil-Surround-edit
-	 evil-surround-region
-	 evil-Surround-region)
-	:init
-	(evil-define-key 'operator global-map "s" 'evil-surround-edit)
-	(evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-	(evil-define-key 'visual global-map "S" 'evil-surround-region)
-	(evil-define-key 'visual global-map "gS" 'evil-Surround-region))
-    #+end_src
-
-*** Evil Org
-    #+begin_src emacs-lisp
-      (use-package evil-org
-	:ensure t
-	:after (evil org)
-	:hook (org-mode . evil-org-mode)
-	:config
-	(require 'evil-org-agenda)
-	(evil-org-agenda-set-keys))
-    #+end_src
-
 ** General
   Space cadet follow your leader's orders!
     #+begin_src emacs-lisp
       (use-package general
+	:ensure t
 	:config
 	(general-evil-setup)
 
@@ -304,6 +130,207 @@ A package manager got boostrapped and started sending things packing.
 	  "t t" '(visual-line-mode :wk "Toggle truncated lines"))
 	)
     #+end_src
+** Elpaca Wait
+    #+begin_src emacs-lisp
+    ;; Block until current queue processed.
+    (elpaca-wait)
+    #+end_src
+
+* Emacs Settings
+    #+begin_src emacs-lisp
+    (use-package emacs
+	:ensure nil
+	:config
+
+	;; Set personal info
+	(setq user-full-name "Lambert Green"
+	    user-mail-address "lambert.green@gmail.com")
+
+	;; Font
+	(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+
+	;; Visuals
+	(scroll-bar-mode -1)        ; Disable visible scrollbar
+	(tool-bar-mode -1)          ; Disable the toolbar
+	(tooltip-mode -1)           ; Disable tooltips
+	(set-fringe-mode 10)        ; Give some breathing room
+
+	;; Set custom file so that customizations are not written here
+	(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+	(load custom-file)
+
+	;; Dired - tell it to use 'gls
+	(setq ls-lisp-use-insert-directory-program t)
+	(setq insert-directory-program "gls")
+	)
+    #+end_src
+
+* No littering
+    #+begin_src emacs-lisp
+    (use-package no-littering
+	:ensure t)
+    #+end_src
+
+* Themes
+** Modus Themes
+    #+begin_src emacs-lisp :tangle no
+      ;; Get a beautiful and functional theme
+      (use-package modus-themes
+	:config
+	(modus-themes-load-theme 'modus-operandi)
+	:bind ("<f5>" . modus-themes-toggle))
+
+      ;; macOS: Change dark/light theme
+      (if (eq system-type 'darwin)
+	  (add-hook 'ns-system-appearance-change-functions
+		    #'(lambda (appearance)
+			(pcase appearance
+			  ('light (modus-themes-load-theme 'modus-operandi))
+			  ('dark (modus-themes-load-theme 'modus-vivendi))))))
+    #+end_src
+
+** Catppuccin Theme
+    #+begin_src emacs-lisp
+      ;; Get a beautiful and functional theme
+      (use-package catppuccin-theme
+	:ensure t
+	:config (load-theme 'catppuccin :no-confirm))
+    #+end_src
+
+* Modeline
+    #+begin_src emacs-lisp
+      ;; Add Doom's modeline
+      (use-package doom-modeline
+	:ensure t
+	:init (doom-modeline-mode 1)
+	:custom ((doom-modeline-height 20)))
+
+      ;; Let's try this other modeline shall we?
+      ;; (use-package telephone-line
+      ;;   :init (telephone-line-mode 1))
+    #+end_src
+
+* Environment
+    #+begin_src emacs-lisp
+      ;; Set a useful $PATH
+      (use-package exec-path-from-shell
+	:ensure t
+	:if (memq window-system '(mac ns))
+	:config
+	(exec-path-from-shell-initialize))
+    #+end_src
+
+* Keybindings
+** Evil
+    #+begin_src emacs-lisp
+      ;; TODO We can't disable insert state bindings as some are useful
+      ;; however it would be good to restore 'C-a' and 'C-e'.
+      (use-package evil
+       :ensure t
+	:init
+	(setq evil-want-keybinding nil)
+	(setq evil-want-C-u-scroll t)
+	;; (setq evil-disable-insert-state-bindings t)
+	:config
+	(evil-mode))
+    #+end_src
+
+** Evil Collection
+    #+begin_src emacs-lisp
+      ;; vim-like keybindings everywhere in emacs
+      (use-package evil-collection
+	:ensure t
+	:after evil
+	:config
+	(evil-collection-init))
+    #+end_src
+
+** Evil Lion
+    #+begin_src emacs-lisp
+      ;; gl and gL operators, like vim-lion
+      (use-package evil-lion
+	:ensure t
+	:bind (:map evil-normal-state-map
+		    ("gl " . evil-lion-left)
+		    ("gL " . evil-lion-right)
+		    :map evil-visual-state-map
+		    ("gl " . evil-lion-left)
+		    ("gL " . evil-lion-right)))
+    #+end_src
+
+** Evil Commentary
+    #+begin_src emacs-lisp
+      ;; gc operator, like vim-commentary
+      (use-package evil-commentary
+	:ensure t
+	:after evil
+	:config (evil-commentary-mode))
+    #+end_src
+
+** Evil Exchange
+    #+begin_src emacs-lisp
+      ;; gx operator, like vim-exchange
+      ;; NOTE using cx like vim-exchange is possible but not as straightforward
+      (use-package evil-exchange
+	:ensure t
+	:bind (:map evil-normal-state-map
+		    ("gx" . evil-exchange)
+		    ("gX" . evil-exchange-cancel)))
+    #+end_src
+
+** Evil Replace-with-register
+    #+begin_src emacs-lisp
+      ;; gr operator, like vim's ReplaceWithRegister
+      (use-package evil-replace-with-register
+	:ensure t
+	:bind (:map evil-normal-state-map
+		    ("gr" . evil-replace-with-register)
+		    :map evil-visual-state-map
+		    ("gr" . evil-replace-with-register)))
+    #+end_src
+
+** Evil VisualStar
+    #+begin_src emacs-lisp
+      ;; * operator in visual mode
+      (use-package evil-visualstar
+	:ensure t
+	:bind (:map evil-visual-state-map
+		    ("*" . evil-visualstar/begin-search-forward)
+		    ("#" . evil-visualstar/begin-search-backward)))
+    #+end_src
+
+** Evil Expat
+    #+begin_src emacs-lisp
+      ;; ex commands, which a vim user is likely to be familiar with
+      (use-package evil-expat :ensure t)
+    #+end_src
+
+** Evil Goggles
+    #+begin_src emacs-lisp
+      ;; visual hints while editing
+      (use-package evil-goggles
+	:ensure t
+	:config
+	(evil-goggles-use-diff-faces)
+	(evil-goggles-mode))
+    #+end_src
+
+** Evil Surround
+    #+begin_src emacs-lisp
+      ;; like vim-surround
+      (use-package evil-surround
+	:ensure t
+	:commands
+	(evil-surround-edit
+	 evil-Surround-edit
+	 evil-surround-region
+	 evil-Surround-region)
+	:init
+	(evil-define-key 'operator global-map "s" 'evil-surround-edit)
+	(evil-define-key 'operator global-map "S" 'evil-Surround-edit)
+	(evil-define-key 'visual global-map "S" 'evil-surround-region)
+	(evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+    #+end_src
 
 * Emacs Enhancement
 ** Which-key
@@ -319,6 +346,7 @@ A package manager got boostrapped and started sending things packing.
 ** Consult
     #+begin_src emacs-lisp
       (use-package consult
+	:ensure t
 	:after general
 	:bind (
 	       ;; C-c bindings in `mode-specific-map'
@@ -362,82 +390,83 @@ A package manager got boostrapped and started sending things packing.
 	       ("M-s L" . consult-line-multi)
 	       ("M-s k" . consult-keep-lines)
 	       ("M-s u" . consult-focus-lines)
-		)
-	       ;; Enable automatic preview at point in the *Completions* buffer. This is
-	       ;; relevant when you use the default completion UI.
-	       :hook (completion-list-mode . consult-preview-at-point-mode)
-
-	       ;; The :init configuration is always executed (Not lazy)
-	       :init
-
-	       ;; Optionally configure the register formatting. This improves the register
-	       ;; preview for `consult-register', `consult-register-load',
-	       ;; `consult-register-store' and the Emacs built-ins.
-	       (setq register-preview-delay 0.5
-		     register-preview-function #'consult-register-format)
-
-	       ;; Optionally tweak the register preview window.
-	       ;; This adds thin lines, sorting and hides the mode line of the window.
-	       (advice-add #'register-preview :override #'consult-register-window)
-
-	       ;; Use Consult to select xref locations with preview
-	       (setq xref-show-xrefs-function #'consult-xref
-		     xref-show-definitions-function #'consult-xref)
-
-	       ;; Configure other variables and modes in the :config section,
-	       ;; after lazily loading the package.
-	       :config
-
-	       (lgreen/leader-keys
-		 "s" '(:ignore t :wk "search")
-		 "s b" '(consult-line :wk "Search buffer")
-		 "s p" '(consult-ripgrep :wk "Search project files")
-		 "s d" '(consult-locate :wk "Search current directory"))
-
-	       ;; Optionally configure preview. The default value
-	       ;; is 'any, such that any key triggers the preview.
-	       ;; (setq consult-preview-key 'any)
-	       ;; (setq consult-preview-key "M-.")
-	       ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-	       ;; For some commands and buffer sources it is useful to configure the
-	       ;; :preview-key on a per-command basis using the `consult-customize' macro.
-	       (consult-customize
-		consult-theme :preview-key '(:debounce 0.2 any)
-		consult-ripgrep consult-git-grep consult-grep
-		consult-bookmark consult-recent-file consult-xref
-		consult--source-bookmark consult--source-file-register
-		consult--source-recent-file consult--source-project-recent-file
-		;; :preview-key "M-."
-		:preview-key '(:debounce 0.4 any))
-
-	       ;; Optionally configure the narrowing key.
-	       ;; Both < and C-+ work reasonably well.
-	       (setq consult-narrow-key "<") ;; "C-+"
-
-	       ;; Optionally make narrowing help available in the minibuffer.
-	       ;; You may want to use `embark-prefix-help-command' or which-key instead.
-	       ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
-
-	       ;; By default `consult-project-function' uses `project-root' from project.el.
-	       ;; Optionally configure a different project root function.
-	      ;;;; 1. project.el (the default)
-	       ;; (setq consult-project-function #'consult--default-project--function)
-	      ;;;; 2. vc.el (vc-root-dir)
-	       ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-	      ;;;; 3. locate-dominating-file
-	       ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-	      ;;;; 4. projectile.el (projectile-project-root)
-	       (autoload 'projectile-project-root "projectile")
-	       (setq consult-project-function (lambda (_) (projectile-project-root)))
-	      ;;;; 5. No project support
-	       ;; (setq consult-project-function nil)
 	       )
+	;; Enable automatic preview at point in the *Completions* buffer. This is
+	;; relevant when you use the default completion UI.
+	:hook (completion-list-mode . consult-preview-at-point-mode)
+
+	;; The :init configuration is always executed (Not lazy)
+	:init
+
+	;; Optionally configure the register formatting. This improves the register
+	;; preview for `consult-register', `consult-register-load',
+	;; `consult-register-store' and the Emacs built-ins.
+	(setq register-preview-delay 0.5
+	      register-preview-function #'consult-register-format)
+
+	;; Optionally tweak the register preview window.
+	;; This adds thin lines, sorting and hides the mode line of the window.
+	(advice-add #'register-preview :override #'consult-register-window)
+
+	;; Use Consult to select xref locations with preview
+	(setq xref-show-xrefs-function #'consult-xref
+	      xref-show-definitions-function #'consult-xref)
+
+	;; Configure other variables and modes in the :config section,
+	;; after lazily loading the package.
+	:config
+
+	(lgreen/leader-keys
+	  "s" '(:ignore t :wk "search")
+	  "s b" '(consult-line :wk "Search buffer")
+	  "s p" '(consult-ripgrep :wk "Search project files")
+	  "s d" '(consult-locate :wk "Search current directory"))
+
+	;; Optionally configure preview. The default value
+	;; is 'any, such that any key triggers the preview.
+	;; (setq consult-preview-key 'any)
+	;; (setq consult-preview-key "M-.")
+	;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+	;; For some commands and buffer sources it is useful to configure the
+	;; :preview-key on a per-command basis using the `consult-customize' macro.
+	(consult-customize
+	 consult-theme :preview-key '(:debounce 0.2 any)
+	 consult-ripgrep consult-git-grep consult-grep
+	 consult-bookmark consult-recent-file consult-xref
+	 consult--source-bookmark consult--source-file-register
+	 consult--source-recent-file consult--source-project-recent-file
+	 ;; :preview-key "M-."
+	 :preview-key '(:debounce 0.4 any))
+
+	;; Optionally configure the narrowing key.
+	;; Both < and C-+ work reasonably well.
+	(setq consult-narrow-key "<") ;; "C-+"
+
+	;; Optionally make narrowing help available in the minibuffer.
+	;; You may want to use `embark-prefix-help-command' or which-key instead.
+	;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+	;; By default `consult-project-function' uses `project-root' from project.el.
+	;; Optionally configure a different project root function.
+	      ;;;; 1. project.el (the default)
+	;; (setq consult-project-function #'consult--default-project--function)
+	      ;;;; 2. vc.el (vc-root-dir)
+	;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+	      ;;;; 3. locate-dominating-file
+	;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+	      ;;;; 4. projectile.el (projectile-project-root)
+	(autoload 'projectile-project-root "projectile")
+	(setq consult-project-function (lambda (_) (projectile-project-root)))
+	      ;;;; 5. No project support
+	;; (setq consult-project-function nil)
+	)
     #+end_src
 
 ** Vertico
     #+begin_src emacs-lisp
       ;; Enable vertico
       (use-package vertico
+	:ensure t
 	:init
 	(vertico-mode)
 
@@ -461,6 +490,7 @@ A package manager got boostrapped and started sending things packing.
 
       ;; A few more useful configurations...
       (use-package emacs
+	:ensure nil
 	:init
 	;; Add prompt indicator to `completing-read-multiple'.
 	;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -489,16 +519,18 @@ A package manager got boostrapped and started sending things packing.
 
 ** Orderless
     #+begin_src emacs-lisp
-    (use-package orderless
+      (use-package orderless
 	:ensure t
 	:custom
 	(completion-styles '(orderless basic))
 	(completion-category-overrides '((file (styles basic partial-completion)))))
     #+end_src
+
 ** Marginalia
     Enable rich annotations using the Marginalia package
     #+begin_src emacs-lisp
       (use-package marginalia
+	:ensure t
 	;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
 	;; available in the *Completions* buffer, add it to the
 	;; `completion-list-mode-map'.
@@ -525,6 +557,7 @@ A package manager got boostrapped and started sending things packing.
 ** Rainbow-delimiters
     #+begin_src emacs-lisp
       (use-package rainbow-delimiters
+	:ensure t
 	:hook (prog-mode . rainbow-delimiters-mode))
     #+end_src
 
@@ -533,17 +566,11 @@ A package manager got boostrapped and started sending things packing.
       ;; use the powerful 'undo-tree'
       ;; "What good is a mind if you can't change it"
       (use-package undo-tree
+	:ensure t
 	:custom
 	(evil-undo-system 'undo-tree)
 	:init
 	(global-undo-tree-mode))
-    #+end_src
-
-* File Exploring
-    #+begin_src emacs-lisp
-      ;; Dired - tell it to use 'gls
-      (setq ls-lisp-use-insert-directory-program t)
-      (setq insert-directory-program "gls")
     #+end_src
 
 * Org
@@ -555,7 +582,8 @@ A package manager got boostrapped and started sending things packing.
     #+end_src
 
 ** Expansive Blocks
-    #+begin_src emacs-lisp
+*** TODO Put inside a use-package
+    #+begin_src emacs-lisp :tangle no
       (require 'org-tempo)
     #+end_src
 
@@ -592,13 +620,22 @@ A package manager got boostrapped and started sending things packing.
       (use-package lsp-mode)
     #+end_src
 
+* Terminals
+** Emulate A Terminal (EAT)
+    #+begin_src emacs-lisp
+      (use-package eat
+	:ensure t)
+    #+end_src
+
 * Misc
     #+begin_src emacs-lisp
-      (use-package lorem-ipsum)
+      (use-package lorem-ipsum :ensure t)
     #+end_src
 
 * My Functions
-    #+begin_src emacs-lisp
+** TODO Disabling this while evaluating Elpaca
+    + Someone mentioned that stuff needs to be in ~use-package~ blocks for the first pass... yeah I don't really know what I am saying either.
+    #+begin_src emacs-lisp :tangle no
       ;; Set transparency of emacs
       (defun lgreen/transparency (value)
 	"Sets the transparency of the frame window. 0=transparent/100=opaque"
@@ -607,9 +644,9 @@ A package manager got boostrapped and started sending things packing.
     #+end_src
 
 * Rest
-We are slowly migrating our conifg into a literate config.  This section is the unmigrated stuff.
-    #+begin_src emacs-lisp
-      (use-package dired-narrow)
-      (use-package origami)
-      (use-package company)
-    #+end_src
+We are slowly migrating our config into a literate config.  This section is the non-migrated stuff.
+#+begin_src emacs-lisp
+    (use-package dired-narrow :ensure t)
+    (use-package origami :ensure t)
+    (use-package company :ensure t)
+#+end_src

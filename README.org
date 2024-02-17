@@ -79,11 +79,13 @@
 	  "SPC" '(execute-extended-command :wk "M-x")
 	  "." '(find-file :wk "find-file"))
 
-	;; Find files
+	;; Find files and things
 	(lgreen/leader-keys
 	  "f" '(:ignore t :wk "file")
 	  "f f" '(find-file :wk "Find file")
 	  "f r" '(recentf :wk "Recent files")
+	  "f t" '(consult-todo :wk "Find todos")
+	  "f T" '(consult-todo-all :wk "Find all todos")
 	  "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
 	;; Search in files
@@ -319,8 +321,9 @@
 	(no-littering-theme-backups))
     #+end_src
 
-* Themes
-** Catppuccin Theme
+* UI Enhancements
+** Themes
+*** Catppuccin Theme
     #+begin_src emacs-lisp
       ;; Get a beautiful and functional theme
       (use-package catppuccin-theme
@@ -328,7 +331,7 @@
 	:config (load-theme 'catppuccin :no-confirm))
     #+end_src
 
-* Modeline
+** Modeline
     #+begin_src emacs-lisp
       ;; Add Doom's modeline
       (use-package doom-modeline
@@ -339,6 +342,36 @@
       ;; Let's try this other modeline shall we?
       ;; (use-package telephone-line
       ;;   :init (telephone-line-mode 1))
+    #+end_src
+
+** Highlighting
+*** TODOs
++ BUG There is an issue with =hl-todo= showing as version 0, which prevents =Elpaca= from installing =magit-todos= and =consult-todo=.
+    #+begin_src emacs-lisp
+      (use-package hl-todo
+	:ensure t
+	:hook ((org-mode . hl-todo-mode)
+	       (prog-mode . hl-todo-mode))
+	:config
+	(setq hl-todo-highlight-punctuation ":"
+	      hl-todo-keyword-faces
+	      `(("TODO"       warning bold)
+		("FIXME"      error bold)
+		("BUG"        error bold)
+		("HACK"       font-lock-constant-face bold)
+		("REVIEW"     font-lock-keyword-face bold)
+		("NOTE"       success bold)
+		("DEPRECATED" font-lock-doc-face bold))))
+
+      ;; (use-package magit-todos
+      ;;   :ensure t
+      ;;   :after magit
+      ;;   :config (magit-todos-mode 1))
+
+      ;; (use-package consult-todo
+      ;;   :ensure t
+      ;;   :after consult
+      ;;   :commands (consult-todo consult-todo-all)
     #+end_src
 
 * OS Specifics

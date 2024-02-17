@@ -281,26 +281,26 @@
 
 * Emacs Settings
     #+begin_src emacs-lisp
-    (use-package emacs
-	:ensure nil
-	:config
+      (use-package emacs
+	  :ensure nil
+	  :config
 
-	;; Set personal info
-	(setq user-full-name "Lambert Green"
-	    user-mail-address "lambert.green@gmail.com")
+	  ;; Set personal info
+	  (setq user-full-name "Lambert Green"
+	      user-mail-address "lambert.green@gmail.com")
 
-	;; Font
-	(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+	  ;; Font
+	  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
 
-	;; Visuals
-	(scroll-bar-mode -1)        ; Disable visible scrollbar
-	(tool-bar-mode -1)          ; Disable the toolbar
-	(tooltip-mode -1)           ; Disable tooltips
-	(set-fringe-mode 10)        ; Give some breathing room
+	  ;; Visuals
+	  (scroll-bar-mode -1)        ; Disable visible scrollbar
+	  (tool-bar-mode -1)          ; Disable the toolbar
+	  (tooltip-mode -1)           ; Disable tooltips
+	  ;; (set-fringe-mode 4)        ; Give some breathing room
 
-	;; Set custom file so that customizations are not written here
-	(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-	(load custom-file))
+	  ;; Set custom file so that customizations are not written here
+	  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+	  (load custom-file))
     #+end_src
 
 * No littering

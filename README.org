@@ -540,10 +540,12 @@
     #+end_src
 
 ** Diff-HL
-#+begin_src emacs-lisp
-  (use-package diff-hl
-    :ensure t)
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package diff-hl
+	:ensure t
+	:config
+	(global-diff-hl-mode))
+    #+end_src
 
 * Programming
 ** LSP

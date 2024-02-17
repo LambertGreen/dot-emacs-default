@@ -154,7 +154,8 @@
 	  "h f" '(helpful-callable :wk "Describe function")
 	  "h v" '(helpful-variable :wk "Describe variable")
 	  "h k" '(helpful-key :wk "Describe key")
-	  "h x" '(helpful-command :wk "Describe command"))
+	  "h c" '(helpful-command :wk "Describe command")
+	  "h m" '(describe-mode :wk "Describe mode"))
 
 	;; Toggles
 	(lgreen/leader-keys

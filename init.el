@@ -414,6 +414,11 @@
   (projectile-mode +1)
   (setq projectile-project-search-path '(("~/dev" . 7))))
 
+(use-package magit
+  :ensure t
+  :config
+  (setq magit-diff-refine-hunk t))
+
 (use-package eat
   :ensure t)
 

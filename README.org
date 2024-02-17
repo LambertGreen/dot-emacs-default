@@ -525,7 +525,7 @@
     #+end_src
 
 * Version Control
-    #+begin_src emacs-lisp :tangle no
+    #+begin_src emacs-lisp
       (use-package magit
 	:ensure t
 	:config

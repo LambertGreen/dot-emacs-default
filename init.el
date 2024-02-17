@@ -66,6 +66,7 @@
   (lgreen/leader-keys
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
+    "f r" '(recentf :wk "Recent files")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
   ;; Buffers
@@ -107,76 +108,25 @@
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit"))
 
+
   ;; Toggles
   (lgreen/leader-keys
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-    "t t" '(visual-line-mode :wk "Toggle truncated lines"))
+    "t w" '(visual-line-mode :wk "Toggle truncated lines"))
   )
 
-;; Block until current queue processed.
-(elpaca-wait)
-
-(use-package emacs
-    :ensure nil
-    :config
-
-    ;; Set personal info
-    (setq user-full-name "Lambert Green"
-	user-mail-address "lambert.green@gmail.com")
-
-    ;; Font
-    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
-
-    ;; Visuals
-    (scroll-bar-mode -1)        ; Disable visible scrollbar
-    (tool-bar-mode -1)          ; Disable the toolbar
-    (tooltip-mode -1)           ; Disable tooltips
-    (set-fringe-mode 10)        ; Give some breathing room
-
-    ;; Set custom file so that customizations are not written here
-    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-    (load custom-file)
-
-    ;; Dired - tell it to use 'gls
-    (setq ls-lisp-use-insert-directory-program t)
-    (setq insert-directory-program "gls")
-    )
-
-(use-package no-littering
-    :ensure t)
-
-;; Get a beautiful and functional theme
-(use-package catppuccin-theme
-  :ensure t
-  :config (load-theme 'catppuccin :no-confirm))
-
-;; Add Doom's modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 20)))
-
-;; Let's try this other modeline shall we?
-;; (use-package telephone-line
-;;   :init (telephone-line-mode 1))
-
-;; Set a useful $PATH
-(use-package exec-path-from-shell
-  :ensure t
-  :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize))
-
-;; TODO We can't disable insert state bindings as some are useful
-;; however it would be good to restore 'C-a' and 'C-e'.
 (use-package evil
- :ensure t
+  :ensure t
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  ;; (setq evil-disable-insert-state-bindings t)
+  (setq org-return-follows-link t)
   :config
+  ;; Use Emacs keybindings in insert mode for C-a and C-e
+  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+  (evil-set-initial-state 'eat-mode 'insert)
   (evil-mode))
 
 ;; vim-like keybindings everywhere in emacs
@@ -184,7 +134,12 @@
   :ensure t
   :after evil
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil)))
 
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
@@ -249,6 +204,54 @@
   (evil-define-key 'visual global-map "S" 'evil-surround-region)
   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
 
+(use-package emacs
+    :ensure nil
+    :config
+
+    ;; Set personal info
+    (setq user-full-name "Lambert Green"
+	user-mail-address "lambert.green@gmail.com")
+
+    ;; Font
+    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+
+    ;; Visuals
+    (scroll-bar-mode -1)        ; Disable visible scrollbar
+    (tool-bar-mode -1)          ; Disable the toolbar
+    (tooltip-mode -1)           ; Disable tooltips
+    (set-fringe-mode 10)        ; Give some breathing room
+
+    ;; Set custom file so that customizations are not written here
+    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+    (load custom-file))
+
+(use-package no-littering
+  :ensure t
+  :config
+  (no-littering-theme-backups))
+
+;; Get a beautiful and functional theme
+(use-package catppuccin-theme
+  :ensure t
+  :config (load-theme 'catppuccin :no-confirm))
+
+;; Add Doom's modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 20)))
+
+;; Let's try this other modeline shall we?
+;; (use-package telephone-line
+;;   :init (telephone-line-mode 1))
+
+;; Set a useful $PATH
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package which-key
   :ensure t
   :init (which-key-mode)
@@ -259,56 +262,11 @@
 (use-package consult
   :ensure t
   :after general
-  :bind (
-	 ;; C-c bindings in `mode-specific-map'
-	 ("C-c M-x" . consult-mode-command)
-	 ("C-c h" . consult-history)
-	 ("C-c k" . consult-kmacro)
-	 ("C-c m" . consult-man)
-	 ("C-c i" . consult-info)
-	 ([remap Info-search] . consult-info)
-	 ;; C-x bindings in `ctl-x-map'
-	 ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-	 ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-	 ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-	 ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-	 ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
-	 ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-	 ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-	 ;; Custom M-# bindings for fast register access
-	 ("M-#" . consult-register-load)
-	 ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-	 ("C-M-#" . consult-register)
-	 ;; Other custom bindings
-	 ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-	 ;; M-g bindings in `goto-map'
-	 ("M-g e" . consult-compile-error)
-	 ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-	 ("M-g g" . consult-goto-line)             ;; orig. goto-line
-	 ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-	 ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-	 ("M-g m" . consult-mark)
-	 ("M-g k" . consult-global-mark)
-	 ("M-g i" . consult-imenu)
-	 ("M-g I" . consult-imenu-multi)
-	 ;; M-s bindings in `search-map'
-	 ("M-s d" . consult-find)                  ;; Alternative: consult-fd
-	 ("M-s c" . consult-locate)
-	 ("M-s g" . consult-grep)
-	 ("M-s G" . consult-git-grep)
-	 ("M-s r" . consult-ripgrep)
-	 ("M-s l" . consult-line)
-	 ("M-s L" . consult-line-multi)
-	 ("M-s k" . consult-keep-lines)
-	 ("M-s u" . consult-focus-lines)
-	 )
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
-
   ;; The :init configuration is always executed (Not lazy)
   :init
-
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
@@ -326,11 +284,11 @@
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
   :config
-
   (lgreen/leader-keys
-    "s" '(:ignore t :wk "search")
+    "s" '(:ignore t :wk "Search")
     "s b" '(consult-line :wk "Search buffer")
     "s p" '(consult-ripgrep :wk "Search project files")
+    "s i" '(consult-imenu :wk "Jump to symbol")
     "s d" '(consult-locate :wk "Search current directory"))
 
   ;; Optionally configure preview. The default value
@@ -464,21 +422,23 @@
   :init
   (global-undo-tree-mode))
 
+(use-package yasnippet-snippets
+  :ensure t
+  :hook (prog-mode . yas-minor-mode))
+
 (use-package org-bullets
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(use-package magit
+(use-package evil-org
   :ensure t
-  :after general
-  :config
-  (setq magit-diff-refine-hunk t)
-  (lgreen/leader-keys
-    "g" '(:ignore t :wk "git")
-    "g g" 'magit-status))
+  :after org
+  :hook ((org-mode . evil-org-mode)
+	 (evil-org-mode . evil-org-set-key-theme)))
 
 (use-package projectile
   :ensure t
+  :after general
   :config
   (projectile-mode +1)
   (setq projectile-project-search-path '(("~/dev" . 7)))
@@ -488,8 +448,6 @@
     "p f" '(projectile-find-file :wk "Find file in project")
     "p d" '(projectile-dired :wk "Dired in project")
     "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")))
-
-(use-package lsp-mode)
 
 (use-package eat
   :ensure t)

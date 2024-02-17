@@ -339,7 +339,8 @@
       ;;   :init (telephone-line-mode 1))
     #+end_src
 
-* Environment
+* OS Specifics
+** Environment
     #+begin_src emacs-lisp
       ;; Set a useful $PATH
       (use-package exec-path-from-shell
@@ -347,6 +348,17 @@
 	:if (memq window-system '(mac ns))
 	:config
 	(exec-path-from-shell-initialize))
+    #+end_src
+
+** MacOS
+    #+begin_src emacs-lisp
+      (use-package emacs
+	:ensure nil
+	:if (memq window-system '(mac ns))
+	:config
+	(setq insert-directory-program "gls"
+	      dired-use-ls-dired t))
+
     #+end_src
 
 * Emacs Enhancement

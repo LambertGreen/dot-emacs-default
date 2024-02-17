@@ -291,6 +291,10 @@
 	  :ensure nil
 	  :config
 
+	  ;; Set custom file so that customizations are not written here
+	  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+	  (load custom-file)
+
 	  ;; Set personal info
 	  (setq user-full-name "Lambert Green"
 	      user-mail-address "lambert.green@gmail.com")
@@ -304,9 +308,6 @@
 	  (tooltip-mode -1)           ; Disable tooltips
 	  ;; (set-fringe-mode 4)        ; Give some breathing room
 
-	  ;; Set custom file so that customizations are not written here
-	  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-	  (load custom-file))
     #+end_src
 
 * No littering

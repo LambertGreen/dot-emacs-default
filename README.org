@@ -289,29 +289,46 @@
     #+end_src
 
 * Emacs Settings
++ TODO Try get save and restore window working
     #+begin_src emacs-lisp
       (use-package emacs
-	  :ensure nil
-	  :config
+	:ensure nil
+	:config
 
-	  ;; Set custom file so that customizations are not written here
-	  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-	  (load custom-file)
+	;; Set custom file so that customizations are not written here
+	(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+	(load custom-file)
 
-	  ;; Set personal info
-	  (setq user-full-name "Lambert Green"
+	;; Set personal info
+	(setq user-full-name "Lambert Green"
 	      user-mail-address "lambert.green@gmail.com")
 
-	  ;; Font
-	  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+	;; Font
+	(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
 
-	  ;; Visuals
-	  (scroll-bar-mode -1)        ; Disable visible scrollbar
-	  (tool-bar-mode -1)          ; Disable the toolbar
-	  (tooltip-mode -1)           ; Disable tooltips
-	  ;; (set-fringe-mode 4)        ; Give some breathing room
+	;; Visuals
+	(scroll-bar-mode -1)        ; Disable visible scrollbar
+	(tool-bar-mode -1)          ; Disable the toolbar
+	(tooltip-mode -1)           ; Disable tooltips
+	;; (set-fringe-mode 4)        ; Give some breathing room
 
-	  (setq use-short-answers t))
+	(setq use-short-answers t)
+
+	;; Save the desktop upon exit
+	(desktop-save-mode 1))
+
+	;; Save and restore window position
+	;; (add-hook 'kill-emacs-hook (lambda ()
+	;; 			       (let ((current-frame-parameters (frame-parameters (selected-frame))))
+	;; 				 (when (fboundp 'w32-send-sys-command)
+	;; 				   ;; For Windows system
+	;; 				   (w32-send-sys-command #xf020 current-frame-parameters))
+	;; 				 ;; Save frame parameters
+	;; 				 (set-frame-parameter nil 'fullscreen (frame-parameter nil 'fullscreen))
+	;; 				 (customize-save-variable 'initial-frame-alist (list (cons 'top (cdr (assoc 'top current-frame-parameters)))
+	;; 										     (cons 'left (cdr (assoc 'left current-frame-parameters)))
+	;; 										     (cons 'height (cdr (assoc 'height current-frame-parameters)))
+	;; 										     (cons 'width (cdr (assoc 'width current-frame-parameters)))))))))
     #+end_src
 
 * No littering

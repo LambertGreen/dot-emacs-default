@@ -560,6 +560,14 @@
     #+end_src
 
 * Org
+** Org Mode
+    #+begin_src emacs-lisp
+      (use-package org
+	:ensure nil
+	:config
+	(require 'org-tempo))
+    #+end_src
+
 ** Bullet Time
     #+begin_src emacs-lisp
       (use-package org-bullets

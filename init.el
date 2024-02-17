@@ -85,6 +85,12 @@
     "p d" '(projectile-dired :wk "Dired in project")
     "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
 
+  ;; Diff
+  (lgreen/leader-keys
+    "d" '(:ignore t :wk "Diff")
+    "d p" '(diff-hl-previous-hunk :wk "Diff previous")
+    "d n" '(diff-hl-next-hunk :wk "Diff next"))
+
   ;; Git Interface
   (lgreen/leader-keys
     "g" '(:ignore t :wk "git")
@@ -245,7 +251,7 @@
     (scroll-bar-mode -1)        ; Disable visible scrollbar
     (tool-bar-mode -1)          ; Disable the toolbar
     (tooltip-mode -1)           ; Disable tooltips
-    (set-fringe-mode 10)        ; Give some breathing room
+    ;; (set-fringe-mode 4)        ; Give some breathing room
 
     ;; Set custom file so that customizations are not written here
     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -418,6 +424,9 @@
   :ensure t
   :config
   (setq magit-diff-refine-hunk t))
+
+(use-package diff-hl
+  :ensure t)
 
 (use-package eat
   :ensure t)

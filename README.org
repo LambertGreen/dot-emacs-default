@@ -308,6 +308,7 @@
 	  (tooltip-mode -1)           ; Disable tooltips
 	  ;; (set-fringe-mode 4)        ; Give some breathing room
 
+	  (setq use-short-answers t))
     #+end_src
 
 * No littering

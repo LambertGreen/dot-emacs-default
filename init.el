@@ -62,14 +62,35 @@
     "SPC" '(execute-extended-command :wk "M-x")
     "." '(find-file :wk "find-file"))
 
-  ;; find
+  ;; Find files
   (lgreen/leader-keys
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
     "f r" '(recentf :wk "Recent files")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
-  ;; Buffers
+  ;; Search in files
+  (lgreen/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s b" '(consult-line :wk "Search buffer")
+    "s p" '(consult-ripgrep :wk "Search project files")
+    "s i" '(consult-imenu :wk "Jump to symbol")
+    "s d" '(consult-locate :wk "Search current directory"))
+
+  ;; Projects
+  (lgreen/leader-keys
+    "p" '(:ignore t :wk "project")
+    "p p" '(projectile-switch-project :wk "Switch project")
+    "p f" '(projectile-find-file :wk "Find file in project")
+    "p d" '(projectile-dired :wk "Dired in project")
+    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
+
+  ;; Git Interface
+  (lgreen/leader-keys
+    "g" '(:ignore t :wk "git")
+    "g g" '(magit-status :wk "Status"))
+
+  ;; Buffer Management
   (lgreen/leader-keys
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
@@ -80,10 +101,9 @@
     "b r" '(revert-buffer :wk "Reload buffer")
     "b R" '(rename-buffer :wk "Rename buffer")
     "b s" '(save-buffer :wk "Save buffer")
-    "b S" '(evil-write-all :wk "Save all buffers")
-    )
+    "b S" '(evil-write-all :wk "Save all buffers"))
 
-  ;; Windows
+  ;; Window Management
   (lgreen/leader-keys
     "w" '(:ignore t :wk "window")
     "w =" '(balance-windows :wk "Balance windows")
@@ -103,18 +123,24 @@
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
     "w L" '(evil-window-move-far-right :wk "Move window far right"))
 
-  ;; Quit
+  ;; Help
   (lgreen/leader-keys
-    "q" '(:ignore t :wk "quit")
-    "q q" '(save-buffers-kill-terminal :wk "Quit"))
-
+    "h" '(:ignore t :wk "help")
+    "h f" '(helpful-callable :wk "Describe function")
+    "h v" '(helpful-variable :wk "Describe variable")
+    "h k" '(helpful-key :wk "Describe key")
+    "h x" '(helpful-command :wk "Describe command"))
 
   ;; Toggles
   (lgreen/leader-keys
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t w" '(visual-line-mode :wk "Toggle truncated lines"))
-  )
+
+  ;; Quit
+  (lgreen/leader-keys
+    "q" '(:ignore t :wk "quit")
+    "q q" '(save-buffers-kill-terminal :wk "Quit")))
 
 (use-package evil
   :ensure t
@@ -261,7 +287,6 @@
 
 (use-package consult
   :ensure t
-  :after general
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
@@ -279,16 +304,7 @@
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
 	xref-show-definitions-function #'consult-xref)
-
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
-  :config
-  (lgreen/leader-keys
-    "s" '(:ignore t :wk "Search")
-    "s b" '(consult-line :wk "Search buffer")
-    "s p" '(consult-ripgrep :wk "Search project files")
-    "s i" '(consult-imenu :wk "Jump to symbol")
-    "s d" '(consult-locate :wk "Search current directory")))
+  )
 
 ;; Enable vertico
 (use-package vertico
@@ -359,15 +375,7 @@
   :init (marginalia-mode))
 
 (use-package helpful
-  :ensure t
-  :after general
-  :config
-  (lgreen/leader-keys
-    "h" '(:ignore t :wk "help")
-    "h f" '(helpful-callable :wk "Describe function")
-    "h v" '(helpful-variable :wk "Describe variable")
-    "h k" '(helpful-key :wk "Describe key")
-    "h x" '(helpful-command :wk "Describe command")))
+  :ensure t)
 
 (use-package rainbow-delimiters
   :ensure t
@@ -402,16 +410,9 @@
 
 (use-package projectile
   :ensure t
-  :after general
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '(("~/dev" . 7)))
-  (lgreen/leader-keys
-    "p" '(:ignore t :wk "project")
-    "p p" '(projectile-switch-project :wk "Switch project")
-    "p f" '(projectile-find-file :wk "Find file in project")
-    "p d" '(projectile-dired :wk "Dired in project")
-    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")))
+  (setq projectile-project-search-path '(("~/dev" . 7))))
 
 (use-package eat
   :ensure t)

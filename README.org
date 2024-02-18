@@ -471,7 +471,6 @@
     #+begin_src emacs-lisp
       ;; Persist history over Emacs restarts. Vertico sorts by history position.
       (use-package savehist
-	:ensure t
 	:init
 	(savehist-mode))
     #+end_src

@@ -675,14 +675,15 @@
     #+end_src
 
 * My Functions
-** TODO Disabling this while evaluating Elpaca
-    + Someone mentioned that stuff needs to be in ~use-package~ blocks for the first pass... yeah I don't really know what I am saying either.
-    #+begin_src emacs-lisp :tangle no
-      ;; Set transparency of emacs
-      (defun lgreen/transparency (value)
-	"Sets the transparency of the frame window. 0=transparent/100=opaque"
-	(interactive "nTransparency Value 0 - 100 opaque:")
-	(set-frame-parameter (selected-frame) 'alpha value))
+    #+begin_src emacs-lisp
+      (use-package emacs
+	:config
+
+	;; Set transparency of emacs
+	(defun lgreen/transparency (value)
+	  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+	  (interactive "nTransparency Value 0 - 100 opaque:")
+	  (set-frame-parameter (selected-frame) 'alpha value)))
     #+end_src
 
 * Rest

@@ -467,6 +467,15 @@
 	)
     #+end_src
 
+** Savehist
+    #+begin_src emacs-lisp
+      ;; Persist history over Emacs restarts. Vertico sorts by history position.
+      (use-package savehist
+	:ensure t
+	:init
+	(savehist-mode))
+    #+end_src
+
 ** Vertico
     #+begin_src emacs-lisp
       ;; Enable vertico
@@ -488,10 +497,6 @@
 	(setq vertico-cycle t)
 	)
 
-      ;; Persist history over Emacs restarts. Vertico sorts by history position.
-      (use-package savehist
-	:init
-	(savehist-mode))
 
       ;; A few more useful configurations...
       (use-package emacs

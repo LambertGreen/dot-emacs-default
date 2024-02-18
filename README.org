@@ -570,6 +570,14 @@
 	(global-undo-tree-mode))
     #+end_src
 
+** Smartparens
+    #+begin_src emacs-lisp
+    (use-package smartparens
+	:ensure t
+	:config
+	(smartparens-global-mode 1))
+    #+end_src
+
 * Snippets
     #+begin_src emacs-lisp
       (use-package yasnippet-snippets

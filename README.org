@@ -576,6 +576,18 @@
 	(smartparens-global-mode 1))
     #+end_src
 
+* Completions
+    #+begin_src emacs-lisp
+    (use-package company
+	:ensure t
+	:init
+	(setq company-idle-delay 0.1  ; Show suggestions after a small delay
+	    company-minimum-prefix-length 2 ; Start completing after 2 characters
+	    company-show-numbers t) ; Show numbers for easy selection
+	:config
+	(global-company-mode t)) ; Enable Company mode globally
+    #+end_src
+
 * Snippets
     #+begin_src emacs-lisp
       (use-package yasnippet-snippets
@@ -676,7 +688,6 @@
 * Rest
 We are slowly migrating our config into a literate config.  This section is the non-migrated stuff.
 #+begin_src emacs-lisp
-    (use-package dired-narrow :ensure t)
-    (use-package origami :ensure t)
-    (use-package company :ensure t)
+  (use-package dired-narrow :ensure t)
+  (use-package origami :ensure t)
 #+end_src

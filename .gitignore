@@ -11,3 +11,6 @@ semanticdb/
 /transient/
 
 custom.el
+/eln-cache/
+/elpaca/
+/var/

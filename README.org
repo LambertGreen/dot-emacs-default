@@ -392,6 +392,24 @@
       ;;   :commands (consult-todo consult-todo-all)
     #+end_src
 
+** Nerd Icons
+    #+begin_src emacs-lisp
+      (use-package nerd-icons
+	:ensure t)
+
+      (use-package nerd-icons-dired
+	:ensure t
+	:after (:all nerd-icons dired)
+	:hook (dired-mode . nerd-icons-dired-mode))
+
+      (use-package nerd-icons-completion
+	:ensure t
+	:after marginalia
+	:config
+	(nerd-icons-completion-mode)
+	(add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+    #+end_src
+
 * OS Specifics
 ** Environment
     #+begin_src emacs-lisp

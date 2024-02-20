@@ -586,17 +586,13 @@
 	(require 'org-tempo))
     #+end_src
 
-** Bullet Time
+** Org Superstar
+    + Yes this better bullets.
+      - after
     #+begin_src emacs-lisp
-      (use-package org-bullets
-	:ensure t
-	:config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-    #+end_src
-
-** Expansive Blocks
-*** TODO Put inside a use-package
-    #+begin_src emacs-lisp :tangle no
-      (require 'org-tempo)
+	  (use-package org-superstar
+	      :ensure t
+	      :hook (org-mode . (lambda () (org-superstar-mode 1))))
     #+end_src
 
 ** Evil Org

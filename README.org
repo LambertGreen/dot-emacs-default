@@ -645,17 +645,17 @@
 	(global-diff-hl-mode))
     #+end_src
 
-* Programming
-** LSP
-    #+begin_src emacs-lisp :tangle no
-      (use-package lsp-mode)
-    #+end_src
-
 * Terminals
 ** Emulate A Terminal (EAT)
     #+begin_src emacs-lisp
       (use-package eat
 	:ensure t)
+    #+end_src
+
+* Programming
+** LSP
+    #+begin_src emacs-lisp :tangle no
+      (use-package lsp-mode)
     #+end_src
 
 * My Functions

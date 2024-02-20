@@ -289,7 +289,6 @@
     #+end_src
 
 * Emacs Settings
-+ TODO Try get save and restore window working
     #+begin_src emacs-lisp
       (use-package emacs
 	:ensure nil
@@ -310,25 +309,8 @@
 	(scroll-bar-mode -1)        ; Disable visible scrollbar
 	(tool-bar-mode -1)          ; Disable the toolbar
 	(tooltip-mode -1)           ; Disable tooltips
-	;; (set-fringe-mode 4)        ; Give some breathing room
 
-	(setq use-short-answers t)
-
-	;; Save the desktop upon exit
-	(desktop-save-mode 1))
-
-	;; Save and restore window position
-	;; (add-hook 'kill-emacs-hook (lambda ()
-	;; 			       (let ((current-frame-parameters (frame-parameters (selected-frame))))
-	;; 				 (when (fboundp 'w32-send-sys-command)
-	;; 				   ;; For Windows system
-	;; 				   (w32-send-sys-command #xf020 current-frame-parameters))
-	;; 				 ;; Save frame parameters
-	;; 				 (set-frame-parameter nil 'fullscreen (frame-parameter nil 'fullscreen))
-	;; 				 (customize-save-variable 'initial-frame-alist (list (cons 'top (cdr (assoc 'top current-frame-parameters)))
-	;; 										     (cons 'left (cdr (assoc 'left current-frame-parameters)))
-	;; 										     (cons 'height (cdr (assoc 'height current-frame-parameters)))
-	;; 										     (cons 'width (cdr (assoc 'width current-frame-parameters)))))))))
+	(setq use-short-answers t))
     #+end_src
 
 * No littering

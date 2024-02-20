@@ -458,6 +458,7 @@
     #+end_src
 
 ** Vertico
+    VERTical Interactive COmpletion
     #+begin_src emacs-lisp
       ;; Enable vertico
       (use-package vertico
@@ -503,6 +504,7 @@
     #+end_src
 
 ** Orderless
+    Completion style for matching regexps in any order
     #+begin_src emacs-lisp
       (use-package orderless
 	:ensure t
@@ -512,7 +514,7 @@
     #+end_src
 
 ** Marginalia
-    Enable rich annotations using the Marginalia package
+    Enrich existing commands with completion annotations
     #+begin_src emacs-lisp
       (use-package marginalia
 	:ensure t

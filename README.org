@@ -310,7 +310,10 @@
 	(tool-bar-mode -1)          ; Disable the toolbar
 	(tooltip-mode -1)           ; Disable tooltips
 
-	(setq use-short-answers t))
+	(setq use-short-answers t)
+
+	;; Not sure this should be in the config.. maybe better in .dir-local.el files?
+	(setq require-final-newline t))
     #+end_src
 
 * No littering

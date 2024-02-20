@@ -573,10 +573,16 @@
     #+end_src
 
 * Snippets
+** Yasnippet
     #+begin_src emacs-lisp
       (use-package yasnippet-snippets
 	:ensure t
 	:hook (prog-mode . yas-minor-mode))
+    #+end_src
+
+** Lorem-ipsum
+    #+begin_src emacs-lisp
+      (use-package lorem-ipsum :ensure t)
     #+end_src
 
 * Org
@@ -647,11 +653,6 @@
     #+begin_src emacs-lisp
       (use-package eat
 	:ensure t)
-    #+end_src
-
-* Misc
-    #+begin_src emacs-lisp
-      (use-package lorem-ipsum :ensure t)
     #+end_src
 
 * My Functions

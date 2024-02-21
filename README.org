@@ -598,6 +598,12 @@
       (use-package lorem-ipsum :ensure t)
     #+end_src
 
+* Folding
+** Origami
+    #+begin_src emacs-lisp
+      (use-package origami :ensure t)
+    #+end_src
+
 * Org
 ** Org Mode
     #+begin_src emacs-lisp
@@ -688,10 +694,3 @@
 	  (interactive "nTransparency Value 0 - 100 opaque:")
 	  (set-frame-parameter (selected-frame) 'alpha value)))
     #+end_src
-
-* Rest
-We are slowly migrating our config into a literate config.  This section is the non-migrated stuff.
-#+begin_src emacs-lisp
-  (use-package dired-narrow :ensure t)
-  (use-package origami :ensure t)
-#+end_src

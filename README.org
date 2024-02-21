@@ -166,7 +166,11 @@
 	;; Quit
 	(lgreen/leader-keys
 	  "q" '(:ignore t :wk "quit")
-	  "q q" '(save-buffers-kill-terminal :wk "Quit")))
+	  "q q" '(save-buffers-kill-terminal :wk "Quit"))
+
+	;; Universal argument
+	(lgreen/leader-keys
+	  "u" '(universal-argument :wk "Universal argument")))
     #+end_src
 
 * Evil Mode
@@ -174,10 +178,11 @@
     #+begin_src emacs-lisp
       (use-package evil
 	:ensure t
-	:init
-	(setq evil-want-keybinding nil)
-	(setq evil-want-C-u-scroll t)
-	(setq org-return-follows-link t)
+	:custom
+	(evil-want-keybinding nil)
+	(evil-want-C-u-scroll t)
+	(evil-want-C-u-delete t)
+	(org-return-follows-link t)
 	:config
 	;; Use Emacs keybindings in insert mode for C-a and C-e
 	(define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)

@@ -157,6 +157,11 @@
 	  "h c" '(helpful-command :wk "Describe command")
 	  "h m" '(describe-mode :wk "Describe mode"))
 
+	;; Open
+	(lgreen/leader-keys
+	  "o" '(:ignore t :wk "open")
+	  "o t" '(vterm-toggle :wk "Vterm"))
+
 	;; Toggles
 	(lgreen/leader-keys
 	  "t" '(:ignore t :wk "toggle")
@@ -654,6 +659,15 @@
 ** Emulate A Terminal (EAT)
     #+begin_src emacs-lisp
       (use-package eat
+	:ensure t)
+    #+end_src
+
+** Vterm
+    #+begin_src emacs-lisp
+      (use-package vterm
+	:ensure t)
+
+      (use-package vterm-toggle
 	:ensure t)
     #+end_src
 

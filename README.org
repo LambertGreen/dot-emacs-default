@@ -508,6 +508,62 @@
 	(add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
     #+end_src
 
+** Pulsar
+    #+begin_src emacs-lisp
+      (use-package pulsar
+	:ensure t
+	:init
+	(setq pulsar-pulse-functions
+	      '(backward-page
+		bookmark-jump
+		delete-other-windows
+		delete-window
+		evil-avy-goto-line
+		evil-goto-definition
+		evil-scroll-down
+		evil-scroll-line-to-bottom
+		evil-scroll-line-to-center
+		evil-scroll-line-to-top
+		evil-scroll-up
+		evil-window-left
+		evil-window-right
+		evil-window-split
+		forward-page
+		kill-current-buffer
+		lsp-find-references
+		lsp-find-definition
+		lsp-find-implementation
+		move-to-window-line-top-bottom
+		other-window
+		recenter-top-bottom
+		reposition-window
+		scroll-down
+		scroll-down-command
+		scroll-up
+		scroll-up-command
+		tab-close
+		tab-new
+		tab-next
+		windmove-down
+		windmove-left
+		windmove-right
+		windmove-swap-states-down
+		windmove-swap-states-left
+		windmove-swap-states-right
+		windmove-swap-states-up
+		windmove-up
+		xref-find-references
+		xref-find-definitions))
+
+	:config
+	(setq pulsar-pulse t)
+	(setq pulsar-delay 0.2)
+	(setq pulsar-iterations 6)
+	(setq pulsar-face 'pulsar-yellow)
+	(setq pulsar-highlight-face 'pulsar-magenta)
+	(pulsar-global-mode 1))
+    #+end_src
+
 * OS Specifics
 ** Environment
     #+begin_src emacs-lisp

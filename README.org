@@ -72,8 +72,8 @@
 	      (general-create-definer lgreen/leader-keys
 		:states '(normal insert visual emacs)
 		:keymaps 'override
-		:prefix "SPC" ;; set leader
-		:global-prefix "M-SPC") ;; access leader in insert mode
+		:prefix "SPC"
+		:non-normal-prefix "M-SPC")
 
 	      (lgreen/leader-keys
 		"SPC" '(execute-extended-command :wk "M-x")

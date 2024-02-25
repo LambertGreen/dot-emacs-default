@@ -684,6 +684,20 @@
       (use-package lsp-mode)
     #+end_src
 
+** Programming Modes
+    #+begin_src emacs-lisp
+    (use-package cmake-mode
+	:ensure t)
+    (use-package lua-mode
+	:ensure t)
+    (use-package yaml-mode
+	:ensure t)
+    (use-package mermaid-mode
+	:ensure t)
+    (use-package powershell
+	:ensure t)
+    #+end_src
+
 * Documentation
     #+begin_src emacs-lisp
     (use-package devdocs

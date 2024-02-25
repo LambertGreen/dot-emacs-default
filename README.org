@@ -312,6 +312,7 @@
     #+end_src
 
 * Emacs Settings
+** General Settings
     #+begin_src emacs-lisp
       (use-package emacs
 	:ensure nil
@@ -339,12 +340,34 @@
 	(setq require-final-newline t))
     #+end_src
 
-* No littering
+** No littering
     #+begin_src emacs-lisp
       (use-package no-littering
 	:ensure t
 	:config
 	(no-littering-theme-backups))
+    #+end_src
+
+** Savehist
+    #+begin_src emacs-lisp
+      ;; Persist history over Emacs restarts. Vertico sorts by history position.
+      (use-package savehist
+	:init
+	(savehist-mode))
+    #+end_src
+
+** Saveplace
+    #+begin_src emacs-lisp
+      (use-package saveplace
+	:config
+	(save-place-mode +1))
+    #+end_src
+
+** So-long
+    #+begin_src emacs-lisp
+      (use-package so-long
+	:config
+	(global-so-long-mode +1))
     #+end_src
 
 * UI Enhancements
@@ -473,14 +496,6 @@
 	(setq xref-show-xrefs-function #'consult-xref
 	      xref-show-definitions-function #'consult-xref)
 	)
-    #+end_src
-
-** Savehist
-    #+begin_src emacs-lisp
-      ;; Persist history over Emacs restarts. Vertico sorts by history position.
-      (use-package savehist
-	:init
-	(savehist-mode))
     #+end_src
 
 ** Vertico

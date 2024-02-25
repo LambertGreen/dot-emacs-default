@@ -63,132 +63,147 @@
 * General Keybindings
   Space cadet follow your leader's orders!
     #+begin_src emacs-lisp
-	    (use-package general
-	      :ensure t
-	      :config
-	      (general-evil-setup)
+      (use-package general
+	:ensure t
+	:config
+	(general-evil-setup)
 
-	      ;; set up 'SPC' as the global leader key
-	      (general-create-definer lgreen/leader-keys
-		:states '(normal insert visual emacs)
-		:keymaps 'override
-		:prefix "SPC"
-		:non-normal-prefix "M-SPC")
+	;; set up 'SPC' as the global leader key
+	(general-create-definer lgreen/leader-keys
+	  :states '(normal insert visual emacs)
+	  :keymaps 'override
+	  :prefix "SPC"
+	  :non-normal-prefix "M-SPC")
 
-	      (lgreen/leader-keys
-		"SPC" '(execute-extended-command :wk "M-x")
-		"." '(find-file :wk "find-file"))
+	(lgreen/leader-keys
+	  "SPC" '(execute-extended-command :wk "M-x")
+	  "." '(find-file :wk "find-file"))
 
-	      ;; Find files and things
-	      (lgreen/leader-keys
-		"f" '(:ignore t :wk "file")
-		"f f" '(find-file :wk "Find file")
-		"f r" '(recentf :wk "Recent files")
-		"f t" '(consult-todo :wk "Find todos")
-		"f T" '(consult-todo-all :wk "Find all todos")
-		"f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
+	;; Jump to
+	(lgreen/leader-keys
+	  "j" '(:ignore t :wk "jump")
+	  "j j" '(evilem-motion-next-line :wk "next-line")
+	  "j k" '(evilem-motion-previous-line :wk "previous-line")
+	  "j g" '(:ignore t :wk "avy")
+	  "j g g" '(evil-avy-goto-char-2 :wk "goto-char-2")
+	  "j g j" '(avy-goto-word-0-below :wk "word-0-below")
+	  "j g k" '(avy-goto-word-0-above :wk "word-0-above")
+	  "j w" '(evilem-motion-forward-word-begin :wk "forward-word-begin")
+	  "j b" '(evilem-motion-backward-word-begin :wk "backward-word-begin")
+	  "j e" '(evilem-motion-forward-word-end :wk "forward-word-end")
+	  "j W" '(evilem-motion-forward-WORD-begin :wk "forward-WORD-begin")
+	  "j E" '(evilem-motion-forward-WORD-end :wk "forward-WORD-end"))
 
-	      ;; Search in files
-	      (lgreen/leader-keys
-		"s" '(:ignore t :wk "Search")
-		"s b" '(consult-line :wk "Search buffer")
-		"s p" '(consult-ripgrep :wk "Search project files")
-		"s i" '(consult-imenu :wk "Jump to symbol")
-		"s d" '(consult-locate :wk "Search current directory"))
+	;; Find files and things
+	(lgreen/leader-keys
+	  "f" '(:ignore t :wk "file")
+	  "f f" '(find-file :wk "Find file")
+	  "f r" '(recentf :wk "Recent files")
+	  "f t" '(consult-todo :wk "Find todos")
+	  "f T" '(consult-todo-all :wk "Find all todos")
+	  "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
-	      ;; Projects
-	      (lgreen/leader-keys
-		"p" '(:ignore t :wk "project")
-		"p p" '(projectile-switch-project :wk "Switch project")
-		"p f" '(projectile-find-file :wk "Find file in project")
-		"p d" '(projectile-dired :wk "Dired in project")
-		"p c" '(projectile-compile-project :wk "Compile project")
-		"p C" '((lambda ()
-			  (interactive)
-			  (let ((compilation-read-command nil))
-			    (projectile-compile-project nil)))
-			:wk "Compile project!")
-		"p t" '(projectile-test-project :wk "Test project")
-		"p T" '((lambda ()
-			  (interactive)
-			  (let ((compilation-read-command nil))
-			    (projectile-test-project nil)))
-			:wk "Test project!")
-		"p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
+	;; Search in files
+	(lgreen/leader-keys
+	  "s" '(:ignore t :wk "Search")
+	  "s b" '(consult-line :wk "Search buffer")
+	  "s p" '(consult-ripgrep :wk "Search project files")
+	  "s i" '(consult-imenu :wk "Jump to symbol")
+	  "s d" '(consult-locate :wk "Search current directory"))
 
-	      ;; Diff
-	      (lgreen/leader-keys
-		"d" '(:ignore t :wk "Diff")
-		"d p" '(diff-hl-previous-hunk :wk "Diff previous")
-		"d n" '(diff-hl-next-hunk :wk "Diff next"))
+	;; Projects
+	(lgreen/leader-keys
+	  "p" '(:ignore t :wk "project")
+	  "p p" '(projectile-switch-project :wk "Switch project")
+	  "p f" '(projectile-find-file :wk "Find file in project")
+	  "p d" '(projectile-dired :wk "Dired in project")
+	  "p c" '(projectile-compile-project :wk "Compile project")
+	  "p C" '((lambda ()
+		    (interactive)
+		    (let ((compilation-read-command nil))
+		      (projectile-compile-project nil)))
+		  :wk "Compile project!")
+	  "p t" '(projectile-test-project :wk "Test project")
+	  "p T" '((lambda ()
+		    (interactive)
+		    (let ((compilation-read-command nil))
+		      (projectile-test-project nil)))
+		  :wk "Test project!")
+	  "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
 
-	      ;; Git Interface
-	      (lgreen/leader-keys
-		"g" '(:ignore t :wk "git")
-		"g g" '(magit-status :wk "Status"))
+	;; Diff
+	(lgreen/leader-keys
+	  "d" '(:ignore t :wk "Diff")
+	  "d p" '(diff-hl-previous-hunk :wk "Diff previous")
+	  "d n" '(diff-hl-next-hunk :wk "Diff next"))
 
-	      ;; Buffer Management
-	      (lgreen/leader-keys
-		"b" '(:ignore t :wk "buffer")
-		"b b" '(switch-to-buffer :wk "Switch buffer")
-		"b d" '(kill-this-buffer :wk "Delete buffer")
-		"b n" '(next-buffer :wk "Next buffer")
-		"b N" '(evil-buffer-new :wk "New buffer")
-		"b p" '(previous-buffer :wk "Previous buffer")
-		"b r" '(revert-buffer :wk "Reload buffer")
-		"b R" '(rename-buffer :wk "Rename buffer")
-		"b s" '(save-buffer :wk "Save buffer")
-		"b S" '(evil-write-all :wk "Save all buffers"))
+	;; Git Interface
+	(lgreen/leader-keys
+	  "g" '(:ignore t :wk "git")
+	  "g g" '(magit-status :wk "Status"))
 
-	      ;; Window Management
-	      (lgreen/leader-keys
-		"w" '(:ignore t :wk "window")
-		"w =" '(balance-windows :wk "Balance windows")
-		"w h" '(evil-window-left :wk "Window left")
-		"w k" '(evil-window-up :wk "Window up")
-		"w j" '(evil-window-down :wk "Window down")
-		"w l" '(evil-window-right :wk "Window right")
-		"w q" '(evil-quit :wk "Window close")
-		"w d" '(delete-window :wk "Delete window")
-		"w s" '(split-window-below :wk "Split window below")
-		"w v" '(split-window-right :wk "Split window right")
-		"w o" '(delete-other-windows :wk "Delete other windows")
-		"w f" '(toggle-frame-fullscreen :wk "Toggle fullscreen")
-		"w m" '(toggle-frame-maximized :wk "Toggle maximized")
-		"w H" '(evil-window-move-far-left :wk "Move window far left")
-		"w K" '(evil-window-move-very-top :wk "Move window very top")
-		"w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
-		"w L" '(evil-window-move-far-right :wk "Move window far right"))
+	;; Buffer Management
+	(lgreen/leader-keys
+	  "b" '(:ignore t :wk "buffer")
+	  "b b" '(switch-to-buffer :wk "Switch buffer")
+	  "b d" '(kill-this-buffer :wk "Delete buffer")
+	  "b n" '(next-buffer :wk "Next buffer")
+	  "b N" '(evil-buffer-new :wk "New buffer")
+	  "b p" '(previous-buffer :wk "Previous buffer")
+	  "b r" '(revert-buffer :wk "Reload buffer")
+	  "b R" '(rename-buffer :wk "Rename buffer")
+	  "b s" '(save-buffer :wk "Save buffer")
+	  "b S" '(evil-write-all :wk "Save all buffers"))
 
-	      ;; Help
-	      (lgreen/leader-keys
-		"h" '(:ignore t :wk "help")
-		"h d" '(devdocs-lookup :wk "Devdocs lookup")
-		"h f" '(helpful-callable :wk "Describe function")
-		"h v" '(helpful-variable :wk "Describe variable")
-		"h k" '(helpful-key :wk "Describe key")
-		"h c" '(helpful-command :wk "Describe command")
-		"h m" '(describe-mode :wk "Describe mode"))
+	;; Window Management
+	(lgreen/leader-keys
+	  "w" '(:ignore t :wk "window")
+	  "w =" '(balance-windows :wk "Balance windows")
+	  "w h" '(evil-window-left :wk "Window left")
+	  "w k" '(evil-window-up :wk "Window up")
+	  "w j" '(evil-window-down :wk "Window down")
+	  "w l" '(evil-window-right :wk "Window right")
+	  "w q" '(evil-quit :wk "Window close")
+	  "w d" '(delete-window :wk "Delete window")
+	  "w s" '(split-window-below :wk "Split window below")
+	  "w v" '(split-window-right :wk "Split window right")
+	  "w o" '(delete-other-windows :wk "Delete other windows")
+	  "w f" '(toggle-frame-fullscreen :wk "Toggle fullscreen")
+	  "w m" '(toggle-frame-maximized :wk "Toggle maximized")
+	  "w H" '(evil-window-move-far-left :wk "Move window far left")
+	  "w K" '(evil-window-move-very-top :wk "Move window very top")
+	  "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
+	  "w L" '(evil-window-move-far-right :wk "Move window far right"))
 
-	      ;; Open
-	      (lgreen/leader-keys
-		"o" '(:ignore t :wk "open")
-		"o t" '(vterm-toggle :wk "Vterm"))
+	;; Help
+	(lgreen/leader-keys
+	  "h" '(:ignore t :wk "help")
+	  "h d" '(devdocs-lookup :wk "Devdocs lookup")
+	  "h f" '(helpful-callable :wk "Describe function")
+	  "h v" '(helpful-variable :wk "Describe variable")
+	  "h k" '(helpful-key :wk "Describe key")
+	  "h c" '(helpful-command :wk "Describe command")
+	  "h m" '(describe-mode :wk "Describe mode"))
 
-	      ;; Toggles
-	      (lgreen/leader-keys
-		"t" '(:ignore t :wk "toggle")
-		"t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-		"t w" '(visual-line-mode :wk "Toggle truncated lines"))
+	;; Open
+	(lgreen/leader-keys
+	  "o" '(:ignore t :wk "open")
+	  "o t" '(vterm-toggle :wk "Vterm"))
 
-	      ;; Quit
-	      (lgreen/leader-keys
-		"q" '(:ignore t :wk "quit")
-		"q q" '(save-buffers-kill-terminal :wk "Quit"))
+	;; Toggles
+	(lgreen/leader-keys
+	  "t" '(:ignore t :wk "toggle")
+	  "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+	  "t w" '(visual-line-mode :wk "Toggle truncated lines"))
 
-	      ;; Universal argument
-	      (lgreen/leader-keys
-		"u" '(universal-argument :wk "Universal argument")))
+	;; Quit
+	(lgreen/leader-keys
+	  "q" '(:ignore t :wk "quit")
+	  "q q" '(save-buffers-kill-terminal :wk "Quit"))
+
+	;; Universal argument
+	(lgreen/leader-keys
+	  "u" '(universal-argument :wk "Universal argument")))
     #+end_src
 
 * Evil Mode

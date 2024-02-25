@@ -151,6 +151,7 @@
 	;; Help
 	(lgreen/leader-keys
 	  "h" '(:ignore t :wk "help")
+	  "h d" '(devdocs-lookup :wk "Devdocs lookup")
 	  "h f" '(helpful-callable :wk "Describe function")
 	  "h v" '(helpful-variable :wk "Describe variable")
 	  "h k" '(helpful-key :wk "Describe key")
@@ -681,6 +682,12 @@
 ** LSP
     #+begin_src emacs-lisp :tangle no
       (use-package lsp-mode)
+    #+end_src
+
+* Documentation
+    #+begin_src emacs-lisp
+    (use-package devdocs
+	:ensure t)
     #+end_src
 
 * My Functions

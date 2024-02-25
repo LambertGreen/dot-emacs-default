@@ -229,6 +229,7 @@
       ;; gl and gL operators, like vim-lion
       (use-package evil-lion
 	:ensure t
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gl " . evil-lion-left)
 		    ("gL " . evil-lion-right)
@@ -252,6 +253,7 @@
       ;; NOTE using cx like vim-exchange is possible but not as straightforward
       (use-package evil-exchange
 	:ensure t
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gx" . evil-exchange)
 		    ("gX" . evil-exchange-cancel)))
@@ -262,6 +264,7 @@
       ;; gr operator, like vim's ReplaceWithRegister
       (use-package evil-replace-with-register
 	:ensure t
+	:after evil
 	:bind (:map evil-normal-state-map
 		    ("gr" . evil-replace-with-register)
 		    :map evil-visual-state-map
@@ -273,6 +276,7 @@
       ;; * operator in visual mode
       (use-package evil-visualstar
 	:ensure t
+	:after evil
 	:bind (:map evil-visual-state-map
 		    ("*" . evil-visualstar/begin-search-forward)
 		    ("#" . evil-visualstar/begin-search-backward)))
@@ -281,7 +285,9 @@
 ** Evil Expat
     #+begin_src emacs-lisp
       ;; ex commands, which a vim user is likely to be familiar with
-      (use-package evil-expat :ensure t)
+      (use-package evil-expat
+	:ensure t
+	:after evil)
     #+end_src
 
 ** Evil Goggles
@@ -289,6 +295,7 @@
       ;; visual hints while editing
       (use-package evil-goggles
 	:ensure t
+	:after evil
 	:config
 	(evil-goggles-use-diff-faces)
 	(evil-goggles-mode))
@@ -299,6 +306,7 @@
       ;; like vim-surround
       (use-package evil-surround
 	:ensure t
+	:after evil
 	:commands
 	(evil-surround-edit
 	 evil-Surround-edit
@@ -311,10 +319,18 @@
 	(evil-define-key 'visual global-map "gS" 'evil-Surround-region))
     #+end_src
 
+** Evil Avy
+    #+begin_src emacs-lisp
+      (use-package evil-avy
+	:ensure t
+	:after evil)
+    #+end_src
+
 ** Evil EasyMotion
     #+begin_src emacs-lisp
       (use-package evil-easymotion
 	:ensure t
+	:after evil
 	:config
 	(let ((prefix "gs"))
 	  (evilem-default-keybindings prefix)

@@ -686,16 +686,23 @@
 
 ** Programming Modes
     #+begin_src emacs-lisp
-    (use-package cmake-mode
-	:ensure t)
-    (use-package lua-mode
-	:ensure t)
-    (use-package yaml-mode
-	:ensure t)
-    (use-package mermaid-mode
-	:ensure t)
-    (use-package powershell
-	:ensure t)
+      (use-package cmake-mode
+	  :ensure t)
+
+      (use-package lua-mode
+	  :ensure t)
+
+      (use-package markdown-mode
+	  :ensure t)
+
+      (use-package mermaid-mode
+	  :ensure t)
+
+      (use-package powershell
+	  :ensure t)
+
+      (use-package yaml-mode
+	  :ensure t)
     #+end_src
 
 * Documentation

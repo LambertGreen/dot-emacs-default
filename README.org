@@ -343,6 +343,17 @@
 	  (evilem-define (kbd (concat prefix " B")) #'evil-backward-WORD-begin)))
     #+end_src
 
+** Evil Snipe
+    #+begin_src emacs-lisp
+      (use-package evil-snipe
+	:ensure t
+	:after evil
+	:config
+	(evil-snipe-mode +1)
+	(evil-snipe-override-mode +1)
+	(setq evil-snipe-scope 'visible))
+    #+end_src
+
 * Emacs Settings
 ** General Settings
     #+begin_src emacs-lisp

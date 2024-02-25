@@ -391,6 +391,15 @@
 	(no-littering-theme-backups))
     #+end_src
 
+** AutoRevert
+    #+begin_src emacs-lisp
+      (use-package autorevert
+	:custom
+	(global-revert-check-vc-info t)
+	:config
+	(global-auto-revert-mode +1))
+    #+end_src
+
 ** Savehist
     #+begin_src emacs-lisp
       ;; Persist history over Emacs restarts. Vertico sorts by history position.

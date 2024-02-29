@@ -15,7 +15,11 @@
 (require 'init-projects)
 (require 'init-vc)
 (require 'init-term)
+(require 'init-elisp-mode)
+(require 'init-my-elisp-functions)
 
+;; Evaluating below packages
+;; -------------------------
 ;; (use-package magit-todos
 ;;   :ensure t
 ;;   :after magit
@@ -26,13 +30,7 @@
 ;;   :after consult
 ;;   :commands (consult-todo consult-todo-all)
 
-(use-package emacs
-  :config
+;; (use-package dired-narrow :ensure t)
 
-  ;; Set transparency of emacs
-  (defun lgreen/transparency (value)
-    "Sets the transparency of the frame window. 0=transparent/100=opaque"
-    (interactive "nTransparency Value 0 - 100 opaque:")
-    (set-frame-parameter (selected-frame) 'alpha value)))
-
-(use-package dired-narrow :ensure t)
+;;; _
+(provide 'init-evil)

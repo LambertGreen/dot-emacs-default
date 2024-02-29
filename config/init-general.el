@@ -93,7 +93,8 @@
     "h v" '(helpful-variable :wk "Describe variable")
     "h k" '(helpful-key :wk "Describe key")
     "h c" '(helpful-command :wk "Describe command")
-    "h m" '(describe-mode :wk "Describe mode"))
+    "h m" '(describe-mode :wk "Describe mode")
+    "h t" '(consult-theme :wk "Switch theme"))
 
   ;; Open
   (lgreen/leader-keys

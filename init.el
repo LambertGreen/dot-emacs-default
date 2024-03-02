@@ -7,6 +7,7 @@
 (require 'init-general)
 (require 'init-evil)
 (require 'init-emacs)
+(require 'init-os)
 (require 'init-ui)
 (require 'init-completion)
 (require 'init-folding)

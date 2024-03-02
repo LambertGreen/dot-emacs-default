@@ -31,14 +31,6 @@
   :config
   (no-littering-theme-backups))
 
-;; macOS specific config
-(use-package emacs
-  :ensure nil
-  :if (memq window-system '(mac ns))
-  :config
-  (setq insert-directory-program "gls"
-	dired-use-ls-dired t))
-
 ;; Set a useful $PATH
 (use-package exec-path-from-shell
   :ensure t

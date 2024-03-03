@@ -20,6 +20,7 @@
 (require 'init-term)
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)
+(require 'init-dashboard)
 
 ;;; _
 (provide 'init-evil)

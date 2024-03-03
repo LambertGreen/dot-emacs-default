@@ -27,6 +27,14 @@
 	  ("NOTE"       success bold)
 	  ("DEPRECATED" font-lock-doc-face bold))))
 
+;; Indent guides
+(use-package indent-guide
+  :ensure t
+  :custom
+  (indent-guide-char "│")
+  :config
+  (indent-guide-global-mode))
+
 ;; Fancy icons
 (use-package nerd-icons
   :ensure t)

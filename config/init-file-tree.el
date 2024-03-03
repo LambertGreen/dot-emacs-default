@@ -15,9 +15,9 @@
 ;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
 ;;   :ensure t)
 
-;; (use-package treemacs-evil
-;;   :after (treemacs evil)
-;;   :ensure t)
+(use-package treemacs-evil
+  :after (treemacs evil)
+  :ensure t)
 
 ;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
 ;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode

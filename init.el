@@ -15,6 +15,7 @@
 (require 'init-org)
 (require 'init-projects)
 (require 'init-vc)
+(require 'init-file-tree)
 (require 'init-term)
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)

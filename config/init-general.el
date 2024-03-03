@@ -99,7 +99,8 @@
   ;; Open
   (lgreen/leader-keys
     "o" '(:ignore t :wk "open")
-    "o t" '(vterm-toggle :wk "Vterm"))
+    "o p" '(treemacs :wk "Open project tree")
+    "o t" '(vterm-toggle :wk "Open vterm"))
 
   ;; Toggles
   (lgreen/leader-keys

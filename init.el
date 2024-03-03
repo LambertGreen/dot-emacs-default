@@ -21,19 +21,5 @@
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)
 
-;; Evaluating below packages
-;; -------------------------
-;; (use-package magit-todos
-;;   :ensure t
-;;   :after magit
-;;   :config (magit-todos-mode 1))
-
-;; (use-package consult-todo
-;;   :ensure t
-;;   :after consult
-;;   :commands (consult-todo consult-todo-all)
-
-;; (use-package dired-narrow :ensure t)
-
 ;;; _
 (provide 'init-evil)

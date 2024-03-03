@@ -21,10 +21,7 @@
   (tooltip-mode -1)           ; Disable tooltips
   ;; (set-fringe-mode 4)        ; Give some breathing room
 
-  (setq use-short-answers t)
-
-  ;; Save the desktop upon exit
-  (desktop-save-mode 1))
+  (setq use-short-answers t))
 
 (use-package no-littering
   :ensure t

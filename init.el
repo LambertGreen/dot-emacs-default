@@ -21,6 +21,7 @@
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)
 (require 'init-dashboard)
+(require 'init-workspaces)
 
 ;;; _
 (provide 'init-evil)

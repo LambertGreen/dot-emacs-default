@@ -13,8 +13,9 @@
     :global-prefix "M-SPC") ;; access leader in insert mode
 
   (lgreen/leader-keys
-    "SPC" '(execute-extended-command :wk "M-x")
-    "." '(find-file :wk "find-file"))
+    ":" '(execute-extended-command :wk "M-x")
+    "SPC" '(projectile-find-file :wk "Find file in project")
+    "." '(find-file :wk "Find file"))
 
   ;; Find files and things
   (lgreen/leader-keys

@@ -39,12 +39,6 @@
 (use-package nerd-icons
   :ensure t)
 
-;; Fancy icons for Dired
-(use-package nerd-icons-dired
-  :ensure t
-  :after (:all nerd-icons dired)
-  :hook (dired-mode . nerd-icons-dired-mode))
-
 ;; Fancy icons in completion window
 (use-package nerd-icons-completion
   :ensure t

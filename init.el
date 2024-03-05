@@ -22,6 +22,8 @@
 (require 'init-my-elisp-functions)
 (require 'init-dashboard)
 (require 'init-workspaces)
+(require 'init-prog)
+(require 'init-cpp)
 
 ;;; _
 (provide 'init-evil)

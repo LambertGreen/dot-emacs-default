@@ -40,7 +40,9 @@
     "p p" '(projectile-switch-project :wk "Switch project")
     "p f" '(projectile-find-file :wk "Find file in project")
     "p d" '(projectile-dired :wk "Dired in project")
-    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
+    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")
+    "p s" '(persp-switch :wk "Switch perspective")
+    )
 
   ;; Diff
   (lgreen/leader-keys

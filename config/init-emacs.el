@@ -153,5 +153,12 @@
   :config
   ;; enable dtrt-indent-mode globally
   (dtrt-indent-mode 1))
+
+;; TODO Validate this package indeed works as advertised
+(use-package whitespace-cleanup-mode
+  :ensure t
+  :hook
+  (prog-mode . whitespace-cleanup-mode))
+
 ;;; _
 (provide 'init-emacs)

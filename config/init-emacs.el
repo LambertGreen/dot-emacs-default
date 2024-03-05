@@ -148,5 +148,10 @@
   :config
   (smartparens-global-mode 1))
 
+(use-package dtrt-indent
+  :ensure t
+  :config
+  ;; enable dtrt-indent-mode globally
+  (dtrt-indent-mode 1))
 ;;; _
 (provide 'init-emacs)

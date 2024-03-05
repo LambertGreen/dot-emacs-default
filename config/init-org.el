@@ -5,6 +5,12 @@
   :config
   (require 'org-tempo))
 
+(use-package org-indent
+  :ensure nil
+  :after (org)
+  :config
+  (add-hook 'org-mode-hook #'(lambda () (org-indent-mode t))))
+
 (use-package org-bullets
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))

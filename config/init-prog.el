@@ -16,5 +16,8 @@
          ("known_hosts\\'"       . ssh-known-hosts-mode)
          ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
+(use-package yaml-mode
+  :ensure t)
+
 ;;; _
 (provide 'init-prog)

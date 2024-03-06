@@ -8,12 +8,19 @@
 (use-package org-indent
   :ensure nil
   :after (org)
-  :config
-  (add-hook 'org-mode-hook #'(lambda () (org-indent-mode t))))
+  :hook
+  (org-mode . org-indent-mode))
 
-(use-package org-bullets
+(use-package org-superstar
   :ensure t
-  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :after (org)
+  :custom
+  (org-superstar-leading-bullet ?\s)
+  (org-superstar-leading-fallback ?\s)
+  (org-hide-leading-stars nil)
+  (org-indent-mode-turns-on-hiding-stars nil)
+  :hook
+  (org-mode . org-superstar-mode))
 
 (use-package evil-org
   :ensure t

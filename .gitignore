@@ -5,13 +5,11 @@ thumbs.db
 # Emacs generated state files
 *~
 bookmarks
+eln-cache/
 elpa/
+elpaca/
 eshell/
 semanticdb/
-/transient/
-
-custom.el
-/eln-cache/
-/elpaca/
-/var/
-/tree-sitter/
+transient/
+tree-sitter/
+var/

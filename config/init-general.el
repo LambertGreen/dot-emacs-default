@@ -7,7 +7,7 @@
 
   ;; set up 'SPC' as the global leader key
   (general-create-definer lgreen/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal insert visual emacs treemacs)
     :keymaps 'override
     :prefix "SPC" ;; set leader
     :non-normal-prefix "M-SPC") ;; access leader in insert mode

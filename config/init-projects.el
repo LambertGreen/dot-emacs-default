@@ -3,6 +3,9 @@
 (use-package projectile
   :ensure t
   :custom
+  ;; We have too many projects to have project discovery done everytime
+  (projectile-auto-discover nil)
+
   ;; Set search path and depth
   (projectile-project-search-path '(("~/dev" . 5)))
   (projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS"))

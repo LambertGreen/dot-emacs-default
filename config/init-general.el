@@ -10,7 +10,7 @@
     :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC" ;; set leader
-    :global-prefix "M-SPC") ;; access leader in insert mode
+    :non-normal-prefix "M-SPC") ;; access leader in insert mode
 
   (lgreen/leader-keys
     ":" '(execute-extended-command :wk "M-x")

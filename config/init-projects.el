@@ -17,7 +17,7 @@
 
   ;; NOTE: If a project is already in the cache, then one has to manually
   ;; delete the cache file to have the project ignored.
-  ;; This can be done using the following elisp command: (delete-file projectile-cache-file)
+  ;; This can be done using the following elisp command: (delete-file projectile-known-projects-file)
   (projectile-ignored-project-function
    (lambda (project-root)
      (or (string-prefix-p "~/dev/work/_bazel/" project-root)

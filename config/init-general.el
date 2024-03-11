@@ -15,6 +15,7 @@
   (lgreen/leader-keys
     ":" '(execute-extended-command :wk "M-x")
     "SPC" '(projectile-find-file :wk "Find file in project")
+    ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file"))
 
   ;; Find files and things

@@ -8,6 +8,7 @@
   (user-mail-address "lambert.green@gmail.com")
 
   (use-short-answers t)
+  (auto-revert-check-vc-info t)
 
   :config
 

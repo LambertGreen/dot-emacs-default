@@ -22,6 +22,7 @@
   ;; (set-fringe-mode 4)        ; Give some breathing room
 
   (setq use-short-answers t))
+  (global-auto-revert-mode 1))
 
 (use-package no-littering
   :ensure t

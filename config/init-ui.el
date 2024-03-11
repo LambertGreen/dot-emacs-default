@@ -1,10 +1,5 @@
 ;;; init-ui.el --- -*- lexical-binding: t; -*-
 
-;; Get a beautiful and functional theme
-(use-package catppuccin-theme
-  :ensure t
-  :config (load-theme 'catppuccin :no-confirm))
-
 ;; Add Doom's modeline
 (use-package doom-modeline
   :ensure t

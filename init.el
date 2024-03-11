@@ -8,6 +8,7 @@
 (require 'init-evil)
 (require 'init-emacs)
 (require 'init-os)
+(require 'init-themes)
 (require 'init-ui)
 (require 'init-completion)
 (require 'init-folding)

@@ -2,15 +2,18 @@
 
 (use-package emacs
   :ensure nil
+  :custom
+  ;; Set personal info
+  (user-full-name "Lambert Green")
+  (user-mail-address "lambert.green@gmail.com")
+
+  (use-short-answers t)
+
   :config
 
   ;; Set custom file so that customizations are not written here
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
-
-  ;; Set personal info
-  (setq user-full-name "Lambert Green"
-	user-mail-address "lambert.green@gmail.com")
 
   ;; Font
   (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
@@ -21,7 +24,6 @@
   (tooltip-mode -1)           ; Disable tooltips
   ;; (set-fringe-mode 4)        ; Give some breathing room
 
-  (setq use-short-answers t))
   (global-auto-revert-mode 1))
 
 (use-package no-littering

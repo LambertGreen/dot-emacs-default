@@ -43,9 +43,21 @@
 (use-package indent-guide
   :ensure t
   :custom
-  (indent-guide-char "│")
+  (indent-guide-char "│")   ; Useful characters: ·│┊┆╎
+  ;; (indent-guide-recursive t)
+  :hook
+  (prog-mode . indent-guide-mode)
   :config
-  (indent-guide-global-mode))
+  ;; Add toggle
+  (lgreen/leader-keys
+    "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
+
+  (defun lgreen/toggle-indent-guide ()
+    "Toggle indent guides in programming modes."
+    (interactive)
+    (if (derived-mode-p 'prog-mode)
+	(indent-guide-mode (if indent-guide-mode -1 1))
+      (message "Not in a programming mode!"))))
 
 ;; Fancy icons
 (use-package nerd-icons

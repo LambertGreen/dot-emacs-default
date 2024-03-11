@@ -3,8 +3,25 @@
 ;; Add Doom's modeline
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 20)))
+  :custom
+  (doom-modeline-height 20)
+  ;; (doom-modeline-indent-info t)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-workspace-name nil)
+  (doom-modeline-persp-name nil)
+  (doom-modeline-minor-modes nil)
+  ;; :hook (after-init . doom-modeline-mode)
+  :config
+  (doom-modeline-mode 1)
+  ;; Add toggle keybind
+  (lgreen/leader-keys
+    "t m" '(:ignore t :wk "modeline")
+    "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
+  (defun lgreen/toggle-doom-modeline-buffer-encoding ()
+    "Toggle the doom-modeline-buffer-encoding variable"
+    (interactive)
+    (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding))))
+
 
 ;; Highlight TODO's
 (use-package hl-todo

@@ -143,6 +143,7 @@
   :ensure t
   :custom
   (evil-undo-system 'undo-tree)
+  (undo-tree-enable-undo-in-region t)
   :init
   (global-undo-tree-mode))
 

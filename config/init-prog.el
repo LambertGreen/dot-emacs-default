@@ -19,5 +19,8 @@
 (use-package yaml-mode
   :ensure t)
 
+(use-package markdown-mode
+  :ensure t)
+
 ;;; _
 (provide 'init-prog)

@@ -22,7 +22,6 @@
     (interactive)
     (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding))))
 
-
 ;; Highlight TODO's
 (use-package hl-todo
   :ensure t
@@ -43,11 +42,14 @@
 (use-package indent-guide
   :ensure t
   :custom
-  (indent-guide-char "│")   ; Useful characters: ·│┊┆╎
+  (indent-guide-char "┊")   ; Useful characters: ·│┊┆╎
   ;; (indent-guide-recursive t)
   :hook
   (prog-mode . indent-guide-mode)
   :config
+  ;; Set the indent-guide color to match the comment color of the current theme
+  (set-face-foreground 'indent-guide-face
+		       (face-foreground 'font-lock-comment-face))
   ;; Add toggle
   (lgreen/leader-keys
     "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))

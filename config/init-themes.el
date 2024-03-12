@@ -18,5 +18,8 @@
 (use-package ef-themes
   :ensure t)
 
+(use-package kaolin-themes
+  :ensure t)
+
 ;;; _
 (provide 'init-themes)

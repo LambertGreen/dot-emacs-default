@@ -12,11 +12,19 @@
     :prefix "SPC" ;; set leader
     :non-normal-prefix "M-SPC") ;; access leader in insert mode
 
+   ;; Define a local leader for all modes
+  (general-create-definer lgreen/local-leader-keys
+    :states 'normal
+    :prefix "SPC m")
+
   (lgreen/leader-keys
     ":" '(execute-extended-command :wk "M-x")
     "SPC" '(projectile-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file"))
+
+  (lgreen/leader-keys
+    "m" '(:ignore t :wk "localleader"))
 
   ;; Find files and things
   (lgreen/leader-keys
@@ -29,7 +37,7 @@
 
   ;; Search in files
   (lgreen/leader-keys
-    "s" '(:ignore t :wk "Search")
+    "s" '(:ignore t :wk "search")
     "s b" '(consult-line :wk "Search buffer")
     "s p" '(consult-ripgrep :wk "Search project files")
     "s i" '(consult-imenu :wk "Jump to symbol")

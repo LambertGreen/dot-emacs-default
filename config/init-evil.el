@@ -13,6 +13,21 @@
   (evil-set-initial-state 'eat-mode 'insert)
   (evil-mode))
 
+(use-package evil-args
+  :ensure t
+  :after evil
+  :config
+  ;; bind evil-args text objects
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+
+  (lgreen/local-leader-keys
+   :keymaps 'prog-mode-map
+   "a" '(:ignore t :wk "Args")
+   "a n" '(evil-forward-arg :wk "Forward arg")
+   "a p" '(evil-backward-arg :wk "Backward arg")
+   "a o" '(evil-jump-out-args :wk "Jump out arg")))
+
 ;; vim-like keybindings everywhere in emacs
 (use-package evil-collection
   :ensure t

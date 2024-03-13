@@ -61,6 +61,16 @@
 	(indent-guide-mode (if indent-guide-mode -1 1))
       (message "Not in a programming mode!"))))
 
+(use-package outshine
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'outshine-mode))
+;; (use-package outline-minor-faces
+;;   :ensure t
+;;   :after outline
+;;   :config (add-hook 'outline-minor-mode-hook
+;;                     #'outline-minor-faces-mode))
+
 ;; Fancy icons
 (use-package nerd-icons
   :ensure t)

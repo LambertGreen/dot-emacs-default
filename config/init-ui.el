@@ -1,5 +1,6 @@
 ;;; init-ui.el --- -*- lexical-binding: t; -*-
 
+;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline
   :ensure t
@@ -22,6 +23,7 @@
     (interactive)
     (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding))))
 
+;;; HL-Todo
 ;; Highlight TODO's
 (use-package hl-todo
   :ensure t
@@ -38,7 +40,8 @@
 	  ("NOTE"       success bold)
 	  ("DEPRECATED" font-lock-doc-face bold))))
 
-;; Indent guides
+;;; Indent-Guide
+;; Know what vertical you are on
 (use-package indent-guide
   :ensure t
   :custom
@@ -61,20 +64,19 @@
 	(indent-guide-mode (if indent-guide-mode -1 1))
       (message "Not in a programming mode!"))))
 
+;;; Outshine
+;; Org like faces and outlining for non-org modes
 (use-package outshine
   :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'outshine-mode))
-;; (use-package outline-minor-faces
-;;   :ensure t
-;;   :after outline
-;;   :config (add-hook 'outline-minor-mode-hook
-;;                     #'outline-minor-faces-mode))
+  :hook
+  (emacs-lisp-mode . outshine-mode))
 
+;;; Nerd-Icons
 ;; Fancy icons
 (use-package nerd-icons
   :ensure t)
 
+;;; Nerd-Icons-Completion
 ;; Fancy icons in completion window
 (use-package nerd-icons-completion
   :ensure t
@@ -83,6 +85,7 @@
   (nerd-icons-completion-mode)
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
+;;; Pulsar
 ;; Know what line point is on after movement
 (use-package pulsar
   :ensure t

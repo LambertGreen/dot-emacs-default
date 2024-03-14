@@ -1,5 +1,8 @@
 ;;; init-evil.el --- -*- lexical-binding: t; -*-
 
+
+;;; Evil
+;; The root of all money
 (use-package evil
   :ensure t
   :init
@@ -13,6 +16,21 @@
   (evil-set-initial-state 'eat-mode 'insert)
   (evil-mode))
 
+;;; Evil-Collection
+;; vim-like keybindings everywhere in emacs
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init)
+  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil)))
+
+;;; Evil-Args
+;; Argue your point left and right
 (use-package evil-args
   :ensure t
   :after evil
@@ -28,18 +46,7 @@
    "a p" '(evil-backward-arg :wk "Backward arg")
    "a o" '(evil-jump-out-args :wk "Jump out arg")))
 
-;; vim-like keybindings everywhere in emacs
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init)
-  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil)))
-
+;;; Evil-Lion
 ;; gl and gL operators, like vim-lion
 (use-package evil-lion
   :ensure t
@@ -50,20 +57,23 @@
 	      ("gl " . evil-lion-left)
 	      ("gL " . evil-lion-right)))
 
+;;; Evil-Commentary
 ;; gc operator, like vim-commentary
 (use-package evil-commentary
   :ensure t
   :after evil
   :config (evil-commentary-mode))
 
+;;; Evil-Exchange
 ;; gx operator, like vim-exchange
-;; NOTE using cx like vim-exchange is possible but not as straightforward
+;; Note: using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
   :ensure t
   :bind (:map evil-normal-state-map
 	      ("gx" . evil-exchange)
 	      ("gX" . evil-exchange-cancel)))
 
+;;; Evil-Replace-With-Register
 ;; gr operator, like vim's ReplaceWithRegister
 (use-package evil-replace-with-register
   :ensure t
@@ -72,16 +82,20 @@
 	      :map evil-visual-state-map
 	      ("gr" . evil-replace-with-register)))
 
-;; * operator in visual mode
+;;; Evil-Visualstar
+;;  operator in visual mode
 (use-package evil-visualstar
   :ensure t
   :bind (:map evil-visual-state-map
 	      ("*" . evil-visualstar/begin-search-forward)
 	      ("#" . evil-visualstar/begin-search-backward)))
 
+;;; Evil-Expat
 ;; ex commands, which a vim user is likely to be familiar with
-(use-package evil-expat :ensure t)
+(use-package evil-expat
+  :ensure t)
 
+;;; Evil-Goggles
 ;; visual hints while editing
 (use-package evil-goggles
   :ensure t
@@ -89,6 +103,7 @@
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
+;;; Evil-Surround
 ;; like vim-surround
 (use-package evil-surround
   :ensure t

@@ -1,10 +1,14 @@
 ;;; init-general.el --- -*- lexical-binding: t; -*-
 
+
+;;; General
+;; Command the map
 (use-package general
   :ensure t
   :config
   (general-evil-setup)
 
+;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
   (general-create-definer lgreen/leader-keys
     :states '(normal insert visual emacs treemacs)
@@ -12,21 +16,24 @@
     :prefix "SPC" ;; set leader
     :non-normal-prefix "M-SPC") ;; access leader in insert mode
 
-   ;; Define a local leader for all modes
+;;;; Local-leader key definer
+  ;; Define a local leader for all modes
   (general-create-definer lgreen/local-leader-keys
     :states 'normal
     :prefix "SPC m")
 
+;;;; Top Level Keys
   (lgreen/leader-keys
     ":" '(execute-extended-command :wk "M-x")
     "SPC" '(projectile-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file"))
 
+;;;; Local Leader
   (lgreen/leader-keys
     "m" '(:ignore t :wk "localleader"))
 
-  ;; Find files and things
+;;;; Find files and things
   (lgreen/leader-keys
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
@@ -35,7 +42,7 @@
     "f T" '(consult-todo-all :wk "Find all todos")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
-  ;; Search in files
+;;;; Search in files
   (lgreen/leader-keys
     "s" '(:ignore t :wk "search")
     "s b" '(consult-line :wk "Search buffer")
@@ -43,7 +50,7 @@
     "s i" '(consult-imenu :wk "Jump to symbol")
     "s d" '(consult-locate :wk "Search current directory"))
 
-  ;; Projects
+;;;; Projects
   (lgreen/leader-keys
     "p" '(:ignore t :wk "project")
     "p p" '(projectile-switch-project :wk "Switch project")
@@ -53,18 +60,18 @@
     "p s" '(persp-switch :wk "Switch perspective")
     )
 
-  ;; Diff
+;;;; Diff
   (lgreen/leader-keys
     "d" '(:ignore t :wk "Diff")
     "d p" '(diff-hl-previous-hunk :wk "Diff previous")
     "d n" '(diff-hl-next-hunk :wk "Diff next"))
 
-  ;; Git Interface
+;;;; Git Interface
   (lgreen/leader-keys
     "g" '(:ignore t :wk "git")
     "g g" '(magit-status :wk "Status"))
 
-  ;; Buffer Management
+;;;; Buffer Management
   (lgreen/leader-keys
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
@@ -77,7 +84,7 @@
     "b s" '(save-buffer :wk "Save buffer")
     "b S" '(evil-write-all :wk "Save all buffers"))
 
-  ;; Window Management
+;;;; Window Management
   (lgreen/leader-keys
     "w" '(:ignore t :wk "window")
     "w =" '(balance-windows :wk "Balance windows")
@@ -98,7 +105,7 @@
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
     "w L" '(evil-window-move-far-right :wk "Move window far right"))
 
-  ;; Help
+;;;; Help
   (lgreen/leader-keys
     "h" '(:ignore t :wk "help")
     "h f" '(helpful-callable :wk "Describe function")
@@ -108,20 +115,20 @@
     "h m" '(describe-mode :wk "Describe mode")
     "h t" '(consult-theme :wk "Switch theme"))
 
-  ;; Open
+;;;; Open
   (lgreen/leader-keys
     "o" '(:ignore t :wk "open")
     "o p" '(treemacs :wk "Open project tree")
     "o t" '(vterm-toggle :wk "Open vterm"))
 
-  ;; Toggles
+;;;; Toggles
   (lgreen/leader-keys
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t i" '(indent-guide-global-mode :wk "Toggle indent guides")
     "t w" '(visual-line-mode :wk "Toggle truncated lines"))
 
-  ;; Quit
+;;;; Quit
   (lgreen/leader-keys
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit")))

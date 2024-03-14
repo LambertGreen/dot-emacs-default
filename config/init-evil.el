@@ -16,19 +16,6 @@
   (evil-set-initial-state 'eat-mode 'insert)
   (evil-mode))
 
-;;; Evil-Collection
-;; vim-like keybindings everywhere in emacs
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init)
-  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil)))
-
 ;;; Evil-Args
 ;; Argue your point left and right
 (use-package evil-args
@@ -46,16 +33,18 @@
    "a p" '(evil-backward-arg :wk "Backward arg")
    "a o" '(evil-jump-out-args :wk "Jump out arg")))
 
-;;; Evil-Lion
-;; gl and gL operators, like vim-lion
-(use-package evil-lion
+;;; Evil-Collection
+;; vim-like keybindings everywhere in emacs
+(use-package evil-collection
   :ensure t
-  :bind (:map evil-normal-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)
-	      :map evil-visual-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)))
+  :after evil
+  :config
+  (evil-collection-init)
+  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil)))
 
 ;;; Evil-Commentary
 ;; gc operator, like vim-commentary
@@ -69,44 +58,53 @@
 ;; Note: using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
   :ensure t
+  :after evil
   :bind (:map evil-normal-state-map
 	      ("gx" . evil-exchange)
 	      ("gX" . evil-exchange-cancel)))
 
-;;; Evil-Replace-With-Register
-;; gr operator, like vim's ReplaceWithRegister
-(use-package evil-replace-with-register
-  :ensure t
-  :bind (:map evil-normal-state-map
-	      ("gr" . evil-replace-with-register)
-	      :map evil-visual-state-map
-	      ("gr" . evil-replace-with-register)))
-
-;;; Evil-Visualstar
-;;  operator in visual mode
-(use-package evil-visualstar
-  :ensure t
-  :bind (:map evil-visual-state-map
-	      ("*" . evil-visualstar/begin-search-forward)
-	      ("#" . evil-visualstar/begin-search-backward)))
-
 ;;; Evil-Expat
 ;; ex commands, which a vim user is likely to be familiar with
 (use-package evil-expat
-  :ensure t)
+  :ensure t
+  :after evil)
 
 ;;; Evil-Goggles
 ;; visual hints while editing
 (use-package evil-goggles
   :ensure t
+  :after evil
   :config
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
+
+;;; Evil-Lion
+;; gl and gL operators, like vim-lion
+(use-package evil-lion
+  :ensure t
+  :after evil
+  :bind (:map evil-normal-state-map
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)
+	      :map evil-visual-state-map
+	      ("gl " . evil-lion-left)
+	      ("gL " . evil-lion-right)))
+
+;;; Evil-Replace-With-Register
+;; gr operator, like vim's ReplaceWithRegister
+(use-package evil-replace-with-register
+  :ensure t
+  :after evil
+  :bind (:map evil-normal-state-map
+	      ("gr" . evil-replace-with-register)
+	      :map evil-visual-state-map
+	      ("gr" . evil-replace-with-register)))
 
 ;;; Evil-Surround
 ;; like vim-surround
 (use-package evil-surround
   :ensure t
+  :after evil
   :commands
   (evil-surround-edit
    evil-Surround-edit
@@ -117,6 +115,15 @@
   (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
   (evil-define-key 'visual global-map "S" 'evil-surround-region)
   (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+
+;;; Evil-Visualstar
+;;  operator in visual mode
+(use-package evil-visualstar
+  :ensure t
+  :after evil
+  :bind (:map evil-visual-state-map
+	      ("*" . evil-visualstar/begin-search-forward)
+	      ("#" . evil-visualstar/begin-search-backward)))
 
 ;;; _
 (provide 'init-evil)

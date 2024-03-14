@@ -1,5 +1,8 @@
 ;;; init-projects.el --- -*- lexical-binding: t; -*-
 
+
+;;; Projectile
+;; Shooting projects into space
 (use-package projectile
   :ensure t
   :custom

@@ -1,5 +1,8 @@
 ;;; init-org.el --- -*- lexical-binding: t; -*-
 
+
+;;; Org
+;; Taming the chaos
 (use-package org
   :ensure nil
   :custom
@@ -7,12 +10,16 @@
   :config
   (require 'org-tempo))
 
+;;; Org-Indent
+;; Line things up better
 (use-package org-indent
   :ensure nil
   :after (org)
   :hook
   (org-mode . org-indent-mode))
 
+;;; Org-Superstar
+;; Holywood doing bullet time
 (use-package org-superstar
   :ensure t
   :after (org)
@@ -24,6 +31,8 @@
   :hook
   (org-mode . org-superstar-mode))
 
+;;; Evil-Org
+;; Taming the chaos with HKJL
 (use-package evil-org
   :ensure t
   :after org

@@ -1,5 +1,6 @@
 ;;; init-emacs.el --- -*- lexical-binding: t; -*-
 
+;;; Emacs
 (use-package emacs
   :ensure nil
   :custom
@@ -11,7 +12,6 @@
   (auto-revert-check-vc-info t)
 
   :config
-
   ;; Set custom file so that customizations are not written here
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
@@ -23,15 +23,18 @@
   (scroll-bar-mode -1)        ; Disable visible scrollbar
   (tool-bar-mode -1)          ; Disable the toolbar
   (tooltip-mode -1)           ; Disable tooltips
-  ;; (set-fringe-mode 4)        ; Give some breathing room
+  (set-fringe-mode 3)        ; Give some breathing room
 
   (global-auto-revert-mode 1))
 
+;;; No-Littering
+;; Let's put the mess in './var'
 (use-package no-littering
   :ensure t
   :config
   (no-littering-theme-backups))
 
+;;; Exec-Path-From-Shell
 ;; Set a useful $PATH
 (use-package exec-path-from-shell
   :ensure t
@@ -39,6 +42,8 @@
   :config
   (exec-path-from-shell-initialize))
 
+;;; Which-Key
+;; Which key? This one.
 (use-package which-key
   :ensure t
   :init (which-key-mode)
@@ -46,6 +51,8 @@
   (setq which-key-min-display-lines 3)
   (setq which-key-sort-uppercase-first nil))
 
+;;; Consult
+;; Making buffer completions nicer
 (use-package consult
   :ensure t
   ;; Enable automatic preview at point in the *Completions* buffer. This is
@@ -67,12 +74,19 @@
 	xref-show-definitions-function #'consult-xref)
   )
 
+;;; Wgrep
+;; Let's bulk update
+(use-package wgrep
+  :ensure t)
+
+;;; Savehist
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
   (savehist-mode))
 
-;; Enable vertico
+;;; Vertico
+;; Veritcal completion UI
 (use-package vertico
   :ensure t
   :init
@@ -114,12 +128,16 @@
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
+;;; Orderless
+;; Orderless completion style
 (use-package orderless
   :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;;; Marginalia
+;; Annotaions for minibuffer completions
 (use-package marginalia
   :ensure t
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
@@ -131,6 +149,8 @@
 
   :init (marginalia-mode))
 
+;;; Embark
+;; Run actions on item on point
 (use-package embark
   :ensure t
   :after (general)
@@ -161,20 +181,25 @@
 		 nil
 		 (window-parameters (mode-line-format . none)))))
 
-;; Consult users will also want the embark-consult package.
+;;; Embark-Consult
+;; Integration between 'embark' and 'consult'
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+;;; Helpful
+;; A better *help* buffer
 (use-package helpful
   :ensure t)
 
+;;; Rainbow-Delimiters
+;; Highlight delimiters according to their depth
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; use the powerful 'undo-tree'
+;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
   :ensure t
@@ -184,17 +209,22 @@
   :init
   (global-undo-tree-mode))
 
+;;; Smartparens
+;; Automatically balance inserting of parens
 (use-package smartparens
   :ensure t
   :config
   (smartparens-global-mode 1))
 
+;;; Dtrt-Indent
+;; Guess file indentation
 (use-package dtrt-indent
   :ensure t
   :config
   ;; enable dtrt-indent-mode globally
   (dtrt-indent-mode 1))
 
+;;; Whitespace Cleanup
 ;; TODO Validate this package indeed works as advertised
 (use-package whitespace-cleanup-mode
   :ensure t

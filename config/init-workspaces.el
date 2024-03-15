@@ -4,7 +4,6 @@
 ;;; Perspective
 ;; Switching from one view to the other
 (use-package perspective
-  :ensure t
   :bind
   ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
   :custom
@@ -14,13 +13,11 @@
 
 ;;; Persp-Projectile
 ;; Perspective and project integration
-(use-package persp-projectile
-  :ensure t)
+(use-package persp-projectile)
 
 ;;; Centaur-Tabs
 ;; See your projects in the tabs
 (use-package centaur-tabs
-  :ensure t
   :after (projectile)
   :commands centaur-tabs-mode
   :custom

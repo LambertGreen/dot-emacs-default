@@ -7,3 +7,7 @@ I had started out using a literate configuration, but changed to a pure elisp co
  - I did not end up needing an abundance comments
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in elisp mode makes code execution and debugging easier
+
+* TODOs [1/2]
+** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
+** TODO Consider all ~:bind~ blocks for ~:general~ applicability

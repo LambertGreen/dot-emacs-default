@@ -3,6 +3,7 @@
 ;;; My Functions
 ;; Funky functionals
 (use-package emacs
+  :ensure nil
   :config
 
   ;; Set transparency of emacs

@@ -4,7 +4,6 @@
 ;;; Projectile
 ;; Shooting projects into space
 (use-package projectile
-  :ensure t
   :custom
   ;; We have too many projects to have project discovery done everytime
   (projectile-auto-discover nil)

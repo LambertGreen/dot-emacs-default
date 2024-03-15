@@ -39,6 +39,10 @@
 (elpaca `(,@elpaca-order))
 
 ;; Install use-package support
+(setq use-package-verbose t
+      use-package-compute-statistics t
+      use-package-always-ensure t)
+
 (elpaca elpaca-use-package
     ;; Enable use-package :ensure support for Elpaca.
     (elpaca-use-package-mode))

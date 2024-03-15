@@ -2,36 +2,29 @@
 
 ;;; Catppuccin theme
 (use-package catppuccin-theme
-  :ensure t
   :custom
   ;; Options: 'mocha, 'frappe, 'latte, 'macchiato
   (catppuccin-flavor 'mocha))
 
 ;;; Kanagawa theme
-(use-package kanagawa-theme
-  :ensure t)
+(use-package kanagawa-theme)
 
 ;;; Doom Themes
 (use-package doom-themes
-  :ensure t
   :config
   (load-theme 'doom-tokyo-night :no-confirm))
 
 ;;; EF Themes
-(use-package ef-themes
-  :ensure t)
+(use-package ef-themes)
 
 ;;; Kaolin Themes
-(use-package kaolin-themes
-  :ensure t)
+(use-package kaolin-themes)
 
 ;;; Spacemacs Theme
-(use-package spacemacs-theme
-  :ensure t)
+(use-package spacemacs-theme)
 
 ;;; Chocolate Theme
-(use-package chocolate-theme
-  :ensure t)
+(use-package chocolate-theme)
 
 ;;; _
 (provide 'init-themes)

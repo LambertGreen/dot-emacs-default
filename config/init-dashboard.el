@@ -1,7 +1,6 @@
 ;;; init-dashboard.el --- -*- lexical-binding: t; -*-
 
 (use-package dashboard
-  :ensure t
   :custom
   (dashboard-center-content t)
   (dashboard-startup-banner 'logo)
@@ -19,8 +18,7 @@
   ((elpaca-after-init . dashboard-insert-startupify-lists)
    (elpaca-after-init . dashboard-initialize))
 
-  :config
-  (dashboard-setup-startup-hook))
+  :config (dashboard-setup-startup-hook))
 
 ;;; _
 (provide 'init-dashboard)

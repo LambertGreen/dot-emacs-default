@@ -4,7 +4,6 @@
 ;;; Evil
 ;; The root of all money
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
@@ -19,7 +18,6 @@
 ;;; Evil-Args
 ;; Argue your point left and right
 (use-package evil-args
-  :ensure t
   :after evil
   :config
   ;; bind evil-args text objects
@@ -34,9 +32,8 @@
    "a o" '(evil-jump-out-args :wk "Jump out arg")))
 
 ;;; Evil-Collection
-;; vim-like keybindings everywhere in emacs
+;; keybind them all
 (use-package evil-collection
-  :ensure t
   :after evil
   :config
   (evil-collection-init)
@@ -47,83 +44,81 @@
     (define-key evil-motion-state-map (kbd "TAB") nil)))
 
 ;;; Evil-Commentary
-;; gc operator, like vim-commentary
+;; no pleading the fifth here
 (use-package evil-commentary
-  :ensure t
   :after evil
   :config (evil-commentary-mode))
+
+;;; Evil-Escape
+;; alternate escape route when capslock is not bound to escape
+(use-package evil-escape
+  :after evil
+  :custom
+  (evil-escape-key-sequence "jk")
+  (evil-escape-delay 0.2)
+  :config
+  (evil-escape-mode))
 
 ;;; Evil-Exchange
 ;; gx operator, like vim-exchange
 ;; Note: using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
-  :ensure t
   :after evil
-  :bind (:map evil-normal-state-map
-	      ("gx" . evil-exchange)
-	      ("gX" . evil-exchange-cancel)))
+  :general
+  (:states '(visual normal)
+	   "gx" 'evil-exchange
+	   "gX" 'evil-exchange-cancel))
+
 
 ;;; Evil-Expat
-;; ex commands, which a vim user is likely to be familiar with
+;; additional ex commands
 (use-package evil-expat
-  :ensure t
   :after evil)
 
 ;;; Evil-Goggles
 ;; visual hints while editing
 (use-package evil-goggles
-  :ensure t
   :after evil
   :config
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
 ;;; Evil-Lion
-;; gl and gL operators, like vim-lion
+;; gl and gL operators, for lining things up
 (use-package evil-lion
-  :ensure t
   :after evil
-  :bind (:map evil-normal-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)
-	      :map evil-visual-state-map
-	      ("gl " . evil-lion-left)
-	      ("gL " . evil-lion-right)))
+  :general
+  (:states '(visual normal)
+	   "gl" 'evil-lion-left
+	   "gL" 'evil-lion-right))
+
+;;; Evil EasyMotion
+;; get there in one fell swoop
+(use-package evil-easymotion
+  :after evil
+  :config (evilem-default-keybindings "gs"))
 
 ;;; Evil-Replace-With-Register
-;; gr operator, like vim's ReplaceWithRegister
+;; gR operator.  Replace without affecting unamed register
 (use-package evil-replace-with-register
-  :ensure t
   :after evil
-  :bind (:map evil-normal-state-map
-	      ("gr" . evil-replace-with-register)
-	      :map evil-visual-state-map
-	      ("gr" . evil-replace-with-register)))
+  :config (evil-replace-with-register-install))
 
 ;;; Evil-Surround
-;; like vim-surround
+;; encompass them on both sides
+;; Keybindings provided by evil-surround:
+;; cs<from><to>: Change Surrounding, changes surrounding <from> chars to <to>
+;; ds<target>: Delete Surrounding, removes surrounding <target> chars
+;; ys<target><to>: Add Surrounding, adds surrounding <to> chars around <target>
 (use-package evil-surround
-  :ensure t
   :after evil
-  :commands
-  (evil-surround-edit
-   evil-Surround-edit
-   evil-surround-region
-   evil-Surround-region)
-  :init
-  (evil-define-key 'operator global-map "s" 'evil-surround-edit)
-  (evil-define-key 'operator global-map "S" 'evil-Surround-edit)
-  (evil-define-key 'visual global-map "S" 'evil-surround-region)
-  (evil-define-key 'visual global-map "gS" 'evil-Surround-region))
+  :config
+  (global-evil-surround-mode 1))
 
 ;;; Evil-Visualstar
-;;  operator in visual mode
+;;  the star of the show
 (use-package evil-visualstar
-  :ensure t
-  :after evil
-  :bind (:map evil-visual-state-map
-	      ("*" . evil-visualstar/begin-search-forward)
-	      ("#" . evil-visualstar/begin-search-backward)))
+  :after evil)
 
 ;;; _
 (provide 'init-evil)

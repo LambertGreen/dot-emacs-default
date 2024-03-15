@@ -3,7 +3,6 @@
 ;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline
-  :ensure t
   :custom
   (doom-modeline-height 20)
   ;; (doom-modeline-indent-info t)
@@ -26,7 +25,6 @@
 ;;; HL-Todo
 ;; Highlight TODO's
 (use-package hl-todo
-  :ensure t
   :hook ((org-mode . hl-todo-mode)
 	 (prog-mode . hl-todo-mode))
   :config
@@ -43,7 +41,6 @@
 ;;; Indent-Guide
 ;; Know what vertical you are on
 (use-package indent-guide
-  :ensure t
   :custom
   (indent-guide-char "┊")   ; Useful characters: ·│┊┆╎
   ;; (indent-guide-recursive t)
@@ -67,19 +64,15 @@
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
-  :ensure t
-  :hook
-  (emacs-lisp-mode . outshine-mode))
+  :hook (emacs-lisp-mode . outshine-mode))
 
 ;;; Nerd-Icons
 ;; Fancy icons
-(use-package nerd-icons
-  :ensure t)
+(use-package nerd-icons)
 
 ;;; Nerd-Icons-Completion
 ;; Fancy icons in completion window
 (use-package nerd-icons-completion
-  :ensure t
   :after marginalia
   :config
   (nerd-icons-completion-mode)
@@ -88,14 +81,12 @@
 ;;; Pulsar
 ;; Know what line point is on after movement
 (use-package pulsar
-  :ensure t
   :custom
   ((pulsar-pulse t)
    (pulsar-delay 0.05)
    (pulsar-iterations 10)
    (pulsar-face 'pulsar-magenta)
    (pulsar-highlight-face 'pulsar-yellow)
-
    (pulsar-pulse-functions
     '(isearch-repeat-forward
       isearch-repeat-backward

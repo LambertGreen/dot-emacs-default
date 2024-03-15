@@ -19,7 +19,6 @@
 ;;; Org-Superstar
 ;; Holywood doing bullet time
 (use-package org-superstar
-  :ensure t
   :after (org)
   :custom
   (org-superstar-leading-bullet ?\s)
@@ -32,7 +31,6 @@
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
 (use-package evil-org
-  :ensure t
   :after org
   :hook ((org-mode . evil-org-mode)
 	 (evil-org-mode . evil-org-set-key-theme))

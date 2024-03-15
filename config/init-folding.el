@@ -4,7 +4,6 @@
 ;;; Origami
 ;; Enable Vim like code folding
 (use-package origami
-  :ensure t
   :hook
   (prog-mode . origami-mode))
 

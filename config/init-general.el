@@ -4,7 +4,7 @@
 ;;; General
 ;; Command the map
 (use-package general
-  :ensure t
+  :demand t
   :config
   (general-evil-setup)
 
@@ -132,6 +132,10 @@
   (lgreen/leader-keys
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit")))
+
+
+(elpaca-wait)
+;; use-package declarations beyond this point may use the `:general' use-package keyword.
 
 ;;; _
 (provide 'init-general)

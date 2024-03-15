@@ -30,14 +30,12 @@
 ;;; No-Littering
 ;; Let's put the mess in './var'
 (use-package no-littering
-  :ensure t
   :config
   (no-littering-theme-backups))
 
 ;;; Exec-Path-From-Shell
 ;; Set a useful $PATH
 (use-package exec-path-from-shell
-  :ensure t
   :if (memq window-system '(mac ns))
   :config
   (exec-path-from-shell-initialize))
@@ -45,7 +43,6 @@
 ;;; Which-Key
 ;; Which key? This one.
 (use-package which-key
-  :ensure t
   :init (which-key-mode)
   :config
   (setq which-key-min-display-lines 3)
@@ -54,7 +51,6 @@
 ;;; Consult
 ;; Making buffer completions nicer
 (use-package consult
-  :ensure t
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
@@ -76,19 +72,17 @@
 
 ;;; Wgrep
 ;; Let's bulk update
-(use-package wgrep
-  :ensure t)
+(use-package wgrep)
 
 ;;; Savehist
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :init
-  (savehist-mode))
+  :ensure nil
+  :init (savehist-mode))
 
 ;;; Vertico
 ;; Veritcal completion UI
 (use-package vertico
-  :ensure t
   :init
   (vertico-mode)
   ;; Different scroll margin
@@ -131,7 +125,6 @@
 ;;; Orderless
 ;; Orderless completion style
 (use-package orderless
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
@@ -139,7 +132,6 @@
 ;;; Marginalia
 ;; Annotaions for minibuffer completions
 (use-package marginalia
-  :ensure t
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
@@ -152,7 +144,6 @@
 ;;; Embark
 ;; Run actions on item on point
 (use-package embark
-  :ensure t
   :after (general)
   :bind
   (("C-;" . embark-act)         ;; pick some comfortable binding
@@ -184,52 +175,40 @@
 ;;; Embark-Consult
 ;; Integration between 'embark' and 'consult'
 (use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
 ;;; Helpful
 ;; A better *help* buffer
-(use-package helpful
-  :ensure t)
+(use-package helpful)
 
 ;;; Rainbow-Delimiters
 ;; Highlight delimiters according to their depth
 (use-package rainbow-delimiters
-  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
-  :ensure t
   :custom
   (evil-undo-system 'undo-tree)
   (undo-tree-enable-undo-in-region t)
-  :init
-  (global-undo-tree-mode))
+  :init (global-undo-tree-mode))
 
 ;;; Smartparens
 ;; Automatically balance inserting of parens
 (use-package smartparens
-  :ensure t
-  :config
-  (smartparens-global-mode 1))
+  :config (smartparens-global-mode 1))
 
 ;;; Dtrt-Indent
 ;; Guess file indentation
 (use-package dtrt-indent
-  :ensure t
-  :config
-  ;; enable dtrt-indent-mode globally
-  (dtrt-indent-mode 1))
+  :config (dtrt-indent-mode 1))
 
 ;;; Whitespace Cleanup
 ;; TODO Validate this package indeed works as advertised
 (use-package whitespace-cleanup-mode
-  :ensure t
-  :hook
-  (prog-mode . whitespace-cleanup-mode))
+  :hook (prog-mode . whitespace-cleanup-mode))
 
 ;;; _
 (provide 'init-emacs)

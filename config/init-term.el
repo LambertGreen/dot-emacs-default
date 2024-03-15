@@ -1,16 +1,13 @@
 ;;; init-term.el --- -*- lexical-binding: t; -*-
 
 ;;; Vterm
-(use-package vterm
-  :ensure t)
+(use-package vterm)
 
 ;;; VTerm-toggle
-(use-package vterm-toggle
-  :ensure t)
+(use-package vterm-toggle)
 
 ;;; EAT
-(use-package eat
-  :ensure t)
+(use-package eat)
 
 ;;; _
 (provide 'init-term)

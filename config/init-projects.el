@@ -26,7 +26,12 @@
 	 (string-prefix-p "/usr/lib/node_modules/" project-root))))
 
   :config
-  (projectile-mode +1))
+  (projectile-mode +1)
+  (lgreen/leader-keys
+    "p p" '(projectile-switch-project :wk "Switch project")
+    "p f" '(projectile-find-file :wk "Find file in project")
+    "p d" '(projectile-dired :wk "Dired in project")
+    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")))
 
 ;;; _
 (provide 'init-projects)

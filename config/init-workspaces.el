@@ -6,7 +6,10 @@
 (use-package perspective
   :custom
   (persp-suppress-no-prefix-key-warning t)
-  :init (persp-mode))
+  :init (persp-mode)
+  :config
+  (lgreen/leader-keys
+    "p s" '(persp-switch :wk "Switch perspective")))
 
 ;;; Persp-Projectile
 ;; Perspective and project integration

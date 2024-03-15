@@ -38,27 +38,15 @@
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
     "f r" '(recentf :wk "Recent files")
-    "f t" '(consult-todo :wk "Find todos")
-    "f T" '(consult-todo-all :wk "Find all todos")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
 
 ;;;; Search in files
   (lgreen/leader-keys
-    "s" '(:ignore t :wk "search")
-    "s b" '(consult-line :wk "Search buffer")
-    "s p" '(consult-ripgrep :wk "Search project files")
-    "s i" '(consult-imenu :wk "Jump to symbol")
-    "s d" '(consult-locate :wk "Search current directory"))
+    "s" '(:ignore t :wk "search"))
 
 ;;;; Projects
   (lgreen/leader-keys
-    "p" '(:ignore t :wk "project")
-    "p p" '(projectile-switch-project :wk "Switch project")
-    "p f" '(projectile-find-file :wk "Find file in project")
-    "p d" '(projectile-dired :wk "Dired in project")
-    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")
-    "p s" '(persp-switch :wk "Switch perspective")
-    )
+    "p" '(:ignore t :wk "project"))
 
 ;;;; Diff
   (lgreen/leader-keys
@@ -109,18 +97,11 @@
   (lgreen/leader-keys
     "h" '(:ignore t :wk "help")
     "h b" '(describe-bindings :wk "Describe bindings")
-    "h f" '(helpful-callable :wk "Describe function")
-    "h v" '(helpful-variable :wk "Describe variable")
-    "h k" '(helpful-key :wk "Describe key")
-    "h c" '(helpful-command :wk "Describe command")
-    "h m" '(describe-mode :wk "Describe mode")
-    "h t" '(consult-theme :wk "Switch theme"))
+    "h m" '(describe-mode :wk "Describe mode"))
 
 ;;;; Open
   (lgreen/leader-keys
-    "o" '(:ignore t :wk "open")
-    "o p" '(treemacs :wk "Open project tree")
-    "o t" '(vterm-toggle :wk "Open vterm"))
+    "o" '(:ignore t :wk "open"))
 
 ;;;; Toggles
   (lgreen/leader-keys

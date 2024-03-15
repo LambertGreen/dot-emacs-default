@@ -1,6 +1,9 @@
 ;;; init-file-tree.el --- -*- lexical-binding: t; -*-
 
-(use-package treemacs)
+(use-package treemacs
+  :config
+  (lgreen/leader-keys
+    "o p" '(treemacs :wk "Open project tree")))
 
 (use-package treemacs-projectile
   :after (treemacs projectile))

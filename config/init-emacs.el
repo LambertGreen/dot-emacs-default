@@ -65,7 +65,16 @@
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref))
+	xref-show-definitions-function #'consult-xref)
+  :config
+  (lgreen/leader-keys
+    "f t" '(consult-todo :wk "Find todos")
+    "f T" '(consult-todo-all :wk "Find all todos")
+    "h t" '(consult-theme :wk "Switch theme")
+    "s b" '(consult-line :wk "Search buffer")
+    "s p" '(consult-ripgrep :wk "Search project files")
+    "s i" '(consult-imenu :wk "Jump to symbol")
+    "s d" '(consult-locate :wk "Search current directory")))
 
 ;;; Wgrep
 ;; Let's bulk update
@@ -169,7 +178,13 @@
 
 ;;; Helpful
 ;; A better *help* buffer
-(use-package helpful)
+(use-package helpful
+  :config
+  (lgreen/leader-keys
+    "h f" '(helpful-callable :wk "Describe function")
+    "h v" '(helpful-variable :wk "Describe variable")
+    "h k" '(helpful-key :wk "Describe key")
+    "h c" '(helpful-command :wk "Describe command")))
 
 ;;; Rainbow-Delimiters
 ;; Highlight delimiters according to their depth

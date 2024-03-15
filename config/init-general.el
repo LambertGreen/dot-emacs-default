@@ -108,6 +108,7 @@
 ;;;; Help
   (lgreen/leader-keys
     "h" '(:ignore t :wk "help")
+    "h b" '(describe-bindings :wk "Describe bindings")
     "h f" '(helpful-callable :wk "Describe function")
     "h v" '(helpful-variable :wk "Describe variable")
     "h k" '(helpful-key :wk "Describe key")

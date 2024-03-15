@@ -4,12 +4,9 @@
 ;;; Perspective
 ;; Switching from one view to the other
 (use-package perspective
-  :bind
-  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
   :custom
-  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
-  :init
-  (persp-mode))
+  (persp-suppress-no-prefix-key-warning t)
+  :init (persp-mode))
 
 ;;; Persp-Projectile
 ;; Perspective and project integration
@@ -30,16 +27,15 @@
   (centaur-tabs-style "bar")
   (centaur-tabs-enable-ido-completion nil)
   (centaur-tabs-cycle-scope 'group)
-  :bind
-  (:map evil-normal-state-map
-	("g t" . centaur-tabs-forward)
-	("g T" . centaur-tabs-backward))
+  :general
+  (:states '(normal)
+	   "gt" 'centaur-tabs-forward
+	   "gT" 'centaur-tabs-backward)
   :config
   (setq centaur-tabs--buffer-show-groups t)
   (centaur-tabs-mode t)
   (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-headline-match)
-  )
+  (centaur-tabs-headline-match))
 
 ;;; _
 (provide 'init-workspaces)

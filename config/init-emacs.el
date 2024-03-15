@@ -30,15 +30,13 @@
 ;;; No-Littering
 ;; Let's put the mess in './var'
 (use-package no-littering
-  :config
-  (no-littering-theme-backups))
+  :config (no-littering-theme-backups))
 
 ;;; Exec-Path-From-Shell
 ;; Set a useful $PATH
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize))
+  :config (exec-path-from-shell-initialize))
 
 ;;; Which-Key
 ;; Which key? This one.
@@ -67,8 +65,7 @@
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref)
-  )
+	xref-show-definitions-function #'consult-xref))
 
 ;;; Wgrep
 ;; Let's bulk update
@@ -83,15 +80,13 @@
 ;;; Vertico
 ;; Veritcal completion UI
 (use-package vertico
-  :init
-  (vertico-mode)
+  :custom
   ;; Different scroll margin
-  (setq vertico-scroll-margin 0)
-  ;; Show more candidates
-  (setq vertico-count 20)
-  ;; Grow and shrink the Vertico minibuffer
-  (setq vertico-resize t)
-  (setq vertico-cycle t))
+  (vertico-scroll-margin 0)
+  (vertico-count 20)
+  (vertico-cycle t)
+  :init
+  (vertico-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -132,23 +127,16 @@
 ;;; Marginalia
 ;; Annotaions for minibuffer completions
 (use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
-  :bind (:map minibuffer-local-map
-	      ("M-A" .
-	       marginalia-cycle))
-
   :init (marginalia-mode))
 
 ;;; Embark
 ;; Run actions on item on point
 (use-package embark
   :after (general)
-  :bind
-  (("C-;" . embark-act)         ;; pick some comfortable binding
-   ("C-." . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :general
+  (general-define-key
+   "C-;"  'embark-act
+   "C-." 'embark-dwim)
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -163,7 +151,8 @@
 
   (lgreen/leader-keys
     "a" '(embark-act :wk "Actions")
-    "A" '(embark-dwim :wk "Actions-dwim"))
+    "A" '(embark-dwim :wk "Actions-dwim")
+    "h B" '(embark-bindings :wk "Embark bindings"))
 
   :config
   ;; Hide the mode line of the Embark live/completions buffers

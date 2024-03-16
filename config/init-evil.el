@@ -83,6 +83,11 @@
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
+;;; Evil-Indent-Plus
+(use-package evil-indent-plus
+  :after evil
+  :config (evil-indent-plus-default-bindings))
+
 ;;; Evil-Lion
 ;; gl and gL operators, for lining things up
 (use-package evil-lion

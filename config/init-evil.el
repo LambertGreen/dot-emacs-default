@@ -49,6 +49,12 @@
   :after evil
   :config (evil-commentary-mode))
 
+;;; Evil EasyMotion
+;; get there in one fell swoop
+(use-package evil-easymotion
+  :after evil
+  :config (evilem-default-keybindings "gs"))
+
 ;;; Evil-Escape
 ;; alternate escape route when capslock is not bound to escape
 (use-package evil-escape
@@ -97,11 +103,15 @@
 	   "gl" 'evil-lion-left
 	   "gL" 'evil-lion-right))
 
-;;; Evil EasyMotion
-;; get there in one fell swoop
-(use-package evil-easymotion
+;;; Evil-Numbers
+(use-package evil-numbers
   :after evil
-  :config (evilem-default-keybindings "gs"))
+  :config
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'global
+   "g =" 'evil-numbers/inc-at-pt
+   "g -" 'evil-numbers/dec-at-pt))
 
 ;;; Evil-Replace-With-Register
 ;; gR operator.  Replace without affecting unamed register

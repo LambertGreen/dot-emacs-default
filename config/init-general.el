@@ -22,45 +22,39 @@
     :states 'normal
     :prefix "SPC m")
 
-;;;; Top Level Keys
   (lgreen/leader-keys
+;;;;; Top Level Keys
+;;;;; --------------
     ":" '(execute-extended-command :wk "M-x")
     "SPC" '(projectile-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
-    "." '(find-file :wk "Find file"))
+    "." '(find-file :wk "Find file")
 
-;;;; Local Leader
-  (lgreen/leader-keys
-    "m" '(:ignore t :wk "localleader"))
+;;;;; Local Leader
+;;;;; ------------
+    "m" '(:ignore t :wk "localleader")
 
-;;;; Find files and things
-  (lgreen/leader-keys
+;;;;; Find files and things
+;;;;; ---------------------
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
     "f r" '(recentf :wk "Recent files")
-    "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config"))
+    "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config")
 
-;;;; Search in files
-  (lgreen/leader-keys
-    "s" '(:ignore t :wk "search"))
+;;;;; Search
+;;;;; ---------------
+    "s" '(:ignore t :wk "search")
 
-;;;; Projects
-  (lgreen/leader-keys
-    "p" '(:ignore t :wk "project"))
+;;;;; Projects
+;;;;; --------
+    "p" '(:ignore t :wk "project")
 
-;;;; Diff
-  (lgreen/leader-keys
-    "d" '(:ignore t :wk "Diff")
-    "d p" '(diff-hl-previous-hunk :wk "Diff previous")
-    "d n" '(diff-hl-next-hunk :wk "Diff next"))
-
-;;;; Git Interface
-  (lgreen/leader-keys
+;;;;; Git Interface
+;;;;; -------------
     "g" '(:ignore t :wk "git")
-    "g g" '(magit-status :wk "Status"))
 
-;;;; Buffer Management
-  (lgreen/leader-keys
+;;;;; Buffer Management
+;;;;; -----------------
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
     "b d" '(kill-this-buffer :wk "Delete buffer")
@@ -70,10 +64,10 @@
     "b r" '(revert-buffer :wk "Reload buffer")
     "b R" '(rename-buffer :wk "Rename buffer")
     "b s" '(save-buffer :wk "Save buffer")
-    "b S" '(evil-write-all :wk "Save all buffers"))
+    "b S" '(evil-write-all :wk "Save all buffers")
 
-;;;; Window Management
-  (lgreen/leader-keys
+;;;;; Window Management
+;;;;; -----------------
     "w" '(:ignore t :wk "window")
     "w =" '(balance-windows :wk "Balance windows")
     "w h" '(evil-window-left :wk "Window left")
@@ -91,27 +85,27 @@
     "w H" '(evil-window-move-far-left :wk "Move window far left")
     "w K" '(evil-window-move-very-top :wk "Move window very top")
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
-    "w L" '(evil-window-move-far-right :wk "Move window far right"))
+    "w L" '(evil-window-move-far-right :wk "Move window far right")
 
-;;;; Help
-  (lgreen/leader-keys
+;;;;; Help
+;;;;; ----
     "h" '(:ignore t :wk "help")
     "h b" '(describe-bindings :wk "Describe bindings")
-    "h m" '(describe-mode :wk "Describe mode"))
+    "h m" '(describe-mode :wk "Describe mode")
 
-;;;; Open
-  (lgreen/leader-keys
-    "o" '(:ignore t :wk "open"))
+;;;;; Open
+;;;;; ----
+    "o" '(:ignore t :wk "open")
 
-;;;; Toggles
-  (lgreen/leader-keys
+;;;;; Toggles
+;;;;; -------
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t i" '(indent-guide-global-mode :wk "Toggle indent guides")
-    "t w" '(visual-line-mode :wk "Toggle truncated lines"))
+    "t w" '(visual-line-mode :wk "Toggle truncated lines")
 
-;;;; Quit
-  (lgreen/leader-keys
+;;;;; Quit
+;;;;; ----
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit")))
 

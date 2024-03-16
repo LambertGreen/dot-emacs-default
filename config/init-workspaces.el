@@ -6,8 +6,8 @@
 (use-package perspective
   :custom
   (persp-suppress-no-prefix-key-warning t)
-  :init (persp-mode)
-  :config
+  :init
+  (persp-mode)
   (lgreen/leader-keys
     "p s" '(persp-switch :wk "Switch perspective")))
 

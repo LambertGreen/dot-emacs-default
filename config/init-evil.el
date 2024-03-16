@@ -19,7 +19,7 @@
 ;; Argue your point left and right
 (use-package evil-args
   :after evil
-  :config
+  :init
   ;; bind evil-args text objects
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)

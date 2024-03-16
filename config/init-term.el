@@ -5,7 +5,8 @@
 
 ;;; VTerm-toggle
 (use-package vterm-toggle
-  :config
+  :after general
+  :init
   (lgreen/leader-keys
       "o t" '(vterm-toggle :wk "Open vterm")))
 

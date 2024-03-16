@@ -7,7 +7,6 @@
   :custom
   ;; We have too many projects to have project discovery done everytime
   (projectile-auto-discover nil)
-
   ;; Set search path and depth
   (projectile-project-search-path '(("~/dev" . 5)))
   (projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS"))
@@ -16,7 +15,6 @@
    (append
     '("~/dev/my/dotfiles/emacs/dot-emacs.default/elpaca/repos/"
       )))
-
   ;; NOTE: If a project is already in the cache, then one has to manually
   ;; delete the cache file to have the project ignored.
   ;; This can be done using the following elisp command: (delete-file projectile-known-projects-file)
@@ -24,14 +22,14 @@
    (lambda (project-root)
      (or (string-prefix-p "~/dev/work/_bazel/" project-root)
 	 (string-prefix-p "/usr/lib/node_modules/" project-root))))
-
-  :config
-  (projectile-mode +1)
+  :init
   (lgreen/leader-keys
     "p p" '(projectile-switch-project :wk "Switch project")
     "p f" '(projectile-find-file :wk "Find file in project")
     "p d" '(projectile-dired :wk "Dired in project")
-    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project")))
+    "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
+  :config
+  (projectile-mode +1))
 
 ;;; _
 (provide 'init-projects)

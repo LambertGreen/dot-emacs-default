@@ -1,5 +1,6 @@
 ;;; init-ui.el --- -*- lexical-binding: t; -*-
 
+
 ;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline
@@ -11,12 +12,12 @@
   (doom-modeline-persp-name nil)
   (doom-modeline-minor-modes nil)
   ;; :hook (after-init . doom-modeline-mode)
-  :config
-  (doom-modeline-mode 1)
-  ;; Add toggle keybind
+  :init
   (lgreen/leader-keys
     "t m" '(:ignore t :wk "modeline")
     "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
+  :config
+  (doom-modeline-mode 1)
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
@@ -44,15 +45,15 @@
   :custom
   (indent-guide-char "┊")   ; Useful characters: ·│┊┆╎
   ;; (indent-guide-recursive t)
+  :init
+  (lgreen/leader-keys
+    "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
   :hook
   (prog-mode . indent-guide-mode)
   :config
   ;; Set the indent-guide color to match the comment color of the current theme
   (set-face-foreground 'indent-guide-face
 		       (face-foreground 'font-lock-comment-face))
-  ;; Add toggle
-  (lgreen/leader-keys
-    "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
 
   (defun lgreen/toggle-indent-guide ()
     "Toggle indent guides in programming modes."

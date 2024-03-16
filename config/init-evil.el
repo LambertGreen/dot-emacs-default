@@ -104,6 +104,15 @@
   :after evil
   :config (evil-replace-with-register-install))
 
+;;; Evil-Snipe
+(use-package evil-snipe
+  :after evil
+  :custom (evil-snipe-repeat-scope 'visible)
+  :config
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1)
+  :hook (magit-mode-hook . turn-off-evil-snipe-override-mode))
+
 ;;; Evil-Surround
 ;; encompass them on both sides
 ;; Keybindings provided by evil-surround:

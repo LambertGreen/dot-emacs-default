@@ -1,4 +1,4 @@
-;;; init-prog.el --- -*- lexical-binding: t; -*-
+;;; init-prog-modes.el --- -*- lexical-binding: t; -*-
 
 ;;; Treesit-Auto
 ;; Get all the langs
@@ -40,4 +40,4 @@
 (use-package markdown-mode)
 
 ;;; _
-(provide 'init-prog)
+(provide 'init-prog-modes)

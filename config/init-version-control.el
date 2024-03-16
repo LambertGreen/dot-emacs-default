@@ -1,4 +1,4 @@
-;;; init-vc.el --- -*- lexical-binding: t; -*-
+;;; init-version-control.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Magit
@@ -26,4 +26,4 @@
    (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
 
 ;;; _
-(provide 'init-vc)
+(provide 'init-version-control)

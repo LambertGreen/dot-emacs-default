@@ -1,4 +1,4 @@
-;;; init-dired.el --- -*- lexical-binding: t; -*-
+;;; init-file-management.el --- -*- lexical-binding: t; -*-
 
 ;;; Nerd-Icons-Dired
 ;; Fancy icons for Dired
@@ -17,4 +17,4 @@
   :if (executable-find "fd"))
 
 ;;; _
-(provide 'init-dired)
+(provide 'init-file-management)

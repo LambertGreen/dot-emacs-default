@@ -1,6 +1,6 @@
-;;; init-elpaca.el --- -*- lexical-binding: t; -*-
+;;; init-package-manager.el --- -*- lexical-binding: t; -*-
 
-;; Use Elpaca for our package manager
+;;; Use Elpaca as our package manager
 (defvar elpaca-installer-version 0.6)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -38,17 +38,17 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
-;; Install use-package support
+;;; Install use-package support
 (setq use-package-verbose t
       use-package-compute-statistics t
       use-package-always-ensure t)
 
 (elpaca elpaca-use-package
-    ;; Enable use-package :ensure support for Elpaca.
     (elpaca-use-package-mode))
 
 ;; Block until current queue processed.
 (elpaca-wait)
+;; Use-package can be used beyond this point
 
 ;;; _
-(provide 'init-elpaca)
+(provide 'init-package-manager)

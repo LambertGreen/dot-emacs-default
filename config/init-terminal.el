@@ -1,4 +1,4 @@
-;;; init-term.el --- -*- lexical-binding: t; -*-
+;;; init-terminal.el --- -*- lexical-binding: t; -*-
 
 ;;; Vterm
 (use-package vterm)
@@ -14,4 +14,4 @@
 (use-package eat)
 
 ;;; _
-(provide 'init-term)
+(provide 'init-terminal)

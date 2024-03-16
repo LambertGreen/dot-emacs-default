@@ -1,7 +1,7 @@
-;;; init-general.el --- -*- lexical-binding: t; -*-
+;;; init-keybindings.el --- -*- lexical-binding: t; -*-
 
 
-;;; General
+;;; Use General for convenient keybindings
 ;; Command the map
 (use-package general
   :demand t
@@ -114,4 +114,4 @@
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.
 
 ;;; _
-(provide 'init-general)
+(provide 'init-keybindings)

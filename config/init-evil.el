@@ -2,18 +2,23 @@
 
 
 ;;; Evil
-;; The root of all money
+;; The root of all money-trees
 (use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq org-return-follows-link t)
+  :custom
+  (evil-want-keybinding nil)
+  (evil-want-C-u-scroll t)
+  (org-return-follows-link t)
   :config
-  ;; Use Emacs keybindings in insert mode for C-a and C-e
-  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
-  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
   (evil-set-initial-state 'eat-mode 'insert)
-  (evil-mode))
+  ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
+  (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
+  (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
+
+  ;; Set keybinding for evil-avy-goto-char-timer in motion state
+  (evil-define-key '(normal visual) 'global (kbd "g s SPC") 'evil-avy-goto-char-timer)
+
+  ;; Activate evil-mode
+  (evil-mode 1))
 
 ;;; Evil-Args
 ;; Argue your point left and right

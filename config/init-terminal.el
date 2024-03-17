@@ -11,7 +11,11 @@
       "o t" '(vterm-toggle :wk "Open vterm")))
 
 ;;; EAT
-(use-package eat)
+(use-package eat
+  :after evil
+  :config
+  ;; Set the initial state for specific modes, if necessary
+  (evil-set-initial-state 'eat-mode 'insert))
 
 ;;; _
 (provide 'init-terminal)

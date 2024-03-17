@@ -9,7 +9,6 @@
   (evil-want-C-u-scroll t)
   (org-return-follows-link t)
   :config
-  (evil-set-initial-state 'eat-mode 'insert)
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)

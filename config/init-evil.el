@@ -7,6 +7,7 @@
   :custom
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
+  (evil-want-Y-yank-to-eol t)
   (org-return-follows-link t)
   :config
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e

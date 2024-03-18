@@ -143,6 +143,53 @@
   :config
   (global-evil-surround-mode 1))
 
+;;; Evil-Textobj-Tree-Sitter
+(use-package evil-textobj-tree-sitter
+  :after evil-collection-unimpaired
+  :config
+  (evil-define-key nil evil-outer-text-objects-map
+    "f" (evil-textobj-tree-sitter-get-textobj "function.outer")
+    "l" (evil-textobj-tree-sitter-get-textobj "loop.outer")
+    "x" (evil-textobj-tree-sitter-get-textobj "conditional.outer")
+    "c" (evil-textobj-tree-sitter-get-textobj "class.outer")
+    ;; "b" (evil-textobj-tree-sitter-get-textobj "block.outer")
+    "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer")
+    )
+  (evil-define-key nil evil-inner-text-objects-map
+    "f" (evil-textobj-tree-sitter-get-textobj "function.inner")
+    "l" (evil-textobj-tree-sitter-get-textobj "loop.inner")
+    "x" (evil-textobj-tree-sitter-get-textobj "conditional.inner")
+    "c" (evil-textobj-tree-sitter-get-textobj "class.inner")
+    ;; "b" (evil-textobj-tree-sitter-get-textobj "block.inner")
+    "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner")
+    )
+
+    (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
+      "]f" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "function.outer"))
+      "[f" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+      "]F" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+      "[F" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+      "]c" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "class.outer"))
+      "[c" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+      "]C" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+      "[C" (lambda ()
+	(interactive)
+	(evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+
 ;;; Evil-Visualstar
 ;;  the star of the show
 (use-package evil-visualstar

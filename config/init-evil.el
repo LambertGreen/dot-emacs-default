@@ -30,11 +30,11 @@
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
   (lgreen/local-leader-keys
-   :keymaps 'prog-mode-map
-   "a" '(:ignore t :wk "Args")
-   "a n" '(evil-forward-arg :wk "Forward arg")
-   "a p" '(evil-backward-arg :wk "Backward arg")
-   "a o" '(evil-jump-out-args :wk "Jump out arg")))
+    :keymaps 'prog-mode-map
+    "a" '(:ignore t :wk "Args")
+    "a n" '(evil-forward-arg :wk "Forward arg")
+    "a p" '(evil-backward-arg :wk "Backward arg")
+    "a o" '(evil-jump-out-args :wk "Jump out arg")))
 
 ;;; Evil-Collection
 ;; keybind them all
@@ -79,7 +79,6 @@
   (:states '(visual normal)
 	   "gx" 'evil-exchange
 	   "gX" 'evil-exchange-cancel))
-
 
 ;;; Evil-Expat
 ;; additional ex commands

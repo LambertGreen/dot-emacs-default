@@ -22,8 +22,7 @@
   :config
   (global-diff-hl-mode)
   :hook
-  ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
-   (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
+  (focus-in . diff-hl-update))
 
 ;;; _
 (provide 'init-version-control)

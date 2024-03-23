@@ -29,6 +29,7 @@
     "SPC" '(projectile-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
+    "u" '(universal-argument :wk "Universal Argument")
 
 ;;;;; Local Leader
 ;;;;; ------------

@@ -7,6 +7,7 @@
   :custom
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
+  (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
   (org-return-follows-link t)
   :config

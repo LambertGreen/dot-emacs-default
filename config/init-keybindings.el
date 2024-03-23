@@ -108,7 +108,15 @@
 ;;;;; Quit
 ;;;;; ----
     "q" '(:ignore t :wk "quit")
-    "q q" '(save-buffers-kill-terminal :wk "Quit")))
+    "q q" '(save-buffers-kill-terminal :wk "Quit"))
+
+;;;; Minibuffer specific keybinds
+  (defun my/minibuffer-keybindings ()
+    "Set custom keybindings for the minibuffer."
+    (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)  ; Modify or kill the word backward
+    (define-key minibuffer-local-map (kbd "C-u") 'backward-kill-sentence)) ; Kill text back to the beginning
+
+  (add-hook 'minibuffer-setup-hook 'my/minibuffer-keybindings))
 
 
 (elpaca-wait)

@@ -144,7 +144,7 @@
 (use-package embark
   :after (general)
   :general
-  (general-define-key
+  (evil-normal-state-map
    "C-;"  'embark-act
    "C-." 'embark-dwim)
   :init

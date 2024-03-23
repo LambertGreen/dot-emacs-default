@@ -1,5 +1,11 @@
 ;;; init-completion.el --- -*- lexical-binding: t; -*-
 
+(use-package dabbrev
+  :ensure nil
+  :general
+  (evil-insert-state-map
+   "C-;" 'dabbrev-expand))
+
 (use-package company
   :init
   (setq company-idle-delay 0.1  ; Show suggestions after a small delay

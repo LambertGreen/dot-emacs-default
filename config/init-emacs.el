@@ -96,7 +96,11 @@
   (vertico-count 20)
   (vertico-cycle t)
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :hook (minibuffer-setup . vertico-repeat-save)
+  :config
+  (lgreen/leader-keys
+    "'" '(vertico-repeat :wk "Repeat Search")))
 
 ;; A few more useful configurations...
 (use-package emacs

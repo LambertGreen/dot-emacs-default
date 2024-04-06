@@ -7,6 +7,7 @@
 (require 'init-keybindings)
 (require 'init-evil)
 (require 'init-emacs)
+(require 'init-minibuffer)
 (require 'init-os)
 (require 'init-themes)
 (require 'init-ui)

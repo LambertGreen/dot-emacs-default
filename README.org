@@ -8,14 +8,18 @@ I had started out using a literate configuration, but changed to a pure elisp co
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in elisp mode makes code execution and debugging easier
 
-* TODOs [2/3]
-** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
-** DONE Consider all ~:bind~ blocks for ~:general~ applicability
-** TODO Add checkers [0/0]
-*** [ ] Spell checker
 
-*** [ ] Progamming linters
+* TODOs
+** Open [1/3]
+*** TODO Add checkers [0/0]
+**** [ ] Spell checker
 
-** TODO Port your Doom Org config
+**** [ ] Progamming linters
 
-** TODO Double check Evil packages against Doom's list
+*** TODO Port your Doom Org config
+
+*** DONE Fix issue with =hl-todo= package not installing
+** Complete [3/3]
+*** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
+*** DONE Consider all ~:bind~ blocks for ~:general~ applicability
+*** DONE Double check Evil packages against Doom's list

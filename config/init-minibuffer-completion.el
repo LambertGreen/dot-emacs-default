@@ -27,8 +27,6 @@
   :after general
   :init
   (lgreen/leader-keys
-    "f t" '(consult-todo :wk "Find todos")
-    "f T" '(consult-todo-all :wk "Find all todos")
     "b b" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")
@@ -52,6 +50,13 @@
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode))
+
+(use-package consult-todo
+  :after (general consult hl-todo)
+  :init
+  (lgreen/leader-keys
+    "s t" '(consult-todo :wk "Search todos")
+    "s T" '(consult-todo-all :wk "Search all todos")))
 
 ;;; _
 (provide 'init-minibuffer-completion)

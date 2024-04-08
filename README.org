@@ -29,3 +29,5 @@ I had started out using a literate configuration, but changed to a pure elisp co
 *** DONE Provide a way to undo maximize
 Used ~winnner-undo~
 
+** TODO Add support for org checkboxes
+Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.

@@ -74,10 +74,10 @@
 ;;; Nerd-Icons-Completion
 ;; Fancy icons in completion window
 (use-package nerd-icons-completion
-  :after marginalia
+  :after (marginalia nerd-icons)
+  :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
   :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+  (nerd-icons-completion-mode))
 
 ;;; Pulsar
 ;; Know what line point is on after movement

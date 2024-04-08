@@ -87,6 +87,16 @@
   :ensure nil
   :init (savehist-mode))
 
+;;; Minibuffer keymaps
+(use-package emacs
+  :ensure nil
+  :after (general evil)
+  :init
+  (general-def :keymaps 'minibuffer-local-map
+	     :states 'insert
+	     "C-n" 'next-line-or-history-element
+	     "C-p" 'previous-line-or-history-element))
+
 ;;; Vertico
 ;; Veritcal completion UI
 (use-package vertico

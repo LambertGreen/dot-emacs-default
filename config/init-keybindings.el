@@ -8,6 +8,9 @@
   :config
   (general-evil-setup)
 
+  ;; BUG Not working for me
+  ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 ;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
   (general-create-definer lgreen/leader-keys

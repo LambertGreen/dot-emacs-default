@@ -22,8 +22,10 @@ I had started out using a literate configuration, but changed to a pure elisp co
 
 ** DONE Update =terminal= to open in bottom
 
-** TODO Update =window management= [0/0]
+** TODO Update =window management= [1/2]
 
-*** [ ] Provide a way to toggle window to max size
+*** TODO Provide a way to toggle window to max size
 
-*** [ ] Provide a way to undo maximize
+*** DONE Provide a way to undo maximize
+Used ~winnner-undo~
+

@@ -8,6 +8,7 @@
 (require 'init-evil)
 (require 'init-emacs)
 (require 'init-minibuffer)
+(require 'init-window-management)
 (require 'init-os)
 (require 'init-themes)
 (require 'init-ui)

@@ -5,6 +5,11 @@
 (use-package minibuffer
   :ensure nil
   :init
+  (general-def :keymaps 'minibuffer-local-map
+	     :states '(normal insert)
+	     "C-n" 'next-line-or-history-element
+	     "C-p" 'previous-line-or-history-element)
+
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
@@ -15,14 +20,8 @@
 		  (car args))
 	  (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-
-  (defun my/minibuffer-keybindings ()
-    "Set custom keybindings for the minibuffer."
-    (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)  ; Modify or kill the word backward
-    (define-key minibuffer-local-map (kbd "C-u") 'backward-kill-sentence)) ; Kill text back to the beginning
   :hook
-  ((minibuffer-setup-hook . my/minibuffer-keybindings)
-   (minibuffer-setup-hook . cursor-intangible-mode))
+   (minibuffer-setup-hook . cursor-intangible-mode)
   :custom
   ;; Enable recursive minibuffers
   (enable-recursive-minibuffers t)

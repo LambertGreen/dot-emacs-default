@@ -31,3 +31,17 @@ Used ~winnner-undo~
 
 ** TODO Add support for org checkboxes
 Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
+
+** TODO Performance analyze Emacs startup
+Run the following:
+#+begin_src elisp
+(use-package-report)
+#+end_src
+
+#+RESULTS:
+: #<window 11 on *use-package statistics*>
+
+ + We see ~exec-path-from-shell~ is the long pole: 3 seconds
+
+** TODO Prettify =org-agenda=
++ https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j

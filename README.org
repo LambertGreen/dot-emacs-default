@@ -8,31 +8,25 @@ I had started out using a literate configuration, but changed to a pure elisp co
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in elisp mode makes code execution and debugging easier
 
-* TODOs [3/7]
-** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
-** DONE Consider all ~:bind~ blocks for ~:general~ applicability
-** TODO Add checkers [0/0]
-*** [ ] Spell checker
+* TODOs
+** Open [0/4]
+*** TODO Add checkers [0/0]
+**** [ ] Spell checker
 
-*** [ ] Progamming linters
+**** [ ] Progamming linters
 
-** TODO Port your Doom Org config
+*** TODO Port your Doom Org config
+*** TODO Update =window management= [1/2]
 
-** TODO Double check Evil packages against Doom's list
+**** TODO Provide a way to toggle window to max size
 
-** DONE Update =terminal= to open in bottom
-
-** TODO Update =window management= [1/2]
-
-*** TODO Provide a way to toggle window to max size
-
-*** DONE Provide a way to undo maximize
+**** DONE Provide a way to undo maximize
 Used ~winnner-undo~
 
-** TODO Add support for org checkboxes
+*** TODO Add support for org checkboxes
 Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
 
-** TODO Performance analyze Emacs startup
+*** TODO Performance analyze Emacs startup
 Run the following:
 #+begin_src elisp
 (use-package-report)
@@ -43,5 +37,11 @@ Run the following:
 
  + We see ~exec-path-from-shell~ is the long pole: 3 seconds
 
-** TODO Prettify =org-agenda=
+*** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
+** Complete [3/3]
+*** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
+*** DONE Consider all ~:bind~ blocks for ~:general~ applicability
+*** DONE Double check Evil packages against Doom's list
+*** DONE Update =terminal= to open in bottom
+*** DONE Fix issue with =hl-todo= package not installing

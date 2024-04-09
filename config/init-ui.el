@@ -26,6 +26,10 @@
 ;;; HL-Todo
 ;; Highlight TODO's
 (use-package hl-todo
+  ;; Ensure is elpaca specifier:
+  ;; Given hl-todo default does not specify version, but it is required to
+  ;; install dependencies we indicate the version.
+  :ensure (hl-todo :version (lambda (_) "3.6.0"))
   :hook ((org-mode . hl-todo-mode)
 	 (prog-mode . hl-todo-mode))
   :config

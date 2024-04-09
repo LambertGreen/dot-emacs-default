@@ -46,37 +46,6 @@
   (setq which-key-min-display-lines 3)
   (setq which-key-sort-uppercase-first nil))
 
-;;; Consult
-;; Making buffer completions nicer
-(use-package consult
-  :after general
-  :init
-  (lgreen/leader-keys
-    "f t" '(consult-todo :wk "Find todos")
-    "f T" '(consult-todo-all :wk "Find all todos")
-    "h t" '(consult-theme :wk "Switch theme")
-    "s b" '(consult-line :wk "Search buffer")
-    "s p" '(consult-ripgrep :wk "Search project files")
-    "s i" '(consult-imenu :wk "Jump to symbol")
-    "s d" '(consult-locate :wk "Search current directory"))
-
-  ;; Optionally configure the register formatting. This improves the register
-  ;; preview for `consult-register', `consult-register-load',
-  ;; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.5
-	register-preview-function #'consult-register-format)
-
-  ;; Optionally tweak the register preview window.
-  ;; This adds thin lines, sorting and hides the mode line of the window.
-  (advice-add #'register-preview :override #'consult-register-window)
-
-  ;; Use Consult to select xref locations with preview
-  (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref)
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode))
-
 ;;; Wgrep
 ;; Let's bulk update
 (use-package wgrep)

@@ -33,25 +33,5 @@
   (setq read-extended-command-predicate
 	#'command-completion-default-include-p))
 
-;;; Vertico
-;; Veritcal completion UI
-(use-package vertico
-  :custom
-  ;; Different scroll margin
-  (vertico-scroll-margin 0)
-  (vertico-count 20)
-  (vertico-cycle t)
-  :init
-  (vertico-mode)
-  :hook (minibuffer-setup . vertico-repeat-save)
-  :config
-  (lgreen/leader-keys
-    "'" '(vertico-repeat :wk "Repeat Search")))
-
-;;; Marginalia
-;; Annotaions for minibuffer completions
-(use-package marginalia
-  :init (marginalia-mode))
-
 ;;; _
 (provide 'init-minibuffer)

@@ -9,16 +9,17 @@ I had started out using a literate configuration, but changed to a pure elisp co
  - Working directly in elisp mode makes code execution and debugging easier
 
 * TODOs
-** Open [0/4]
+** Open [1/6]
 *** TODO Add checkers [0/0]
 **** [ ] Spell checker
 
 **** [ ] Progamming linters
 
 *** TODO Port your Doom Org config
-*** TODO Update =window management= [1/2]
+*** DONE Update =window management= [2/2]
 
-**** TODO Provide a way to toggle window to max size
+**** DONE Provide a way to toggle window to max size
+I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configufation using ~winner-undo~ (~w u~).
 
 **** DONE Provide a way to undo maximize
 Used ~winnner-undo~

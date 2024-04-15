@@ -42,6 +42,8 @@
 ;; keybind them all
 (use-package evil-collection
   :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
   :config
   (evil-collection-init)
   ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work

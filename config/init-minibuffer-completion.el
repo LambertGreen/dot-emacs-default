@@ -51,6 +51,8 @@
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode))
 
+;;; Conslut-Todo
+;; TODO Consider removing in favor of `magit-todos`
 (use-package consult-todo
   :after (general consult hl-todo)
   :init

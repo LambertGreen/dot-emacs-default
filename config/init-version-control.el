@@ -12,6 +12,15 @@
   (lgreen/leader-keys
     "g g" '(magit-status :wk "Status")))
 
+;;; Magit-Todos
+;; There is always more todo
+(use-package magit-todos
+  :after magit
+  :init
+  (lgreen/leader-keys
+    "p t" '(magit-todos-list :wk "todos"))
+  :config (magit-todos-mode 1))
+
 ;;; Diff-Hl
 ;; Show git status in the fringe
 (use-package diff-hl

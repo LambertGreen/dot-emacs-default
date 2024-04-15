@@ -9,7 +9,6 @@
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
-  (evil-want-minibuffer t)
   (org-return-follows-link t)
   (evil-undo-system 'undo-tree)
   :config

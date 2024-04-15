@@ -6,6 +6,7 @@
 (use-package org
   :ensure nil
   :custom
+  (org-return-follows-link t)
   (org-blank-before-new-entry '((heading . true) (plain-list-item . true)))
   :config
   (require 'org-tempo))

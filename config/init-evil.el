@@ -11,7 +11,6 @@
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
-  (org-return-follows-link t)
   (evil-undo-system 'undo-tree)
   :config
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e

@@ -49,6 +49,7 @@
   :config
   (evil-collection-init)
   ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+  ;; TODO Validate that you really need to unmap these keys
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)

@@ -11,6 +11,13 @@
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
 
+;;; WDired
+;; Rename files in Dired
+(use-package wdired
+  :ensure nil
+  :after (dired undo-tree)
+  :hook (wdired-mode . turn-on-undo-tree-mode))
+
 ;;; Fd-Dired
 ;; `find-dired' alternative using `fd'
 (use-package fd-dired

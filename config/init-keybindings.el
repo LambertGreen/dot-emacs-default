@@ -8,7 +8,7 @@
   :config
   (general-evil-setup)
 
-  ;; BUG Not working for me
+  ;; TODO Is this needed or taken care of by evil-collection?
   ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;;;; Leader key definer

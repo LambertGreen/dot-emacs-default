@@ -9,11 +9,12 @@ I had started out using a literate configuration, but changed to a pure elisp co
  - Working directly in elisp mode makes code execution and debugging easier
 
 * TODOs
-** Open [1/6]
-*** TODO Add checkers [0/0]
-**** [ ] Spell checker
+** Open [2/7]
+*** TODO Add checkers [0/2]
+**** TODO Spell checker
+***** Checkout this new high performance spell checker: https://github.com/minad/jinx
 
-**** [ ] Progamming linters
+**** TODO Progamming linters
 
 *** TODO Port your Doom Org config
 *** DONE Update =window management= [2/2]
@@ -40,6 +41,22 @@ Run the following:
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
+
+*** DONE Add local leader keybinds for ~org-mode-map~ [4/4]
+**** DONE Add ~clock~ section
+**** DONE Add ~dates~ section
+**** DONE Add ~tables~ section
+***** Another heading
+|-------+-------+-------+-------|
+| col1  | col2  | col3  | col4  |
+|-------+-------+-------+-------|
+| val11 | val12 | val13 | val14 |
+| val21 | val22 | val23 | val24 |
+| val31 | val32 | val33 | val34 |
+| val41 | val42 | val43 | val44 |
+
+**** DONE Add bindings for ~org-schedule~ to navigate the calendar window
+DEADLINE: <2024-04-19 Fri> SCHEDULED: <2024-03-25 Mon>
 ** Complete [3/3]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability

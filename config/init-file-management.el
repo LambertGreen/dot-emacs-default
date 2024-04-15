@@ -1,5 +1,7 @@
 ;;; init-file-management.el --- -*- lexical-binding: t; -*-
 
+;; TODO Checkout some of the Dired extension packages e.g. Dired+
+
 ;;; Nerd-Icons-Dired
 ;; Fancy icons for Dired
 (use-package nerd-icons-dired
@@ -9,6 +11,7 @@
 ;;; Diredfl
 ;; Colorful dired
 (use-package diredfl
+  :after dired
   :hook (dired-mode . diredfl-mode))
 
 ;;; WDired

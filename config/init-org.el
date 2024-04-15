@@ -30,6 +30,14 @@
   :hook
   (org-mode . org-superstar-mode))
 
+;;; Org-Pretty-Table
+;; Draw pretty unicode tables
+(use-package org-pretty-table
+  :ensure (:fetcher github :repo "Fuco1/org-pretty-table")
+  :after org
+  :hook (org-mode . org-pretty-table-mode)
+  )
+
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
 (use-package evil-org

@@ -5,7 +5,7 @@
   :ensure nil
   :hook (after-init . winner-mode)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "w r" 'winner-redo
     "w u" 'winner-undo))
 

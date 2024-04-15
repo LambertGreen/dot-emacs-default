@@ -13,7 +13,7 @@
   (doom-modeline-minor-modes nil)
   ;; :hook (after-init . doom-modeline-mode)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
     "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
   :config
@@ -50,7 +50,7 @@
   (indent-guide-char "┊")   ; Useful characters: ·│┊┆╎
   ;; (indent-guide-recursive t)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
   :hook
   (prog-mode . indent-guide-mode)

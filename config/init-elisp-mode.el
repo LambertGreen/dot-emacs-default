@@ -3,7 +3,7 @@
 (use-package emacs-lisp-mode
   :ensure nil ; since emacs-lisp-mode is built-in
   :init
-  (lgreen/local-leader-keys
+  (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'emacs-lisp-mode-map
     "e" '(:ignore t :wk "eval")

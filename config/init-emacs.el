@@ -83,7 +83,7 @@
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "a" '(embark-act :wk "Actions")
     "A" '(embark-dwim :wk "Actions-dwim")
     "h B" '(embark-bindings :wk "Embark bindings"))
@@ -106,7 +106,7 @@
 (use-package helpful
   :after general
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "h f" '(helpful-callable :wk "Describe function")
     "h v" '(helpful-variable :wk "Describe variable")
     "h k" '(helpful-key :wk "Describe key")

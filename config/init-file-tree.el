@@ -2,7 +2,7 @@
 
 (use-package treemacs
   :config
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "o p" '(treemacs :wk "Open project tree")))
 
 (use-package treemacs-projectile

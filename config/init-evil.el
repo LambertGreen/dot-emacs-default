@@ -32,7 +32,7 @@
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-  (lgreen/local-leader-keys
+  (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
     "a" '(:ignore t :wk "Args")
     "a n" '(evil-forward-arg :wk "Forward arg")

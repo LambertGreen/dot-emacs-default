@@ -9,7 +9,7 @@
   (org-return-follows-link t)
   (org-blank-before-new-entry '((heading . true) (plain-list-item . true)))
   :init
-  (lgreen/local-leader-keys
+  (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
     "t" '(org-todo :wk "todo")

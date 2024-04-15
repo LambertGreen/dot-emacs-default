@@ -13,7 +13,7 @@
   (vertico-mode)
   :hook (minibuffer-setup . vertico-repeat-save)
   :config
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "'" '(vertico-repeat :wk "Repeat Search")))
 
 ;;; Marginalia
@@ -26,7 +26,7 @@
 (use-package consult
   :after general
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "b b" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")
@@ -56,7 +56,7 @@
 (use-package consult-todo
   :after (general consult hl-todo)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
 

@@ -5,6 +5,15 @@
 ;; Command the map
 (use-package general
   :demand t
+  :init
+  (defvar lgreen/general-leader-key "SPC"
+    "Leader key for Evil")
+  (defvar lgreen/general-leader-alt-key "M-SPC"
+    "Leader key for Emacs and Evil Insert states")
+  (defvar lgreen/general-local-leader-key "SPC m"
+    "Local leader key for major-mode specific commands")
+  (defvar lgreen/general-local-leader-alt-key "M-SPC m"
+    "Local leader key for major-mode specific commands for Emacs and Evil Insert states.")
   :config
   (general-evil-setup)
 
@@ -13,19 +22,20 @@
 
 ;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
-  (general-create-definer lgreen/leader-keys
+  (general-create-definer lgreen/leader-define-key
     :states '(normal insert visual emacs treemacs)
     :keymaps 'override
-    :prefix "SPC" ;; set leader
-    :non-normal-prefix "M-SPC") ;; access leader in insert mode
+    :prefix lgreen/general-leader-key
+    :non-normal-prefix lgreen/general-leader-alt-key)
 
 ;;;; Local-leader key definer
   ;; Define a local leader for all modes
-  (general-create-definer lgreen/local-leader-keys
-    :states 'normal
-    :prefix "SPC m")
+  (general-create-definer lgreen/local-leader-define-key
+    :states '(normal insert)
+    :prefix lgreen/general-local-leader-key
+    :non-normal-prefix lgreen/general-local-leader-alt-key)
 
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
 ;;;;; Top Level Keys
 ;;;;; --------------
     ":" '(execute-extended-command :wk "M-x")

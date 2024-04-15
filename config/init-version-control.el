@@ -9,7 +9,7 @@
   (magit-diff-refine-hunk t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "g g" '(magit-status :wk "Status")))
 
 ;;; Magit-Todos
@@ -17,7 +17,7 @@
 (use-package magit-todos
   :after magit
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "p t" '(magit-todos-list :wk "todos"))
   :config (magit-todos-mode 1))
 
@@ -26,7 +26,7 @@
 (use-package diff-hl
   :after magit
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "g p" '(diff-hl-previous-hunk :wk "Previous hunk")
     "g n" '(diff-hl-next-hunk :wk "Next hunk"))
   :config

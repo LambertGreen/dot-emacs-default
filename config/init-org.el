@@ -14,21 +14,19 @@
 ;; Line things up better
 (use-package org-indent
   :ensure nil
-  :after (org)
-  :hook
-  (org-mode . org-indent-mode))
+  :after org
+  :hook (org-mode . org-indent-mode))
 
 ;;; Org-Superstar
 ;; Holywood doing bullet time
 (use-package org-superstar
-  :after (org)
+  :after org
   :custom
   (org-superstar-leading-bullet ?\s)
   (org-superstar-leading-fallback ?\s)
   (org-hide-leading-stars nil)
   (org-indent-mode-turns-on-hiding-stars nil)
-  :hook
-  (org-mode . org-superstar-mode))
+  :hook (org-mode . org-superstar-mode))
 
 ;;; Org-Pretty-Table
 ;; Draw pretty unicode tables

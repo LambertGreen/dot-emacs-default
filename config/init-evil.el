@@ -11,6 +11,7 @@
   (evil-want-Y-yank-to-eol t)
   (evil-want-minibuffer t)
   (org-return-follows-link t)
+  (evil-undo-system 'undo-tree)
   :config
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)

@@ -120,10 +120,18 @@
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
+  :after evil
   :custom
-  (evil-undo-system 'undo-tree)
   (undo-tree-enable-undo-in-region t)
-  :init (global-undo-tree-mode))
+  (undo-tree-visualizer-diff t)
+  (undo-tree-visualizer-timestamps t)
+  :hook
+  (evil-local-mode . turn-on-undo-tree-mode)
+  :general
+  (:states 'normal
+	   "U" 'undo-tree-visualize)
+  :config
+  (global-undo-tree-mode))
 
 ;;; Smartparens
 ;; Automatically balance inserting of parens

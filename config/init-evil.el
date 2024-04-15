@@ -5,6 +5,8 @@
 ;; The root of all money-trees
 (use-package evil
   :custom
+  ;; we set the below since we also using evil-collection
+  ;; and it will take care of enabling evil keybindings
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)

@@ -197,5 +197,11 @@
 (use-package evil-visualstar
   :after evil)
 
+;; ;;; Evil-Owl
+;; TODO Evaluate evil-owl package
+;; ;;  the star of the show
+;; (use-package evil-owl
+;;   :after evil)
+
 ;;; _
 (provide 'init-evil)

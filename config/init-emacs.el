@@ -33,7 +33,8 @@
   :config (no-littering-theme-backups))
 
 ;;; Exec-Path-From-Shell
-;; Set a useful $PATH
+;; Get on the right $PATH
+;; TODO Read the docs (on github) on how to use this is a performant manner
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))

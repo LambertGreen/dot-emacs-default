@@ -1,5 +1,8 @@
 ;;; init-elisp.el --- -*- lexical-binding: t; -*-
 
+;;; Emacs-Lisp-Mode
+;; brace yourself!
+;; TODO configure typing quote symbol to not create a pair in elisp-mode
 (use-package emacs-lisp-mode
   :ensure nil ; since emacs-lisp-mode is built-in
   :init

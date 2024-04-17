@@ -202,6 +202,23 @@
 (use-package evil-visualstar
   :after evil)
 
+;;; Evil-Little-Word
+;; handle the sub ("little") words in CamelCase
+;; NOTE: The evil-little-words.el comes with predefined bindings that fail, and I
+;; had to manually comment them out.
+;; FIXME: Fork the evil-little-word github project with your fix
+(use-package evil-little-word
+  :ensure (:fetcher github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
+  :after evil
+  :config
+  (define-key evil-normal-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-normal-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "i M-w") 'evil-inner-little-word))
+
 ;; ;;; Evil-Owl
 ;; TODO Evaluate evil-owl package
 ;; ;;  the star of the show

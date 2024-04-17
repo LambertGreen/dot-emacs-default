@@ -67,10 +67,12 @@
 ;; Run actions on item on point
 (use-package embark
   :after (general)
-  :general
-  (evil-normal-state-map
-   "C-;"  'embark-act
-   "C-." 'embark-dwim)
+  ;; FIXME Find better embark keybinds as we want "C-;" for either completion or spelling
+  ;; Consider using "C-RET" instead
+  ;; :general
+  ;; (evil-normal-state-map
+  ;;  "C-;"  'embark-act
+  ;;  "C-." 'embark-dwim)
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)

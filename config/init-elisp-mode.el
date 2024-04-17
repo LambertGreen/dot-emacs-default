@@ -11,13 +11,8 @@
     "e d" 'eval-defun
     "e e" 'eval-last-sexp
     "e r" 'eval-region)
-  (defun lgreen/modify-syntax-entry-for-lisp()
-    "Adjust syntax table for lisp programming modes."
-    (modify-syntax-entry ?- "w")
-    (modify-syntax-entry ?/ "w"))
   :hook
-  (emacs-lisp-mode . hs-minor-mode)
-  (emacs-lisp-mode . lgreen/modify-syntax-entry-for-lisp))
+  (emacs-lisp-mode . hs-minor-mode))
 
 ;;; _
 (provide 'init-elisp-mode)

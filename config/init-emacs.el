@@ -152,5 +152,10 @@
 (use-package whitespace-cleanup-mode
   :hook (prog-mode . whitespace-cleanup-mode))
 
+;;; Ripgrep in Emacs
+;; Quote - What was lost is now found
+(use-package rg
+  :config (rg-enable-default-bindings))
+
 ;;; _
 (provide 'init-emacs)

@@ -32,12 +32,13 @@ This will toggle `flyspell-prog-mode' in `prog-mode' buffers, and
       (flyspell-mode 'toggle))))
 
 ;;; Flyspell-Correct
-;; can we fix it? Yes, we can!
+;; Fuzzy select the correction
+;; - Quote: Can we fix it? Yes, we can!
 (use-package flyspell-correct
   :after flyspell)
 
 ;;; Consult-Flyspell
-;;
+;; Fuzzy select the target
 (use-package consult-flyspell
   :ensure (:fetcher gitlab :repo "Olson/consult-flyspell")
   :after (flyspell flyspell-correct)

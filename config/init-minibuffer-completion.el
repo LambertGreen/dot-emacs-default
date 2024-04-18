@@ -51,8 +51,10 @@
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode))
 
-;;; Conslut-Todo
-;; TODO Consider removing in favor of `magit-todos`
+;;; Consult-Todo
+;; NOTE The directory and project based searches are done using a hard coded grep-command
+;; TODO Fork Consult-Todo and add ripgrep support.
+;; We can use `magit-todos` for project todos but I prefer the minibuffer interface (item counts, filtering, exporting)
 (use-package consult-todo
   :after (general consult hl-todo)
   :init

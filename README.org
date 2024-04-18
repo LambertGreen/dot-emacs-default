@@ -1,3 +1,4 @@
+
 #+TITLE: Lambert's Emacs Configuration
 #+AUTHOR: Lambert Green
 
@@ -14,17 +15,10 @@ I had started out using a literate configuration, but changed to a pure elisp co
 **** TODO Spell checker
 ***** Checkout this new high performance spell checker: https://github.com/minad/jinx
 
-**** TODO Progamming linters
+These are some misstypeded words
+**** TODO Programming linter
 
 *** TODO Port your Doom Org config
-*** DONE Update =window management= [2/2]
-
-**** DONE Provide a way to toggle window to max size
-I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configufation using ~winner-undo~ (~w u~).
-
-**** DONE Provide a way to undo maximize
-Used ~winnner-undo~
-
 *** TODO Add support for org checkboxes
 Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
 
@@ -42,6 +36,20 @@ Run the following:
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
 
+** Complete [3/3]
+*** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
+*** DONE Consider all ~:bind~ blocks for ~:general~ applicability
+*** DONE Double check Evil packages against Doom's list
+*** DONE Update =terminal= to open in bottom
+*** DONE Fix issue with =hl-todo= package not installing
+*** DONE Update =window management= [2/2]
+
+**** DONE Provide a way to toggle window to max size
+I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configufation using ~winner-undo~ (~w u~).
+
+**** DONE Provide a way to undo maximize
+Used ~winnner-undo~
+
 *** DONE Add local leader keybinds for ~org-mode-map~ [4/4]
 **** DONE Add ~clock~ section
 **** DONE Add ~dates~ section
@@ -57,9 +65,3 @@ Run the following:
 
 **** DONE Add bindings for ~org-schedule~ to navigate the calendar window
 DEADLINE: <2024-04-19 Fri> SCHEDULED: <2024-03-25 Mon>
-** Complete [3/3]
-*** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
-*** DONE Consider all ~:bind~ blocks for ~:general~ applicability
-*** DONE Double check Evil packages against Doom's list
-*** DONE Update =terminal= to open in bottom
-*** DONE Fix issue with =hl-todo= package not installing

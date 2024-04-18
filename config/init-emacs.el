@@ -25,6 +25,11 @@
   (tooltip-mode -1)           ; Disable tooltips
   (set-fringe-mode 3)        ; Give some breathing room
 
+  ;; Better find and grep
+  ;; TODO Investigation actual usage of these grep commands
+  (setq grep-command "rg --no-heading --color=never ")
+  (setq grep-find-command "rg --files ")
+
   (global-auto-revert-mode 1))
 
 ;;; No-Littering

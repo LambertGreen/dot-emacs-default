@@ -25,6 +25,9 @@
 ;; Making buffer completions nicer
 (use-package consult
   :after general
+  :bind
+  ([remap next-matching-history-element] . consult-history)
+  ([remap previous-matching-history-element] . consult-history)
   :init
   (lgreen/leader-define-key
     "b b" '(consult-buffer :wk "Switch buffer")

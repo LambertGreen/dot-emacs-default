@@ -2,7 +2,7 @@
 
 
 ;;; Vertico
-;; Veritcal completion UI
+;; Vertical completion UI
 (use-package vertico
   :custom
   ;; Different scroll margin
@@ -17,7 +17,7 @@
     "'" '(vertico-repeat :wk "Repeat Search")))
 
 ;;; Marginalia
-;; Annotaions for minibuffer completions
+;; Annotations for minibuffer completions
 (use-package marginalia
   :init (marginalia-mode))
 

@@ -33,7 +33,7 @@ This will toggle `flyspell-prog-mode' in `prog-mode' buffers, and
 
 ;;; Flyspell-Correct
 ;; Fuzzy select the correction
-;; - Quote: Can we fix it? Yes, we can!
+;; -- "Can we fix it? Yes, we can!"
 (use-package flyspell-correct
   :after flyspell)
 

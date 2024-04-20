@@ -65,5 +65,10 @@
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
 
+;;; Fussy
+;; Flex matching
+(use-package fussy
+  :config (push 'fussy completion-styles))
+
 ;;; _
 (provide 'init-minibuffer-completion)

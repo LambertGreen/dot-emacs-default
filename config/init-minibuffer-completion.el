@@ -19,7 +19,7 @@
 ;;; Marginalia
 ;; Annotations for minibuffer completions
 (use-package marginalia
-  :init (marginalia-mode))
+  :config (marginalia-mode))
 
 ;;; Consult
 ;; Making buffer completions nicer

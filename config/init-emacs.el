@@ -162,5 +162,9 @@
 (use-package rg
   :config (rg-enable-default-bindings))
 
+;;; Affe
+;; An elisp FZF clone
+(use-package affe)
+
 ;;; _
 (provide 'init-emacs)

@@ -60,7 +60,7 @@
   :hook (org-mode . org-indent-mode))
 
 ;;; Org-Superstar
-;; Holywood doing bullet time
+;; Hollywood doing bullet time
 (use-package org-superstar
   :after org
   :custom

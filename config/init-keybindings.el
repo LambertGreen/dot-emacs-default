@@ -101,6 +101,11 @@
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
     "w L" '(evil-window-move-far-right :wk "Move window far right")
 
+;;;;; Insert
+;;;;; ----
+    "i" '(:ignore t :wk "insert")
+    "i f" '(lgreen/insert-current-filename :wk "Current filename")
+
 ;;;;; Help
 ;;;;; ----
     "h" '(:ignore t :wk "help")

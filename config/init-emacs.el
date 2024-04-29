@@ -145,7 +145,12 @@
 ;;; Smartparens
 ;; Automatically balance inserting of parens
 (use-package smartparens
-  :config (smartparens-global-mode 1))
+  :after org
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  ;; Disable auto-pairing of single quotes in emacs-lisp-mode
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil))
 
 ;;; Dtrt-Indent
 ;; Guess file indentation

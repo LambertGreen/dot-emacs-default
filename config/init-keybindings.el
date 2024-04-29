@@ -126,8 +126,11 @@
 ;;;;; Quit
 ;;;;; ----
     "q" '(:ignore t :wk "quit")
-    "q q" '(save-buffers-kill-terminal :wk "Quit")))
+    "q q" '(save-buffers-kill-terminal :wk "Quit")
 
+;;;;; Org-Capture
+;;;;; -----------
+    "x" '(org-capture :wk "Capture")))
 
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.

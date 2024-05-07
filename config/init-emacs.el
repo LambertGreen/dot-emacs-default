@@ -176,5 +176,9 @@
 ;; An elisp FZF clone
 (use-package affe)
 
+;;; Nyan Mode
+(use-package nyan-mode
+  :init (nyan-mode))
+
 ;;; _
 (provide 'init-emacs)

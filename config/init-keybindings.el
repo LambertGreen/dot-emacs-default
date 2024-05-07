@@ -103,6 +103,7 @@
 
 ;;;;; Insert
 ;;;;; ----
+;;;;; TODO Add other useful bindings from Doom Emacs
     "i" '(:ignore t :wk "insert")
     "i f" '(lgreen/insert-current-filename :wk "Current filename")
 

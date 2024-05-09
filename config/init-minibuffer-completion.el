@@ -19,6 +19,8 @@
 ;;; Marginalia
 ;; Annotaions for minibuffer completions
 (use-package marginalia
+  :bind (:map minibuffer-local-map
+	 ("M-a" . marginalia-cycle))
   :init (marginalia-mode))
 
 ;;; Consult

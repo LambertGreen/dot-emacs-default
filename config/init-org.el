@@ -41,9 +41,14 @@
   ;; but this fails with treesit-mode undefined
   ;; (org-mode . (lambda () (treesit-mode -1)))
   :init
+  (general-def
+    :keymaps 'org-mode-map
+    [remap consult-imenu] 'consult-org-heading)
+
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
+
     "t" '(org-todo :wk "todo")
 
     "c" '(:ignore t :wk "clock")
@@ -70,7 +75,47 @@
     "b i" '(:ignore t :wk "insert")
     "b i c" 'org-table-insert-column
     "b i h" 'org-table-insert-hline
-    "b i r" 'org-table-insert-row)
+    "b i r" 'org-table-insert-row
+
+    "l" '(:ignore t :which-key "link")
+    "l i" 'org-id-store-link
+    "l l" 'org-insert-link
+    "l L" 'org-insert-all-links
+    "l s" 'org-store-link
+    "l S" 'org-insert-last-stored-link
+    "l t" 'org-toggle-link-display
+
+    "p" '(:ignore t :which-key "priority")
+    "p d" 'org-priority-down
+    "p p" 'org-priority
+    "p u" 'org-priority-up
+
+    "P" '(:ignore t :which-key "publish")
+    "P a" 'org-publish-all
+    "P f" 'org-publish-current-file
+    "P p" 'org-publish
+    "P P" 'org-publish-current-project
+    "P s" 'org-publish-sitemap
+
+    "r" '(:ignore t :which-key "refile")
+    "r r" 'org-refile
+    "r R" 'org-refile-reverse
+
+    "s" '(:ignore t :which-key "subtree")
+    "s a" 'org-toggle-archive-tag
+    "s b" 'org-tree-to-indirect-buffer
+    "s c" 'org-clone-subtree-with-time-shift
+    "s d" 'org-cut-subtree
+    "s h" 'org-promote-subtree
+    "s j" 'org-move-subtree-down
+    "s k" 'org-move-subtree-up
+    "s l" 'org-demote-subtree
+    "s n" 'org-narrow-to-subtree
+    "s r" 'org-refile
+    "s s" 'org-sparse-tree
+    "s A" 'org-archive-subtree
+    "s N" 'widen
+    "s S" 'org-sort)
 
   (defun lgreen/setup-org-calendar-navigation ()
     (general-def

@@ -2,13 +2,15 @@
 
 ;;; Treesit-Auto
 ;; Get all the langs
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  (treesit-font-lock-level 4)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+;; TODO Disabling for now due to a Treesitter performance issue
+;; showing up when loading org-agenda
+;; (use-package treesit-auto
+;;   :custom
+;;   (treesit-auto-install 'prompt)
+;;   (treesit-font-lock-level 4)
+;;   :config
+;;   (treesit-auto-add-to-auto-mode-alist 'all)
+;;   (global-treesit-auto-mode))
 
 ;;; Cmake
 ;; Let's make them cpp projects

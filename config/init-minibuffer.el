@@ -6,9 +6,9 @@
   :ensure nil
   :init
   (general-def :keymaps 'minibuffer-local-map
-	     :states '(normal insert)
-	     "C-n" 'next-line-or-history-element
-	     "C-p" 'previous-line-or-history-element)
+    :states '(normal insert)
+    "C-n" 'next-line-or-history-element
+    "C-p" 'previous-line-or-history-element)
 
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.

@@ -2,7 +2,7 @@
 
 
 ;;; Vertico
-;; Veritcal completion UI
+;; Vertical completion UI
 (use-package vertico
   :custom
   ;; Different scroll margin
@@ -13,11 +13,11 @@
   (vertico-mode)
   :hook (minibuffer-setup . vertico-repeat-save)
   :config
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "'" '(vertico-repeat :wk "Repeat Search")))
 
 ;;; Marginalia
-;; Annotaions for minibuffer completions
+;; Annotations for minibuffer completions
 (use-package marginalia
   :bind (:map minibuffer-local-map
 	 ("M-a" . marginalia-cycle))
@@ -27,8 +27,11 @@
 ;; Making buffer completions nicer
 (use-package consult
   :after general
+  :bind
+  ([remap next-matching-history-element] . consult-history)
+  ([remap previous-matching-history-element] . consult-history)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "b b" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")
@@ -53,12 +56,21 @@
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode))
 
+;;; Consult-Todo
+;; NOTE The directory and project based searches are done using a hard coded grep-command
+;; TODO Fork Consult-Todo and add ripgrep support.
+;; We can use `magit-todos` for project todos but I prefer the minibuffer interface (item counts, filtering, exporting)
 (use-package consult-todo
   :after (general consult hl-todo)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
+
+;;; Fussy
+;; Flex matching
+(use-package fussy
+  :config (push 'fussy completion-styles))
 
 ;;; _
 (provide 'init-minibuffer-completion)

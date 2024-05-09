@@ -25,7 +25,17 @@
   (tooltip-mode -1)           ; Disable tooltips
   (set-fringe-mode 3)        ; Give some breathing room
 
+  ;; Better find and grep
+  ;; TODO Investigation actual usage of these grep commands
+  (setq grep-command "rg --no-heading --color=never ")
+  (setq grep-find-command "rg --files ")
+
   (global-auto-revert-mode 1))
+
+;;; GCMH
+;; the GC magic hack
+(use-package gcmh
+  :hook (after-init . gcmh-mode))
 
 ;;; No-Littering
 ;; Let's put the mess in './var'
@@ -33,7 +43,8 @@
   :config (no-littering-theme-backups))
 
 ;;; Exec-Path-From-Shell
-;; Set a useful $PATH
+;; Get on the right $PATH
+;; TODO Read the docs (on github) on how to use this is a performant manner
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))
@@ -63,14 +74,17 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; TODO Refactor: move to a file called "actions"
 ;;; Embark
-;; Run actions on item on point
+;; Run actions on item at point or a minibuffer list item
 (use-package embark
   :after (general)
-  :general
-  (evil-normal-state-map
-   "C-;"  'embark-act
-   "C-." 'embark-dwim)
+  ;; FIXME Find better embark keybinds as we want "C-;" for either completion or spelling
+  ;; Consider using "C-RET" instead
+  ;; :general
+  ;; (evil-normal-state-map
+  ;;  "C-;"  'embark-act
+  ;;  "C-." 'embark-dwim)
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -83,7 +97,7 @@
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "a" '(embark-act :wk "Actions")
     "A" '(embark-dwim :wk "Actions-dwim")
     "h B" '(embark-bindings :wk "Embark bindings"))
@@ -106,7 +120,7 @@
 (use-package helpful
   :after general
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "h f" '(helpful-callable :wk "Describe function")
     "h v" '(helpful-variable :wk "Describe variable")
     "h k" '(helpful-key :wk "Describe key")
@@ -120,15 +134,28 @@
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
+  :after evil
   :custom
-  (evil-undo-system 'undo-tree)
   (undo-tree-enable-undo-in-region t)
-  :init (global-undo-tree-mode))
+  (undo-tree-visualizer-diff t)
+  (undo-tree-visualizer-timestamps t)
+  :hook
+  (evil-local-mode . turn-on-undo-tree-mode)
+  :general
+  (:states 'normal
+	   "U" 'undo-tree-visualize)
+  :config
+  (global-undo-tree-mode))
 
 ;;; Smartparens
 ;; Automatically balance inserting of parens
 (use-package smartparens
-  :config (smartparens-global-mode 1))
+  :after org
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  ;; Disable auto-pairing of single quotes in emacs-lisp-mode
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil))
 
 ;;; Dtrt-Indent
 ;; Guess file indentation
@@ -139,6 +166,19 @@
 ;; TODO Validate this package indeed works as advertised
 (use-package whitespace-cleanup-mode
   :hook (prog-mode . whitespace-cleanup-mode))
+
+;;; Ripgrep in Emacs
+;; -- "What was lost is now found"
+(use-package rg
+  :config (rg-enable-default-bindings))
+
+;;; Affe
+;; An elisp FZF clone
+(use-package affe)
+
+;;; Nyan Mode
+(use-package nyan-mode
+  :init (nyan-mode))
 
 ;;; _
 (provide 'init-emacs)

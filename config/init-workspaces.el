@@ -8,7 +8,7 @@
   (persp-suppress-no-prefix-key-warning t)
   :init
   (persp-mode)
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "p s" '(persp-switch :wk "Switch perspective")))
 
 ;;; Persp-Projectile

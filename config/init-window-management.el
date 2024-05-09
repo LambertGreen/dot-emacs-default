@@ -5,8 +5,9 @@
   :ensure nil
   :hook (after-init . winner-mode)
   :init
-  (lgreen/leader-keys
-    "w u" '(winner-undo :wk "Window undo")))
+  (lgreen/leader-define-key
+    "w r" 'winner-redo
+    "w u" 'winner-undo))
 
 ;;; _
 (provide 'init-window-management)

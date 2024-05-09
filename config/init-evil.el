@@ -5,12 +5,13 @@
 ;; The root of all money-trees
 (use-package evil
   :custom
+  ;; we set the below since we also using evil-collection
+  ;; and it will take care of enabling evil keybindings
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
-  (evil-want-minibuffer t)
-  (org-return-follows-link t)
+  (evil-undo-system 'undo-tree)
   :config
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
@@ -31,7 +32,7 @@
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-  (lgreen/local-leader-keys
+  (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
     "a" '(:ignore t :wk "Args")
     "a n" '(evil-forward-arg :wk "Forward arg")
@@ -42,9 +43,13 @@
 ;; keybind them all
 (use-package evil-collection
   :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  (evil-collection-calendar-setup-org-bindings t)
   :config
   (evil-collection-init)
   ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+  ;; TODO Validate that you really need to unmap these keys
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
@@ -196,6 +201,29 @@
 ;;  the star of the show
 (use-package evil-visualstar
   :after evil)
+
+;;; Evil-Little-Word
+;; handle the sub ("little") words in CamelCase
+;; NOTE: The evil-little-words.el comes with predefined bindings that fail, and I
+;; had to manually comment them out.
+;; FIXME: Fork the evil-little-word github project with your fix
+(use-package evil-little-word
+  :ensure (:fetcher github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
+  :after evil
+  :config
+  (define-key evil-normal-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-normal-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "M-w") 'evil-forward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "M-b") 'evil-backward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "i M-w") 'evil-inner-little-word))
+
+;; ;;; Evil-Owl
+;; TODO Evaluate evil-owl package
+;; ;;  the star of the show
+;; (use-package evil-owl
+;;   :after evil)
 
 ;;; _
 (provide 'init-evil)

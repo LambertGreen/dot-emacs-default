@@ -23,7 +23,7 @@
      (or (string-prefix-p "~/dev/work/_bazel/" project-root)
 	 (string-prefix-p "/usr/lib/node_modules/" project-root))))
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "p p" '(projectile-switch-project :wk "Switch project")
     "p f" '(projectile-find-file :wk "Find file in project")
     "p d" '(projectile-dired :wk "Dired in project")

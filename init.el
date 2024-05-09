@@ -21,6 +21,7 @@
 (require 'init-file-tree)
 (require 'init-terminal)
 (require 'init-completion)
+(require 'init-spellchecking)
 (require 'init-folding)
 (require 'init-snippets)
 (require 'init-org)

@@ -5,27 +5,37 @@
 ;; Command the map
 (use-package general
   :demand t
+  :init
+  (defvar lgreen/general-leader-key "SPC"
+    "Leader key for Evil")
+  (defvar lgreen/general-leader-alt-key "M-SPC"
+    "Leader key for Emacs and Evil Insert states")
+  (defvar lgreen/general-local-leader-key "SPC m"
+    "Local leader key for major-mode specific commands")
+  (defvar lgreen/general-local-leader-alt-key "M-SPC m"
+    "Local leader key for major-mode specific commands for Emacs and Evil Insert states.")
   :config
   (general-evil-setup)
 
-  ;; BUG Not working for me
+  ;; TODO Is this needed or taken care of by evil-collection?
   ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
-  (general-create-definer lgreen/leader-keys
+  (general-create-definer lgreen/leader-define-key
     :states '(normal insert visual emacs treemacs)
     :keymaps 'override
-    :prefix "SPC" ;; set leader
-    :non-normal-prefix "M-SPC") ;; access leader in insert mode
+    :prefix lgreen/general-leader-key
+    :non-normal-prefix lgreen/general-leader-alt-key)
 
 ;;;; Local-leader key definer
   ;; Define a local leader for all modes
-  (general-create-definer lgreen/local-leader-keys
-    :states 'normal
-    :prefix "SPC m")
+  (general-create-definer lgreen/local-leader-define-key
+    :states '(normal insert)
+    :prefix lgreen/general-local-leader-key
+    :non-normal-prefix lgreen/general-local-leader-alt-key)
 
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
 ;;;;; Top Level Keys
 ;;;;; --------------
     ":" '(execute-extended-command :wk "M-x")
@@ -91,6 +101,12 @@
     "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
     "w L" '(evil-window-move-far-right :wk "Move window far right")
 
+;;;;; Insert
+;;;;; ----
+;;;;; TODO Add other useful bindings from Doom Emacs
+    "i" '(:ignore t :wk "insert")
+    "i f" '(lgreen/insert-current-filename :wk "Current filename")
+
 ;;;;; Help
 ;;;;; ----
     "h" '(:ignore t :wk "help")
@@ -111,8 +127,11 @@
 ;;;;; Quit
 ;;;;; ----
     "q" '(:ignore t :wk "quit")
-    "q q" '(save-buffers-kill-terminal :wk "Quit")))
+    "q q" '(save-buffers-kill-terminal :wk "Quit")
 
+;;;;; Org-Capture
+;;;;; -----------
+    "x" '(org-capture :wk "Capture")))
 
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.

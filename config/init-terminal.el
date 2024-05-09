@@ -9,7 +9,7 @@
   :custom
   (vterm-toggle-fullscreen-p nil)
   :init
-  (lgreen/leader-keys
+  (lgreen/leader-define-key
     "o t" '(vterm-toggle :wk "Open vterm"))
   :config
   (add-to-list 'display-buffer-alist

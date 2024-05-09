@@ -4,31 +4,74 @@
 This is my personal Emacs configuration.
 
 I had started out using a literate configuration, but changed to a pure elisp config for the following reasons:
- - I did not end up needing an abundance comments
+ - I did not end up needing an abundance of comments
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in elisp mode makes code execution and debugging easier
-
+   
 * TODOs
-** Open [0/4]
-*** TODO Add checkers [0/0]
-**** [ ] Spell checker
+** Open [1/6]
+*** TODO Add checkers [0/2]
+**** TODO Spell checker
+***** Checkout this new high performance spell checker: https://github.com/minad/jinx
 
-**** [ ] Progamming linters
+These are some misstypeded words
+**** TODO Programming linter
 
-*** TODO Port your Doom Org config
-*** TODO Update =window management= [1/2]
+*** STRT Port your Doom Org config
+- State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
-**** TODO Provide a way to toggle window to max size
-
-**** DONE Provide a way to undo maximize
-Used ~winnner-undo~
-
+*** DONE A new task for testing
+CLOSED: [2024-04-28 Sun 22:00]
+- State "DONE"       from "STRT"       [2024-04-28 Sun 22:00]
+- State "STRT"       from "HOLD"       [2024-04-28 Sun 22:00]
+- State "HOLD"       from "STRT"       [2024-04-28 Sun 22:00] \\
+  Just testing things
+- State "STRT"       from "TODO"       [2024-04-28 Sun 22:00]
+- State "TODO"       from              [2024-04-28 Sun 21:59]
 *** TODO Add support for org checkboxes
 Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
 
-** Complete [3/3]
+*** TODO Performance analyze Emacs startup
+Run the following:
+#+begin_src elisp
+(use-package-report)
+#+end_src
+
+#+RESULTS:
+: #<window 11 on *use-package statistics*>
+
+ + We see ~exec-path-from-shell~ is the long pole: 3 seconds
+
+*** TODO Prettify =org-agenda=
++ https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
+
+** Complete [7/7]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list
 *** DONE Update =terminal= to open in bottom
 *** DONE Fix issue with =hl-todo= package not installing
+*** DONE Update =window management= [2/2]
+
+**** DONE Provide a way to toggle window to max size
+I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configufation using ~winner-undo~ (~w u~).
+
+**** DONE Provide a way to undo maximize
+Used ~winnner-undo~
+
+*** DONE Add local leader keybinds for ~org-mode-map~ [4/4]
+**** DONE Add ~clock~ section
+**** DONE Add ~dates~ section
+**** DONE Add ~tables~ section
+***** Another heading
+|-------+-------+-------+-------|
+| col1  | col2  | col3  | col4  |
+|-------+-------+-------+-------|
+| val11 | val12 | val13 | val14 |
+| val21 | val22 | val23 | val24 |
+| val31 | val32 | val33 | val34 |
+| val41 | val42 | val43 | val44 |
+
+**** DONE Add bindings for ~org-schedule~ to navigate the calendar window
+DEADLINE: <2024-04-19 Fri> SCHEDULED: <2024-03-25 Mon>
+

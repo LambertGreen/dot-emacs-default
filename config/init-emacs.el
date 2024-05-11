@@ -13,8 +13,7 @@
 
   :config
   ;; Set custom file so that customizations are not written here
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (load custom-file)
+  (setq custom-file (make-temp-file "emacs-custom"))
 
   ;; Font
   (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)

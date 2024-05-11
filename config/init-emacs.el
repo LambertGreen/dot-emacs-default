@@ -131,21 +131,6 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;;; Undo-Tree
-;; "What good is a mind if you can't change it"
-(use-package undo-tree
-  :after evil
-  :custom
-  (undo-tree-enable-undo-in-region t)
-  (undo-tree-visualizer-diff t)
-  (undo-tree-visualizer-timestamps t)
-  :hook
-  (evil-local-mode . turn-on-undo-tree-mode)
-  :general
-  (:states 'normal
-	   "U" 'undo-tree-visualize)
-  :config
-  (global-undo-tree-mode))
 
 ;;; Smartparens
 ;; Automatically balance inserting of parens

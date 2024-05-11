@@ -7,6 +7,7 @@
 (require 'init-keybindings)
 (require 'init-evil)
 (require 'init-emacs)
+(require 'init-undo)
 (require 'init-minibuffer)
 (require 'init-minibuffer-completion)
 (require 'init-window-management)

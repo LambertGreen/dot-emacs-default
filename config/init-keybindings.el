@@ -116,6 +116,7 @@
 ;;;;; Open
 ;;;;; ----
     "o" '(:ignore t :wk "open")
+    "o s" '(scratch-buffer :wk "Scratch buffer")
 
 ;;;;; Toggles
 ;;;;; -------

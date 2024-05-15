@@ -7,11 +7,9 @@
 ;; short and sweet
 (use-package dabbrev
   :ensure nil
-  ;; TODO Need to find another binding since we are taking "C-;" for flyspell
-  ;; :general
-  ;; (evil-insert-state-map
-  ;;  "C-;" 'dabbrev-expand)
-  )
+  :bind (
+	 ("C-;" . dabbrev-expand)
+	 ("C-/" . dabbrev-completion)))
 
 ;;; Company
 ;; not a crowd

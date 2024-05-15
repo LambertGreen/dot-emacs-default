@@ -17,6 +17,11 @@
 	   "z =" 'ispell-word
 	   "z g" 'flyspell-buffer)
   :config
+  (general-def
+    :keymaps 'flyspell-mode-map
+    "C-;" nil  ; Unbind the old key
+    "C-," 'flyspell-correct-wrapper)
+
   (lgreen/leader-define-key
     "t s" '(lgreen/toggle-flyspell-mode :wk "Toggle spellcheck"))
 

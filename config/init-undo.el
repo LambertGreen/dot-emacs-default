@@ -16,6 +16,8 @@
   :general
   (:states 'normal
 	   "U" 'undo-tree-visualize)
+  :bind (:map undo-tree-map
+	   ("C-/" . nil))
   :config
   (global-undo-tree-mode))
 ;;; _

@@ -44,8 +44,10 @@ This will toggle `flyspell-prog-mode' in `prog-mode' buffers, and
 
 ;;; Consult-Flyspell
 ;; Fuzzy select the target
+;; FIXME Consult-flyspell is disabled due to Elpaca install issue
 (use-package consult-flyspell
   :ensure (:fetcher gitlab :repo "Olson/consult-flyspell")
+  :disabled t
   :after (flyspell flyspell-correct)
   :init
   ;; NOTE I had issues setting this up the usual way i.e. using `:custom` and

@@ -234,5 +234,12 @@
 ;; (use-package org-checklist
 ;;   :after org)
 
+
+;;; Org-Roam
+;; Knowledge management system... did you not know?
+(use-package org-roam
+  :after org
+  :custom (org-roam-directory "~/dev/my/org/roam"))
+
 ;;; _
 (provide 'init-org)

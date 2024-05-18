@@ -117,7 +117,6 @@
     "s A" 'org-archive-subtree
     "s N" 'widen
     "s S" 'org-sort)
-
   (defun lgreen/setup-org-calendar-navigation ()
     (general-def
       :keymaps 'org-read-date-minibuffer-local-map
@@ -126,7 +125,6 @@
       "C-j" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-week 1)))
       "C-l" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-day 1)))
       "C-h" (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-day 1)))))
-
   :hook (org-mode . lgreen/setup-org-calendar-navigation)
   :config
   (org-load-modules-maybe t)
@@ -170,7 +168,7 @@
 )
 
 ;;; Evil-Org-Agenda
-;; making evil plans
+;; Making evil plans
 ;; NOTE The `SPC' key gets overridden. I tried without sufficient success
 ;; to bring back `SPC' as leader key, but it never worked 100% consistently
 ;; and so I finally decided to rather keep a simpler config, and just not

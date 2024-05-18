@@ -233,12 +233,33 @@
 ;; (use-package org-checklist
 ;;   :after org)
 
-
 ;;; Org-Roam
 ;; Knowledge management system... did you not know?
 (use-package org-roam
   :after org
-  :custom (org-roam-directory "~/dev/my/org/roam"))
+  :custom (org-roam-directory "~/dev/my/org/roam")
+  :init
+  (lgreen/local-leader-define-key
+    :states 'normal
+    :keymaps 'org-mode-map
+    "m" '(:ignore t :which-key "roam")
+    "m i" 'org-roam-node-insert
+    "m f" 'org-roam-node-find
+    "m m" 'org-roam-buffer-toggle
+
+    "m d" '(:ignore t :which-key "dailies")
+    "m d d" 'org-roam-dailies-goto-date
+    "m d t" 'org-roam-dailies-goto-today
+    "m d y" 'org-roam-dailies-goto-yesterday
+
+    "m o" '(:ignore t :which-key "node properties")
+    "m o a" 'org-roam-alias-add
+    "m o A" 'org-roam-alias-remove
+    "m o r" 'org-roam-ref-add
+    "m o R" 'org-roam-ref-remove
+    "m o t" 'org-roam-tag-add
+    "m o T" 'org-roam-tag-remove
+    ))
 
 ;;; Org-Roam-Ui
 ;; Seeing is believing

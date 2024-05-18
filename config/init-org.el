@@ -244,7 +244,8 @@
 ;; Seeing is believing
 (use-package org-roam-ui
   :after org-roam
-  :commands (org-roam-ui-mode))
+  :commands (org-roam-ui-mode)
+  :config (org-roam-db-autosync-mode))
 
 ;;; _
 (provide 'init-org)

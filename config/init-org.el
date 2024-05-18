@@ -41,10 +41,11 @@
   ;; but this fails with treesit-mode undefined
   ;; (org-mode . (lambda () (treesit-mode -1)))
   :init
+  (lgreen/leader-define-key
+    "o a" '(org-agenda :wk "Open agenda"))
   (general-def
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading)
-
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map

@@ -240,5 +240,11 @@
   :after org
   :custom (org-roam-directory "~/dev/my/org/roam"))
 
+;;; Org-Roam-Ui
+;; Seeing is believing
+(use-package org-roam-ui
+  :after org-roam
+  :commands (org-roam-ui-mode))
+
 ;;; _
 (provide 'init-org)

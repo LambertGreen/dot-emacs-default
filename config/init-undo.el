@@ -5,7 +5,8 @@
 (use-package undo-tree
   :after (evil no-littering)
   :custom
-  (undo-tree-auto-save-history t)
+  ;; Disabling for now because it is a pretty noisy option
+  ;; (undo-tree-auto-save-history t)
   (undo-tree-enable-undo-in-region t)
   (undo-tree-visualizer-diff t)
   (undo-tree-visualizer-timestamps t)
@@ -20,5 +21,6 @@
 	   ("C-/" . nil))
   :config
   (global-undo-tree-mode))
+
 ;;; _
 (provide 'init-undo)

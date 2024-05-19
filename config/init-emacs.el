@@ -64,6 +64,7 @@
 ;; Persist history over Emacs restarts.
 (use-package savehist
   :ensure nil
+  :after no-littering
   :init (savehist-mode))
 
 ;;; Orderless
@@ -73,17 +74,19 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;;; Embark
+;; Take action for your responsibility
 ;; TODO Refactor: move to a file called "actions"
 ;;; Embark
 ;; Run actions on item at point or a minibuffer list item
 (use-package embark
-  :after (general)
+  :after general
   ;; FIXME Find better embark keybinds as we want "C-;" for either completion or spelling
   ;; Consider using "C-RET" instead
-  ;; :general
-  ;; (evil-normal-state-map
-  ;;  "C-;"  'embark-act
-  ;;  "C-." 'embark-dwim)
+  :general
+  (evil-normal-state-map
+   "C-'"  'embark-act
+   "C-." 'embark-dwim)
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -95,7 +98,6 @@
 
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
-
   (lgreen/leader-define-key
     "a" '(embark-act :wk "Actions")
     "A" '(embark-dwim :wk "Actions-dwim")
@@ -129,7 +131,6 @@
 ;; Highlight delimiters according to their depth
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
 
 ;;; Smartparens
 ;; Automatically balance inserting of parens

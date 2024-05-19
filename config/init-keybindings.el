@@ -59,6 +59,10 @@
 ;;;;; ---------------
     "s" '(:ignore t :wk "search")
 
+;;;;; Check
+;;;;; ---------------
+    "c" '(:ignore t :wk "check")
+
 ;;;;; Projects
 ;;;;; --------
     "p" '(:ignore t :wk "project")

@@ -2,63 +2,34 @@
 
 ;; TODO Setup personal dictionary and project specific dictionary
 
-;;; Flyspell
-;; High flying spelling bees
+;;; Jinx
+;; Misspelled it first!
+;;
+;; This package has an external dependency i.e. the `enchant' library
+;; - install it using your package manager
 ;; Use cases:
 ;; - Common mistyped and misspelled words: hte (the), noone (none/noon)
-(use-package flyspell
-  :ensure nil
-  :after general
-  :hook
-  (text-mode . flyspell-mode)
-  (prog-mode . flyspell-prog-mode)
-  :general
-  (:states 'normal
-	   "z =" 'ispell-word
-	   "z g" 'flyspell-buffer)
-  :config
-  (general-def
-    :keymaps 'flyspell-mode-map
-    "C-;" nil  ; Unbind the old key
-    "C-," 'flyspell-correct-wrapper)
-
-  (lgreen/leader-define-key
-    "t s" '(lgreen/toggle-flyspell-mode :wk "Toggle spellcheck"))
-
-  (defun lgreen/toggle-flyspell-mode ()
-    "Toggle `flyspell-mode', respecting major mode.
-
-This will toggle `flyspell-prog-mode' in `prog-mode' buffers, and
-`flyspell-mode' everywhere else."
-    (interactive)
-    (if (and (derived-mode-p 'prog-mode)
-	     (not flyspell-mode))
-	(flyspell-prog-mode)
-      (flyspell-mode 'toggle))))
-
-;;; Flyspell-Correct
-;; Fuzzy select the correction
-;; -- "Can we fix it? Yes, we can!"
-(use-package flyspell-correct
-  :after flyspell)
-
-;;; Consult-Flyspell
-;; Fuzzy select the target
-;; FIXME Consult-flyspell is disabled due to Elpaca install issue
-(use-package consult-flyspell
-  :ensure (:fetcher gitlab :repo "Olson/consult-flyspell")
-  :disabled t
-  :after (flyspell flyspell-correct)
+(use-package jinx
+  :after (general evil-collection)
   :init
-  ;; NOTE I had issues setting this up the usual way i.e. using `:custom` and
-  ;; not using `require` directly in the hook.
-  (setq consult-flyspell-select-function 'flyspell-correct-at-point)
-  (setq consult-flyspell-set-point-after-word t)
-  (setq consult-flyspell-always-check-buffer t)
-  (general-def
-    :keymaps 'flyspell-mode-map
-    "C-;" 'consult-flyspell)
-  :hook (flyspell-mode . (lambda () (require 'consult-flyspell))))
+  (lgreen/leader-define-key
+    "t s" '(global-jinx-mode :wk "Toggle spellcheck")
+    "c s" '(:ingore :wk "Check spelling")
+    "c s s" 'jinx-correct
+    "c s a" 'jinx-correct-all
+    "c s n" 'jinx-next
+    "c s p" 'jinx-previous
+    )
+  :hook (emacs-startup . global-jinx-mode)
+  :bind
+  ([remap ispell-word] . 'jinx-correct)
+  ("C-," . 'jinx-correct)
+  :general
+  (:keymaps 'jinx-repeat-map
+	    :states '(normal insert visual)
+	    "C-j" 'jinx-next
+	    "C-k" 'jinx-previous)
+  )
 
 ;;; _
 (provide 'init-spellchecking)

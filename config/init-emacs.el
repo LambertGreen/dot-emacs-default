@@ -10,6 +10,7 @@
 
   (use-short-answers t)
   (auto-revert-check-vc-info t)
+  (global-auto-revert-non-file-buffers t)
 
   :config
   ;; Set custom file so that customizations are not written here

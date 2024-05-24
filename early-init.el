@@ -9,4 +9,4 @@
 ;; Restore `gc-cons-threshold'
 (add-hook 'after-init-hook
 	  (lambda ()
-	    (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))
+	    (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))))

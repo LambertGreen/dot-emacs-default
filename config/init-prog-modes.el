@@ -39,5 +39,9 @@
 ;; Baby org
 (use-package markdown-mode)
 
+;;; Groovy
+;; Get into the groove boy
+(use-package groovy-mode)
+
 ;;; _
 (provide 'init-prog-modes)

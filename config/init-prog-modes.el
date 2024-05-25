@@ -1,5 +1,16 @@
 ;;; init-prog-modes.el --- -*- lexical-binding: t; -*-
 
+;;; Lisp functions
+(use-package emacs
+  :ensure nil
+  :config
+  (defun lgreen/format-buffer ()
+    "Format buffer with eglot or apheleia."
+    (interactive)
+    (if (bound-and-true-p eglot--managed-mode)
+	(eglot-format-buffer)
+      (call-interactively #'apheleia-format-buffer))))
+
 ;;; Treesit-Auto
 ;; Get all the langs
 (use-package treesit-auto
@@ -9,6 +20,11 @@
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
+
+;;; Apheleia
+;; format code with minimal disruption
+(use-package apheleia
+  :config (apheleia-global-mode +1))
 
 ;;; Cmake
 ;; Let's make them cpp projects

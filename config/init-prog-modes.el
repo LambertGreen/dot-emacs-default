@@ -4,6 +4,12 @@
 (use-package emacs
   :ensure nil
   :config
+  (lgreen/local-leader-define-key
+    :keymaps 'prog-mode-map
+    "f" '(:ignore t :wk "format")
+    "f b" '(lgreen/format-buffer :wk "format buffer")
+    )
+
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
     (interactive)

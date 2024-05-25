@@ -8,6 +8,10 @@
     :keymaps 'prog-mode-map
     "f" '(:ignore t :wk "format")
     "f b" '(lgreen/format-buffer :wk "format buffer")
+    "x" '(:ignore t :wk "errors")
+    "x l" '(consult-flymake :wk "list errors")
+    "x p" '(flymake-goto-prev-error :wk "error previous")
+    "x n" '(flymake-goto-next-error :wk "error next")
     )
 
   (defun lgreen/format-buffer ()

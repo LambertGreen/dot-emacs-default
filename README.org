@@ -3,10 +3,10 @@
 
 This is my personal Emacs configuration.
 
-I had started out using a literate configuration, but changed to a pure elisp config for the following reasons:
+I had started out using a literate configuration, but changed to a pure =elisp= config for the following reasons:
  - I did not end up needing an abundance of comments
  - I prefer a modular config so that updates have more useful diffs
- - Working directly in ~elisp~ mode makes code execution and debugging easier
+ - Working directly in =elisp= mode makes code execution and debugging easier
    
 * TODOs
 ** Open [1/6]

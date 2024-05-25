@@ -10,11 +10,13 @@ I had started out using a literate configuration, but changed to a pure elisp co
    
 * TODOs
 ** Open [1/6]
-*** TODO Add checkers [0/2]
-**** TODO Spell checker
+*** TODO Add checkers [1/2]
+**** DONE Spell checker
+CLOSED: [2024-05-20 Mon 00:14]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-05-20 Mon 00:14]
+:END:
 ***** Checkout this new high performance spell checker: https://github.com/minad/jinx
-
-These are some misstypeded words
 **** TODO Programming linter
 
 *** STRT Port your Doom Org config

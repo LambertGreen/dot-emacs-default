@@ -7,6 +7,7 @@
   :custom
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
+  (org-startup-folded 'show3levels)
   (org-blank-before-new-entry '((heading . true) (plain-list-item . true)))
   (org-todo-keywords
    '((sequence
@@ -36,10 +37,7 @@
   ;; Log state changes into drawer
   (org-log-into-drawer t)
   (org-agenda-log-mode-items '(closed clock state))
-  ;; FIXME Tried using this to fix treesitter org-agenda performance issue
-  ;; :hook
-  ;; but this fails with treesit-mode undefined
-  ;; (org-mode . (lambda () (treesit-mode -1)))
+  :hook (org-mode . visual-line-mode)
   :init
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
@@ -270,6 +268,20 @@
   :after org-roam
   :commands (org-roam-ui-mode)
   :config (org-roam-db-autosync-mode))
+
+
+;;; Consult-Org-Roam
+;; TODO Evaluate this package
+;; Added this package primarily because when I tried adding
+;; an org-roam note, I was not getting any completion candidates in
+;; the minibuffer.  I do get them just fine in Doom Emacs. I should
+;; debug and better learn what is goind on rather than just relying
+;; on this package.
+(use-package consult-org-roam
+  :after org-roam
+  :init
+  (require 'consult-org-roam)
+  (consult-org-roam-mode 1))
 
 ;;; _
 (provide 'init-org)

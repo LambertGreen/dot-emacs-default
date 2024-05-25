@@ -10,6 +10,7 @@
 
   (use-short-answers t)
   (auto-revert-check-vc-info t)
+  (global-auto-revert-non-file-buffers t)
 
   :config
   ;; Set custom file so that customizations are not written here
@@ -33,7 +34,9 @@
 
 ;;; GCMH
 ;; the GC magic hack
+;; TODO Evaluate the final removal of this package
 (use-package gcmh
+  :disabled t
   :hook (after-init . gcmh-mode))
 
 ;;; No-Littering

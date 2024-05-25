@@ -45,7 +45,10 @@
     "o a" '(org-agenda :wk "Open agenda"))
   (general-def
     :keymaps 'org-mode-map
-    [remap consult-imenu] 'consult-org-heading)
+    [remap consult-imenu] 'consult-org-heading
+    "C-," nil
+    "C-'" nil
+    )
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map

@@ -4,6 +4,9 @@
 (use-package emacs
   :ensure nil
   :config
+  (lgreen/leader-define-key
+    "c f" '(lgreen/format-buffer :wk "format buffer"))
+
   (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
     "f" '(:ignore t :wk "format")
@@ -11,8 +14,7 @@
     "x" '(:ignore t :wk "errors")
     "x l" '(consult-flymake :wk "list errors")
     "x p" '(flymake-goto-prev-error :wk "error previous")
-    "x n" '(flymake-goto-next-error :wk "error next")
-    )
+    "x n" '(flymake-goto-next-error :wk "error next"))
 
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."

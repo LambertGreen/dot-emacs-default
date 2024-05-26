@@ -14,11 +14,11 @@
   :init
   (lgreen/leader-define-key
     "t s" '(global-jinx-mode :wk "Toggle spellcheck")
-    "c s" '(:ingore :wk "Check spelling")
-    "c s s" 'jinx-correct
-    "c s a" 'jinx-correct-all
-    "c s n" 'jinx-next
-    "c s p" 'jinx-previous
+    "x s" '(:ingore t :wk "spelling")
+    "x s s" '(jinx-correct :wk "correct")
+    "x s a" '(jinx-correct-all :wk "correct all")
+    "x s n" '(jinx-next :wk "correct-next")
+    "x s p" '(jinx-previous :wk "correct-previous")
     )
   :hook (emacs-startup . global-jinx-mode)
   :bind

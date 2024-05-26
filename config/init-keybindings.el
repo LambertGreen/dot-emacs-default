@@ -61,7 +61,7 @@
 
 ;;;;; Check
 ;;;;; ---------------
-    "c" '(:ignore t :wk "check")
+    "c" '(:ignore t :wk "code")
 
 ;;;;; Projects
 ;;;;; --------
@@ -134,9 +134,9 @@
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit")
 
-;;;;; Org-Capture
+;;;;; Checks
 ;;;;; -----------
-    "x" '(org-capture :wk "Capture")))
+    "x" '(:ignore t :wk "checks")))
 
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.

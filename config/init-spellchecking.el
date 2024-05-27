@@ -22,14 +22,7 @@
     "x s p" '(jinx-previous :wk "correct-previous"))
   :hook (emacs-startup . global-jinx-mode)
   :bind
-  ([remap ispell-word] . 'jinx-correct)
-  ("C-," . 'jinx-correct)
-  :general
-  (:keymaps 'jinx-mode-map
-	    :states '(normal insert visual)
-	    "C-j" 'jinx-next
-	    "C-k" 'jinx-previous)
-  )
+  ([remap ispell-word] . 'jinx-correct))
 
 ;;; _
 (provide 'init-spellchecking)

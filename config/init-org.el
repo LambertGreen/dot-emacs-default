@@ -8,7 +8,8 @@
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
   (org-startup-folded 'show3levels)
-  (org-blank-before-new-entry '((heading . true) (plain-list-item . true)))
+  (org-blank-before-new-entry '((heading . t)
+				(plain-list-item . auto)))
   (org-todo-keywords
    '((sequence
       "TODO(t!)"  ; A task that needs doing & is ready to do
@@ -155,8 +156,7 @@
 	     "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	    ("L" "Protocol Link" entry
 	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %? [[%:link][%:description]] \nCaptured On: %U")))
-  )
+	     "* %? [[%:link][%:description]] \nCaptured On: %U"))))
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
@@ -165,8 +165,7 @@
   :hook ((org-mode . evil-org-mode)
 	 (evil-org-mode . evil-org-set-key-theme))
   :config
-  (evil-org-set-key-theme '(textobjects insert navigation additional shift leader todo heading))
-)
+  (evil-org-set-key-theme '(textobjects insert navigation additional shift leader todo heading)))
 
 ;;; Evil-Org-Agenda
 ;; Making evil plans

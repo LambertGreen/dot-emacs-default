@@ -80,8 +80,6 @@
 ;;; Embark
 ;; Take action for your responsibility
 ;; TODO Refactor: move to a file called "actions"
-;;; Embark
-;; Run actions on item at point or a minibuffer list item
 (use-package embark
   :after general
   ;; FIXME Find better embark keybinds as we want "C-;" for either completion or spelling

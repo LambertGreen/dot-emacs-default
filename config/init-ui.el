@@ -95,6 +95,8 @@
    (pulsar-pulse-functions
     '(isearch-repeat-forward
       isearch-repeat-backward
+      evil-search-next
+      evil-search-previous
       evil-ex-search-next
       evil-ex-search-previous
       evil-ex-search-forward

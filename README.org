@@ -3,33 +3,15 @@
 
 This is my personal Emacs configuration.
 
-I had started out using a literate configuration, but changed to a pure elisp config for the following reasons:
+I had started out using a literate configuration, but changed to a pure =elisp= config for the following reasons:
  - I did not end up needing an abundance of comments
  - I prefer a modular config so that updates have more useful diffs
- - Working directly in ~elisp~ mode makes code execution and debugging easier
+ - Working directly in =elisp= mode makes code execution and debugging easier
    
 * TODOs
-** Open [1/6]
-*** TODO Add checkers [0/2]
-**** TODO Spell checker
-***** Checkout this new high performance spell checker: https://github.com/minad/jinx
-
-These are some misstypeded words
-**** TODO Programming linter
-
+** Open [0/3]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
-
-*** DONE A new task for testing
-CLOSED: [2024-04-28 Sun 22:00]
-- State "DONE"       from "STRT"       [2024-04-28 Sun 22:00]
-- State "STRT"       from "HOLD"       [2024-04-28 Sun 22:00]
-- State "HOLD"       from "STRT"       [2024-04-28 Sun 22:00] \\
-  Just testing things
-- State "STRT"       from "TODO"       [2024-04-28 Sun 22:00]
-- State "TODO"       from              [2024-04-28 Sun 21:59]
-*** TODO Add support for org checkboxes
-Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
 
 *** TODO Performance analyze Emacs startup
 Run the following:
@@ -45,7 +27,7 @@ Run the following:
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
 
-** Complete [7/7]
+** Complete [9/9]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list
@@ -75,3 +57,37 @@ Used ~winnner-undo~
 **** DONE Add bindings for ~org-schedule~ to navigate the calendar window
 DEADLINE: <2024-04-19 Fri> SCHEDULED: <2024-03-25 Mon>
 
+*** DONE Add support for org checkboxes
+CLOSED: [2024-05-24 Fri 21:58]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-05-24 Fri 21:58]
+:END:
+Currently the rollup cookies are not working for checkboxes.  I think you have to define checkboxes as =todo= items.
+
+**** Testing Rollup [3/3]
+***** [X] Checkbox one
+CLOSED: [2024-05-24 Fri 21:58]
+
+***** [X] Checkbox two
+CLOSED: [2024-05-24 Fri 21:58]
+
+***** [X] Checbox three
+CLOSED: [2024-05-24 Fri 21:58]
+
+*** DONE Add checkers [2/2]
+CLOSED: [2024-05-25 Sat 12:36]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-05-25 Sat 12:36]
+:END:
+**** DONE Spell checker
+CLOSED: [2024-05-20 Mon 00:14]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-05-20 Mon 00:14]
+:END:
+***** Checkout this new high performance spell checker: https://github.com/minad/jinx
+**** DONE Programming linters
+CLOSED: [2024-05-25 Sat 12:36]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-05-25 Sat 12:36]
+:END:
+Added via =Flymake= and =Eglot= support.

@@ -43,6 +43,8 @@
       (if (file-exists-p projectile-file)
 	  (cons 'vc dir)
 	nil)))
+  :custom
+  (project-vc-merge-submodules nil)
   :init
   (lgreen/leader-define-key
     "p p" '(project-switch-project :wk "Switch project")

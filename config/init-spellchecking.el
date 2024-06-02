@@ -14,7 +14,6 @@
   :init
   (lgreen/leader-define-key
     "t s" '(global-jinx-mode :wk "Toggle spellcheck")
-    "$" '(jinx-correct :wk "Spell Check")
     "x s" '(:ingore t :wk "spelling")
     "x s s" '(jinx-correct :wk "correct")
     "x s a" '(jinx-correct-all :wk "correct all")
@@ -22,7 +21,8 @@
     "x s p" '(jinx-previous :wk "correct-previous"))
   :hook (emacs-startup . global-jinx-mode)
   :bind
-  ([remap ispell-word] . 'jinx-correct))
+  ([remap ispell-word] . 'jinx-correct)
+  ("C-," . 'jinx-correct))
 
 ;;; _
 (provide 'init-spellchecking)

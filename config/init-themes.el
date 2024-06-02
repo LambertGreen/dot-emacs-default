@@ -6,9 +6,6 @@
   ;; Options: 'mocha, 'frappe, 'latte, 'macchiato
   (catppuccin-flavor 'mocha))
 
-;;; Kanagawa theme
-(use-package kanagawa-theme)
-
 ;;; Doom Themes
 (use-package doom-themes
   :config

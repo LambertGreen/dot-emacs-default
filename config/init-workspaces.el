@@ -47,8 +47,8 @@
 ;; Put it on my tab
 (use-package tab-bar
   :ensure nil
+  :hook (after-init . tab-bar-mode)
   :custom
-  (tab-bar-close-button-show nil)
   (tab-bar-format '(tab-bar-format-tabs tab-bar-separator)))
 
 ;;; Tabspaces

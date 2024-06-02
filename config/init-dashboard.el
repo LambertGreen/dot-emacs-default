@@ -9,7 +9,8 @@
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  (dashboard-projects-switch-function 'projectile-persp-switch-project)
+  ;;TODO Remove if finally moving from projectile to projectl.el
+  ;; (dashboard-projects-switch-function 'projectile-persp-switch-project)
   (dashboard-items '((recents   . 5)
 		     (projects  . 5)
 		     (bookmarks . 5)

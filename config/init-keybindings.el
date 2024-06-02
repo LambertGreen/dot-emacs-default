@@ -39,7 +39,7 @@
 ;;;;; Top Level Keys
 ;;;;; --------------
     ":" '(execute-extended-command :wk "M-x")
-    "SPC" '(projectile-find-file :wk "Find file in project")
+    "SPC" '(project-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
     "u" '(universal-argument :wk "Universal Argument")

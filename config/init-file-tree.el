@@ -3,6 +3,9 @@
 ;;; Treemacs
 ;; Squintting at the forest
 (use-package treemacs
+  :after general
+  :custom
+  (treemacs-project-follow-mode t)
   :config
   (lgreen/leader-define-key
     "o p" '(treemacs :wk "Open project tree")))

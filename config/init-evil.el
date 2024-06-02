@@ -75,6 +75,7 @@
   :custom
   (evil-escape-key-sequence "jk")
   (evil-escape-delay 0.2)
+  (evil-escape-excluded-major-modes '(dired-mode treemacs-mode evil-visual-mode))
   :config
   (evil-escape-mode))
 

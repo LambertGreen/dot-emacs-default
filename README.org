@@ -7,7 +7,36 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
  - I did not end up needing an abundance of comments
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in =elisp= mode makes code execution and debugging easier
-   
+ 
+* Favorite Themes
+** Doom-One
+*** Pros
++ Simply the best all round theme!
++ Great light/dark modes
+
+*** Cons
++ Need something different every now and then
+
+** Doom-Badger
+*** Pros
+**** =Star Wars= type vibe
+Has warm ~blues~, ~browns~
+
+**** =Programming modes=
+***** Looks good in all programming modes
+***** Has ~green~ strings
+/Example:/
+#+begin_src emacs-lisp
+(messasge "I like green strings")
+#+end_src
+
+**** =Org mode=
+***** TODO keywords have a traffic light color
+***** DONE key word has a nice strike-out
+
+*** Cons
++ Does not come with a light mode version
+
 * TODOs
 ** Open [0/3]
 *** STRT Port your Doom Org config

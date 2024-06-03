@@ -54,7 +54,9 @@
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil)))
+    ;; We need to disable the below to have 'C-i' bound to `evil-jump-forward'
+    ;; (define-key evil-motion-state-map (kbd "TAB") nil)
+    ))
 
 ;;; Evil-Commentary
 ;; no pleading the fifth here
@@ -75,6 +77,7 @@
   :custom
   (evil-escape-key-sequence "jk")
   (evil-escape-delay 0.2)
+  (evil-escape-excluded-major-modes '(dired-mode treemacs-mode evil-visual-mode))
   :config
   (evil-escape-mode))
 
@@ -161,42 +164,39 @@
     "x" (evil-textobj-tree-sitter-get-textobj "conditional.outer")
     "c" (evil-textobj-tree-sitter-get-textobj "class.outer")
     ;; "b" (evil-textobj-tree-sitter-get-textobj "block.outer")
-    "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer")
-    )
+    "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
   (evil-define-key nil evil-inner-text-objects-map
     "f" (evil-textobj-tree-sitter-get-textobj "function.inner")
     "l" (evil-textobj-tree-sitter-get-textobj "loop.inner")
     "x" (evil-textobj-tree-sitter-get-textobj "conditional.inner")
     "c" (evil-textobj-tree-sitter-get-textobj "class.inner")
     ;; "b" (evil-textobj-tree-sitter-get-textobj "block.inner")
-    "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner")
-    )
-
-    (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
-      "]f" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "function.outer"))
-      "[f" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "function.outer" t))
-      "]F" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
-      "[F" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
-      "]c" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "class.outer"))
-      "[c" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "class.outer" t))
-      "]C" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
-      "[C" (lambda ()
-	(interactive)
-	(evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+    "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
+  (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
+    "]f" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "function.outer"))
+    "[f" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+    "]F" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+    "[F" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+    "]c" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "class.outer"))
+    "[c" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+    "]C" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+    "[C" (lambda ()
+	   (interactive)
+	   (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
 
 ;;; Evil-Visualstar
 ;;  the star of the show

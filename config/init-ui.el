@@ -15,13 +15,22 @@
   :init
   (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
+    "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline")
     "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
   :config
   (doom-modeline-mode 1)
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
-    (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding))))
+    (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding)))
+  (defun lgreen/toggle-mode-line ()
+    "Toggle the visibility of the mode line."
+    (interactive)
+    (if (eq mode-line-format nil)
+	(setq mode-line-format (default-value 'mode-line-format))
+      (setq mode-line-format nil))
+    (force-mode-line-update)
+    (redraw-display)))
 
 ;;; HL-Todo
 ;; Highlight TODO's
@@ -47,24 +56,27 @@
 ;; Know what vertical you are on
 (use-package indent-guide
   :custom
-  (indent-guide-char "┊")   ; Useful characters: ·│┊┆╎
   ;; (indent-guide-recursive t)
+  (indent-guide-char "·")   ; Useful characters: ·│┊┆╎
   :init
   (lgreen/leader-define-key
     "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
-  :hook
-  (prog-mode . indent-guide-mode)
+  :hook (prog-mode . indent-guide-mode)
   :config
-  ;; Set the indent-guide color to match the comment color of the current theme
-  (set-face-foreground 'indent-guide-face
-		       (face-foreground 'font-lock-comment-face))
-
   (defun lgreen/toggle-indent-guide ()
     "Toggle indent guides in programming modes."
     (interactive)
     (if (derived-mode-p 'prog-mode)
 	(indent-guide-mode (if indent-guide-mode -1 1))
-      (message "Not in a programming mode!"))))
+      (message "Not in a programming mode!")))
+  (defun lgreen/set-face-indent-guide (&rest _)
+    "Set the indent-guide color to match the comment color of the current theme"
+    (set-face-attribute 'indent-guide-face nil
+			:inherit 'font-lock-comment-face
+			:foreground 'unspecified
+			:background 'unspecified))
+  (advice-add 'load-theme
+	      :after 'lgreen/set-face-indent-guide))
 
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes
@@ -155,7 +167,7 @@
 ;; Give yourself some breathing room
 (use-package perfect-margin
   :custom
-  (perfect-margin-visible-width 128)
+  (perfect-margin-visible-width 130)
   :config
   ;; enable perfect-mode
   (perfect-margin-mode t)
@@ -165,9 +177,9 @@
   ;; (setq perfect-margin-ignore-regexps nil)
   ;; add additinal bding on margin area
   (dolist (margin '("<left-margin> " "<right-margin> "))
-  (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
-  (global-set-key (kbd (concat margin "<mouse-3>")) 'ignore)
-  (dolist (multiple '("" "double-" "triple-"))
+    (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
+    (global-set-key (kbd (concat margin "<mouse-3>")) 'ignore)
+    (dolist (multiple '("" "double-" "triple-"))
       (global-set-key (kbd (concat margin "<" multiple "wheel-up>")) 'mwheel-scroll)
       (global-set-key (kbd (concat margin "<" multiple "wheel-down>")) 'mwheel-scroll))))
 

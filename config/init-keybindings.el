@@ -39,7 +39,7 @@
 ;;;;; Top Level Keys
 ;;;;; --------------
     ":" '(execute-extended-command :wk "M-x")
-    "SPC" '(projectile-find-file :wk "Find file in project")
+    "SPC" '(project-find-file :wk "Find file in project")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
     "u" '(universal-argument :wk "Universal Argument")
@@ -127,6 +127,7 @@
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t i" '(indent-guide-global-mode :wk "Toggle indent guides")
+    "t h" '(hl-line-mode :wk "Toggle highlight line")
     "t w" '(visual-line-mode :wk "Toggle truncated lines")
 
 ;;;;; Quit

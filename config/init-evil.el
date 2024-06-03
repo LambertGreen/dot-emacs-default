@@ -54,7 +54,9 @@
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil)))
+    ;; We need to disable the below to have 'C-i' bound to `evil-jump-forward'
+    ;; (define-key evil-motion-state-map (kbd "TAB") nil)
+    ))
 
 ;;; Evil-Commentary
 ;; no pleading the fifth here

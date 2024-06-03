@@ -26,6 +26,7 @@
   (lgreen/leader-define-key
     "p p" '(projectile-switch-project :wk "Switch project")
     "p f" '(projectile-find-file :wk "Find file in project")
+    "p c" '(projectile-compile-project :wk "Compile in project")
     "p d" '(projectile-dired :wk "Dired in project")
     "p b" '(projectile-switch-to-buffer :wk "Switch buffer in project"))
   :config

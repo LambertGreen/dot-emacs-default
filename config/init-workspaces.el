@@ -66,6 +66,7 @@
   :hook (after-init . tabspaces-mode)
   :init
   (lgreen/leader-define-key
+    "t t" '(toggle-frame-tab-bar :wk "Toggle tab bar")
     "TAB " '(:ignore :wk "Tabs/Workspaces")
     "TAB TAB" '(tabspaces-switch-or-create-workspace :wk "Switch workspace")
     "TAB b" '(tabspaces-switch-buffer-and-tab :wk "Switch to buffer")

@@ -127,6 +127,7 @@
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t i" '(indent-guide-global-mode :wk "Toggle indent guides")
+    "t h" '(hl-line-mode :wk "Toggle highlight line")
     "t w" '(visual-line-mode :wk "Toggle truncated lines")
 
 ;;;;; Quit

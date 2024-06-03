@@ -49,7 +49,16 @@
   :ensure nil
   :hook (after-init . tab-bar-mode)
   :custom
-  (tab-bar-format '(tab-bar-format-tabs tab-bar-separator)))
+  (tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
+  :config
+  (defun lgreen/set-face-tab-bar (&rest _)
+    "Set face for tab-bar-tab."
+    (message "Setting tab-bar-tab face attributes")
+    (set-face-attribute 'tab-bar-tab nil
+			:inherit 'doom-modeline-project-dir
+			:foreground 'unspecified
+			:background 'unspecified))
+  (advice-add 'load-theme :after 'lgreen/set-face-tab-bar))
 
 ;;; Tabspaces
 ;; Make tabs work those spaces

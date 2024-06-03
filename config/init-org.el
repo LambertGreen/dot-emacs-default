@@ -213,7 +213,7 @@
   :hook (org-mode . org-superstar-mode))
 
 ;;; Org-Pretty-Table
-;; Draw pretty unicode tables
+;; Draw pretty Unicode tables
 (use-package org-pretty-table
   :ensure (:fetcher github :repo "Fuco1/org-pretty-table")
   :after org

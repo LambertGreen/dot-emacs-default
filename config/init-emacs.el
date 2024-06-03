@@ -47,7 +47,9 @@
 ;;; Exec-Path-From-Shell
 ;; Get on the right $PATH
 ;; TODO Read the docs (on github) on how to use this is a performant manner
+;; TODO Looks like this is not needed when launching Emacs via Alfred
 (use-package exec-path-from-shell
+  :disabled t
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))
 

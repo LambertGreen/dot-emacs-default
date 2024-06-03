@@ -9,7 +9,7 @@
 ;;; Doom Themes
 (use-package doom-themes
   :config
-  (load-theme 'doom-tokyo-night :no-confirm))
+  (load-theme 'doom-badger :no-confirm))
 
 ;;; EF Themes
 (use-package ef-themes)

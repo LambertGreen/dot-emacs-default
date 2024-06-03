@@ -15,13 +15,22 @@
   :init
   (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
+    "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline")
     "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
   :config
   (doom-modeline-mode 1)
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
-    (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding))))
+    (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding)))
+  (defun lgreen/toggle-mode-line ()
+    "Toggle the visibility of the mode line."
+    (interactive)
+    (if (eq mode-line-format nil)
+	(setq mode-line-format (default-value 'mode-line-format))
+      (setq mode-line-format nil))
+    (force-mode-line-update)
+    (redraw-display)))
 
 ;;; HL-Todo
 ;; Highlight TODO's

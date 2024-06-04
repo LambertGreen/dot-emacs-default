@@ -38,10 +38,11 @@
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
 ;;;;; --------------
-    ":" '(execute-extended-command :wk "M-x")
     "SPC" '(project-find-file :wk "Find file in project")
+    ":" '(execute-extended-command :wk "M-x")
     ";" '(eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
+    "/" '(consult-line :wk "Search buffer")
     "u" '(universal-argument :wk "Universal Argument")
 
 ;;;;; Local Leader

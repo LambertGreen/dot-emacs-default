@@ -20,7 +20,7 @@
 ;; Annotations for minibuffer completions
 (use-package marginalia
   :bind (:map minibuffer-local-map
-	 ("M-a" . marginalia-cycle))
+	      ("M-a" . marginalia-cycle))
   :init (marginalia-mode))
 
 ;;; Consult
@@ -32,6 +32,7 @@
   ([remap previous-matching-history-element] . consult-history)
   :init
   (lgreen/leader-define-key
+    "*" '(lgreen/ripgrep-symbol-at-point :wk "Search for symbol in project")
     "b b" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")
@@ -64,6 +65,12 @@
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
+
+  (defun lgreen/ripgrep-symbol-at-point ()
+    "Performs a search in the current buffer for thing at point."
+    (interactive)
+    (consult-ripgrep nil (thing-at-point 'symbol)))
+
   :hook (completion-list-mode . consult-preview-at-point-mode))
 
 ;;; Consult-Todo

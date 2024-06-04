@@ -84,12 +84,12 @@
 ;; TODO Refactor: move to a file called "actions"
 (use-package embark
   :after general
-  ;; FIXME Find better embark keybinds as we want "C-;" for either completion or spelling
-  ;; Consider using "C-RET" instead
-  :general
-  (evil-normal-state-map
-   "C-'"  'embark-act
-   "C-." 'embark-dwim)
+  ;; FIXME Find better embark keybinds as we are using "C-;" for completion
+  ;; FIXME Find better embark keybinds as we are using "C-'" for toggling terminal window
+  ;; :general
+  ;; (evil-normal-state-map
+  ;;  "C-'"  'embark-act
+  ;;  "C-." 'embark-dwim)
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -167,6 +167,10 @@
 ;;; Nyan Mode
 (use-package nyan-mode
   :init (nyan-mode))
+
+;;; Dumb-Jump
+;; Give it your best shot
+(use-package dumb-jump)
 
 ;;; _
 (provide 'init-emacs)

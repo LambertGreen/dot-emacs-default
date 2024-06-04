@@ -11,6 +11,7 @@
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
+  (evil-symbol-word-search t)
   (evil-search-module 'evil-search)
   (evil-undo-system 'undo-tree)
   :config
@@ -137,10 +138,11 @@
 ;;; Evil-Snipe
 (use-package evil-snipe
   :after evil
-  :custom (evil-snipe-repeat-scope 'visible)
+  :custom
+  (evil-snipe-repeat-scope 'visible)
+  (evil-snipe-override-mode +1)
   :config
   (evil-snipe-mode +1)
-  (evil-snipe-override-mode +1)
   :hook (magit-mode-hook . turn-off-evil-snipe-override-mode))
 
 ;;; Evil-Surround

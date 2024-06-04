@@ -138,10 +138,11 @@
 ;;; Evil-Snipe
 (use-package evil-snipe
   :after evil
-  :custom (evil-snipe-repeat-scope 'visible)
+  :custom
+  (evil-snipe-repeat-scope 'visible)
+  (evil-snipe-override-mode +1)
   :config
   (evil-snipe-mode +1)
-  (evil-snipe-override-mode +1)
   :hook (magit-mode-hook . turn-off-evil-snipe-override-mode))
 
 ;;; Evil-Surround

@@ -11,6 +11,7 @@
   (evil-want-C-u-scroll t)
   (evil-want-C-u-delete t)
   (evil-want-Y-yank-to-eol t)
+  (evil-symbol-word-search t)
   (evil-search-module 'evil-search)
   (evil-undo-system 'undo-tree)
   :config

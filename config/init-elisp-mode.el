@@ -17,5 +17,10 @@
   :hook
   (emacs-lisp-mode . hs-minor-mode))
 
+;;; Eros
+;; (E)valuation (R)esult (O)verlay(S) for Emacs Lisp
+(use-package eros
+  :config (eros-mode 1))
+
 ;;; _
 (provide 'init-elisp-mode)

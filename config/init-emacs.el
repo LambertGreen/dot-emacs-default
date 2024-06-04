@@ -168,5 +168,9 @@
 (use-package nyan-mode
   :init (nyan-mode))
 
+;;; Dumb-Jump
+;; Give it your best shot
+(use-package dumb-jump)
+
 ;;; _
 (provide 'init-emacs)

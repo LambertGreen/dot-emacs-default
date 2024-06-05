@@ -44,6 +44,7 @@
 	  (cons 'vc dir)
 	nil)))
   :custom
+  (project-switch-commands 'project-find-file)
   (project-vc-merge-submodules nil)
   :init
   (lgreen/leader-define-key

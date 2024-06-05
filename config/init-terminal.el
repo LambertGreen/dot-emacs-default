@@ -24,11 +24,11 @@
 (use-package eat
   :after project
   :bind ([remap project-shell] . eat-project)
+  :custom (eat-kill-buffer-on-exit t)
   :init
   (lgreen/leader-define-key
     "o t" '(eat :wk "Open term")
-    "p s" '(eat-project :wk "Shell in project"))
-  )
+    "p s" '(eat-project :wk "Shell in project")))
 
 ;;; _
 (provide 'init-terminal)

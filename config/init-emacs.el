@@ -172,5 +172,16 @@
 ;; Give it your best shot
 (use-package dumb-jump)
 
+;;; Whitespace-Mode
+;; Getting red in the face for the trailing space
+(use-package whitespace-mode
+  :ensure nil
+  :init
+  (setq whitespace-style '(face trailing))
+  (global-whitespace-mode 1)
+  :config
+  (custom-set-faces
+   '(whitespace-trailing ((t (:background "red"))))))
+
 ;;; _
 (provide 'init-emacs)

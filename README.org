@@ -7,7 +7,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
  - I did not end up needing an abundance of comments
  - I prefer a modular config so that updates have more useful diffs
  - Working directly in =elisp= mode makes code execution and debugging easier
- 
+
 * Favorite Themes
 ** Doom-One
 *** Pros

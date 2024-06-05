@@ -35,9 +35,8 @@
 ;;; GCMH
 ;; the GC magic hack
 ;; TODO Evaluate the final removal of this package
-(use-package gcmh
-  :disabled t
-  :hook (after-init . gcmh-mode))
+;; (use-package gcmh
+;;   :hook (after-init . gcmh-mode))
 
 ;;; No-Littering
 ;; Let's put the mess in './var'

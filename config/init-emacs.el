@@ -17,7 +17,7 @@
   (setq custom-file (make-temp-file "emacs-custom"))
 
   ;; Font
-  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 160)
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 128)
 
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scrollbar

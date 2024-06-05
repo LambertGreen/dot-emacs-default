@@ -55,11 +55,22 @@
 
 ;;; Which-Key
 ;; Which key? This one.
+;; NOTE Press "?" to disambiguate long entries with the same prefix
 (use-package which-key
-  :init (which-key-mode)
-  :config
-  (setq which-key-min-display-lines 3)
-  (setq which-key-sort-uppercase-first nil))
+  :custom
+  ;; Going with empty ellipsis to avoid alignment issues,
+  ;; which is fine given the overlong items are clearly
+  ;; up against the limit
+  (which-key-ellipsis "") ;; options: "︙",
+  ;; An alternate solution to the alignment issue
+  ;; (which-key-dont-use-unicode t)
+  (which-key-sort-order #'which-key-key-order-alpha)
+  (which-key-sort-uppercase-first nil)
+  (which-key-add-column-padding 1)
+  (which-key-max-display-columns nil)
+  (which-key-min-display-lines 6)
+  (which-key-side-window-slot -10)
+  :init (which-key-mode))
 
 ;;; Wgrep
 ;; Let's bulk update

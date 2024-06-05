@@ -32,7 +32,7 @@
   ([remap previous-matching-history-element] . consult-history)
   :init
   (lgreen/leader-define-key
-    "*" '(lgreen/ripgrep-symbol-at-point :wk "Search for symbol in project")
+    "*" '(lgreen/ripgrep-symbol-at-point :wk "Symbol search")
     "b b" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")

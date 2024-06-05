@@ -50,7 +50,7 @@
   :hook (after-init . tab-bar-mode)
   :custom
   (tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
-  init:
+  :init
   (lgreen/leader-define-key
     "t t" '(toggle-frame-tab-bar :wk "Toggle tab bar")
     "TAB" '(:ignore :wk "Workspace")

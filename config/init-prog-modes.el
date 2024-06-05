@@ -36,9 +36,16 @@
   (global-treesit-auto-mode))
 
 ;;; Apheleia
-;; format code with minimal disruption
+;; Format code with minimal disruption
 (use-package apheleia
   :config (apheleia-global-mode +1))
+
+;;; Eglot-Booster
+;; Boohoo
+(use-package eglot-booster
+  :ensure (:fetcher github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
 
 ;;; Cmake
 ;; Let's make them cpp projects

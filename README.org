@@ -38,7 +38,7 @@ Has warm ~blues~, ~browns~
 + Does not come with a light mode version
 
 * TODOs
-** Open [0/3]
+** Open [1/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
@@ -55,8 +55,6 @@ Run the following:
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
-
-*** TODO Install =elgot-booster=
 
 ** Complete [9/9]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
@@ -122,3 +120,9 @@ CLOSED: [2024-05-25 Sat 12:36]
 - State "DONE"       from "TODO"       [2024-05-25 Sat 12:36]
 :END:
 Added via =Flymake= and =Eglot= support.
+
+*** DONE Install =elgot-booster=
+CLOSED: [2024-06-04 Tue 23:18]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-06-04 Tue 23:18]
+:END:

@@ -9,30 +9,42 @@
     "w r" 'winner-redo
     "w u" 'winner-undo))
 
+;;; Popper
+;; What's popping?
 (use-package popper
-  :bind (("C-'"   . popper-toggle)
-	 ("C-M-'"   . popper-cycle))
+  :bind (("C-'" . popper-toggle)
+	 ("C-M-'" . popper-cycle))
   :init
   (lgreen/leader-define-key
     "`" '(popper-toggle :wk "Toggle popup"))
-  (setq popper-reference-buffers
-	'("\\*eat\\*"
-	  "\\*.*-eat\\*"
-	  eshell-mode    ;eshell as popups
-	  shell-mode     ;shell as popups
-	  term-mode      ;term as popups
-	  vterm-mode     ;vterm as popups
-	  help-mode      ;help windows
-	  compilation-mode)) ;compilation buffers
-  (setq popper-group-function #'popper-group-by-project)
-  (popper-mode +1)
-  (popper-echo-mode +1))
-
-;;; Shackle
-;; keep em secure
-(use-package shackle
+  :custom
+  (popper-reference-buffers
+   '("\\*eat\\*"
+     "\\*.*-eat\\*"
+     eshell-mode    ; eshell as popups
+     shell-mode     ; shell as popups
+     term-mode      ; term as popups
+     vterm-mode     ; vterm as popups
+     help-mode      ; help windows
+     compilation-mode)) ; compilation buffers
+  (popper-group-function #'popper-group-by-project)
   :config
-  (shackle-mode 1))
+  (popper-mode +1)
+  (popper-echo-mode +1)
+
+  (add-to-list 'display-buffer-alist
+	       '("\\*.*eat\\*"
+		 (display-buffer-reuse-window
+		  display-buffer-at-bottom)
+		 (window-height . 0.3)))
+  )
+
+;; ;;; Shackle
+;; ;; keep em secure
+;; ;; TODO Consider using Shackle for managing popup window locations
+;; (use-package shackle
+;;   :config
+;;   (shackle-mode 1))
 
 ;;; _
 (provide 'init-window-management)

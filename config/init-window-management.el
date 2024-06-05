@@ -31,9 +31,10 @@
 
 ;;; Shackle
 ;; keep em secure
-(use-package shackle
-  :config
-  (shackle-mode 1))
+;; TODO Do we need Shackle or is the display `alist' sufficient?
+;; (use-package shackle
+;;   :config
+;;   (shackle-mode 1))
 
 ;;; _
 (provide 'init-window-management)

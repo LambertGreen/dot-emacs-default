@@ -38,27 +38,14 @@ Has warm ~blues~, ~browns~
 + Does not come with a light mode version
 
 * TODOs
-** Open [0/3]
+** Open [0/2]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
-
-*** TODO Performance analyze Emacs startup
-Run the following:
-#+begin_src elisp
-(use-package-report)
-#+end_src
-
-#+RESULTS:
-: #<window 11 on *use-package statistics*>
-
- + We see ~exec-path-from-shell~ is the long pole: 3 seconds
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
 
-*** TODO Install =elgot-booster=
-
-** Complete [9/9]
+** Complete [11/11]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list
@@ -122,3 +109,30 @@ CLOSED: [2024-05-25 Sat 12:36]
 - State "DONE"       from "TODO"       [2024-05-25 Sat 12:36]
 :END:
 Added via =Flymake= and =Eglot= support.
+
+*** DONE Install =elgot-booster=
+CLOSED: [2024-06-04 Tue 23:18]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-06-04 Tue 23:18]
+:END:
+*** DONE Performance analyze Emacs startup
+CLOSED: [2024-06-04 Tue 23:50]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-06-04 Tue 23:50]
+:END:
+Run the following:
+#+begin_src elisp
+  (use-package-report)
+  (emacs-init-time)
+#+end_src
+
+#+RESULTS:
+: 0.584425 seconds
+
+**** Issues
+ + We see ~exec-path-from-shell~ is the long pole: 3 seconds
+**** Results
++ Disabled ~exec-path-from-shell~ as it does not seem necessary
+  + I am not quite sure how the ~env~ is being set
+    + =Homebrew= install of =Emacs= does mention the shell env is added to a =plist= file.
+

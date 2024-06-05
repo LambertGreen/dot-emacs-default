@@ -14,7 +14,8 @@
 	 ("C-M-'"   . popper-cycle))
   :init
   (lgreen/leader-define-key
-    "`" '(popper-toggle :wk "Toggle popup"))
+    "`" '(popper-toggle :wk "Toggle popup")
+    "t p" '(popper-toggle-type :wk "Toggle popper"))
   (setq popper-reference-buffers
 	'("\\*eat\\*"
 	  "\\*.*-eat\\*"

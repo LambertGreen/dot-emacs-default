@@ -277,7 +277,7 @@
 ;; Added this package primarily because when I tried adding
 ;; an org-roam note, I was not getting any completion candidates in
 ;; the minibuffer.  I do get them just fine in Doom Emacs. I should
-;; debug and better learn what is goind on rather than just relying
+;; debug and better learn what is going on rather than just relying
 ;; on this package.
 (use-package consult-org-roam
   :after org-roam

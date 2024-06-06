@@ -156,7 +156,10 @@
 	     "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	    ("L" "Protocol Link" entry
 	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %? [[%:link][%:description]] \nCaptured On: %U"))))
+	     "* %? [[%:link][%:description]] \nCaptured On: %U")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((http . t))))
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
@@ -282,15 +285,8 @@
   (require 'consult-org-roam)
   (consult-org-roam-mode 1))
 
-
 ;;; Ob-Http
 (use-package ob-http)
-
-(use-package org
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((http . t))))
 
 ;;; _
 (provide 'init-org)

@@ -80,5 +80,7 @@
 ;; Get into the groove boy
 (use-package groovy-mode)
 
+;;; Ahk-Mode
+(use-package ahk-mode)
 ;;; _
 (provide 'init-prog-modes)

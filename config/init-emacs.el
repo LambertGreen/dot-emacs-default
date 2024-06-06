@@ -174,7 +174,7 @@
 
 ;;; Whitespace-Mode
 ;; Getting red in the face for the trailing space
-(use-package whitespace-mode
+(use-package whitespace
   :ensure nil
   :init
   (setq whitespace-style '(face trailing))

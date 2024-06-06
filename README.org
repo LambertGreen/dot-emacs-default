@@ -9,18 +9,19 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
  - Working directly in =elisp= mode makes code execution and debugging easier
 
 * Favorite Themes
-** Doom-One
+** Theme: ~Doom-One~
 *** Pros
 + Simply the best all round theme!
 + Great light/dark modes
+**** ~diff-hl~ colors
 
 *** Cons
 + Need something different every now and then
 
-** Doom-Badger
+** Theme: ~Doom-Badger~
 *** Pros
 **** =Star Wars= type vibe
-Has warm ~blues~, ~browns~
++ Has warm ~blues~, ~browns~
 
 **** =Programming modes=
 ***** Looks good in all programming modes
@@ -34,8 +35,22 @@ Has warm ~blues~, ~browns~
 ***** TODO keywords have a traffic light color
 ***** DONE key word has a nice strike-out
 
+**** =diff-hl= colors
 *** Cons
 + Does not come with a light mode version
+**** The background color: is almost black
++ However this works well if using transparency
+
+** Theme: ~Ef-Dream~
+*** Pros
+**** =Star Wars= type vibe
++ Has warm ~blues~, ~browns~
+
+**** The background color is pleasant
+
+*** Cons
+**** ~diff-hl~ colors
++ Looks simply broken
 
 * TODOs
 ** Open [0/2]

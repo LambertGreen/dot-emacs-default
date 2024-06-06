@@ -17,7 +17,7 @@
   (setq custom-file (make-temp-file "emacs-custom"))
 
   ;; Font
-  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 160)
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 128)
 
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -35,9 +35,8 @@
 ;;; GCMH
 ;; the GC magic hack
 ;; TODO Evaluate the final removal of this package
-(use-package gcmh
-  :disabled t
-  :hook (after-init . gcmh-mode))
+;; (use-package gcmh
+;;   :hook (after-init . gcmh-mode))
 
 ;;; No-Littering
 ;; Let's put the mess in './var'
@@ -55,11 +54,22 @@
 
 ;;; Which-Key
 ;; Which key? This one.
+;; NOTE Press "?" to disambiguate long entries with the same prefix
 (use-package which-key
-  :init (which-key-mode)
-  :config
-  (setq which-key-min-display-lines 3)
-  (setq which-key-sort-uppercase-first nil))
+  :custom
+  ;; Going with empty ellipsis to avoid alignment issues,
+  ;; which is fine given the overlong items are clearly
+  ;; up against the limit
+  (which-key-ellipsis "") ;; options: "︙",
+  ;; An alternate solution to the alignment issue
+  ;; (which-key-dont-use-unicode t)
+  (which-key-sort-order #'which-key-key-order-alpha)
+  (which-key-sort-uppercase-first nil)
+  (which-key-add-column-padding 1)
+  (which-key-max-display-columns nil)
+  (which-key-min-display-lines 6)
+  (which-key-side-window-slot -10)
+  :init (which-key-mode))
 
 ;;; Wgrep
 ;; Let's bulk update

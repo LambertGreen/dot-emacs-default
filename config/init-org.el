@@ -156,7 +156,10 @@
 	     "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	    ("L" "Protocol Link" entry
 	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %? [[%:link][%:description]] \nCaptured On: %U"))))
+	     "* %? [[%:link][%:description]] \nCaptured On: %U")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((http . t))))
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
@@ -274,13 +277,16 @@
 ;; Added this package primarily because when I tried adding
 ;; an org-roam note, I was not getting any completion candidates in
 ;; the minibuffer.  I do get them just fine in Doom Emacs. I should
-;; debug and better learn what is goind on rather than just relying
+;; debug and better learn what is going on rather than just relying
 ;; on this package.
 (use-package consult-org-roam
   :after org-roam
   :init
   (require 'consult-org-roam)
   (consult-org-roam-mode 1))
+
+;;; Ob-Http
+(use-package ob-http)
 
 ;;; _
 (provide 'init-org)

@@ -82,5 +82,9 @@
 
 ;;; Ahk-Mode
 (use-package ahk-mode)
+
+;;; Lua-Mode
+(use-package lua-mode)
+
 ;;; _
 (provide 'init-prog-modes)

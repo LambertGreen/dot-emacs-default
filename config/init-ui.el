@@ -32,6 +32,11 @@
     (force-mode-line-update)
     (redraw-display)))
 
+;;; Solaire-Mode
+;; Darken popup buffers
+(use-package solaire-mode
+  :config (solaire-global-mode +1))
+
 ;;; HL-Todo
 ;; Highlight TODO's
 (use-package hl-todo
@@ -182,6 +187,7 @@
     (dolist (multiple '("" "double-" "triple-"))
       (global-set-key (kbd (concat margin "<" multiple "wheel-up>")) 'mwheel-scroll)
       (global-set-key (kbd (concat margin "<" multiple "wheel-down>")) 'mwheel-scroll))))
+
 
 ;;; _
 (provide 'init-ui)

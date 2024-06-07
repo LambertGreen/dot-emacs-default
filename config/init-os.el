@@ -8,6 +8,7 @@
   (setq insert-directory-program "gls"
 	dired-use-ls-dired t)
 
+  ;; Set Homebrew prefix
   (defvar homebrew-prefix)
   (if (file-directory-p "/opt/homebrew/")
       (setq homebrew-prefix "/opt/homebrew/")
@@ -16,6 +17,16 @@
   ;; Add Homebrew Emacs site-lisp to load-path
   (let ((default-directory (concat homebrew-prefix "share/emacs/site-lisp")))
     (normal-top-level-add-subdirs-to-load-path)))
+
+;;; Ns-Auto-Titlebar
+;; On macOS make the titlebar look better
+;; The package essentially handles the below config:
+;; (set-frame-parameter nil 'ns-appearance 'dark/light)
+;; (set-frame-parameter nil 'ns-transparent-titlebar t)
+(use-package ns-auto-titlebar
+  :when (and (eq system-type 'darwin)
+             (or (display-graphic-p) (daemonp)))
+  :config (ns-auto-titlebar-mode))
 
 (use-package emacs
   :ensure nil

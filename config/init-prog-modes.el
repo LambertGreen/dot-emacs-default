@@ -68,23 +68,27 @@
    ("known_hosts\\'"       . ssh-known-hosts-mode)
    ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
-;;; Yaml
-;; Configs everywhere
+;;; Language modes
+;; Make Emacs a babelfish
+(use-package ahk-mode)
+(use-package apples-mode)
+(use-package bats-mode)
+(use-package fennel-mode)
+(use-package gn-mode)
+(use-package git-modes)
+(use-package groovy-mode)
+(use-package jq-mode)
+(use-package just-mode)
+(use-package lua-mode)
+(use-package markdown-mode)
+(use-package mermaid-mode)
+(use-package nix-mode)
+(use-package rfc-mode)
+(use-package strace-mode)
+(use-package toml-mode)
+(use-package vimrc-mode)
 (use-package yaml-mode)
 
-;;; Markdown
-;; Baby org
-(use-package markdown-mode)
-
-;;; Groovy
-;; Get into the groove boy
-(use-package groovy-mode)
-
-;;; Ahk-Mode
-(use-package ahk-mode)
-
-;;; Lua-Mode
-(use-package lua-mode)
-
+(use-package powershell)
 ;;; _
 (provide 'init-prog-modes)

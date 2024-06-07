@@ -30,6 +30,7 @@
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)
 (require 'init-cpp)
+(require 'init-utils)
 
 ;;; _
 (provide 'init-evil)

@@ -23,6 +23,8 @@
   (scroll-bar-mode -1)        ; Disable visible scrollbar
   (tool-bar-mode -1)          ; Disable the toolbar
   (tooltip-mode -1)           ; Disable tooltips
+  (unless (display-graphic-p)
+    (menu-bar-mode -1))
   (set-fringe-mode 3)        ; Give some breathing room
 
   ;; Better find and grep
@@ -175,8 +177,11 @@
 (use-package affe)
 
 ;;; Nyan Mode
+;; Rainbow and cat
 (use-package nyan-mode
-  :init (nyan-mode))
+  :init
+  (when (display-graphic-p)
+    (nyan-mode)))
 
 ;;; Dumb-Jump
 ;; Give it your best shot

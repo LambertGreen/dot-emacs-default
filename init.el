@@ -31,6 +31,7 @@
 (require 'init-my-elisp-functions)
 (require 'init-cpp)
 (require 'init-utils)
+(require 'init-tty)
 
 ;;; _
 (provide 'init-evil)

@@ -16,5 +16,9 @@
 ;; pump up those wpm numbers
 (use-package typit)
 
+;;; Pinentry
+(use-package pinentry
+  :config (pinentry-start))
+
 ;;; _
 (provide 'init-utils)

@@ -196,14 +196,31 @@
   :config
   (pulsar-global-mode 1))
 
+;;; Olivetti
+;; Give yourself some breathing room
+(use-package olivetti
+  :custom
+  (olivetti-body-width 130)
+  :init
+  (lgreen/leader-define-key
+    "t o" '(olivetti-mode :wk "Toggle ovlivetti"))
+  :hook ((org-mode
+	  text-mode
+	  dired-mode
+	  magit-mode
+          emacs-lisp-mode) . olivetti-mode))
+
 ;;; Perfect-Margin
 ;; Give yourself some breathing room
 (use-package perfect-margin
+  :disabled t
   :custom
   (perfect-margin-visible-width 130)
+  :hook ((org-mode
+	  text-mode
+	  dired-mode
+          emacs-lisp-mode) . perfect-margin-mode)
   :config
-  ;; enable perfect-mode
-  (perfect-margin-mode t)
   ;; auto-center minibuffer windows
   ;; (setq perfect-margin-ignore-filters nil)
   ;; auto-center special windows

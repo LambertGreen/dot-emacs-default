@@ -32,6 +32,34 @@
     (force-mode-line-update)
     (redraw-display)))
 
+;;; Spaceline
+;; The mode line from Spacemacs
+(use-package spaceline
+  :disabled t
+  :custom
+  ( powerline-default-separator 'contour)
+  ( powerline-gui-use-vcs-glyph t)
+  ( powerline-height 22)
+  (spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  ( spaceline-workspace-numbers-unicode t)
+  ( spaceline-window-numbers-unicode t)
+  ( spaceline-separator-dir-left '(left . right))
+  ( spaceline-separator-dir-right '(right . left))
+  ( spaceline-flycheck-bullet "❀ %s")
+  ;; (powerline-default-separator 'utf-8)
+  ;; (spaceline-minor-modes-separator " ")
+  ;; (spaceline-window-numbers-unicode t)
+  ;; (spaceline-workspace-numbers-unicode t)
+  :config
+  (require `spaceline-config)
+  (spaceline-spacemacs-theme))
+
+;;; Spaceline-All-The-Icons
+(use-package spaceline-all-the-icons
+  :after spaceline
+  :config
+  (spaceline-all-the-icons-theme))
+
 ;;; Solaire-Mode
 ;; Darken popup buffers
 (use-package solaire-mode

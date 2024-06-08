@@ -7,9 +7,7 @@
   (catppuccin-flavor 'mocha))
 
 ;;; Doom Themes
-(use-package doom-themes
-  :config
-  (load-theme 'doom-badger :no-confirm))
+(use-package doom-themes)
 
 ;;; EF Themes
 (use-package ef-themes)
@@ -22,6 +20,18 @@
 
 ;;; Chocolate Theme
 (use-package chocolate-theme)
+
+;;; Sync theme with system appearance
+(use-package emacs
+  :ensure nil
+  :init
+  (defun lgreen/sync-theme-with-system-appearance (appearance)
+    "Load theme taking current system APPEARANCE into account."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'doom-one-light t))
+      ('dark (load-theme 'doom-one t))))
+  (add-hook 'ns-system-appearance-change-functions  #'lgreen/sync-theme-with-system-appearance))
 
 ;;; _
 (provide 'init-themes)

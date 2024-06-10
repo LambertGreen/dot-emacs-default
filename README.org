@@ -32,7 +32,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 #+end_src
 
 **** =Org mode=
-***** TODO keywords have a traffic light color
+***** ~TODO~ keywords have a traffic light color
 ***** DONE key word has a nice strike-out
 
 **** =diff-hl= colors

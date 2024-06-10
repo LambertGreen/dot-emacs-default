@@ -24,6 +24,8 @@
 ;;; Sync theme with system appearance
 (use-package emacs
   :ensure nil
+  :after doom-themes
+  :if (memq window-system '(mac ns))
   :init
   (defun lgreen/sync-theme-with-system-appearance (appearance)
     "Load theme taking current system APPEARANCE into account."
@@ -31,7 +33,10 @@
     (pcase appearance
       ('light (load-theme 'doom-one-light t))
       ('dark (load-theme 'doom-one t))))
-  (add-hook 'ns-system-appearance-change-functions  #'lgreen/sync-theme-with-system-appearance))
+  (add-hook 'ns-system-appearance-change-functions  #'lgreen/sync-theme-with-system-appearance)
+  :config
+  ;; Determine current appearance and set the appropriate theme at startup
+  (lgreen/sync-theme-with-system-appearance 'ns-system-appearance))
 
 ;;; _
 (provide 'init-themes)

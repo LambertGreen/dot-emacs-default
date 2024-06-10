@@ -158,9 +158,18 @@
 	    ("L" "Protocol Link" entry
 	     (file+headline lgreen/org-capture-notes-file "Inbox")
 	     "* %? [[%:link][%:description]] \nCaptured On: %U")))
+  (require 'ob-C)
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((http . t))))
+   '((python . t)
+     (C . t)
+     (dot . t)
+     (gnuplot . t)
+     (org . t)
+     (js . t)
+     (sqlite . t)
+     (shell . t)
+     )))
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
@@ -287,7 +296,18 @@
   (consult-org-roam-mode 1))
 
 ;;; Ob-Http
-(use-package ob-http)
+(use-package ob-http
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((http . t))))
+
+;;; Ob-Mermaid
+(use-package ob-mermaid
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((mermaid . t))))
 
 ;;; _
 (provide 'init-org)

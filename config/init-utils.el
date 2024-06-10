@@ -1,7 +1,7 @@
 ;;; init-utils.el --- -*- lexical-binding: t; -*-
 
 ;;; Tldr
-;; When there is no timei for man
+;; When there is no time for man
 (use-package tldr)
 
 ;;; Devdocs

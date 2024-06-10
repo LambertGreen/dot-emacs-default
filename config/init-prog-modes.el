@@ -73,6 +73,7 @@
 (use-package ahk-mode)
 (use-package apples-mode)
 (use-package bats-mode)
+(use-package csv-mode)
 (use-package fennel-mode)
 (use-package gn-mode)
 (use-package git-modes)

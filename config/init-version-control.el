@@ -7,6 +7,7 @@
   :after general
   :custom
   (magit-diff-refine-hunk t)
+  (magit-diff-hide-trailing-cr-characters t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
   (lgreen/leader-define-key

@@ -20,5 +20,8 @@
 (use-package pinentry
   :config (pinentry-start))
 
+;;; Direnv
+(use-package direnv)
+
 ;;; _
 (provide 'init-utils)

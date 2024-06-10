@@ -1,12 +1,13 @@
 ;;; init-file-tree.el --- -*- lexical-binding: t; -*-
 
 ;;; Treemacs
-;; Squintting at the forest
+;; Squinting at the forest
 (use-package treemacs
   :after general
   :custom
   (treemacs-project-follow-mode t)
   :config
+  (treemacs-resize-icons 18)
   (lgreen/leader-define-key
     "o p" '(treemacs :wk "Open project tree")))
 

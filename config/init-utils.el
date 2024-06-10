@@ -26,5 +26,10 @@
 ;;; EditorConfig
 (use-package editorconfig)
 
+;;; Keychain-Environment
+(use-package keychain-environment
+  :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
+  :config (keychain-refresh-environment))
+
 ;;; _
 (provide 'init-utils)

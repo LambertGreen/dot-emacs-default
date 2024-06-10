@@ -191,10 +191,10 @@
 ;; Getting red in the face for the trailing space
 (use-package whitespace
   :ensure nil
-  :init
-  (setq whitespace-style '(face trailing))
-  (global-whitespace-mode 1)
+  :custom (whitespace-style '(face trailing))
+  :hook ((text-mode prog-mode) . whitespace-mode)
   :config
+  ;; Customize the appearance of trailing whitespace
   (custom-set-faces
    '(whitespace-trailing ((t (:background "red"))))))
 

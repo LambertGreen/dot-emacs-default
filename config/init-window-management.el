@@ -14,11 +14,6 @@
 (use-package popper
   :bind (("C-'" . popper-toggle)
 	 ("C-M-'" . popper-cycle))
-  :init
-  (lgreen/leader-define-key
-    "`" '(popper-toggle :wk "Toggle popup"))
-  (popper-mode +1)
-  (popper-echo-mode +1)
   :custom
   (popper-reference-buffers
    '("\\*eat\\*"
@@ -30,6 +25,14 @@
      help-mode      ; help windows
      compilation-mode)) ; compilation buffers
   (popper-group-function #'popper-group-by-project)
+  (popper-display-control 'user)
+  :init
+  (lgreen/leader-define-key
+    "`" '(popper-toggle :wk "Toggle popup")
+    "t p" '(popper-toggle-type :wk "Toggle popup type"))
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
   :config
   (add-to-list 'display-buffer-alist
 	       '("\\*.*eat\\*"

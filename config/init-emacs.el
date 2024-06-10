@@ -20,7 +20,7 @@
   (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 128)
 
   ;; Visuals
-  (scroll-bar-mode -1)        ; Disable visible scrollbar
+  (scroll-bar-mode -1)        ; Disable visible scroll-bar
   (tool-bar-mode -1)          ; Disable the toolbar
   (tooltip-mode -1)           ; Disable tooltips
   (unless (display-graphic-p)

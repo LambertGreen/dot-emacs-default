@@ -23,5 +23,8 @@
 ;;; Direnv
 (use-package direnv)
 
+;;; EditorConfig
+(use-package editorconfig)
+
 ;;; _
 (provide 'init-utils)

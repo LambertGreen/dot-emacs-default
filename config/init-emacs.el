@@ -27,6 +27,17 @@
     (menu-bar-mode -1))
   (set-fringe-mode 3)        ; Give some breathing room
 
+  ;; Make the frame title include the project name
+  ;; Allows for easy switching to Emacs frame by project name
+  (setq frame-title-format
+	'(""
+          "%b"
+          (:eval
+           (let ((project (project-current)))
+             (when project
+               (let ((project-name (file-name-nondirectory (directory-file-name (project-root project)))))
+		 (format " in [%s] - Emacs" project-name)))))))
+
   ;; Better find and grep
   ;; TODO Investigation actual usage of these grep commands
   (setq grep-command "rg --no-heading --color=never ")

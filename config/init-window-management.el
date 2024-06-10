@@ -17,6 +17,8 @@
   :init
   (lgreen/leader-define-key
     "`" '(popper-toggle :wk "Toggle popup"))
+  (popper-mode +1)
+  (popper-echo-mode +1)
   :custom
   (popper-reference-buffers
    '("\\*eat\\*"
@@ -29,9 +31,6 @@
      compilation-mode)) ; compilation buffers
   (popper-group-function #'popper-group-by-project)
   :config
-  (popper-mode +1)
-  (popper-echo-mode +1)
-
   (add-to-list 'display-buffer-alist
 	       '("\\*.*eat\\*"
 		 (display-buffer-reuse-window

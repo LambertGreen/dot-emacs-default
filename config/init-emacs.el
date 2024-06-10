@@ -13,8 +13,10 @@
   (global-auto-revert-non-file-buffers t)
 
   :config
-  ;; Set custom file so that customizations are not written here
-  (setq custom-file (make-temp-file "emacs-custom"))
+  ;; Set custom file
+  ;; NOTE: I have disabled this on occasion, but don't do this as this breaks the
+  ;; saving of add directory local variables to the safe list.
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
   ;; Font
   (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 128)

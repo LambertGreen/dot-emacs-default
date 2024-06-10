@@ -1,5 +1,9 @@
 ;;; init-version-control.el --- -*- lexical-binding: t; -*-
 
+;;; Emacs
+(use-package emacs
+  :ensure nil
+  :custom (vc-follow-symlinks t))
 
 ;;; Magit
 ;; Git porcelain inside Emacs

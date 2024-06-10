@@ -53,6 +53,25 @@
 
   (add-hook 'kill-buffer-hook 'close-window-on-eat-buffer-kill))
 
+;;; Customize compilation windows
+(use-package emacs
+  :ensure nil
+  :config
+  ;; Make compilation buffer show in right window
+  (add-to-list 'display-buffer-alist
+               '("\\*compilation\\*"
+		 (display-buffer-in-side-window)
+		 (side . right)
+		 (slot . 1)
+		 (window-width . 0.5)))
+
+  (require 'ansi-color)
+  (defun lgreen/colorize-compilation-buffer ()
+    "Apply ANSI color codes to the compilation buffer."
+    (when (derived-mode-p 'compilation-mode)
+      (ansi-color-apply-on-region (point-min) (point-max))))
+  (add-hook 'compilation-filter-hook 'lgreen/colorize-compilation-buffer))
+
 ;; ;;; Shackle
 ;; ;; keep em secure
 ;; ;; TODO Consider using Shackle for managing popup window locations

@@ -37,6 +37,13 @@
 		 (display-buffer-reuse-window
 		  display-buffer-at-bottom)
 		 (window-height . 0.3)))
+
+  (defun close-window-on-eat-buffer-kill ()
+    "Close the window when an eat buffer is killed."
+    (when (string-match-p "\\*.*eat\\*" (buffer-name))
+      (delete-window)))
+
+  (add-hook 'kill-buffer-hook 'close-window-on-eat-buffer-kill)
   )
 
 ;; ;;; Shackle

@@ -9,6 +9,7 @@
   (org-return-follows-link t)
   (org-startup-folded 'show3levels)
   (org-ellipsis "⤵")
+  (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
 				(plain-list-item . auto)))
   (org-todo-keywords
@@ -245,6 +246,12 @@
 ;; FIXME This package is not found by Elpaca
 ;; (use-package org-checklist
 ;;   :after org)
+
+;;; Org-Appear
+;; Seeing is believing
+(use-package org-appear
+  :after org
+  :hook (org-mode . org-appear-mode))
 
 ;;; Org-Roam
 ;; Knowledge management system... did you not know?

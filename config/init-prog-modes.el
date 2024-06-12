@@ -45,6 +45,8 @@
 (use-package eglot-booster
   :ensure (:fetcher github :repo "jdtsmith/eglot-booster")
   :after eglot
+  :init
+  (add-to-list 'exec-path "~/dev/pub/emacs-lsp-booster/target/release")
   :config (eglot-booster-mode))
 
 ;;; Cmake

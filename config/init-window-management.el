@@ -11,7 +11,9 @@
 
 ;;; Popper
 ;; What's popping?
-;; NOTE: Use the universal argument before toggling to keep popups showing
+;; Usage notes:
+;; - Use the universal argument before toggling to keep popups showing
+;; - Use the universal argument twice for toggling all
 (use-package popper
   :bind (("C-'" . popper-toggle)
 	 ("C-M-'" . popper-cycle))

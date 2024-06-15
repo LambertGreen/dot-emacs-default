@@ -233,6 +233,10 @@
       (global-set-key (kbd (concat margin "<" multiple "wheel-up>")) 'mwheel-scroll)
       (global-set-key (kbd (concat margin "<" multiple "wheel-down>")) 'mwheel-scroll))))
 
+;;; Rainbow-Mode
+;; Turning words and numbers into visible light
+;; Example: Red (#ff0000), Green (#00ff00), Blue (#0000ff)
+(use-package rainbow-mode)
 
 ;;; _
 (provide 'init-ui)

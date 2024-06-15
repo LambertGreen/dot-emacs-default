@@ -9,6 +9,7 @@
   (org-return-follows-link t)
   (org-startup-folded 'show3levels)
   (org-ellipsis "⤵")
+  (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
 				(plain-list-item . auto)))
   (org-todo-keywords
@@ -169,7 +170,23 @@
      (js . t)
      (sqlite . t)
      (shell . t)
-     )))
+     ))
+
+  (defun lgreen/org-font-setup ()
+    ;; Set faces for heading levels
+    (dolist (face '((org-document-title . 1.5)
+		    (org-level-1 . 1.3)
+                    (org-level-2 . 1.2)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "Iosevka NF" :weight 'regular :height (cdr face) :slant 'unspecified)))
+
+  ;; Apply the function after loading Org mode
+  (add-hook 'org-mode-hook 'lgreen/org-font-setup))
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
@@ -245,6 +262,12 @@
 ;; FIXME This package is not found by Elpaca
 ;; (use-package org-checklist
 ;;   :after org)
+
+;;; Org-Appear
+;; Seeing is believing
+(use-package org-appear
+  :after org
+  :hook (org-mode . org-appear-mode))
 
 ;;; Org-Roam
 ;; Knowledge management system... did you not know?

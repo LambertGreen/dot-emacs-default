@@ -90,7 +90,7 @@
 (use-package indent-guide
   :custom
   ;; (indent-guide-recursive t)
-  (indent-guide-char "·")   ; Useful characters: ·│┊┆╎
+  (indent-guide-char "│")   ; Useful characters: ·│┊┆╎┋▏
   :init
   (lgreen/leader-define-key
     "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))

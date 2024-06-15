@@ -21,10 +21,12 @@
   :config (pinentry-start))
 
 ;;; Direnv
-(use-package direnv)
+(use-package direnv
+  :config (direnv-mode))
 
 ;;; EditorConfig
-(use-package editorconfig)
+(use-package editorconfig
+  :config (editorconfig-mode 1))
 
 ;;; Keychain-Environment
 (use-package keychain-environment

@@ -66,6 +66,13 @@
 			:background 'unspecified))
   (advice-add 'load-theme :after 'lgreen/set-face-tab-bar))
 
+;;; Vim-Tab-Bar
+;; Improve the UX of the tab-bar
+(use-package vim-tab-bar
+  :ensure (:fetcher github :repo "jamescherti/vim-tab-bar.el")
+  :after tab-bar
+  :config (vim-tab-bar-mode))
+
 ;;; Tabspaces
 ;; Make tabs work those spaces
 (use-package tabspaces

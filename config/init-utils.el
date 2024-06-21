@@ -33,5 +33,16 @@
   :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
   :config (keychain-refresh-environment))
 
+;;; World-Clock
+(use-package emacs
+  :ensure nil
+  :custom
+  (world-clock-time-format "%a %d %b %l:%M %p %Z")
+  (world-clock-list '(("America/Los_Angeles" "Seattle")
+		      ("UTC" "UTC")
+		      ("Africa/Nairobi" "Cape Town")
+		      ("Asia/Calcutta" "New Delhi")
+		      ("Asia/Tokyo" "Tokyo"))))
+
 ;;; _
 (provide 'init-utils)

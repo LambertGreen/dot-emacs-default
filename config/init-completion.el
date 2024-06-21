@@ -1,7 +1,7 @@
 ;;; init-completion.el --- -*- lexical-binding: t; -*-
 
 
-;; FIXME Fix auto-completion issue where fast typing can result in mistaken acceptence of incorrect completion
+;; FIXME Fix auto-completion issue where fast typing can result in mistaken acceptance of incorrect completion
 
 ;;; Dabbrev
 ;; short and sweet
@@ -37,19 +37,19 @@
   (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind (:map corfu-map
-	       ("C-n" . 'corfu-next)
-	       ("C-p" . 'corfu-previous)
-	       ("C-j" . 'corfu-next)
-	       ("C-k" . 'corfu-previous)
-	       ;; ("<escape>" . 'corfu-quit)
-	       ("<return>" . 'corfu-insert)
-	       ("<tab>" . 'corfu-next)
-	       ("S-<tab>" . 'corfu-previous)
-	       ("H-SPC" . 'corfu-insert-separator)
-	       ;; "SPC" #'corfu-insert-separator ; Use when `corfu-quit-at-boundary' is non-nil
-	       ("M-d" . 'corfu-show-documentation)
-	       ;; ("C-g" . 'corfu-quit)
-	       ("M-l" . 'corfu-show-location))
+	      ("C-n" . 'corfu-next)
+	      ("C-p" . 'corfu-previous)
+	      ("C-j" . 'corfu-next)
+	      ("C-k" . 'corfu-previous)
+	      ;; ("<escape>" . 'corfu-quit)
+	      ("<return>" . 'corfu-insert)
+	      ("<tab>" . 'corfu-next)
+	      ("S-<tab>" . 'corfu-previous)
+	      ("H-SPC" . 'corfu-insert-separator)
+	      ;; "SPC" #'corfu-insert-separator ; Use when `corfu-quit-at-boundary' is non-nil
+	      ("M-d" . 'corfu-show-documentation)
+	      ;; ("C-g" . 'corfu-quit)
+	      ("M-l" . 'corfu-show-location))
 
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable

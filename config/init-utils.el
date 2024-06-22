@@ -16,7 +16,14 @@
 ;; pump up those wpm numbers
 (use-package typit)
 
+;;; GPG
+;; NOTE: Not sure if we need `pinentry' or just this config
+(use-package epg
+  :ensure nil
+  :custom (epg-pinentry-mode 'loopback))
+
 ;;; Pinentry
+;; Enter GPG passphrase via Emacs
 (use-package pinentry
   :config (pinentry-start))
 

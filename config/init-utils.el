@@ -40,6 +40,7 @@
   (world-clock-time-format "%a %d %b %l:%M %p %Z")
   (world-clock-list '(("America/Los_Angeles" "Seattle")
 		      ("UTC" "UTC")
+		      ("Europe/Madrid" "Madrid")
 		      ("Africa/Nairobi" "Cape Town")
 		      ("Asia/Calcutta" "New Delhi")
 		      ("Asia/Tokyo" "Tokyo"))))

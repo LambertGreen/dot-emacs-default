@@ -28,7 +28,13 @@
   :init
   (lgreen/leader-define-key
     "o t" '(eat :wk "Open term")
-    "p s" '(eat-project :wk "Shell in project")))
+    "p s" '(eat-project :wk "Shell in project"))
+  :config
+  (defun lgreen/eat-startup-in-line-mode ()
+    "Start `eat' in line edit mode."
+    (when (derived-mode-p 'eat-mode)
+      (eat-line-mode)))
+  (add-hook 'eat-mode-hook 'lgreen/eat-startup-in-line-mode))
 
 ;;; _
 (provide 'init-terminal)

@@ -86,6 +86,8 @@
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
     "l L" 'org-insert-all-links
+    "l n" 'org-next-link
+    "l p" 'org-previous-link
     "l s" 'org-store-link
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display

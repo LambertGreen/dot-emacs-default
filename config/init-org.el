@@ -252,7 +252,9 @@
 
 ;;; Org-Contacts
 ;; Keeping connections
+;; TODO I am disabling to see if this package is causing performance issues
 (use-package org-contacts
+  :disabled t
   :after org
   :custom (org-contacts-files (list (expand-file-name "personal/contacts.org" org-directory)
 				    (expand-file-name "personal/contacts_imported_from_gmail.org" org-directory))))

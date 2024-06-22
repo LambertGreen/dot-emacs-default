@@ -223,6 +223,12 @@
   (define-key evil-visual-state-map (kbd "M-b") 'evil-backward-little-word-begin)
   (define-key evil-visual-state-map (kbd "i M-w") 'evil-inner-little-word))
 
+;;; Evil-Markdown
+;; Get down with it, get down with it
+(use-package evil-markdown
+  :after (evil markdown-mode)
+  :ensure (:fetcher github :repo "Somelauw/evil-markdown"))
+
 ;; ;;; Evil-Owl
 ;; TODO Evaluate evil-owl package
 ;; ;;  the star of the show

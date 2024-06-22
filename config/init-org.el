@@ -188,6 +188,15 @@
   ;; Apply the function after loading Org mode
   (add-hook 'org-mode-hook 'lgreen/org-font-setup))
 
+;;; Org-Contrib
+(use-package org-contrib
+  :config
+  (require 'org-collector)
+  (require 'org-protocol)
+  ;; (require 'org-man)
+  )
+
+
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
 (use-package evil-org

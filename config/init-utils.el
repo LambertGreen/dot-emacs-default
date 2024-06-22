@@ -13,7 +13,7 @@
 (use-package speed-type)
 
 ;;; Typit
-;; pump up those wpm numbers
+;; Pump up those wpm numbers
 (use-package typit)
 
 ;;; GPG

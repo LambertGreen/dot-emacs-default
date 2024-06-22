@@ -13,7 +13,9 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 *** Pros
 + Simply the best all round theme!
 + Great light/dark modes
+
 **** ~diff-hl~ colors
++ Colors match expectation
 
 *** Cons
 + Need something different every now and then
@@ -53,12 +55,18 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + Looks simply broken
 
 * TODOs
-** Open [0/2]
+** Open [0/3]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
+
+*** TODO Add some keybindings for =markdown-mode=
+:LOGBOOK:
+- State "TODO"       from              [2024-06-21 Fri 18:02]
+:END:
+Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
 
 ** Complete [11/11]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries

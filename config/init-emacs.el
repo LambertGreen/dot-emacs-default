@@ -45,6 +45,12 @@
   (setq grep-command "rg --no-heading --color=never ")
   (setq grep-find-command "rg --files ")
 
+  ;; Enable desktop save  mode
+  ;; TODO I don't think I want this option enabled as I use multiple Emacs instances
+  ;; and don't really want any of their window configurations saved, however I do want
+  ;; recently used files remembered. I need to enable the option that keeps such history.
+  ;; (desktop-save-mode 1)
+
   (global-auto-revert-mode 1))
 
 ;;; GCMH

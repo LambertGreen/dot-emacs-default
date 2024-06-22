@@ -78,7 +78,10 @@
 (use-package csv-mode)
 (use-package fennel-mode)
 (use-package gn-mode)
-(use-package git-modes)
+(use-package git-modes
+  :mode (("\\.gitconfig\\'" . gitconfig-mode)
+	 ("\\.gitignore\\'" . gitignore-mode)))
+
 (use-package groovy-mode)
 (use-package jq-mode)
 (use-package just-mode)
@@ -90,7 +93,8 @@
 (use-package strace-mode)
 (use-package toml-mode)
 (use-package vimrc-mode)
-(use-package yaml-mode)
+(use-package yaml-mode
+  :mode ("\\.(yaml|yml)\\'" . yaml-mode))
 
 (use-package powershell)
 ;;; _

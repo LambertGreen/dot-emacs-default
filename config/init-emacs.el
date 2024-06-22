@@ -89,6 +89,12 @@
   (which-key-add-column-padding 1)
   (which-key-max-display-columns nil)
   (which-key-min-display-lines 6)
+  ;; Get Which-Key to always show at the bottom
+  ;; NOTE: we don't use the below config because while it gets
+  ;; the popup at the bottom, it does not show the useful help line
+  ;; (which-key-popup-type 'minibuffer)
+  ;; TODO I did not find a good quick fix to opening `which-key' while `eat' is open
+  ;; ChatGPT gave some suggestions, but I did not have time to implement them
   (which-key-side-window-slot -10)
   :init (which-key-mode))
 

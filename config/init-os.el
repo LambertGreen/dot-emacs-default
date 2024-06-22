@@ -1,5 +1,6 @@
 ;;; init-os.el --- -*- lexical-binding: t; -*-
 
+;;; Darwin/MacOS
 ;; macOS specific config
 (use-package emacs
   :ensure nil
@@ -17,6 +18,30 @@
   ;; Add Homebrew Emacs site-lisp to load-path
   (let ((default-directory (concat homebrew-prefix "share/emacs/site-lisp")))
     (normal-top-level-add-subdirs-to-load-path)))
+
+;;; GNU/Linux
+;; Linux specific config
+(use-package emacs
+  :ensure nil
+  :if (eq system-type 'gnu/linux)
+  :config
+  (defvar homebrew-prefix)
+  (setq homebrew-prefix "/home/linuxbrew/.linuxbrew/"))
+
+;;; Windows-NT
+;; Windows specific config
+(use-package emacs
+  :ensure nil
+  :if (eq system-type 'windows-nt)
+  :config
+  ;; Set find program
+  ;; TODO: Check if fd can be used since it so much faster.
+  (when (eq system-type 'windows-nt)
+    (setq find-program (expand-file-name "~/scoop/shims/find.exe")))
+
+  ;; Set exec path
+  (when (eq system-type 'windows-nt)
+    (setq exec-path (cons "c:/Users/Lambert/scoop/shims/" exec-path))))
 
 ;;; Ns-Auto-Titlebar
 ;; On macOS make the titlebar look better

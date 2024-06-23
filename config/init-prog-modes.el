@@ -72,7 +72,15 @@
 
 ;;; Language modes
 ;; Make Emacs a babelfish
-(use-package ahk-mode)
+(use-package ahk-mode
+  :config
+  (defun lgreen/ahk-comment-block-dwim (arg)
+    "Comment or uncomment current line or region using block notation.
+     For details, see `comment-dwim'."
+    (interactive "*P")
+    (require 'newcomment)
+    (ahk-comment-dwim arg)))
+
 (use-package apples-mode)
 (use-package bats-mode)
 (use-package csv-mode)

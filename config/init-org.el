@@ -188,7 +188,18 @@
       (set-face-attribute (car face) nil :font "Iosevka NF" :weight 'regular :height (cdr face) :slant 'unspecified)))
 
   ;; Apply the function after loading Org mode
-  (add-hook 'org-mode-hook 'lgreen/org-font-setup))
+  (add-hook 'org-mode-hook 'lgreen/org-font-setup)
+
+  ;; Below code snippet acquired from here:
+  ;; - https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
+  (defun lgreen/org-toggle-emphasis ()
+    "Toggle hiding/showing of org emphasize markers."
+    (interactive)
+    (if org-hide-emphasis-markers
+	(set-variable 'org-hide-emphasis-markers nil)
+      (set-variable 'org-hide-emphasis-markers t))
+    (org-mode-restart))
+  )
 
 ;;; Org-Contrib
 (use-package org-contrib

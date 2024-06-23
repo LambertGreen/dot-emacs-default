@@ -36,6 +36,7 @@
   :config (editorconfig-mode 1))
 
 ;;; Keychain-Environment
+;; Re-use environment variables: `SSH_AUTH_SOCK' `SSH_AGENT_PID' `GPG_AGENT'
 (use-package keychain-environment
   :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
   :config (keychain-refresh-environment))

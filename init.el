@@ -32,6 +32,7 @@
 (require 'init-cpp)
 (require 'init-utils)
 (require 'init-tty)
+(require 'init-email)
 
 ;;; _
 (provide 'init-evil)

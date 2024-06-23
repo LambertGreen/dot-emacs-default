@@ -17,7 +17,12 @@
 
   ;; Add Homebrew Emacs site-lisp to load-path
   (let ((default-directory (concat homebrew-prefix "share/emacs/site-lisp")))
-    (normal-top-level-add-subdirs-to-load-path)))
+    (normal-top-level-add-subdirs-to-load-path))
+
+  ;; Set auth-sources
+  (setq auth-sources '(macos-keychain-generic macos-keychain-internet "~/.authinfo.gpg"))
+
+  )
 
 ;;; GNU/Linux
 ;; Linux specific config

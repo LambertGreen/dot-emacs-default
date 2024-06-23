@@ -48,7 +48,23 @@
 
   ;; Set exec path
   (when (eq system-type 'windows-nt)
-    (setq exec-path (cons "c:/Users/Lambert/scoop/shims/" exec-path))))
+    (setq exec-path (cons "c:/Users/Lambert/scoop/shims/" exec-path)))
+
+  ;; On Windows ignore any f15 key-press since we use Caffeine from time to time
+  ;; and it uses the f15 key to keep the machine from falling asleep
+  (when (eq system-type 'windows-nt)
+    (global-set-key [f15] 'ignore))
+
+  ;; On Windows: open a `cmd.exe' shell
+  (when (eq system-type 'windows-nt)
+    (defun command-shell ()
+      "opens a shell which can run programs as if run from cmd.exe from Windows"
+      (interactive)
+      (let ((explicit-shell-file-name "cmdproxy")
+            (shell-file-name "cmdproxy") (comint-dynamic-complete t))
+	(shell))))
+
+  )
 
 ;;; Ns-Auto-Titlebar
 ;; On macOS make the titlebar look better

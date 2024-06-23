@@ -1,4 +1,3 @@
-
 ;;; init-tty.el --- -*- lexical-binding: t; -*-
 
 (use-package emacs

@@ -22,6 +22,8 @@
   ;; Set auth-sources
   (setq auth-sources '(macos-keychain-generic macos-keychain-internet "~/.authinfo.gpg"))
 
+  ;; Use `mdfind' instead of `locate'
+  (setq consult-locate-args "mdfind -name ")
   )
 
 ;;; GNU/Linux

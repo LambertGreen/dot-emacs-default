@@ -43,7 +43,8 @@
   :hook (org-mode . visual-line-mode)
   :init
   (lgreen/leader-define-key
-    "o a" '(org-agenda :wk "Open agenda"))
+    "o a" '(org-agenda :wk "Open agenda")
+    "X" '(org-capture :wk "Org capture"))
   (general-def
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading

@@ -4,6 +4,7 @@
 ;;; Org
 ;; My life in plain text.
 (use-package org
+  :ensure nil
   :custom
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
@@ -12,6 +13,7 @@
   (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
 				(plain-list-item . auto)))
+  (org-directory "~/dev/my/org")
   (org-todo-keywords
    '((sequence
       "TODO(t!)"  ; A task that needs doing & is ready to do
@@ -39,12 +41,7 @@
   (org-log-done 'time)
   ;; Log state changes into drawer
   (org-log-into-drawer t)
-  (org-agenda-log-mode-items '(closed clock state))
-  :hook (org-mode . visual-line-mode)
   :init
-  (lgreen/leader-define-key
-    "o a" '(org-agenda :wk "Open agenda")
-    "X" '(org-capture :wk "Org capture"))
   (general-def
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading
@@ -132,36 +129,10 @@
       "C-j" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-week 1)))
       "C-l" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-day 1)))
       "C-h" (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-day 1)))))
-  :hook (org-mode . lgreen/setup-org-calendar-navigation)
+  :hook ((org-mode . visual-line-mode)
+	 (org-mode . lgreen/setup-org-calendar-navigation))
   :config
   (org-load-modules-maybe t)
-  ;; To speed up startup, the below is specifically not put in the init section
-  (setq   org-directory "~/dev/my/org"
-	  org-agenda-files (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
-				   (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$"))
-	  lgreen/org-capture-todo-file (expand-file-name "personal/todo.org" org-directory)
-	  lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
-	  lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
-	  lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
-	  org-capture-templates
-	  '(("t" "todo" entry
-	     (file+headline lgreen/org-capture-todo-file "Inbox")
-	     "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-	    ("n" "notes" entry
-	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %u %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-	    ("m" "email" entry
-	     (file+olp lgreen/org-capture-todo-file "Inbox")
-	     "* TODO Mail:%u %?\n%i\n%a" :prepend t)
-	    ("j" "Journal" entry
-	     (file+olp+datetree lgreen/org-capture-journal-file)
-	     "* %U %?\n%i\n%a" :prepend t)
-	    ("p" "Protocol" entry
-	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	    ("L" "Protocol Link" entry
-	     (file+headline lgreen/org-capture-notes-file "Inbox")
-	     "* %? [[%:link][%:description]] \nCaptured On: %U")))
   (require 'ob-C)
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -210,7 +181,6 @@
   ;; (require 'org-man)
   )
 
-
 ;;; Evil-Org
 ;; Taming the chaos with HKJL
 (use-package evil-org
@@ -219,6 +189,21 @@
 	 (evil-org-mode . evil-org-set-key-theme))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift leader todo heading)))
+
+;;; Org-Agenda
+;; I love it when a plan comes together
+(use-package org-agenda
+  :ensure nil
+  :after org
+  :custom
+  (org-agenda-log-mode-items '(closed clock state))
+  :init
+  (lgreen/leader-define-key
+    "o a" '(org-agenda :wk "Open agenda"))
+  :config
+  (setq org-agenda-files (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
+				 (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
+  )
 
 ;;; Evil-Org-Agenda
 ;; Making evil plans
@@ -245,6 +230,40 @@
   ;;     "SPC" nil
   ;;     "<tab>" 'org-agenda-show-and-scroll-up
   ;;     "RET" 'org-agenda-goto))
+  )
+
+;;; Org-Capture
+;; Gotta capture them all
+(use-package org-capture
+  :ensure nil
+  :after org
+  :init
+  (lgreen/leader-define-key
+    "X" '(org-capture :wk "Org capture"))
+  :config
+  (setq lgreen/org-capture-todo-file (expand-file-name "personal/todo.org" org-directory)
+	lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
+	lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
+	lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
+	org-capture-templates
+	'(("t" "todo" entry
+	   (file+headline lgreen/org-capture-todo-file "Inbox")
+	   "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
+	  ("n" "notes" entry
+	   (file+headline lgreen/org-capture-notes-file "Inbox")
+	   "* %u %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
+	  ("m" "email" entry
+	   (file+olp lgreen/org-capture-todo-file "Inbox")
+	   "* TODO Mail:%u %?\n%i\n%a" :prepend t)
+	  ("j" "Journal" entry
+	   (file+olp+datetree lgreen/org-capture-journal-file)
+	   "* %U %?\n%i\n%a" :prepend t)
+	  ("p" "Protocol" entry
+	   (file+headline lgreen/org-capture-notes-file "Inbox")
+	   "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	  ("L" "Protocol Link" entry
+	   (file+headline lgreen/org-capture-notes-file "Inbox")
+	   "* %? [[%:link][%:description]] \nCaptured On: %U")))
   )
 
 ;;; Org-Indent

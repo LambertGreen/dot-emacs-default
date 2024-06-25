@@ -91,7 +91,14 @@
 	 ("\\.gitignore\\'" . gitignore-mode)))
 
 (use-package groovy-mode)
-(use-package jq-mode)
+
+(use-package jq-mode
+  :after org
+  :mode ("\\.jq\\'" . jq-mode)
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((jq . t))))
+
 (use-package just-mode)
 (use-package lua-mode)
 (use-package markdown-mode)

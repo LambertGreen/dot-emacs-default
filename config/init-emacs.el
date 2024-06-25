@@ -175,7 +175,6 @@
 ;;; Smartparens
 ;; Automatically balance inserting of parens
 (use-package smartparens
-  :after org
   :config
   (require 'smartparens-config)
   (smartparens-global-mode 1)

@@ -90,7 +90,7 @@
 (use-package indent-guide
   :custom
   ;; (indent-guide-recursive t)
-  (indent-guide-char "│")   ; Useful characters: ·│┊┆╎┋▏
+  (indent-guide-char "▏")   ; Useful characters: ·│┊┆╎┋▏
   :init
   (lgreen/leader-define-key
     "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
@@ -102,12 +102,14 @@
     (if (derived-mode-p 'prog-mode)
 	(indent-guide-mode (if indent-guide-mode -1 1))
       (message "Not in a programming mode!")))
+
   (defun lgreen/set-face-indent-guide (&rest _)
     "Set the indent-guide color to match the comment color of the current theme"
     (set-face-attribute 'indent-guide-face nil
 			:inherit 'font-lock-comment-face
 			:foreground 'unspecified
 			:background 'unspecified))
+  (lgreen/set-face-indent-guide)
   (advice-add 'load-theme
 	      :after 'lgreen/set-face-indent-guide))
 

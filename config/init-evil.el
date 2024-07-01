@@ -158,7 +158,9 @@
   (global-evil-surround-mode 1))
 
 ;;; Evil-Textobj-Tree-Sitter
+;; FIXME Enable for prog modes that have treesitter support
 (use-package evil-textobj-tree-sitter
+  :disabled t
   :after evil-collection-unimpaired
   :config
   (evil-define-key nil evil-outer-text-objects-map

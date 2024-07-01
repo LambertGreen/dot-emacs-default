@@ -12,12 +12,16 @@
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
 
-  :config
   ;; Set custom file
   ;; NOTE: I have disabled this on occasion, but don't do this as this breaks the
   ;; saving of add directory local variables to the safe list.
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  ;;
+  ;; NOTE: I am running into an issue where variables marked as safe in the custom file
+  ;; is not being honored, so I have moved the setting of the custom file from `:config' section
+  ;; to the `:custom' section to see if this will help.
+  (custom-file (expand-file-name "custom.el" user-emacs-directory))
 
+  :config
   ;; Fonts
   ;; Default font
   (set-face-attribute 'default nil :family "Iosevka" :height 128)

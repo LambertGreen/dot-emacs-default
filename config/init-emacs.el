@@ -18,8 +18,13 @@
   ;; saving of add directory local variables to the safe list.
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
-  ;; Font
-  (set-face-attribute 'default nil :font "Iosevka Nerd Font Mono" :height 128)
+  ;; Fonts
+  ;; Default font
+  (set-face-attribute 'default nil :family "Iosevka" :height 128)
+  ;; Fixed-Pitch font
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka Mono")
+  ;; Variable-Pitch font
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 128)
 
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scroll-bar

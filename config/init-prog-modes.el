@@ -40,6 +40,11 @@
 (use-package apheleia
   :config (apheleia-global-mode +1))
 
+;;; Aggressive-Indent-Mode
+;; Do it now!
+(use-package aggressive-indent
+  :hook (emacs-lisp-mode . aggressive-indent-mode))
+
 ;;; Eglot-Booster
 ;; Boohoo
 (use-package eglot-booster

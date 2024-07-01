@@ -147,17 +147,36 @@
      ))
 
   (defun lgreen/org-font-setup ()
+    "Sets the fonts to specific sizes for org-mode"
+    (interactive)
+    ;; TODO Is this needed?
+    (require 'org-faces)
+
+    ;; Make the document title a bit bigger
+    (set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.5)
     ;; Set faces for heading levels
-    (dolist (face '((org-document-title . 1.5)
-		    (org-level-1 . 1.3)
+    (dolist (face '((org-level-1 . 1.3)
                     (org-level-2 . 1.25)
                     (org-level-3 . 1.20)
                     (org-level-4 . 1.15)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Iosevka NF" :weight 'regular :height (cdr face) :slant 'unspecified)))
+                    (org-level-5 . 1.0)
+                    (org-level-6 . 1.0)
+                    (org-level-7 . 1.0)
+                    (org-level-8 . 1.0)))
+      (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face)))
+
+    ;; Make sure org-indent face is available
+    (require 'org-indent)
+
+    ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
   ;; Apply the function after loading Org mode
   (add-hook 'org-mode-hook 'lgreen/org-font-setup)
@@ -171,7 +190,9 @@
 	(set-variable 'org-hide-emphasis-markers nil)
       (set-variable 'org-hide-emphasis-markers t))
     (org-mode-restart))
-  )
+
+  (advice-add 'load-theme
+	      :after 'lgreen/org-font-setup))
 
 ;;; Org-Contrib
 (use-package org-contrib
@@ -201,8 +222,9 @@
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
   :config
-  (setq org-agenda-files (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
-				 (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
+  (setq org-agenda-files
+	(append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
+		(directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
   )
 
 ;;; Evil-Org-Agenda
@@ -347,7 +369,6 @@
   :after org-roam
   :commands (org-roam-ui-mode)
   :config (org-roam-db-autosync-mode))
-
 
 ;;; Consult-Org-Roam
 ;; TODO Evaluate this package

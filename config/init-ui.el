@@ -116,7 +116,12 @@
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
-  :hook (emacs-lisp-mode . outshine-mode))
+  :hook (prog-mode . outshine-mode)
+  :general
+  (:keymaps 'outshine-mode-map
+            :states 'normal
+            "<tab>" #'outline-cycle
+            "<backtab>" #'outshine-cycle-buffer))
 
 ;;; Nerd-Icons
 ;; Fancy icons

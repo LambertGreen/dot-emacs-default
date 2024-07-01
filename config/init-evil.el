@@ -235,5 +235,42 @@
 ;; (use-package evil-owl
 ;;   :after evil)
 
+;;; Targets
+;; Aiming at that there
+(use-package targets
+  :ensure (:fetcher github :repo "dvzubarev/targets.el")
+  :config
+  (setq targets-text-objects nil)
+  (targets-setup nil)
+  (targets-define-composite-to any-block
+    (("(" ")" pair)
+     ("[" "]" pair)
+     ("{" "}" pair)
+     ("<" ">" pair))
+    :bind t
+    :next-key "n"
+    :last-key "l"
+    :around-key nil
+    :inside-key nil
+    :keys "b")
+  (targets-define-composite-to any-quote
+    (("\"" "\"" quote)
+     ("'" "'" quote))
+    :bind t
+    :next-key "n"
+    :last-key "l"
+    :around-key nil
+    :inside-key nil
+    :keys "q")
+  (targets-define-to double-quote
+                     "\"" nil quote
+                     :bind t
+                     :next-key "n"
+                     :last-key "l"
+                     :around-key nil
+                     :inside-key nil
+                     :keys "q"
+                     :hooks (emacs-lisp-mode-hook)))
+
 ;;; _
 (provide 'init-evil)

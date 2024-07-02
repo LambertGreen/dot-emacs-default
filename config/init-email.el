@@ -7,8 +7,27 @@
   :after org
   :custom
   (mu4e-index-cleanup nil)
-  (mu4e-ind
-   ex-lazy-check t)
+  (mu4e-index-lazy-check t)
+  (mu4e-maildir "~/.mail/gmail")
+  (mu4e-maildir-shortcuts
+   '((:maildir "/inbox"         :key ?i)
+     (:maildir "/All Mail"      :key ?a)
+     (:maildir "/Drafts"        :key ?d)
+     (:maildir "/Sent Mail"     :key ?s)
+     (:maildir "/Trash"         :key ?t)))
+  (mu4e-drafts-folder "/Drafts")
+  (mu4e-trash-folder "/Trash")
+  (mu4e-refile-folder "/All Mail")
+  (mu4e-get-mail-command "mbsync -a")
+  (mu4e-update-interval 300)
+  (mu4e-change-filenames-when-moving t) ;; needed for mbsync
+
+  ;; Don't keep message buffers around
+  (message-kill-buffer-on-exit t)
+
+  :init
+  (lgreen/leader-define-key
+    "o m" '(mu4e :wk "Open mu4e")))
   )
 
 ;;; _

@@ -76,7 +76,7 @@
 ;;;;; -----------------
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
-    "b d" '(kill-this-buffer :wk "Delete buffer")
+    "b d" '(evil-delete-buffer :wk "Delete buffer")
     "b n" '(next-buffer :wk "Next buffer")
     "b N" '(evil-buffer-new :wk "New buffer")
     "b p" '(previous-buffer :wk "Previous buffer")

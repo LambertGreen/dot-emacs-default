@@ -110,6 +110,11 @@
 (use-package mermaid-mode)
 (use-package nix-mode)
 (use-package rfc-mode)
+
+(use-package sh-mode
+  :ensure nil
+  :hook (sh-mode . hs-minor-mode))
+
 (use-package strace-mode)
 (use-package toml-mode)
 (use-package vimrc-mode)

@@ -118,10 +118,11 @@
 (use-package outshine
   :hook (prog-mode . outshine-mode)
   :general
-  (:keymaps 'outshine-mode-map
+  (:keymaps 'outline-mode-map
             :states 'normal
-            "<tab>" #'outline-cycle
-            "<backtab>" #'outshine-cycle-buffer))
+            "<tab>" 'outline-cycle
+            "<backtab>" 'outshine-cycle-buffer
+	    "gh" 'outline-up-heading))
 
 ;;; Nerd-Icons
 ;; Fancy icons

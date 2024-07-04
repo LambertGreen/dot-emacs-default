@@ -24,11 +24,12 @@
   :config
   ;; Fonts
   ;; Default font
-  (set-face-attribute 'default nil :family "Iosevka" :height 128)
+  (set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 128)
   ;; Fixed-Pitch font
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka Mono")
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
   ;; Variable-Pitch font
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 128)
+  ;; (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 128)
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo")
 
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scroll-bar

@@ -3,7 +3,7 @@
 ;;; Lisp functions
 (use-package emacs
   :ensure nil
-  :config
+  :init
   (lgreen/leader-define-key
     "c f" '(lgreen/format-buffer :wk "format buffer"))
 
@@ -23,12 +23,28 @@
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
 
+  (defun lgreen/set-faces-for-prog-mode ()
+    "Set faces for programming font lock variables"
+    (interactive)
+
+    ;; Make keywords italic and light weight
+    (set-face-attribute 'font-lock-keyword-face nil :slant 'italic :weight 'light)
+    ;; Make comments italic and light weight
+    (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'light)
+    ;; Make function names more prominent by increasing size
+    (set-face-attribute 'font-lock-function-name-face nil :weight 'normal :height 148))
+
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
     (interactive)
     (if (bound-and-true-p eglot--managed-mode)
 	(eglot-format-buffer)
-      (call-interactively #'apheleia-format-buffer))))
+      (call-interactively #'apheleia-format-buffer)))
+
+  :hook (prog-mode . lgreen/set-faces-for-prog-mode)
+  :config
+  (advice-add 'load-theme
+	      :after 'lgreen/set-faces-for-prog-mode))
 
 ;;; Treesit-Auto
 ;; Get all the syntax

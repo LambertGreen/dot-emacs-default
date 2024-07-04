@@ -55,9 +55,18 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + Looks simply broken
 
 * TODOs
-** Open [0/3]
+** Open [0/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
+
+*** WAIT Prettify =org-mode=
+:LOGBOOK:
+- State "WAIT"       from "STRT"          [2024-07-03 Wed 19:36] \\
+  Not really waiting, but testing the waiting state.
+- State "STRT"       from "TODO"          [2024-07-03 Wed 19:36]
+- State "TODO"       from              [2024-07-03 Wed 19:36]
+:END:
+Customize ~prettify-symbols-alist~
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j

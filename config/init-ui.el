@@ -4,6 +4,7 @@
 ;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline
+  :disabled t
   :custom
   (doom-modeline-height 20)
   ;; (doom-modeline-indent-info t)
@@ -32,27 +33,30 @@
     (force-mode-line-update)
     (redraw-display)))
 
-;;; Spaceline
-;; The mode line from Spacemacs
-(use-package spaceline
-  :disabled t
-  :custom
-  ( powerline-default-separator 'contour)
-  ( powerline-gui-use-vcs-glyph t)
-  ( powerline-height 22)
-  (spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  ( spaceline-workspace-numbers-unicode t)
-  ( spaceline-window-numbers-unicode t)
-  ( spaceline-separator-dir-left '(left . right))
-  ( spaceline-separator-dir-right '(right . left))
-  ( spaceline-flycheck-bullet "❀ %s")
-  ;; (powerline-default-separator 'utf-8)
-  ;; (spaceline-minor-modes-separator " ")
-  ;; (spaceline-window-numbers-unicode t)
-  ;; (spaceline-workspace-numbers-unicode t)
+;;; Moody
+;; Get into the mood boy
+(use-package moody
   :config
-  (require `spaceline-config)
-  (spaceline-spacemacs-theme))
+  (setq evil-mode-line-format '(before . moody-mode-line-buffer-identification))
+  ;; (setq x-underline-at-descent-line t)
+  (setq moody-mode-line-height 22)
+  ;; (when (memq window-system '(mac ns))
+  ;;   (setq moody-slant-function #'moody-slant-apple-rgb))
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)
+  (moody-replace-mode-line-front-space)
+  (moody-replace-eldoc-minibuffer-message-function)
+  (defun lgreen/set-faces-for-mode-line()
+    "Set faces for the mode line"
+    (interactive)
+    (set-face-attribute 'mode-line nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :box nil)
+    ))
+
+;;; Minions
+;; Keeping the minor modes in line, instead sprawled in the mode line
+(use-package minions
+  :config (minions-mode 1))
 
 ;;; Spaceline-All-The-Icons
 (use-package spaceline-all-the-icons

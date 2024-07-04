@@ -11,10 +11,17 @@
     :keymaps 'prog-mode-map
     "f" '(:ignore t :wk "format")
     "f b" '(lgreen/format-buffer :wk "format buffer")
+
     "x" '(:ignore t :wk "errors")
     "x l" '(consult-flymake :wk "list errors")
     "x p" '(flymake-goto-prev-error :wk "error previous")
-    "x n" '(flymake-goto-next-error :wk "error next"))
+    "x n" '(flymake-goto-next-error :wk "error next")
+
+    "n" '(:ignore t :wk "narrow")
+    "n r" '(narrow-to-region :wk "narrow to region")
+    "n d" '(narrow-to-defun :wk "narrow to defun")
+    "n p" '(narrow-to-page :wk "narrow to page")
+    "n w" '(widen :wk "widen"))
 
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."

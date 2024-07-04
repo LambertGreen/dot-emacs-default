@@ -77,7 +77,7 @@ Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=
 *** DONE Update =window management= [2/2]
 
 **** DONE Provide a way to toggle window to max size
-I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configufation using ~winner-undo~ (~w u~).
+I did not find a way to do this in the same way as =Doom Emacs=, however we can use ~delete-other-window~ (~w o~) to make the current window the only window, and then restore to the previous window configuration using ~winner-undo~ (~w u~).
 
 **** DONE Provide a way to undo maximize
 Used ~winnner-undo~
@@ -112,7 +112,7 @@ CLOSED: [2024-05-24 Fri 21:58]
 ***** [X] Checkbox two
 CLOSED: [2024-05-24 Fri 21:58]
 
-***** [X] Checbox three
+***** [X] Checkbox three
 CLOSED: [2024-05-24 Fri 21:58]
 
 *** DONE Add checkers [2/2]

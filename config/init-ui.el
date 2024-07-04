@@ -136,6 +136,10 @@
   :config
   (nerd-icons-completion-mode))
 
+;;; All-The-Icons
+;; A picture is like a thousand words
+(use-package all-the-icons)
+
 ;;; Pulsar
 ;; Know what line point is on after movement
 (use-package pulsar

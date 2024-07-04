@@ -155,17 +155,17 @@
     (require 'org-faces)
 
     ;; Make the document title a bit bigger
-    (set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.5)
+    (set-face-attribute 'org-document-title nil :font "Iosevka Nerd Font Propo" :weight 'bold :height 1.5)
     ;; Set faces for heading levels
     (dolist (face '((org-level-1 . 1.3)
-                    (org-level-2 . 1.25)
-                    (org-level-3 . 1.20)
+                    (org-level-2 . 1.20)
+                    (org-level-3 . 1.17)
                     (org-level-4 . 1.15)
-                    (org-level-5 . 1.0)
-                    (org-level-6 . 1.0)
-                    (org-level-7 . 1.0)
-                    (org-level-8 . 1.0)))
-      (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face)))
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "Iosevka Nerd Font Propo" :weight 'medium :height (cdr face)))
 
     ;; Make sure org-indent face is available
     (require 'org-indent)

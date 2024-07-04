@@ -20,6 +20,15 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 *** Cons
 + Need something different every now and then
 
+** Theme: ~Cattpuccin~
+*** Pros
++ Has a good inbetween light/dark variant
++ ~diff-hl~ colors
+  + Colors match expectation
+
+*** Cons
++ Programming modes are little lackluster
+
 ** Theme: ~Doom-Badger~
 *** Pros
 **** =Star Wars= type vibe

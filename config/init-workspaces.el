@@ -55,16 +55,7 @@
     "t t" '(toggle-frame-tab-bar :wk "Toggle tab bar")
     "TAB" '(:ignore :wk "Workspace")
     "TAB n" '(tab-bar-switch-to-next-tab  :wk "Tab next")
-    "TAB p" '(tab-bar-switch-to-prev-tab  :wk "Tab previous"))
-  :config
-  (defun lgreen/set-face-tab-bar (&rest _)
-    "Set face for tab-bar-tab."
-    (message "Setting tab-bar-tab face attributes")
-    (set-face-attribute 'tab-bar-tab nil
-			:inherit 'doom-modeline-project-dir
-			:foreground 'unspecified
-			:background 'unspecified))
-  (advice-add 'load-theme :after 'lgreen/set-face-tab-bar))
+    "TAB p" '(tab-bar-switch-to-prev-tab  :wk "Tab previous")))
 
 ;;; Vim-Tab-Bar
 ;; Improve the UX of the tab-bar

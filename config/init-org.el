@@ -131,22 +131,6 @@
       "C-j" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-week 1)))
       "C-l" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-day 1)))
       "C-h" (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-day 1)))))
-  :hook ((org-mode . visual-line-mode)
-	 (org-mode . lgreen/setup-org-calendar-navigation))
-  :config
-  (org-load-modules-maybe t)
-  (require 'ob-C)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (C . t)
-     (dot . t)
-     (gnuplot . t)
-     (org . t)
-     (js . t)
-     (sqlite . t)
-     (shell . t)
-     ))
 
   (defun lgreen/org-font-setup ()
     "Sets the fonts to specific sizes for org-mode"
@@ -230,8 +214,23 @@
 				   ("DEADLINE:" . "")))
     (prettify-symbols-mode))
 
-  ;; Apply the function after loading Org mode
-  (add-hook 'org-mode-hook 'lgreen/org-font-setup)
+  :hook ((org-mode . visual-line-mode)
+	 (org-mode . lgreen/setup-org-calendar-navigation)
+	 (org-mode . lgreen/org-font-setup))
+  :config
+  (org-load-modules-maybe t)
+  (require 'ob-C)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (C . t)
+     (dot . t)
+     (gnuplot . t)
+     (org . t)
+     (js . t)
+     (sqlite . t)
+     (shell . t)
+     ))
 
   ;; Below code snippet acquired from here:
   ;; - https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode

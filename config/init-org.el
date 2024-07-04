@@ -1,6 +1,5 @@
 ;;; init-org.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Org
 ;; My life in plain text.
 (use-package org
@@ -49,6 +48,7 @@
     "C-," nil
     "C-'" nil
     )
+
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
@@ -81,7 +81,7 @@
     "b i h" 'org-table-insert-hline
     "b i r" 'org-table-insert-row
 
-    "l" '(:ignore t :which-key "link")
+    "l" '(:ignore t :wk "link")
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
     "l L" 'org-insert-all-links
@@ -91,23 +91,23 @@
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display
 
-    "p" '(:ignore t :which-key "priority")
+    "p" '(:ignore t :wk "priority")
     "p d" 'org-priority-down
     "p p" 'org-priority
     "p u" 'org-priority-up
 
-    "P" '(:ignore t :which-key "publish")
+    "P" '(:ignore t :wk "publish")
     "P a" 'org-publish-all
     "P f" 'org-publish-current-file
     "P p" 'org-publish
     "P P" 'org-publish-current-project
     "P s" 'org-publish-sitemap
 
-    "r" '(:ignore t :which-key "refile")
+    "r" '(:ignore t :wk "refile")
     "r r" 'org-refile
     "r R" 'org-refile-reverse
 
-    "s" '(:ignore t :which-key "subtree")
+    "s" '(:ignore t :wk "subtree")
     "s a" 'org-toggle-archive-tag
     "s b" 'org-tree-to-indirect-buffer
     "s c" 'org-clone-subtree-with-time-shift
@@ -122,6 +122,7 @@
     "s A" 'org-archive-subtree
     "s N" 'widen
     "s S" 'org-sort)
+
   (defun lgreen/setup-org-calendar-navigation ()
     (general-def
       :keymaps 'org-read-date-minibuffer-local-map
@@ -393,17 +394,17 @@
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
-    "m" '(:ignore t :which-key "roam")
+    "m" '(:ignore t :wk "roam")
     "m i" 'org-roam-node-insert
     "m f" 'org-roam-node-find
     "m m" 'org-roam-buffer-toggle
 
-    "m d" '(:ignore t :which-key "dailies")
+    "m d" '(:ignore t :wk "dailies")
     "m d d" 'org-roam-dailies-goto-date
     "m d t" 'org-roam-dailies-goto-today
     "m d y" 'org-roam-dailies-goto-yesterday
 
-    "m o" '(:ignore t :which-key "node properties")
+    "m o" '(:ignore t :wk "node properties")
     "m o a" 'org-roam-alias-add
     "m o A" 'org-roam-alias-remove
     "m o r" 'org-roam-ref-add

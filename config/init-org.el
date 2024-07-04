@@ -184,9 +184,11 @@
     "Beautify org mode keywords."
     (interactive)
     (setq prettify-symbols-alist '(("TODO" . "")
+	                           ("STRT" . "")
 	                           ("WAIT" . "")
 				   ("KILL" . "")
 				   ("DONE" . "")
+				   ("PROJ" . " ")
 				   ("[#A]" . "")
 				   ("[#B]" . "")
 				   ("[#C]" . "")

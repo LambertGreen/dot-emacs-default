@@ -38,20 +38,34 @@
 (use-package moody
   :config
   (setq evil-mode-line-format '(before . moody-mode-line-buffer-identification))
-  ;; (setq x-underline-at-descent-line t)
+  (setq x-underline-at-descent-line t)
   (setq moody-mode-line-height 22)
-  ;; (when (memq window-system '(mac ns))
-  ;;   (setq moody-slant-function #'moody-slant-apple-rgb))
+  (when (memq window-system '(mac ns))
+    (setq moody-slant-function #'moody-slant-apple-rgb))
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode)
   (moody-replace-mode-line-front-space)
   (moody-replace-eldoc-minibuffer-message-function)
-  (defun lgreen/set-faces-for-mode-line()
-    "Set faces for the mode line"
-    (interactive)
-    (set-face-attribute 'mode-line nil :box nil)
-    (set-face-attribute 'mode-line-inactive nil :box nil)
-    ))
+
+  (setq evil-normal-state-tag   (propertize " 󰬕 " 'face '((:height 178 :weight extrabold)))
+        evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :weight extrabold :foreground "blue")))
+        evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :weight extrabold :foreground "green")))
+        evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :weight extrabold :foreground "yellow")))
+        evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :weight extrabold :foreground "orange")))
+        evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :weight extrabold :foreground "red")))
+        evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :weight extrabold :foreground "violet"))))
+
+  (defun lgreen/customize-vc-mode (orig-func &rest args)
+    "Customize the vc-mode string to include a Git icon with custom face."
+    (let ((result (apply orig-func args)))
+      (when (and vc-mode (stringp vc-mode))
+        (let ((git-icon (propertize "  " 'face '((:height 158 :weight extrabold)))))
+	  (setq vc-mode
+		(concat git-icon (substring vc-mode 4)))))
+      result))
+
+  ;; Advise vc-mode-line to apply custom vc-mode formatting
+  (advice-add 'vc-mode-line :around #'lgreen/customize-vc-mode))
 
 ;;; Minions
 ;; Keeping the minor modes in line, instead sprawled in the mode line

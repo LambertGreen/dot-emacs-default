@@ -29,6 +29,17 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 *** Cons
 + Programming modes are little lackluster
 
+** Theme: ~Ef-Dream~
+*** Pros
+**** =Star Wars= type vibe
++ Has warm ~blues~, ~browns~
+
+**** The background color is pleasant
+
+*** Cons
+**** ~diff-hl~ colors
++ Looks simply broken
+
 ** Theme: ~Doom-Badger~
 *** Pros
 **** =Star Wars= type vibe
@@ -52,18 +63,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 **** The background color: is almost black
 + However this works well if using transparency
 
-** Theme: ~Ef-Dream~
-*** Pros
-**** =Star Wars= type vibe
-+ Has warm ~blues~, ~browns~
-
-**** The background color is pleasant
-
-*** Cons
-**** ~diff-hl~ colors
-+ Looks simply broken
-
-* TODOs
+* PROJ Work-Items
 ** Open [0/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]

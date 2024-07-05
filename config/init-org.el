@@ -216,7 +216,8 @@
 
   :hook ((org-mode . visual-line-mode)
 	 (org-mode . lgreen/setup-org-calendar-navigation)
-	 (org-mode . lgreen/org-font-setup))
+	 (org-mode . lgreen/org-font-setup)
+	 (org-mode . lgreen/org-prettify-symbols))
   :config
   (org-load-modules-maybe t)
   (require 'ob-C)

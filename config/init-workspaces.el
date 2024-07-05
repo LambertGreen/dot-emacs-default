@@ -1,48 +1,5 @@
 ;;; init-workspaces.el --- -*- lexical-binding: t; -*-
 
-
-;; TODO Remove if finally deciding to move from projectile to project.el
-;; ;;; Perspective
-;; ;; Switching from one view to the other
-;; (use-package perspective
-;;   :custom
-;;   (persp-suppress-no-prefix-key-warning t)
-;;   :init
-;;   (persp-mode)
-;;   (lgreen/leader-define-key
-;;     "p s" '(persp-switch :wk "Switch perspective")))
-
-;; ;;; Persp-Projectile
-;; ;; Perspective and project integration
-;; (use-package persp-projectile
-;;   :after (projectile perspective))
-
-;; ;;; Centaur-Tabs
-;; ;; See your projects in the tabs
-;; (use-package centaur-tabs
-;;   :after (projectile)
-;;   :commands centaur-tabs-mode
-;;   :custom
-;;   ;; (centaur-tabs-height 24)
-;;   (centaur-tabs-style "bar")
-;;   (centaur-tabs-set-bar 'over)
-;;   (centaur-tabs-modified-marker "•") ;; Unicode Bullet (0x2022)
-;;   (centaur-tabs-set-icons t)
-;;   (centaur-tabs-set-modified-marker t)
-;;   (centaur-tabs-change-fonts "arial" 160)
-;;   (centaur-tabs-show-navigation-buttons nil)
-;;   (centaur-tabs-enable-ido-completion nil)
-;;   (centaur-tabs-cycle-scope 'group)
-;;   :general
-;;   (:states '(normal)
-;;	   "gt" 'centaur-tabs-forward
-;;	   "gT" 'centaur-tabs-backward)
-;;   :config
-;;   (setq centaur-tabs--buffer-show-groups t)
-;;   (centaur-tabs-mode t)
-;;   (centaur-tabs-group-by-projectile-project)
-;;   (centaur-tabs-headline-match))
-
 ;;; Tab-bar
 ;; Put it on my tab
 (use-package tab-bar
@@ -56,13 +13,6 @@
     "TAB" '(:ignore :wk "Workspace")
     "TAB n" '(tab-bar-switch-to-next-tab  :wk "Tab next")
     "TAB p" '(tab-bar-switch-to-prev-tab  :wk "Tab previous")))
-
-;;; Vim-Tab-Bar
-;; Improve the UX of the tab-bar
-(use-package vim-tab-bar
-  :ensure (:fetcher github :repo "jamescherti/vim-tab-bar.el")
-  :after tab-bar
-  :config (vim-tab-bar-mode))
 
 ;;; Tabspaces
 ;; Make tabs work those spaces

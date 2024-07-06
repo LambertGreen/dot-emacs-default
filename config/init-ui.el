@@ -134,7 +134,8 @@
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
-  :hook (prog-mode . outshine-mode)
+  :hook ((prog-mode . outshine-mode)
+	 (conf-mode . outshine-mode))
   :general
   (:keymaps 'outline-mode-map
             :states 'normal

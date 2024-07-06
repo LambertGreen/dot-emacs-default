@@ -39,5 +39,13 @@
   (mu4e-alert-set-default-style 'libnotify)
   )
 
+;;; Smtpmail
+;; Get it out there
+(use-package smtpmail
+  :ensure nil
+  :custom
+  (send-mail-function 'smtpmail-send-it)
+  (message-send-mail-function 'smtpmail-send-it))
+
 ;;; _
 (provide 'init-email)

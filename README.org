@@ -40,6 +40,22 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 **** ~diff-hl~ colors
 + Looks simply broken
 
+** Theme: ~Chocolate~
+*** Pros
++ =Star Wars= type vibe
++ Has warm ~blues~, ~browns~
++ The background color is pleasant
+
+*** Cons
++ No light mode analog
+
+** Theme: ~Spacemacs~
+*** Pros
++ Has one of the best light themes
++ Has great =diff-hl= colors
++ Theme has both ~light~ and ~dark~ modes
+*** Cons
++ The =org= colors are not my favorite
 ** Theme: ~Doom-Badger~
 *** Pros
 **** =Star Wars= type vibe

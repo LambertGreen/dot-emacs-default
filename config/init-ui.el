@@ -47,19 +47,40 @@
   (moody-replace-mode-line-front-space)
   (moody-replace-eldoc-minibuffer-message-function)
 
-  (setq evil-normal-state-tag   (propertize " 󰬕 " 'face '((:height 178 :weight extrabold)))
-        evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :weight extrabold :foreground "blue")))
-        evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :weight extrabold :foreground "green")))
-        evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :weight extrabold :foreground "yellow")))
-        evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :weight extrabold :foreground "orange")))
-        evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :weight extrabold :foreground "red")))
-        evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :weight extrabold :foreground "violet"))))
+  (defun lgreen/set-face-evil-mode-line-tags ()
+    "Set the evil mode line tags."
+    (setq evil-normal-state-tag   (propertize " 󰬕 " 'face '((:height 178 :weight extrabold)))
+	  evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :weight extrabold :foreground "blue")))
+	  evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :weight extrabold :foreground "green")))
+	  evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :weight extrabold :foreground "yellow")))
+	  evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :weight extrabold :foreground "orange")))
+	  evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :weight extrabold :foreground "red")))
+	  evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :weight extrabold :foreground "violet")))))
+  (lgreen/set-face-evil-mode-line-tags)
+
+  (defun lgreen/set-face-evil-mode-line-tags-colors (&rest _)
+    "Set the evil mode line tags using diff-mode face colors."
+    (require 'diff-mode)
+    (setq evil-insert-state-tag   (propertize " 󰬐 " 'face `(:height 178 :foreground ,(face-attribute 'diff-added :foreground)))
+	  evil-visual-state-tag   (propertize " 󰬝 " 'face `(:height 178 :foreground ,(face-attribute 'diff-changed :foreground)))
+	  evil-replace-state-tag  (propertize " 󰬙 " 'face `(:height 178 :foreground ,(face-attribute 'diff-removed :foreground)))
+	  evil-motion-state-tag   (propertize " 󰬔 " 'face `(:height 178 :foreground ,(face-attribute 'diff-removed :foreground)))
+	  evil-operator-state-tag (propertize " 󰬖 " 'face `(:height 178 :foreground ,(face-attribute 'diff-removed :foreground)))
+	  evil-emacs-state-tag    (propertize " 󰬌 " 'face `(:height 178 :foreground ,(face-attribute 'diff-header :foreground)))))
+
+  ;; FIXME The evil state tags face colors do not get updated
+  ;; - they don't update on initial load
+  ;; - they don't update on theme change
+  ;; The below does not work because even though we require diff-mode, the faces are not yet defined?
+  ;; (lgreen/set-face-evil-mode-line-tags-colors)
+  (add-hook 'after-load-theme-hook #'lgreen/set-face-evil-mode-line-tags)
+  (advice-add 'load-theme :after 'lgreen/set-face-evil-mode-line-tags-colors)
 
   (defun lgreen/customize-vc-mode (orig-func &rest args)
     "Customize the vc-mode string to include a Git icon with custom face."
     (let ((result (apply orig-func args)))
       (when (and vc-mode (stringp vc-mode))
-        (let ((git-icon (propertize "  " 'face '((:height 158 :weight extrabold)))))
+	(let ((git-icon (propertize "  " 'face '((:height 158 :weight extrabold)))))
 	  (setq vc-mode
 		(concat git-icon (substring vc-mode 4)))))
       result))

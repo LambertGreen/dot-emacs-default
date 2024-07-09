@@ -25,6 +25,14 @@
 
 ;;; Consult
 ;; Making buffer completions nicer
+;;
+;; NOTE: narrowing in the minibuffer is supported with the following keys:
+;; - <SPC>     -> ephemeral buffers
+;; - <* SPC>   -> modified buffers
+;; - <b SPC>   -> only buffers
+;; - <f SPC>   -> Files
+;; NOTE: For some reason the `*Messages*' buffer does not show using `consult-buffer'
+;; Use <C-x C-b> as a workaround
 (use-package consult
   :after general
   :bind
@@ -33,11 +41,13 @@
   :init
   (lgreen/leader-define-key
     "*" '(lgreen/ripgrep-symbol-at-point :wk "Symbol search")
-    "b b" '(consult-buffer :wk "Switch buffer")
+    "b b" '(consult-project-buffer :wk "Switch buffer (project)")
+    "b B" '(consult-buffer :wk "Switch buffer")
     "h t" '(consult-theme :wk "Switch theme")
     "s b" '(consult-line :wk "Search buffer")
     "s p" '(consult-ripgrep :wk "Search project files")
     "s i" '(consult-imenu :wk "Jump to symbol")
+    "s I" '(consult-imenu-multi :wk "Jump to symbol (multi-file)")
     "s d" '(consult-locate :wk "Search current directory"))
 
   ;; Optionally configure the register formatting. This improves the register

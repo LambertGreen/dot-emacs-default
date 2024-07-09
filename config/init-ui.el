@@ -84,7 +84,12 @@
 ;;; Solaire-Mode
 ;; Darken popup buffers
 (use-package solaire-mode
-  :config (solaire-global-mode +1))
+  :config
+  (solaire-global-mode 1)
+  ;; Prevent solaire-mode from overriding the modeline faces. The difference in
+  ;; color between normal buffers and special is confusing and annoying.
+  (dolist (face '(mode-line mode-line-active mode-line-inactive))
+    (setf (alist-get face solaire-mode-remap-alist) nil)))
 
 ;;; HL-Todo
 ;; Highlight TODO's

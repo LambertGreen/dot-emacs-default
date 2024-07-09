@@ -1,4 +1,5 @@
-;;; init-dashboard.el --- -*- lexical-binding: t; -*-
+;; init-dashboard.el --- -*- lexical-binding: t; -*-
+
 
 (use-package dashboard
   :custom
@@ -9,7 +10,7 @@
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  ;;TODO Remove if finally moving from projectile to projectl.el
+  ;;TODO Remove if finally moving from projectile to project.el
   ;; (dashboard-projects-switch-function 'projectile-persp-switch-project)
   (dashboard-items '((recents   . 5)
 		     (projects  . 5)
@@ -21,5 +22,9 @@
 
   :config (dashboard-setup-startup-hook))
 
-;;; _
+;; _
 (provide 'init-dashboard)
+
+;; Local Variables:
+;; jinx-local-words: "persp"
+;; End:

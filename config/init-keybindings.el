@@ -1,4 +1,4 @@
-;;; init-keybindings.el --- -*- lexical-binding: t; -*-
+;; init-keybindings.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Use General for convenient keybindings
@@ -14,11 +14,9 @@
     "Local leader key for major-mode specific commands")
   (defvar lgreen/general-local-leader-alt-key "M-SPC m"
     "Local leader key for major-mode specific commands for Emacs and Evil Insert states.")
+
   :config
   (general-evil-setup)
-
-  ;; TODO Is this needed or taken care of by evil-collection?
-  ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
@@ -143,5 +141,9 @@
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.
 
-;;; _
+;; _
 (provide 'init-keybindings)
+
+;; Local Variables:
+;; jinx-local-words: "localleader"
+;; End:

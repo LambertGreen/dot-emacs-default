@@ -1,4 +1,5 @@
-;;; init-file-tree.el --- -*- lexical-binding: t; -*-
+;; init-file-tree.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Treemacs
 ;; Squinting at the forest
@@ -42,5 +43,9 @@
   :after (treemacs)
   :config (treemacs-set-scope-type 'Tabs))
 
-;;; _
+;; _
 (provide 'init-file-tree)
+
+;; Local Variables:
+;; jinx-local-words: "persp treemacs"
+;; End:

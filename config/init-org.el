@@ -1,4 +1,5 @@
-;;; init-org.el --- -*- lexical-binding: t; -*-
+;; init-org.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Org
 ;; My life in plain text.
@@ -218,6 +219,7 @@
 	 (org-mode . lgreen/setup-org-calendar-navigation)
 	 (org-mode . lgreen/org-font-setup)
 	 (org-mode . lgreen/org-prettify-symbols))
+
   :config
   (org-load-modules-maybe t)
   (require 'ob-C)
@@ -281,6 +283,7 @@
 
 ;;; Evil-Org-Agenda
 ;; Making evil plans
+;;
 ;; NOTE The `SPC' key gets overridden. I tried without sufficient success
 ;; to bring back `SPC' as leader key, but it never worked 100% consistently
 ;; and so I finally decided to rather keep a simpler config, and just not
@@ -288,6 +291,7 @@
 (use-package evil-org-agenda
   :ensure nil
   :after (evil-org org-agenda)
+  ;; TODO Make final decision on whether leader key can be enabled in agenda mode
   ;; :hook (org-agenda-mode . lgreen/org-agenda-mode-setup)
   :config
   (evil-org-agenda-set-keys)
@@ -449,5 +453,9 @@
    'org-babel-load-languages
    '((mermaid . t))))
 
-;;; _
+;; _
 (provide 'init-org)
+
+;; Local Variables:
+;; jinx-local-words: "Iosevka Propo filetags gmail goto html keymaps minibuffer nCaptured src subtree"
+;; End:

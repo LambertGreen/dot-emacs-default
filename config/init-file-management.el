@@ -1,4 +1,5 @@
-;;; init-file-management.el --- -*- lexical-binding: t; -*-
+;; init-file-management.el --- -*- lexical-binding: t; -*-
+
 
 ;; TODO Checkout some of the Dired extension packages e.g. Dired+
 
@@ -26,5 +27,9 @@
 (use-package fd-dired
   :if (executable-find "fd"))
 
-;;; _
+;; _
 (provide 'init-file-management)
+
+;; Local Variables:
+;; jinx-local-words: "Dired dired fd"
+;; End:

@@ -1,4 +1,4 @@
-;;; init-minibuffer-completion.el --- -*- lexical-binding: t; -*-
+;; init-minibuffer-completion.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Vertico
@@ -31,6 +31,7 @@
 ;; - <* SPC>   -> modified buffers
 ;; - <b SPC>   -> only buffers
 ;; - <f SPC>   -> Files
+;;
 ;; NOTE: For some reason the `*Messages*' buffer does not show using `consult-buffer'
 ;; Use <C-x C-b> as a workaround
 (use-package consult
@@ -99,5 +100,9 @@
 (use-package fussy
   :config (push 'fussy completion-styles))
 
-;;; _
+;; _
 (provide 'init-minibuffer-completion)
+
+;; Local Variables:
+;; jinx-local-words: "Vertico magit minibuffer ripgrep"
+;; End:

@@ -1,4 +1,4 @@
-;;; init-evil.el --- -*- lexical-binding: t; -*-
+;; init-evil.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Evil
@@ -15,10 +15,12 @@
   (evil-symbol-word-search t)
   (evil-search-module 'evil-search)
   (evil-undo-system 'undo-tree)
+
   :config
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
+  (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
 
   ;; Set keybinding for evil-avy-goto-char-timer in motion state
   (evil-define-key '(normal visual) 'global (kbd "g s SPC") 'evil-avy-goto-char-timer)
@@ -123,6 +125,7 @@
 	   "gL" 'evil-lion-right))
 
 ;;; Evil-Numbers
+;; Up and down we go
 (use-package evil-numbers
   :after evil
   :config
@@ -133,7 +136,7 @@
    "g -" 'evil-numbers/dec-at-pt))
 
 ;;; Evil-Replace-With-Register
-;; gR operator.  Replace without affecting unamed register
+;; gR operator.  Replace without affecting unnamed register
 (use-package evil-replace-with-register
   :after evil
   :config (evil-replace-with-register-install))
@@ -276,5 +279,9 @@
                      :keys "q"
                      :hooks (emacs-lisp-mode-hook)))
 
-;;; _
+;; _
 (provide 'init-evil)
+
+;; Local Variables:
+;; jinx-local-words: "CamelCase Somelauw arg args avy capslock cx ds dvzubarev gL gR gX github gl goto gx jk kbd prog setq tarao textobj treesitter unmap ys"
+;; End:

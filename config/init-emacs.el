@@ -1,4 +1,5 @@
-;;; init-emacs.el --- -*- lexical-binding: t; -*-
+;; init-emacs.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Emacs
 (use-package emacs
@@ -93,7 +94,7 @@
   ;; up against the limit
   (which-key-ellipsis "") ;; options: "︙",
   ;; An alternate solution to the alignment issue
-  ;; (which-key-dont-use-unicode t)
+  ;; (which-key-don't-use-unicode t)
   (which-key-sort-order #'which-key-key-order-alpha)
   (which-key-sort-uppercase-first nil)
   (which-key-add-column-padding 1)
@@ -232,5 +233,9 @@
   (custom-set-faces
    '(whitespace-trailing ((t (:background "red"))))))
 
-;;; _
+;; _
 (provide 'init-emacs)
+
+;; Local Variables:
+;; jinx-local-words: "Aile Eldoc Iosevka Orderless Propo dwim eldoc elisp emacs github minibuffer modeline parens rg setq tooltips unicode whitespace"
+;; End:

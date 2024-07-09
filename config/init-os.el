@@ -1,4 +1,5 @@
-;;; init-os.el --- -*- lexical-binding: t; -*-
+;; init-os.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Darwin/MacOS
 ;; macOS specific config
@@ -62,9 +63,7 @@
       (interactive)
       (let ((explicit-shell-file-name "cmdproxy")
             (shell-file-name "cmdproxy") (comint-dynamic-complete t))
-	(shell))))
-
-  )
+	(shell)))))
 
 ;;; Ns-Auto-Titlebar
 ;; On macOS make the titlebar look better
@@ -101,5 +100,10 @@
     (setq mouse-sel-mode t)
     )
   )
-;;; _
+
+;; _
 (provide 'init-os)
+
+;; Local Variables:
+;; jinx-local-words: "auth authinfo cmd cmdproxy emacs exe fd gls gpg homebrew linuxbrew mdfind ns os titlebar usr"
+;; End:

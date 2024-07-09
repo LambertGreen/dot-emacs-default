@@ -1,4 +1,5 @@
-;;; init-undo.el --- -*- lexical-binding: t; -*-
+;; init-undo.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
@@ -22,5 +23,9 @@
   :config
   (global-undo-tree-mode))
 
-;;; _
+;; _
 (provide 'init-undo)
+
+;; Local Variables:
+;; jinx-local-words: "alist"
+;; End:

@@ -1,6 +1,7 @@
 #+TITLE: Lambert's Emacs Configuration
 #+AUTHOR: Lambert Green
 
+
 This is my personal Emacs configuration.
 
 I had started out using a literate configuration, but changed to a pure =elisp= config for the following reasons:

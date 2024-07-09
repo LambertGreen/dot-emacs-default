@@ -1,4 +1,4 @@
-;;; init.el --- -*- lexical-binding: t; -*-
+;; init.el --- -*- lexical-binding: t; -*-
 
 
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
@@ -34,5 +34,5 @@
 (require 'init-tty)
 (require 'init-email)
 
-;;; _
+;; _
 (provide 'init-evil)

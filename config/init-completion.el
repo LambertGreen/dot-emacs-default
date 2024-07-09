@@ -1,10 +1,10 @@
-;;; init-completion.el --- -*- lexical-binding: t; -*-
+;; init-completion.el --- -*- lexical-binding: t; -*-
 
 
 ;; FIXME Fix auto-completion issue where fast typing can result in mistaken acceptance of incorrect completion
 
 ;;; Dabbrev
-;; short and sweet
+;; Short and sweet
 (use-package dabbrev
   :ensure nil
   :bind (
@@ -12,8 +12,8 @@
 	 ("C-/" . dabbrev-completion)))
 
 ;;; Company
-;; not a crowd
-;; FIXME Disabling Company while testing out Corfu
+;; Not a crowd
+;; NOTE: Company Disabled: We are using Corfu now
 (use-package company
   :disabled t
   :init
@@ -33,7 +33,7 @@
   (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
   (corfu-preview-current nil)    ;; Disable current candidate preview
-  (corfu-preselect 'prompt)      ;; Preselect the prompt
+  (corfu-preselect 'prompt)      ;; Pre-select the prompt
   (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind (:map corfu-map
@@ -57,23 +57,25 @@
   :init
   (global-corfu-mode))
 
-
+;;; Corfu-Quick
 (use-package corfu-quick
   :ensure nil
   :after corfu
   :bind (:map corfu-map
 	      ("C-q" . corfu-quick-insert)))
 
+;;; Corfu-History
 (use-package corfu-history
   :ensure nil
   :after corfu
   :hook (corfu-mode . corfu-history-mode))
 
+;;; Nerd-Icons-Corfu
 (use-package nerd-icons-corfu
   :after corfu
   :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-;; Add extensions
+;;; Cape
 (use-package cape
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
@@ -133,6 +135,7 @@
   ;; setting is useful beyond Corfu.
   (setq read-extended-command-predicate #'command-completion-default-include-p))
 
+;;; Kind-Icon
 (use-package kind-icon
   :after corfu
   :custom
@@ -152,11 +155,15 @@
   ;; Add hook to reset cache so the icon colors match my theme
   ;; NOTE 2022-02-05: This is a hook which resets the cache whenever I switch
   ;; the theme using my custom defined command for switching themes. If I don't
-  ;; do this, then the backgound color will remain the same, meaning it will not
+  ;; do this, then the background color will remain the same, meaning it will not
   ;; match the background color corresponding to the current theme. Important
   ;; since I have a light theme and dark theme I switch between. This has no
   ;; function unless you use something similar
   (add-hook 'kb/themes-hooks #'(lambda () (interactive) (kind-icon-reset-cache))))
 
-;;; _
+;; _
 (provide 'init-completion)
+
+;; Local Variables:
+;; jinx-local-words: "Dabbrev Orderless capf corfu dabbrev dir elisp emacs etags formatter formatters ispell setq sgml svg tex"
+;; End:

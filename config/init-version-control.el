@@ -1,4 +1,5 @@
-;;; init-version-control.el --- -*- lexical-binding: t; -*-
+;; init-version-control.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Emacs
 (use-package emacs
@@ -39,5 +40,5 @@
   :hook
   (focus-in . diff-hl-update))
 
-;;; _
+;; _
 (provide 'init-version-control)

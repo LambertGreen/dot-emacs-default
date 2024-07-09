@@ -1,4 +1,5 @@
-;;; init-window-management.el --- -*- lexical-binding: t; -*-
+;; init-window-management.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Winner mode
 (use-package winner
@@ -82,5 +83,9 @@
 ;;   :config
 ;;   (shackle-mode 1))
 
-;;; _
+;; _
 (provide 'init-window-management)
+
+;; Local Variables:
+;; jinx-local-words: "eshell vterm"
+;; End:

@@ -1,8 +1,9 @@
-;;; init-ui.el --- -*- lexical-binding: t; -*-
+;; init-ui.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Doom-Modeline
 ;; Add Doom's modeline
+;; NOTE: We disable Doom-Modeline to use Moody for now
 (use-package doom-modeline
   :disabled t
   :custom
@@ -37,7 +38,21 @@
 ;; Get into the mood boy
 (use-package moody
   :after evil
+  :init
+  (lgreen/leader-define-key
+    "t m" '(:ignore t :wk "modeline")
+    "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline"))
+
   :config
+  (defun lgreen/toggle-mode-line ()
+    "Toggle the visibility of the mode line."
+    (interactive)
+    (if (eq mode-line-format nil)
+	(setq mode-line-format (default-value 'mode-line-format))
+      (setq mode-line-format nil))
+    (force-mode-line-update)
+    (redraw-display))
+
   (setq evil-mode-line-format '(before . moody-mode-line-buffer-identification))
   (setq x-underline-at-descent-line t)
   (setq moody-mode-line-height 22)
@@ -50,12 +65,12 @@
 
   ;; Customize evil state colors to match the colors from diff-mode
   (setq evil-normal-state-tag   (propertize " 󰬕 " 'face '((:height 178)))
-        evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :inherit diff-header :background unspecified)))
-        evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :inherit diff-added :background unspecified)))
-        evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
-        evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :inherit diff-changed :background unspecified)))
-        evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
-        evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :inherit diff-removed :background unspecified))))
+	evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :inherit diff-header :background unspecified)))
+	evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :inherit diff-added :background unspecified)))
+	evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
+	evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :inherit diff-changed :background unspecified)))
+	evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
+	evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :inherit diff-removed :background unspecified))))
 
   ;; Customize the `vc-mode'
   (defun lgreen/customize-vc-mode (orig-func &rest args)
@@ -74,12 +89,6 @@
 ;; Keeping the minor modes in line, instead sprawled in the mode line
 (use-package minions
   :config (minions-mode 1))
-
-;;; Spaceline-All-The-Icons
-(use-package spaceline-all-the-icons
-  :after spaceline
-  :config
-  (spaceline-all-the-icons-theme))
 
 ;;; Solaire-Mode
 ;; Darken popup buffers
@@ -242,7 +251,7 @@
   (olivetti-body-width 130)
   :init
   (lgreen/leader-define-key
-    "t o" '(olivetti-mode :wk "Toggle ovlivetti"))
+    "t o" '(olivetti-mode :wk "Toggle olivetti"))
   :hook ((org-mode
 	  text-mode
 	  dired-mode
@@ -251,6 +260,7 @@
 
 ;;; Perfect-Margin
 ;; Give yourself some breathing room
+;; NOTE: Disabled: Using Olivetti-Mode instead
 (use-package perfect-margin
   :disabled t
   :custom
@@ -264,7 +274,7 @@
   ;; (setq perfect-margin-ignore-filters nil)
   ;; auto-center special windows
   ;; (setq perfect-margin-ignore-regexps nil)
-  ;; add additinal bding on margin area
+  ;; add additional binding on margin area
   (dolist (margin '("<left-margin> " "<right-margin> "))
     (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
     (global-set-key (kbd (concat margin "<mouse-3>")) 'ignore)
@@ -277,5 +287,9 @@
 ;; Example: Red (#ff0000), Green (#00ff00), Blue (#0000ff)
 (use-package rainbow-mode)
 
-;;; _
+;; _
 (provide 'init-ui)
+
+;; Local Variables:
+;; jinx-local-words: "elpaca hl minibuffer modeline olivetti setq solaire ui vc"
+;; End:

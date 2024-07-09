@@ -1,4 +1,4 @@
-;;; init-projects.el --- -*- lexical-binding: t; -*-
+;; init-projects.el --- -*- lexical-binding: t; -*-
 
 
 ;; TODO Remove if finally deciding to move from projectile to project.el
@@ -6,7 +6,7 @@
 ;; ;; Shooting projects into space
 ;; (use-package projectile
 ;;   :custom
-;;   ;; We have too many projects to have project discovery done everytime
+;;   ;; We have too many projects to have project discovery done every time
 ;;   (projectile-auto-discover nil)
 ;;   ;; Set search path and depth
 ;;   (projectile-project-search-path '(("~/dev" . 5)))
@@ -55,5 +55,9 @@
     "p b" '(project-switch-to-buffer :wk "Switch buffer in project"))
   :config (add-to-list 'project-find-functions 'lgreen/project-try-projectile))
 
-;;; _
+;; _
 (provide 'init-projects)
+
+;; Local Variables:
+;; jinx-local-words: "bazel dired elc elisp elpaca emacs lgreen pyc usr"
+;; End:

@@ -1,4 +1,5 @@
-;;; init-workspaces.el --- -*- lexical-binding: t; -*-
+;; init-workspaces.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Tab-bar
 ;; Put it on my tab
@@ -46,5 +47,9 @@
     (add-to-list 'consult-buffer-sources 'consult--source-workspace))
   )
 
-;;; _
+;; _
 (provide 'init-workspaces)
+
+;; Local Variables:
+;; jinx-local-words: "workspaces"
+;; End:

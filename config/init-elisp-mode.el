@@ -1,4 +1,5 @@
-;;; init-elisp.el --- -*- lexical-binding: t; -*-
+;; init-elisp.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Emacs-Lisp-Mode
 ;; brace yourself!
@@ -18,9 +19,13 @@
   (emacs-lisp-mode . hs-minor-mode))
 
 ;;; Eros
-;; (E)valuation (R)esult (O)verlay(S) for Emacs Lisp
+;; Evaluation Result Overlays for Emacs Lisp
 (use-package eros
   :config (eros-mode 1))
 
-;;; _
+;; _
 (provide 'init-elisp-mode)
+
+;; Local Variables:
+;; jinx-local-words: "elisp emacs eval"
+;; End:

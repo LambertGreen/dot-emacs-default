@@ -1,4 +1,5 @@
-;;; init-email.el --- -*- lexical-binding: t; -*-
+;; init-email.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Mu4e
 ;; You got mail!
@@ -98,5 +99,9 @@
   (add-hook 'notmuch-hello-mode-hook
             (lambda () (display-line-numbers-mode 0))))
 
-;;; _
+;; _
 (provide 'init-email)
+
+;; Local Variables:
+;; jinx-local-words: "Verda gmail smtp"
+;; End:

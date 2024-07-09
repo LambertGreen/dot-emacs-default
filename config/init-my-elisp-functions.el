@@ -1,4 +1,5 @@
-;;; init-my-elisp-functions.el --- -*- lexical-binding: t; -*-
+;; init-my-elisp-functions.el --- -*- lexical-binding: t; -*-
+
 
 ;;; My Functions
 ;; Funky functionals
@@ -28,5 +29,10 @@
 			(file-name-nondirectory (buffer-file-name))
 		      "Buffer has no file name.")))
       (insert filename))))
-;;; _
+
+;; _
 (provide 'init-my-elisp-functions)
+
+;; Local Variables:
+;; jinx-local-words: "Unsets elisp emacs functionals nTransparency"
+;; End:

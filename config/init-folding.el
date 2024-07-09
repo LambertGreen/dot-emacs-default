@@ -1,4 +1,4 @@
-;;; init-folding.el --- -*- lexical-binding: t; -*-
+;; init-folding.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Origami
@@ -7,5 +7,5 @@
   :hook
   (prog-mode . origami-mode))
 
-;;; _
+;; _
 (provide 'init-folding)

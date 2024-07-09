@@ -1,4 +1,4 @@
-;;; init-minibuffer.el --- -*- lexical-binding: t; -*-
+;; init-minibuffer.el --- -*- lexical-binding: t; -*-
 
 
 ;;; Minibuffer
@@ -22,7 +22,7 @@
 	  (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
   :hook
-   (minibuffer-setup-hook . cursor-intangible-mode)
+  (minibuffer-setup-hook . cursor-intangible-mode)
   :custom
   ;; Enable recursive minibuffers
   (enable-recursive-minibuffers t)
@@ -34,5 +34,9 @@
   (setq read-extended-command-predicate
 	#'command-completion-default-include-p))
 
-;;; _
+;; _
 (provide 'init-minibuffer)
+
+;; Local Variables:
+;; jinx-local-words: "Vertico minibuffer minibuffers"
+;; End:

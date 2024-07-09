@@ -1,4 +1,5 @@
-;;; init-tty.el --- -*- lexical-binding: t; -*-
+;; init-tty.el --- -*- lexical-binding: t; -*-
+
 
 (use-package emacs
   :ensure nil
@@ -18,5 +19,9 @@
   (unless (display-graphic-p)
     (evil-terminal-cursor-changer-activate)))
 
-;;; _
+;; _
 (provide 'init-tty)
+
+;; Local Variables:
+;; jinx-local-words: "tty"
+;; End:

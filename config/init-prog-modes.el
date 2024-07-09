@@ -1,4 +1,5 @@
-;;; init-prog-modes.el --- -*- lexical-binding: t; -*-
+;; init-prog-modes.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Lisp functions
 (use-package emacs
@@ -99,7 +100,7 @@
    ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
 ;;; Language modes
-;; Make Emacs a babelfish
+;; Make Emacs a babel-fish
 (use-package ahk-mode
   :config
   (defun lgreen/ahk-comment-block-dwim (arg)
@@ -145,5 +146,10 @@
   :mode ("\\.(yaml|yml)\\'" . yaml-mode))
 
 (use-package powershell)
-;;; _
+
+;; _
 (provide 'init-prog-modes)
+
+;; Local Variables:
+;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia cmake eglot emacs gitconfig gitignore jdtsmith jq lsp prog sshd txt uncomment"
+;; End:

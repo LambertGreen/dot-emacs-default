@@ -1,4 +1,5 @@
-;;; init-spellchecking.el --- -*- lexical-binding: t; -*-
+;; init-spellchecking.el --- -*- lexical-binding: t; -*-
+
 
 ;; TODO Setup personal dictionary and project specific dictionary
 
@@ -24,5 +25,5 @@
   ([remap ispell-word] . 'jinx-correct)
   ("C-," . 'jinx-correct))
 
-;;; _
+;; _
 (provide 'init-spellchecking)

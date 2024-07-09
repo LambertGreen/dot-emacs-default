@@ -1,4 +1,5 @@
-;;; init-themes.el --- -*- lexical-binding: t; -*-
+;; init-themes.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Catppuccin theme
 (use-package catppuccin-theme
@@ -38,5 +39,9 @@
   ;; Determine current appearance and set the appropriate theme at startup
   (lgreen/sync-theme-with-system-appearance 'ns-system-appearance))
 
-;;; _
+;; _
 (provide 'init-themes)
+
+;; Local Variables:
+;; jinx-local-words: "macchiato"
+;; End:

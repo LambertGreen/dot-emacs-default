@@ -1,4 +1,5 @@
-;;; init-utils.el --- -*- lexical-binding: t; -*-
+;; init-utils.el --- -*- lexical-binding: t; -*-
+
 
 ;;; Tldr
 ;; When there is no time for man
@@ -53,5 +54,9 @@
 		      ("Asia/Calcutta" "New Delhi")
 		      ("Asia/Tokyo" "Tokyo"))))
 
-;;; _
+;; _
 (provide 'init-utils)
+
+;; Local Variables:
+;; jinx-local-words: "LambertGreen keychain utils"
+;; End:

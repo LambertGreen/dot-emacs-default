@@ -80,7 +80,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [2/7]
+** Open [3/7]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
@@ -115,19 +115,27 @@ CLOSED: [2024-07-08 Mon 15:53]
 The =consult= package provides ways to further narrow searches e.g. using a narrowing keymap.
 However we still need a workaround for quickly getting to the `*Messages*` window.
 
-*** TODO Fix =EAT= issues [0/3]
-**** [ ] =EAT= does not startup fine on initial invocation
+*** KILL Fix =EAT= issues [3/3]
+CLOSED: [2024-07-08 Mon 18:10]
+:LOGBOOK:
+- State "KILL"       from "TODO"          [2024-07-08 Mon 18:10] \\
+  Went back to using vterm
+:END:
+**** [X] =EAT= does not startup fine on initial invocation
+CLOSED: [2024-07-08 Mon 18:11]
 ***** Issue
 + A message is written to the echo area:
 #+begin_quote
 process is not running
 #+end_quote
 
-**** [ ] =EAT= editing modes are hassle still
+**** [X] =EAT= editing modes are hassle still
+CLOSED: [2024-07-08 Mon 18:11]
 ***** Issue
 + I am not sure which mode to be in to quickly copy/paste
 
-**** [ ] =EAT= window is not easily moved around
+**** [X] =EAT= window is not easily moved around
+CLOSED: [2024-07-08 Mon 18:11]
 ***** Issue
 + I cannot easily move the =eat= window around (issue may not be =eat= but more =popper= interaction)
 

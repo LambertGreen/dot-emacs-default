@@ -235,6 +235,8 @@
       outline-next-visible-heading
       outline-previous-visible-heading
       outline-up-heading
+      markdown-next-visible-heading
+      markdown-previous-visible-heading
       evil-scroll-up
       evil-scroll-down
       evil-scroll-page-up

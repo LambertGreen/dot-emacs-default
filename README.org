@@ -81,7 +81,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [0/4]
+** Open [1/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
@@ -94,7 +94,11 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 :END:
 Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
 
-*** TODO Add keybindings for link navigation (org-mode, etc.)
+*** DONE Add keybindings for link navigation (org-mode, etc.)
+CLOSED: [2024-07-08 Mon 22:49]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 22:49]
+:END:
 Add bindings like ~<C-j/k>~ to quickly navigate visible next/prev headings.
 
 ** Complete [15/15]

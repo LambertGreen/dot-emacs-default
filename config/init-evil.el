@@ -234,7 +234,14 @@
 ;; Get down with it, get down with it
 (use-package evil-markdown
   :after (evil markdown-mode)
-  :ensure (:fetcher github :repo "Somelauw/evil-markdown"))
+  :ensure (:fetcher github :repo "Somelauw/evil-markdown")
+  :config
+  (evil-markdown-set-key-theme '(textobjects navigation additional))
+  (evil-define-key 'normal evil-markdown-mode-map
+    (kbd "C-j") 'markdown-next-visible-heading
+    (kbd "C-k") 'markdown-previous-visible-heading)
+  )
+
 
 ;; ;;; Evil-Owl
 ;; TODO Evaluate evil-owl package

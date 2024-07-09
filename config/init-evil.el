@@ -74,7 +74,9 @@
 
 ;;; Evil-Escape
 ;; alternate escape route when capslock is not bound to escape
+;; NOTE: disabling because I often spam home row keys, and I am also OK resorting to <C-[>
 (use-package evil-escape
+  :disabled t
   :after evil
   :custom
   (evil-escape-key-sequence "jk")

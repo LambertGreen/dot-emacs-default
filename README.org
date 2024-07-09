@@ -123,6 +123,14 @@ process is not running
 ***** Issue
 + I cannot easily move the =eat= window around (issue may not be =eat= but more =popper= interaction)
 
+*** DONE Fix the =vc-mode= to correctly replace the "Git:" string
+CLOSED: [2024-07-08 Mon 18:09]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 18:09]
+:END:
+**** Issue
+The config from =ChatGPT= uses a count e.g. len 4.
+
 ** Complete [11/11]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability

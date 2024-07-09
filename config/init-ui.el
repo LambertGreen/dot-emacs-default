@@ -64,7 +64,7 @@
       (when (and vc-mode (stringp vc-mode))
 	(let ((git-icon (propertize "  " 'face '((:height 158 :weight extrabold)))))
           (setq vc-mode
-		(concat git-icon (substring vc-mode 4)))))
+		(replace-regexp-in-string "^ Git[:-]" git-icon vc-mode))))
       result))
 
   ;; Advise vc-mode-line to apply custom vc-mode formatting

@@ -11,7 +11,7 @@
   :init
   (lgreen/leader-define-key
     "t t" '(toggle-frame-tab-bar :wk "Toggle tab bar")
-    "TAB" '(:ignore :wk "Workspace")
+    "TAB" '(:ignore t :wk "Workspaces")
     "TAB n" '(tab-bar-switch-to-next-tab  :wk "Tab next")
     "TAB p" '(tab-bar-switch-to-prev-tab  :wk "Tab previous")))
 

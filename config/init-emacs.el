@@ -172,11 +172,20 @@
 (use-package helpful
   :after general
   :init
+  (setq evil-lookup-func #'helpful-at-point)
   (lgreen/leader-define-key
-    "h f" '(helpful-callable :wk "Describe function")
+    "h f" '(helpful-function :wk "Describe function")
     "h v" '(helpful-variable :wk "Describe variable")
     "h k" '(helpful-key :wk "Describe key")
-    "h c" '(helpful-command :wk "Describe command")))
+    "h c" '(helpful-command :wk "Describe command")
+    "h C" '(helpful-callable :wk "Describe callable")
+    "h s" '(helpful-symbol :wk "Describe symbol")
+    )
+  :bind
+  ([remap describe-key] . helpful-key)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . helpful-function)
+  ([remap describe-variable] . helpful-variable))
 
 ;;; Rainbow-Delimiters
 ;; Highlight delimiters according to their depth

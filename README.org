@@ -80,7 +80,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [0/4]
+** Open [2/7]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
@@ -102,12 +102,20 @@ Customize ~prettify-symbols-alist~
 :END:
 Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
 
-*** TODO Fix buffer switching
+*** DONE Fix buffer switching
+CLOSED: [2024-07-08 Mon 15:53]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 15:53]
+:END:
 **** Requirements
 + Project specific buffers
 + Emacs special buffers e.g. *messages*
 
-*** TODO Fix =EAT= issues [0/2]
+**** Solution
+The =consult= package provides ways to further narrow searches e.g. using a narrowing keymap.
+However we still need a workaround for quickly getting to the `*Messages*` window.
+
+*** TODO Fix =EAT= issues [0/3]
 **** [ ] =EAT= does not startup fine on initial invocation
 ***** Issue
 + A message is written to the echo area:

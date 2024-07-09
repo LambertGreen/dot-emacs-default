@@ -130,7 +130,22 @@
 
 (use-package just-mode)
 (use-package lua-mode)
-(use-package markdown-mode)
+
+(use-package markdown-mode
+  :after general
+  :init
+  (lgreen/local-leader-define-key
+    :keymaps 'markdown-mode-map
+    "i" '(:ignore t :wk "insert")
+    "ii" '(markdown-insert-italic :wk "italic")
+    "ib" '(markdown-insert-bold :wk "bold")
+    "ih" '(markdown-insert-hr :wk "h-line")
+
+    "c" '(:ignore t :wk "command")
+    "cm" '(markdown-other-window :wk "other-window")
+    "cp" '(markdown-preview :wk "preview")
+    "ce" '(markdown-export :wk "export")))
+
 (use-package mermaid-mode)
 (use-package nix-mode)
 (use-package rfc-mode)

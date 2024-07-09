@@ -81,15 +81,17 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [1/4]
+** Open [2/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
 
-*** TODO Add some keybindings for =markdown-mode=
+*** DONE Add some keybindings for =markdown-mode=
+CLOSED: [2024-07-09 Tue 01:03]
 :LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-09 Tue 01:03]
 - State "TODO"       from              [2024-06-21 Fri 18:02]
 :END:
 Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.

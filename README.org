@@ -81,18 +81,9 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [3/7]
+** Open [0/4]
 *** STRT Port your Doom Org config
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
-
-*** WAIT Prettify =org-mode=
-:LOGBOOK:
-- State "WAIT"       from "STRT"          [2024-07-03 Wed 19:36] \\
-  Not really waiting, but testing the waiting state.
-- State "STRT"       from "TODO"          [2024-07-03 Wed 19:36]
-- State "TODO"       from              [2024-07-03 Wed 19:36]
-:END:
-Customize ~prettify-symbols-alist~
 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
@@ -103,52 +94,10 @@ Customize ~prettify-symbols-alist~
 :END:
 Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
 
-*** DONE Fix buffer switching
-CLOSED: [2024-07-08 Mon 15:53]
-:LOGBOOK:
-- State "DONE"       from "TODO"          [2024-07-08 Mon 15:53]
-:END:
-**** Requirements
-+ Project specific buffers
-+ Emacs special buffers e.g. *messages*
+*** TODO Add keybindings for link navigation (org-mode, etc.)
+Add bindings like ~<C-j/k>~ to quickly navigate visible next/prev headings.
 
-**** Solution
-The =consult= package provides ways to further narrow searches e.g. using a narrowing keymap.
-However we still need a workaround for quickly getting to the `*Messages*` window.
-
-*** KILL Fix =EAT= issues [3/3]
-CLOSED: [2024-07-08 Mon 18:10]
-:LOGBOOK:
-- State "KILL"       from "TODO"          [2024-07-08 Mon 18:10] \\
-  Went back to using vterm
-:END:
-**** [X] =EAT= does not startup fine on initial invocation
-CLOSED: [2024-07-08 Mon 18:11]
-***** Issue
-+ A message is written to the echo area:
-#+begin_quote
-process is not running
-#+end_quote
-
-**** [X] =EAT= editing modes are hassle still
-CLOSED: [2024-07-08 Mon 18:11]
-***** Issue
-+ I am not sure which mode to be in to quickly copy/paste
-
-**** [X] =EAT= window is not easily moved around
-CLOSED: [2024-07-08 Mon 18:11]
-***** Issue
-+ I cannot easily move the =eat= window around (issue may not be =eat= but more =popper= interaction)
-
-*** DONE Fix the =vc-mode= to correctly replace the "Git:" string
-CLOSED: [2024-07-08 Mon 18:09]
-:LOGBOOK:
-- State "DONE"       from "TODO"          [2024-07-08 Mon 18:09]
-:END:
-**** Issue
-The config from =ChatGPT= uses a count e.g. len 4.
-
-** Complete [11/11]
+** Complete [15/15]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list
@@ -239,3 +188,59 @@ Run the following:
   + I am not quite sure how the ~env~ is being set
     + =Homebrew= install of =Emacs= does mention the shell env is added to a =plist= file.
 
+
+*** DONE Fix buffer switching
+CLOSED: [2024-07-08 Mon 15:53]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 15:53]
+:END:
+**** Requirements
++ Project specific buffers
++ Emacs special buffers e.g. *messages*
+
+**** Solution
+The =consult= package provides ways to further narrow searches e.g. using a narrowing keymap.
+However we still need a workaround for quickly getting to the `*Messages*` window.
+
+*** KILL Fix =EAT= issues [3/3]
+CLOSED: [2024-07-08 Mon 18:10]
+:LOGBOOK:
+- State "KILL"       from "TODO"          [2024-07-08 Mon 18:10] \\
+  Went back to using vterm
+:END:
+**** [X] =EAT= does not startup fine on initial invocation
+CLOSED: [2024-07-08 Mon 18:11]
+***** Issue
++ A message is written to the echo area:
+#+begin_quote
+process is not running
+#+end_quote
+
+**** [X] =EAT= editing modes are hassle still
+CLOSED: [2024-07-08 Mon 18:11]
+***** Issue
++ I am not sure which mode to be in to quickly copy/paste
+
+**** [X] =EAT= window is not easily moved around
+CLOSED: [2024-07-08 Mon 18:11]
+***** Issue
++ I cannot easily move the =eat= window around (issue may not be =eat= but more =popper= interaction)
+
+*** DONE Fix the =vc-mode= to correctly replace the "Git:" string
+CLOSED: [2024-07-08 Mon 18:09]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 18:09]
+:END:
+**** Issue
+The config from =ChatGPT= uses a count e.g. len 4.
+
+*** DONE Prettify =org-mode=
+CLOSED: [2024-07-08 Mon 21:27]
+:LOGBOOK:
+- State "DONE"       from "WAIT"          [2024-07-08 Mon 21:27]
+- State "WAIT"       from "STRT"          [2024-07-03 Wed 19:36] \\
+  Not really waiting, but testing the waiting state.
+- State "STRT"       from "TODO"          [2024-07-03 Wed 19:36]
+- State "TODO"       from              [2024-07-03 Wed 19:36]
+:END:
+Customize ~prettify-symbols-alist~

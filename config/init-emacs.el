@@ -12,14 +12,6 @@
   (use-short-answers t)
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
-
-  ;; Set custom file
-  ;; NOTE: I have disabled this on occasion, but don't do this as this breaks the
-  ;; saving of add directory local variables to the safe list.
-  ;;
-  ;; NOTE: I am running into an issue where variables marked as safe in the custom file
-  ;; is not being honored, so I have moved the setting of the custom file from `:config' section
-  ;; to the `:custom' section to see if this will help.
   (custom-file (expand-file-name "custom.el" user-emacs-directory))
 
   :config
@@ -55,6 +47,8 @@
   ;; TODO Investigation actual usage of these grep commands
   (setq grep-command "rg --no-heading --color=never ")
   (setq grep-find-command "rg --files ")
+
+  (load custom-file 'noerror)
 
   ;; Enable desktop save  mode
   ;; TODO I don't think I want this option enabled as I use multiple Emacs instances

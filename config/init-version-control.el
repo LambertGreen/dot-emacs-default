@@ -22,9 +22,6 @@
 ;; There is always more todo
 (use-package magit-todos
   :after magit
-  :init
-  (lgreen/leader-define-key
-    "p t" '(magit-todos-list :wk "todos"))
   :config (magit-todos-mode 1))
 
 ;;; Diff-Hl

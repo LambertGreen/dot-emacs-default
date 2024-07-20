@@ -41,6 +41,7 @@
   (org-log-done 'time)
   ;; Log state changes into drawer
   (org-log-into-drawer t)
+  (org-export-backends '(ascii html icalendar latex odt md pandoc))
 
   :init
   (general-def

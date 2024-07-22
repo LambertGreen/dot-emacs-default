@@ -88,21 +88,6 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 *** TODO Prettify =org-agenda=
 + https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
 
-*** DONE Add some keybindings for =markdown-mode=
-CLOSED: [2024-07-09 Tue 01:03]
-:LOGBOOK:
-- State "DONE"       from "TODO"          [2024-07-09 Tue 01:03]
-- State "TODO"       from              [2024-06-21 Fri 18:02]
-:END:
-Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
-
-*** DONE Add keybindings for link navigation (org-mode, etc.)
-CLOSED: [2024-07-08 Mon 22:49]
-:LOGBOOK:
-- State "DONE"       from "TODO"          [2024-07-08 Mon 22:49]
-:END:
-Add bindings like ~<C-j/k>~ to quickly navigate visible next/prev headings.
-
 ** Complete [15/15]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
@@ -194,7 +179,6 @@ Run the following:
   + I am not quite sure how the ~env~ is being set
     + =Homebrew= install of =Emacs= does mention the shell env is added to a =plist= file.
 
-
 *** DONE Fix buffer switching
 CLOSED: [2024-07-08 Mon 15:53]
 :LOGBOOK:
@@ -250,3 +234,18 @@ CLOSED: [2024-07-08 Mon 21:27]
 - State "TODO"       from              [2024-07-03 Wed 19:36]
 :END:
 Customize ~prettify-symbols-alist~
+
+*** DONE Add some keybindings for =markdown-mode=
+CLOSED: [2024-07-09 Tue 01:03]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-09 Tue 01:03]
+- State "TODO"       from              [2024-06-21 Fri 18:02]
+:END:
+Add some keybindings similar to =org-mode= to a bit faster at editing =markdown=.
+
+*** DONE Add keybindings for link navigation (org-mode, etc.)
+CLOSED: [2024-07-08 Mon 22:49]
+:LOGBOOK:
+- State "DONE"       from "TODO"          [2024-07-08 Mon 22:49]
+:END:
+Add bindings like ~<C-j/k>~ to quickly navigate visible next/prev headings.

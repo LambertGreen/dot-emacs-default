@@ -35,11 +35,14 @@
       (set-face-attribute 'variable-pitch nil :family "Iosevka NF Propo"))
 
   ;; Visuals
-  (scroll-bar-mode -1)        ; Disable visible scroll-bar
+  (when (display-graphic-p)
+    (scroll-bar-mode -1)        ; Disable visible scroll-bar
+    (set-fringe-mode 3)         ; Give some breathing room
+    )
+
   (tool-bar-mode -1)          ; Disable the toolbar
   (menu-bar-mode -1)          ; Disable the menubar
   (tooltip-mode -1)           ; Disable tooltips
-  (set-fringe-mode 3)         ; Give some breathing room
 
   ;; Make the frame title include the project name
   ;; Allows for easy switching to Emacs frame by project name

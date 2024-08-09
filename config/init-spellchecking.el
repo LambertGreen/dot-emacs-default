@@ -12,6 +12,7 @@
 ;; - Common mistyped and misspelled words: hte (the), noone (none/noon)
 (use-package jinx
   :after general
+  :if (not (eq system-type 'windows-nt))
   :init
   (lgreen/leader-define-key
     "t s" '(global-jinx-mode :wk "Toggle spellcheck")

@@ -37,10 +37,9 @@
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scroll-bar
   (tool-bar-mode -1)          ; Disable the toolbar
+  (menu-bar-mode -1)          ; Disable the menubar
   (tooltip-mode -1)           ; Disable tooltips
-  (unless (display-graphic-p)
-    (menu-bar-mode -1))
-  (set-fringe-mode 3)        ; Give some breathing room
+  (set-fringe-mode 3)         ; Give some breathing room
 
   ;; Make the frame title include the project name
   ;; Allows for easy switching to Emacs frame by project name

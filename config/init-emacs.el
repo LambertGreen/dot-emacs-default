@@ -17,12 +17,22 @@
   :config
   ;; Fonts
   ;; Default font
-  (set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 128)
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'default nil :font "Iosevka NF" :height 128))
+
   ;; Fixed-Pitch font
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono"))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka NF Mono"))
+
   ;; Variable-Pitch font
-  ;; (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 128)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo")
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'variable-pitch nil :family "Iosevka NF Propo"))
 
   ;; Visuals
   (scroll-bar-mode -1)        ; Disable visible scroll-bar

@@ -22,6 +22,7 @@
 ;; There is always more todo
 (use-package magit-todos
   :after magit
+  :if (not (eq system-type 'windows-nt))
   :config (magit-todos-mode 1))
 
 ;;; Diff-Hl

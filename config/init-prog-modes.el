@@ -24,7 +24,7 @@
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
 
-  (defun lgreen/set-faces-for-prog-mode ()
+  (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables"
     (interactive)
 

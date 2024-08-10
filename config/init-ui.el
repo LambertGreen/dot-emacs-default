@@ -309,6 +309,13 @@
 ;; Example: Red (#ff0000), Green (#00ff00), Blue (#0000ff)
 (use-package rainbow-mode)
 
+;;; Breadcrumb
+;; Like how Hansel & Gretal got back home
+(use-package breadcrumb
+  :if (display-graphic-p)
+  :ensure (:fetcher github :repo "joaotavora/breadcrumb")
+  :config (breadcrumb-mode t))
+
 ;; _
 (provide 'init-ui)
 

@@ -122,7 +122,9 @@
 
 ;;; Indent-Guide
 ;; Know what vertical you are on
+;; TODO Decide if `indent-bars' should replace `indent-guide'
 (use-package indent-guide
+  :disabled t
   :custom
   ;; (indent-guide-recursive t)
   (indent-guide-char "▏")   ; Useful characters: ·│┊┆╎┋▏
@@ -147,6 +149,24 @@
   (lgreen/set-face-indent-guide)
   (advice-add 'load-theme
 	      :after 'lgreen/set-face-indent-guide))
+
+;;; Indent-Bars
+;; Know what vertical you are on
+(use-package indent-bars
+  :ensure (:fetcher github :repo "jdtsmith/indent-bars")
+  :custom
+  (indent-bars-color '(highlight :face-bg t :blend 0.15))
+  (indent-bars-width-frac 0.2)
+  (indent-bars-pad-frac 0.2)
+  ;; (indent-bars-zigzag 0.1)
+  ;; (indent-bars-color-by-depth '(:palette ("red" "green" "orange" "cyan") :blend 1))
+  ;; (indent-bars-highlight-current-depth '(:blend 0.5))
+  ;; (indent-bars-zigzag nil)
+  ;; (indent-bars-color-by-depth t)
+  ;; (indent-bars-display-on-blank-lines nil)
+  (indent-bars-treesit-support t)
+  :hook (prog-mode . indent-bars-mode)
+  )
 
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes

@@ -6,6 +6,8 @@
 (use-package mu4e
   :ensure nil
   :after org
+  :if (and (not (eq system-type 'windows-nt))
+           (executable-find "mu"))
   :custom
   (mu4e-index-cleanup nil)
   (mu4e-index-lazy-check t)

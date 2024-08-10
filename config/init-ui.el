@@ -64,20 +64,20 @@
   (moody-replace-eldoc-minibuffer-message-function)
 
   ;; Customize evil state colors to match the colors from diff-mode
-  (setq evil-normal-state-tag   (propertize " 󰬕 " 'face '((:height 178)))
-	evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:height 178 :inherit diff-header :background unspecified)))
-	evil-insert-state-tag   (propertize " 󰬐 " 'face '((:height 178 :inherit diff-added :background unspecified)))
-	evil-motion-state-tag   (propertize " 󰬔 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
-	evil-visual-state-tag   (propertize " 󰬝 " 'face '((:height 178 :inherit diff-changed :background unspecified)))
-	evil-replace-state-tag  (propertize " 󰬙 " 'face '((:height 178 :inherit diff-removed :background unspecified)))
-	evil-operator-state-tag (propertize " 󰬖 " 'face '((:height 178 :inherit diff-removed :background unspecified))))
+  (setq evil-normal-state-tag   (propertize " 󰬕 " )
+	evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:inherit diff-header :background unspecified)))
+	evil-insert-state-tag   (propertize " 󰬐 " 'face '((:inherit diff-added :background unspecified)))
+	evil-motion-state-tag   (propertize " 󰬔 " 'face '((:inherit diff-removed :background unspecified)))
+	evil-visual-state-tag   (propertize " 󰬝 " 'face '((:inherit diff-changed :background unspecified)))
+	evil-replace-state-tag  (propertize " 󰬙 " 'face '((:inherit diff-removed :background unspecified)))
+	evil-operator-state-tag (propertize " 󰬖 " 'face '((:inherit diff-removed :background unspecified))))
 
   ;; Customize the `vc-mode'
   (defun lgreen/customize-vc-mode (orig-func &rest args)
     "Customize the vc-mode string to include a Git icon with custom face."
     (let ((result (apply orig-func args)))
       (when (and vc-mode (stringp vc-mode))
-	(let ((git-icon (propertize "  " 'face '((:height 158 :weight extrabold)))))
+	(let ((git-icon (propertize "  " 'face '((:weight extrabold)))))
           (setq vc-mode
 		(replace-regexp-in-string "^ Git[:-]" git-icon vc-mode))))
       result))

@@ -24,7 +24,7 @@
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
 
-  (defun lgreen/set-faces-for-prog-mode ()
+  (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables"
     (interactive)
 
@@ -33,7 +33,9 @@
     ;; Make comments italic and light weight
     (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'light)
     ;; Make function names more prominent by increasing size
-    (set-face-attribute 'font-lock-function-name-face nil :weight 'normal :height 148))
+    ;; TODO Rather use a relative increase in font size
+    (set-face-attribute 'font-lock-function-name-face nil :weight 'normal :height 148)
+    )
 
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."

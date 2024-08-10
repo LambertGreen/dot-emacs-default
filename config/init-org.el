@@ -141,7 +141,7 @@
     (require 'org-faces)
 
     ;; Make the document title a bit bigger
-    (set-face-attribute 'org-document-title nil :font "Iosevka Nerd Font Propo" :weight 'bold :height 1.5)
+    (set-face-attribute 'org-document-title nil :weight 'bold :height 1.5)
     ;; Set faces for heading levels
     (dolist (face '((org-level-1 . 1.3)
                     (org-level-2 . 1.20)
@@ -151,7 +151,7 @@
                     (org-level-6 . 1.1)
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Iosevka Nerd Font Propo" :weight 'medium :height (cdr face)))
+      (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
 
     ;; Make sure org-indent face is available
     (require 'org-indent)

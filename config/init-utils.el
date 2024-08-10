@@ -26,10 +26,12 @@
 ;;; Pinentry
 ;; Enter GPG passphrase via Emacs
 (use-package pinentry
+  :if (not (eq system-type 'windows-nt))
   :config (pinentry-start))
 
 ;;; Direnv
 (use-package direnv
+  :if (not (eq system-type 'windows-nt))
   :config (direnv-mode))
 
 ;;; EditorConfig

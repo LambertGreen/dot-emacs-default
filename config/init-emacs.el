@@ -17,20 +17,32 @@
   :config
   ;; Fonts
   ;; Default font
-  (set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 128)
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'default nil :font "Iosevka NF" :height 128))
+
   ;; Fixed-Pitch font
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono"))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka NF Mono"))
+
   ;; Variable-Pitch font
-  ;; (set-face-attribute 'variable-pitch nil :family "Iosevka Aile" :height 128)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo")
+  (if (eq system-type 'darwin)
+      (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'variable-pitch nil :family "Iosevka NF Propo"))
 
   ;; Visuals
-  (scroll-bar-mode -1)        ; Disable visible scroll-bar
+  (when (display-graphic-p)
+    (scroll-bar-mode -1)        ; Disable visible scroll-bar
+    (set-fringe-mode 3)         ; Give some breathing room
+    )
+
   (tool-bar-mode -1)          ; Disable the toolbar
+  (menu-bar-mode -1)          ; Disable the menubar
   (tooltip-mode -1)           ; Disable tooltips
-  (unless (display-graphic-p)
-    (menu-bar-mode -1))
-  (set-fringe-mode 3)        ; Give some breathing room
 
   ;; Make the frame title include the project name
   ;; Allows for easy switching to Emacs frame by project name

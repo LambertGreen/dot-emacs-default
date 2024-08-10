@@ -13,3 +13,4 @@ semanticdb/
 transient/
 tree-sitter/
 var/
+/custom.el

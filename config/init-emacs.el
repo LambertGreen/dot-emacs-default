@@ -26,13 +26,13 @@
   (if (eq system-type 'darwin)
       (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono"))
   (if (eq system-type 'windows-nt)
-      (set-face-attribute 'fixed-pitch nil :family "Iosevka NF Mono"))
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka NFM"))
 
   ;; Variable-Pitch font
   (if (eq system-type 'darwin)
       (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
   (if (eq system-type 'windows-nt)
-      (set-face-attribute 'variable-pitch nil :family "Iosevka NF Propo"))
+      (set-face-attribute 'variable-pitch nil :family "Iosevka NFP"))
 
   ;; Visuals
   (when (display-graphic-p)

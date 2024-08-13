@@ -67,7 +67,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 ***** Has ~green~ strings
 /Example:/
 #+begin_src emacs-lisp
-(messasge "I like green strings")
+(message "I like green strings")
 #+end_src
 
 **** =Org mode=

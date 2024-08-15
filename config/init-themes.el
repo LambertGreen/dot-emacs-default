@@ -44,10 +44,10 @@
 
      ;; For Windows and Linux, just set a default theme
      ((eq system-type 'windows-nt)
-      (load-theme 'doom-one-light t))  ;; Use light theme on Windows
+      (load-theme 'doom-one t))
 
      ((eq system-type 'gnu/linux)
-      (load-theme 'doom-one t))))  ;; Use dark theme on Linux
+      (load-theme 'doom-one t))))
 
   ;; Execute the function to set the theme based on OS
   (lgreen/set-theme-based-on-os))

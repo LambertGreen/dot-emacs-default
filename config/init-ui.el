@@ -117,35 +117,22 @@
 	  ("NOTE"       success bold)
 	  ("DEPRECATED" font-lock-doc-face bold))))
 
-;;; Indent-Guide
-;; Know what vertical you are on
-;; TODO Decide if `indent-bars' should replace `indent-guide'
-(use-package indent-guide
-  :disabled t
+;;; Display-Fill-Column-Indicator
+(use-package display-fill-column-indicator
+  :ensure nil
+  :hook (prog-mode . display-fill-column-indicator-mode)
   :custom
-  ;; (indent-guide-recursive t)
-  (indent-guide-char "▏")   ; Useful characters: ·│┊┆╎┋▏
+  (fill-column 120)
   :init
   (lgreen/leader-define-key
-    "t i" '(lgreen/toggle-indent-guide :wk "Toggle indent guides"))
-  :hook (prog-mode . indent-guide-mode)
+    "t f" '(lgreen/toggle-fill-column-indicator :wk "Toggle fill-column indicator"))
   :config
-  (defun lgreen/toggle-indent-guide ()
-    "Toggle indent guides in programming modes."
+  (defun lgreen/toggle-fill-column-indicator ()
+    "Toggle the fill column indicator."
     (interactive)
-    (if (derived-mode-p 'prog-mode)
-	(indent-guide-mode (if indent-guide-mode -1 1))
-      (message "Not in a programming mode!")))
-
-  (defun lgreen/set-face-indent-guide (&rest _)
-    "Set the indent-guide color to match the comment color of the current theme"
-    (set-face-attribute 'indent-guide-face nil
-			:inherit 'font-lock-comment-face
-			:foreground 'unspecified
-			:background 'unspecified))
-  (lgreen/set-face-indent-guide)
-  (advice-add 'load-theme
-	      :after 'lgreen/set-face-indent-guide))
+    (if display-fill-column-indicator-mode
+        (display-fill-column-indicator-mode -1)
+      (display-fill-column-indicator-mode 1))))
 
 ;;; Indent-Bars
 ;; Know what vertical you are on

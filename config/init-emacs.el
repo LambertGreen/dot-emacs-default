@@ -40,8 +40,8 @@
     (set-fringe-mode 3)         ; Give some breathing room
     )
 
-  (tool-bar-mode -1)          ; Disable the toolbar
-  (menu-bar-mode -1)          ; Disable the menubar
+  (tool-bar-mode -1)          ; Disable the tool-bar
+  (menu-bar-mode -1)          ; Disable the menu-bar
   (tooltip-mode -1)           ; Disable tooltips
 
   ;; Make the frame title include the project name

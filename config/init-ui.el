@@ -53,7 +53,6 @@
       (setq mode-line-format nil))
     (force-mode-line-update)
     (redraw-display))
-
   (setq evil-mode-line-format '(before . moody-mode-line-buffer-identification))
   (setq x-underline-at-descent-line t)
   (setq moody-mode-line-height 22)
@@ -63,7 +62,6 @@
   (moody-replace-vc-mode)
   (moody-replace-mode-line-front-space)
   (moody-replace-eldoc-minibuffer-message-function)
-
   ;; Customize evil state colors to match the colors from diff-mode
   (setq evil-normal-state-tag   (propertize " 󰬕 " )
 	evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:inherit diff-header :background unspecified)))
@@ -72,7 +70,6 @@
 	evil-visual-state-tag   (propertize " 󰬝 " 'face '((:inherit diff-changed :background unspecified)))
 	evil-replace-state-tag  (propertize " 󰬙 " 'face '((:inherit diff-removed :background unspecified)))
 	evil-operator-state-tag (propertize " 󰬖 " 'face '((:inherit diff-removed :background unspecified))))
-
   ;; Customize the `vc-mode'
   (defun lgreen/customize-vc-mode (orig-func &rest args)
     "Customize the vc-mode string to include a Git icon with custom face."
@@ -82,7 +79,6 @@
           (setq vc-mode
 		(replace-regexp-in-string "^ Git[:-]" git-icon vc-mode))))
       result))
-
   ;; Advise vc-mode-line to apply custom vc-mode formatting
   (advice-add 'vc-mode-line :around #'lgreen/customize-vc-mode))
 

@@ -148,8 +148,19 @@
   ;; (indent-bars-zigzag nil)
   ;; (indent-bars-color-by-depth t)
   ;; (indent-bars-display-on-blank-lines nil)
+  (indent-bars-display-on-blank-lines nil)
   (indent-bars-treesit-support t)
   :hook (prog-mode . indent-bars-mode)
+  :init
+  (lgreen/leader-define-key
+    "t i" '(lgreen/toggle-indent-bars :wk "Toggle indent guides"))
+  :config
+  (defun lgreen/toggle-indent-bars ()
+    "Toggle indent guides in programming modes."
+    (interactive)
+    (if (derived-mode-p 'prog-mode)
+	(indent-bars-mode (if indent-bars-mode nil t))
+      (message "Not in a programming mode!")))
   )
 
 ;;; Outshine

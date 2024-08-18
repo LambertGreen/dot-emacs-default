@@ -38,11 +38,12 @@
 ;; Get into the mood boy
 (use-package moody
   :after evil
+  :custom
+  (column-number-mode 1)
   :init
   (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
     "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline"))
-
   :config
   (defun lgreen/toggle-mode-line ()
     "Toggle the visibility of the mode line."

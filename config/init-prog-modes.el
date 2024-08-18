@@ -71,7 +71,13 @@
 ;;; Apheleia
 ;; Format code with minimal disruption
 (use-package apheleia
-  :config (apheleia-global-mode +1))
+  :config
+  ;; Remove the existing 'stylua' entry and replace it `-s' usage to perform a recursive search for the `sytlua.toml'
+  ;; file
+  (setf (alist-get 'stylua apheleia-formatters)
+        '("stylua" "-s" "-"))
+
+  (apheleia-global-mode +1))
 
 ;;; Aggressive-Indent-Mode
 ;; Do it now!
@@ -138,7 +144,9 @@
                                '((jq . t))))
 
 (use-package just-mode)
-(use-package lua-mode)
+
+(use-package lua-mode
+  :custom (lua-indent-level 3))
 
 (use-package markdown-mode
   :after general

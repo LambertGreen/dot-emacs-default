@@ -17,6 +17,12 @@
 ;; Pump up those wpm numbers
 (use-package typit)
 
+;;; Keychain-Environment
+;; Re-use environment variables: `SSH_AUTH_SOCK' `SSH_AGENT_PID' `GPG_AGENT'
+(use-package keychain-environment
+  :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
+  :config (keychain-refresh-environment))
+
 ;;; GPG
 ;; NOTE: Not sure if we need `pinentry' or just this config
 (use-package epg
@@ -26,8 +32,10 @@
 ;;; Pinentry
 ;; Enter GPG passphrase via Emacs
 (use-package pinentry
+  :after (epg keychain-environment)
   :if (not (eq system-type 'windows-nt))
-  :config (pinentry-start))
+  :config
+  (pinentry-start))
 
 ;;; Direnv
 (use-package direnv
@@ -37,12 +45,6 @@
 ;;; EditorConfig
 (use-package editorconfig
   :config (editorconfig-mode 1))
-
-;;; Keychain-Environment
-;; Re-use environment variables: `SSH_AUTH_SOCK' `SSH_AGENT_PID' `GPG_AGENT'
-(use-package keychain-environment
-  :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
-  :config (keychain-refresh-environment))
 
 ;;; World-Clock
 (use-package emacs

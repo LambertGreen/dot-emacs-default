@@ -10,7 +10,8 @@
 ;;; Clipetty
 ;; Use OSC 52 escape sequences to enable copy/paste in the terminal
 (use-package clipetty
-  :hook (after-init  . global-clipetty-mode))
+  :config
+  (global-clipetty-mode 1))
 
 ;;; Evil-Terminal-Cursor-Changer
 ;; Changing cursor shape and color in the terminal

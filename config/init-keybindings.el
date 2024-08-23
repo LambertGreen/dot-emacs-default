@@ -58,9 +58,11 @@
 ;;;;; ---------------
     "s" '(:ignore t :wk "search")
 
-;;;;; Check
+;;;;; Code
 ;;;;; ---------------
     "c" '(:ignore t :wk "code")
+    "c C" '(compile :wk "Compile")
+    "c c" '(recompile :wk "Rerun last compile")
 
 ;;;;; Projects
 ;;;;; --------

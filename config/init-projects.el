@@ -18,18 +18,27 @@
 	nil)))
 
   (defun lgreen/get-justfile-recipes ()
-    "Get a list of recipes from the Justfile by calling `just --summary`."
+    "Return a list of recipes from the Justfile by calling `just --summary`."
     (let ((default-directory (project-root (project-current t))))
-      (let* ((output (string-trim-right (shell-command-to-string "just --summary")))
-             (recipes (split-string output " " t)))
-	recipes)))
+      (condition-case err
+          (let* ((output (string-trim-right (shell-command-to-string "just --summary")))
+		 (recipes (split-string output " " t)))
+            (if recipes
+		recipes
+              (error "No recipes found in Justfile")))
+	;; Error handling
+	(error
+	 (message "Error fetching recipes: %s" (error-message-string err))
+	 nil))))
 
   (defun lgreen/run-justfile-recipe ()
-    "Prompt user to select a Justfile recipe and run it."
+    "Prompt user to select and run a Justfile recipe."
     (interactive)
-    (let* ((recipes (lgreen/get-justfile-recipes))
-           (recipe (completing-read "Select project task: " recipes)))
-      (compile (concat "just " recipe))))
+    (let* ((recipes (lgreen/get-justfile-recipes)))
+      (if recipes
+          (let ((recipe (completing-read "Select project task: " recipes)))
+            (compile (concat "just " recipe)))
+	(message "No valid recipes found or an error occurred."))))
 
   :custom
   (project-switch-commands 'project-find-file)

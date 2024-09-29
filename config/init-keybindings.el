@@ -36,8 +36,7 @@
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
 ;;;;; --------------
-    "SPC" '(project-find-file :wk "Find file in project")
-    ":" '(execute-extended-command :wk "M-x")
+    "SPC" '(execute-extended-command :wk "M-x")
     ";" '(pp-eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
     "/" '(consult-line :wk "Search buffer")

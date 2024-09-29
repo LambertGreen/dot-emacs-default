@@ -6,10 +6,12 @@
   :ensure nil
   :custom (vc-follow-symlinks t))
 
+(use-package transient)
+
 ;;; Magit
 ;; Git porcelain inside Emacs
 (use-package magit
-  :after general
+  :after (general transient)
   :custom
   (magit-diff-refine-hunk t)
   (magit-diff-hide-trailing-cr-characters t)

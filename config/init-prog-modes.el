@@ -58,9 +58,7 @@
 
 ;;; Treesit-Auto
 ;; Get all the syntax
-;; FIXME Install the appropriate version of Treesitter with expected ABI, and re-enable
 (use-package treesit-auto
-  :disabled t
   :custom
   (treesit-auto-install 'prompt)
   (treesit-font-lock-level 4)

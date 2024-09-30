@@ -161,7 +161,8 @@
     "c" '(:ignore t :wk "command")
     "cm" '(markdown-other-window :wk "other-window")
     "cp" '(markdown-preview :wk "preview")
-    "ce" '(markdown-export :wk "export")))
+    "ce" '(markdown-export :wk "export"))
+  :hook (markdown-mode . outline-minor-mode))
 
 (use-package mermaid-mode)
 (use-package nix-mode)

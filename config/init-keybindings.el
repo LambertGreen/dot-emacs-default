@@ -37,6 +37,7 @@
 ;;;;; Top Level Keys
 ;;;;; --------------
     "SPC" '(execute-extended-command :wk "M-x")
+    "!" '(shell-command :wk "Shell command")
     ";" '(pp-eval-expression :wk "Eval expression")
     "." '(find-file :wk "Find file")
     "/" '(consult-line :wk "Search buffer")

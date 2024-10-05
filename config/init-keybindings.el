@@ -100,6 +100,7 @@
     "w o" '(delete-other-windows :wk "Delete other windows")
     "w f" '(toggle-frame-fullscreen :wk "Toggle fullscreen")
     "w m" '(toggle-frame-maximized :wk "Toggle maximized")
+
     "w w" '(evil-window-next :wk "Toggle maximized")
     "w H" '(evil-window-move-far-left :wk "Move window far left")
     "w K" '(evil-window-move-very-top :wk "Move window very top")
@@ -107,7 +108,7 @@
     "w L" '(evil-window-move-far-right :wk "Move window far right")
 
 ;;;;; Insert
-;;;;; ----
+;;;;; ------
 ;;;;; TODO Add other useful bindings from Doom Emacs
     "i" '(:ignore t :wk "insert")
     "i f" '(lgreen/insert-current-filename :wk "Current filename")
@@ -137,7 +138,7 @@
     "q q" '(save-buffers-kill-terminal :wk "Quit")
 
 ;;;;; Checks
-;;;;; -----------
+;;;;; ------
     "x" '(:ignore t :wk "checks")))
 
 (elpaca-wait)

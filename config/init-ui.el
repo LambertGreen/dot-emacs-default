@@ -123,16 +123,37 @@
   :hook (prog-mode . display-fill-column-indicator-mode)
   :custom
   (fill-column 120)
+  (display-fill-column-indicator-character
+   (plist-get '( triple-pipe  ?┆
+                 double-pipe  ?╎
+                 double-bar   ?║
+                 solid-block  ?█
+                 empty-bullet ?◦)
+              'double-pipe))
   :init
   (lgreen/leader-define-key
     "t f" '(lgreen/toggle-fill-column-indicator :wk "Toggle fill-column indicator"))
   :config
+  (defun lgreen/set-face-for-fill-column-indicator()
+    "Sets the fill column indicator face to match the current theme's comment color."
+    (interactive)
+    (set-face-attribute 'fill-column-indicator nil
+                        :foreground (face-attribute 'font-lock-comment-face :foreground)
+                        :inherit 'font-lock-comment-face
+			:weight 'thin
+			:height 0.5)
+    )
+
   (defun lgreen/toggle-fill-column-indicator ()
     "Toggle the fill column indicator."
     (interactive)
     (if display-fill-column-indicator-mode
         (display-fill-column-indicator-mode -1)
-      (display-fill-column-indicator-mode 1))))
+      (display-fill-column-indicator-mode 1)))
+
+  (lgreen/set-face-for-fill-column-indicator)
+  (advice-add 'load-theme
+	      :after 'lgreen/set-face-for-fill-column-indicator))
 
 ;;; Indent-Bars
 ;; Know what vertical you are on

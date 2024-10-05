@@ -151,19 +151,8 @@
   :init
   (lgreen/local-leader-define-key
     :keymaps 'markdown-mode-map
-    "i" '(:ignore t :wk "insert")
-    "ii" '(markdown-insert-italic :wk "italic")
-    "ib" '(markdown-insert-bold :wk "bold")
-    "ih" '(markdown-insert-hr :wk "h-line")
-    "il" '(markdown-insert-link :wk "link")
-    "ic" '(markdown-insert-code :wk "code")
-    "iq" '(markdown-insert-blockquote :wk "blockquote")
-    "it" '(markdown-insert-table :wk "table")
-
-    "c" '(:ignore t :wk "command")
-    "cm" '(markdown-other-window :wk "other-window")
-    "cp" '(markdown-preview :wk "preview")
-    "ce" '(markdown-export :wk "export"))
+    "i" '(:keymap markdown-mode-style-map :wk "insert")
+    "c" '(:keymap markdown-mode-command-map :wk "command"))
   :hook (markdown-mode . outline-minor-mode))
 
 (use-package mermaid-mode)

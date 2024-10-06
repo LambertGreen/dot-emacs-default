@@ -160,29 +160,17 @@
 (use-package indent-bars
   :ensure (:fetcher github :repo "jdtsmith/indent-bars")
   :custom
-  (indent-bars-color '(highlight :face-bg t :blend 0.15))
   (indent-bars-width-frac 0.2)
   (indent-bars-pad-frac 0.2)
-  ;; (indent-bars-zigzag 0.1)
-  ;; (indent-bars-color-by-depth '(:palette ("red" "green" "orange" "cyan") :blend 1))
-  ;; (indent-bars-highlight-current-depth '(:blend 0.5))
-  ;; (indent-bars-zigzag nil)
-  ;; (indent-bars-color-by-depth t)
-  ;; (indent-bars-display-on-blank-lines nil)
+  (indent-bars-highlight-current-depth '(:blend 0.9))
+  (indent-bars-prefer-character t)
+  (indent-bars-starting-column 0)
   (indent-bars-display-on-blank-lines nil)
   (indent-bars-treesit-support t)
   :hook (prog-mode . indent-bars-mode)
   :init
   (lgreen/leader-define-key
-    "t i" '(lgreen/toggle-indent-bars :wk "Toggle indent guides"))
-  :config
-  (defun lgreen/toggle-indent-bars ()
-    "Toggle indent guides in programming modes."
-    (interactive)
-    (if (derived-mode-p 'prog-mode)
-	(indent-bars-mode (if indent-bars-mode nil t))
-      (message "Not in a programming mode!")))
-  )
+    "t i" '(indent-bars-mode :wk "Toggle indent bars")))
 
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes

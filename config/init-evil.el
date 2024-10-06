@@ -242,12 +242,11 @@
     (kbd "C-k") 'markdown-previous-visible-heading)
   )
 
-
-;; ;;; Evil-Owl
-;; TODO Evaluate evil-owl package
-;; ;;  the star of the show
-;; (use-package evil-owl
-;;   :after evil)
+;;; Evil-Owl
+;;  "Mark my words! You register?"
+(use-package evil-owl
+  :after evil
+  :config (evil-owl-mode))
 
 ;;; Targets
 ;; Aiming at that there

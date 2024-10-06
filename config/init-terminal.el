@@ -16,8 +16,7 @@
   (vterm-toggle-scope 'project)
   :init
   (lgreen/leader-define-key
-    "o t" '(vterm-toggle :wk "Open vterm"))
-  )
+    "o t" '(vterm-toggle :wk "Open vterm")))
 
 ;;; EAT
 ;; Emulate A Terminal

@@ -35,4 +35,3 @@
 (require 'init-email)
 
 ;; _
-(provide 'init-evil)

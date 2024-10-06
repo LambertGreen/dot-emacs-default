@@ -175,5 +175,5 @@
 (provide 'init-prog-modes)
 
 ;; Local Variables:
-;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia ce cmake cp defun eglot emacs gitconfig gitignore ib ih jdtsmith jq lsp prog sshd txt uncomment yaml yml"
+;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia ce cmake cp defun eglot emacs gitconfig gitignore ib ih jdtsmith jenv jq lsp prog sshd stylua txt uncomment yaml yml"
 ;; End:

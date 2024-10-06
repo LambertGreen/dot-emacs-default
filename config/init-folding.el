@@ -59,7 +59,7 @@
 	       'append))
 
 ;;; Evil-Vimish-Fold
-;; Allows manual creation/deletion of freeform folds
+;; Allows manual creation/deletion of free-form folds
 (use-package evil-vimish-fold
   :after outline
   :config
@@ -74,3 +74,7 @@
 
 ;; _
 (provide 'init-folding)
+
+;; Local Variables:
+;; jinx-local-words: "emacs treesit"
+;; End:

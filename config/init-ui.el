@@ -326,7 +326,7 @@
 (use-package rainbow-mode)
 
 ;;; Breadcrumb
-;; Like how Hansel & Gretal got back home
+;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
   :if (display-graphic-p)
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
@@ -336,5 +336,5 @@
 (provide 'init-ui)
 
 ;; Local Variables:
-;; jinx-local-words: "elpaca hl minibuffer modeline olivetti setq solaire ui vc"
+;; jinx-local-words: "elpaca hl jdtsmith joaotavora minibuffer modeline olivetti setq solaire ui vc"
 ;; End:

@@ -73,7 +73,14 @@
 ;;; No-Littering
 ;; Let's put the mess in './var'
 (use-package no-littering
-  :config (no-littering-theme-backups))
+  :config
+  (no-littering-theme-backups)
+  ;; Store backup files in the no-littering directory
+  (setq backup-directory-alist `(("." . ,(no-littering-expand-var-file-name "backups/"))))
+  ;; Store auto-save files in the no-littering directory
+  (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  ;; Store lockfiles in the no-littering directory
+  (setq lock-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "lockfiles/") t))))
 
 ;;; Exec-Path-From-Shell
 ;; Get on the right $PATH

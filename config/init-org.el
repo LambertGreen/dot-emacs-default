@@ -49,6 +49,7 @@
     [remap consult-imenu] 'consult-org-heading
     "C-," nil
     "C-'" nil
+    "RET" 'lgreen/org-enter-key
     )
 
   (lgreen/local-leader-define-key
@@ -124,6 +125,17 @@
     "s A" 'org-archive-subtree
     "s N" 'widen
     "s S" 'org-sort)
+
+  (defun lgreen/org-enter-key ()
+    "Context-aware `RET` key for Org mode in Normal state."
+    (interactive)
+    (cond
+     ;; Open links or other elements at point
+     ((org-in-regexp org-link-any-re) (org-open-at-point))
+     ;; Cycle visibility on a heading
+     ((org-at-heading-p) (org-cycle))
+     ;; Execute custom behaviors or fallback
+     (t (org-cycle))))
 
   (defun lgreen/setup-org-calendar-navigation ()
     (general-def

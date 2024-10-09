@@ -3,16 +3,18 @@
 
 ;;; Doom-Modeline
 ;; Add Doom's modeline
-;; NOTE: We disable Doom-Modeline to use Moody for now
 (use-package doom-modeline
-  :disabled t
   :custom
-  (doom-modeline-height 20)
-  ;; (doom-modeline-indent-info t)
+  ;; (doom-modeline-column-number t) - Deprecated
+  (column-number-mode 1)
+
+  (doom-modeline-height 24)
+  (doom-modeline-indent-info t)
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-workspace-name nil)
   (doom-modeline-persp-name nil)
   (doom-modeline-minor-modes nil)
+
   ;; :hook (after-init . doom-modeline-mode)
   :init
   (lgreen/leader-define-key
@@ -36,7 +38,9 @@
 
 ;;; Moody
 ;; Get into the mood boy
+;; NOTE: We disable Moody as we are back to using Doom-Modeline
 (use-package moody
+  :disabled t
   :after evil
   :custom
   (column-number-mode 1)

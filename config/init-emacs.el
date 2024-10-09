@@ -9,10 +9,11 @@
   (user-full-name "Lambert Green")
   (user-mail-address "lambert.green@gmail.com")
 
+  (custom-file (expand-file-name "custom.el" user-emacs-directory))
   (use-short-answers t)
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
-  (custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (indent-tabs-mode nil)
 
   :config
   ;; Fonts

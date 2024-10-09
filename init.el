@@ -1,5 +1,8 @@
 ;; init.el --- -*- lexical-binding: t; -*-
 
+;;; ======================
+;;; Lambert's Emacs Config
+;;; ======================
 
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
 

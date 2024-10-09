@@ -243,12 +243,15 @@
 ;; Getting red in the face for the trailing space
 (use-package whitespace
   :ensure nil
-  :custom (whitespace-style '(face trailing))
+  :after display-fill-column-indicator
+  :custom (whitespace-style '(face lines tabs trailing))
+  (whitespace-line-column fill-column)
   :hook ((text-mode prog-mode) . whitespace-mode)
-  :config
-  ;; Customize the appearance of trailing whitespace
-  (custom-set-faces
-   '(whitespace-trailing ((t (:background "red"))))))
+  :init
+  (lgreen/leader-define-key
+    "x w" '(:ignore t :which-key "whitespace")
+    "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
+    "x w r" '(whitespace-report :which-key "Whitespace Report")))
 
 ;;; Proced
 ;; Reach for this before htop/btop/etc.

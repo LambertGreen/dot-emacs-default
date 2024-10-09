@@ -97,7 +97,10 @@
 
 ;;; Fussy
 ;; Flex matching
+;; TODO Do we need fussy?
+;; Let's see how things go with fussy disabled
 (use-package fussy
+  :disabled t
   :config (push 'fussy completion-styles))
 
 ;; _

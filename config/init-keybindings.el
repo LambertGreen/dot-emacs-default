@@ -38,7 +38,8 @@
 ;;;;; --------------
     "SPC" '(execute-extended-command :wk "M-x")
     "!" '(shell-command :wk "Shell command")
-    ";" '(pp-eval-expression :wk "Eval expression")
+    ":" '(pp-eval-expression :wk "Eval expression")
+    ";" '(comment-dwim :wk "Comment")
     "." '(find-file :wk "Find file")
     "/" '(consult-line :wk "Search buffer")
     "u" '(universal-argument :wk "Universal Argument")

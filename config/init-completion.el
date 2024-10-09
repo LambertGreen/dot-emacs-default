@@ -57,6 +57,14 @@
   :init
   (global-corfu-mode))
 
+;;; Corfu-Terminal
+;; Do it without child-frames
+(use-package corfu-terminal
+  :after corfu
+  :config
+  (unless (display-graphic-p)
+    (corfu-terminal-mode t)))
+
 ;;; Corfu-Quick
 (use-package corfu-quick
   :ensure nil

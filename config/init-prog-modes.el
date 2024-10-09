@@ -161,6 +161,9 @@
 
 (use-package sh-mode
   :ensure nil
+  :custom
+  (sh-basic-offset 4)
+  (sh-indentation 4)
   :hook (sh-mode . hs-minor-mode))
 
 (use-package strace-mode)

@@ -170,6 +170,7 @@
   :mode ("\\.(yaml|yml)\\'" . yaml-mode))
 
 (use-package powershell)
+(use-package kotlin-mode)
 
 ;; _
 (provide 'init-prog-modes)

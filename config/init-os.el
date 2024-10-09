@@ -1,6 +1,14 @@
 ;; init-os.el --- -*- lexical-binding: t; -*-
 
 
+;;; Environment Setup
+;;
+;; TODO Add more shell variables that are relevant
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-copy-envs '("RIPGREP_CONFIG_PATH")))
+
 ;;; Darwin/MacOS
 ;; macOS specific config
 (use-package emacs

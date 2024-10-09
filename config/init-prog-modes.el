@@ -41,7 +41,7 @@
     "Format buffer with eglot or apheleia."
     (interactive)
     (if (bound-and-true-p eglot--managed-mode)
-	(eglot-format-buffer)
+        (eglot-format-buffer)
       (call-interactively #'apheleia-format-buffer)))
 
   (defun lgreen/set-java-home-from-jenv ()
@@ -49,12 +49,12 @@
     (interactive)
     (let ((jenv-java-home (shell-command-to-string "jenv prefix")))
       (when (not (string= jenv-java-home ""))
-	(setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
+        (setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
 
   :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :config
   (advice-add 'load-theme
-	      :after 'lgreen/set-faces-for-prog-mode))
+              :after 'lgreen/set-faces-for-prog-mode))
 
 ;;; Treesit-Auto
 ;; Get all the syntax
@@ -130,7 +130,7 @@
 (use-package gn-mode)
 (use-package git-modes
   :mode (("\\.gitconfig\\'" . gitconfig-mode)
-	 ("\\.gitignore\\'" . gitignore-mode)))
+         ("\\.gitignore\\'" . gitignore-mode)))
 
 (use-package groovy-mode)
 

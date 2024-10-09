@@ -31,7 +31,7 @@
     "Toggle the visibility of the mode line."
     (interactive)
     (if (eq mode-line-format nil)
-	(setq mode-line-format (default-value 'mode-line-format))
+        (setq mode-line-format (default-value 'mode-line-format))
       (setq mode-line-format nil))
     (force-mode-line-update)
     (redraw-display)))
@@ -53,7 +53,7 @@
     "Toggle the visibility of the mode line."
     (interactive)
     (if (eq mode-line-format nil)
-	(setq mode-line-format (default-value 'mode-line-format))
+        (setq mode-line-format (default-value 'mode-line-format))
       (setq mode-line-format nil))
     (force-mode-line-update)
     (redraw-display))
@@ -68,20 +68,20 @@
   (moody-replace-eldoc-minibuffer-message-function)
   ;; Customize evil state colors to match the colors from diff-mode
   (setq evil-normal-state-tag   (propertize " 󰬕 " )
-	evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:inherit diff-header :background unspecified)))
-	evil-insert-state-tag   (propertize " 󰬐 " 'face '((:inherit diff-added :background unspecified)))
-	evil-motion-state-tag   (propertize " 󰬔 " 'face '((:inherit diff-removed :background unspecified)))
-	evil-visual-state-tag   (propertize " 󰬝 " 'face '((:inherit diff-changed :background unspecified)))
-	evil-replace-state-tag  (propertize " 󰬙 " 'face '((:inherit diff-removed :background unspecified)))
-	evil-operator-state-tag (propertize " 󰬖 " 'face '((:inherit diff-removed :background unspecified))))
+        evil-emacs-state-tag    (propertize " 󰬌 " 'face '((:inherit diff-header :background unspecified)))
+        evil-insert-state-tag   (propertize " 󰬐 " 'face '((:inherit diff-added :background unspecified)))
+        evil-motion-state-tag   (propertize " 󰬔 " 'face '((:inherit diff-removed :background unspecified)))
+        evil-visual-state-tag   (propertize " 󰬝 " 'face '((:inherit diff-changed :background unspecified)))
+        evil-replace-state-tag  (propertize " 󰬙 " 'face '((:inherit diff-removed :background unspecified)))
+        evil-operator-state-tag (propertize " 󰬖 " 'face '((:inherit diff-removed :background unspecified))))
   ;; Customize the `vc-mode'
   (defun lgreen/customize-vc-mode (orig-func &rest args)
     "Customize the vc-mode string to include a Git icon with custom face."
     (let ((result (apply orig-func args)))
       (when (and vc-mode (stringp vc-mode))
-	(let ((git-icon (propertize "  " 'face '((:weight extrabold)))))
+        (let ((git-icon (propertize "  " 'face '((:weight extrabold)))))
           (setq vc-mode
-		(replace-regexp-in-string "^ Git[:-]" git-icon vc-mode))))
+                (replace-regexp-in-string "^ Git[:-]" git-icon vc-mode))))
       result))
   ;; Advise vc-mode-line to apply custom vc-mode formatting
   (advice-add 'vc-mode-line :around #'lgreen/customize-vc-mode))
@@ -109,17 +109,17 @@
   ;; install dependencies we indicate the version.
   :ensure (hl-todo :version (lambda (_) "3.6.0"))
   :hook ((org-mode . hl-todo-mode)
-	 (prog-mode . hl-todo-mode))
+         (prog-mode . hl-todo-mode))
   :config
   (setq hl-todo-highlight-punctuation ":"
-	hl-todo-keyword-faces
-	`(("TODO"       warning bold)
-	  ("FIXME"      error bold)
-	  ("BUG"        error bold)
-	  ("HACK"       font-lock-constant-face bold)
-	  ("REVIEW"     font-lock-keyword-face bold)
-	  ("NOTE"       success bold)
-	  ("DEPRECATED" font-lock-doc-face bold))))
+        hl-todo-keyword-faces
+        `(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("BUG"        error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
 
 ;;; Display-Fill-Column-Indicator
 (use-package display-fill-column-indicator
@@ -144,8 +144,8 @@
     (set-face-attribute 'fill-column-indicator nil
                         :foreground (face-attribute 'font-lock-comment-face :foreground)
                         :inherit 'font-lock-comment-face
-			:weight 'thin
-			:height 0.5)
+                        :weight 'thin
+                        :height 0.5)
     )
 
   (defun lgreen/toggle-fill-column-indicator ()
@@ -157,7 +157,7 @@
 
   (lgreen/set-face-for-fill-column-indicator)
   (advice-add 'load-theme
-	      :after 'lgreen/set-face-for-fill-column-indicator))
+              :after 'lgreen/set-face-for-fill-column-indicator))
 
 ;;; Indent-Bars
 ;; Know what vertical you are on
@@ -180,13 +180,13 @@
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
   :hook ((prog-mode . outshine-mode)
-	 (conf-mode . outshine-mode))
+         (conf-mode . outshine-mode))
   :general
   (:keymaps 'outline-mode-map
             :states 'normal
             "<tab>" 'outline-cycle
             "<backtab>" 'outshine-cycle-buffer
-	    "gh" 'outline-up-heading))
+            "gh" 'outline-up-heading))
 
 ;;; Nerd-Icons
 ;; Fancy icons
@@ -283,9 +283,9 @@
   (lgreen/leader-define-key
     "t o" '(olivetti-mode :wk "Toggle olivetti"))
   :hook ((org-mode
-	  text-mode
-	  dired-mode
-	  magit-mode
+          text-mode
+          dired-mode
+          magit-mode
           emacs-lisp-mode) . olivetti-mode))
 
 ;;; Perfect-Margin
@@ -296,8 +296,8 @@
   :custom
   (perfect-margin-visible-width 130)
   :hook ((org-mode
-	  text-mode
-	  dired-mode
+          text-mode
+          dired-mode
           emacs-lisp-mode) . perfect-margin-mode)
   :config
   ;; auto-center minibuffer windows

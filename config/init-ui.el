@@ -13,20 +13,25 @@
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-workspace-name nil)
   (doom-modeline-persp-name nil)
-  (doom-modeline-minor-modes nil)
+  (doom-modeline-minor-modes t)
 
   ;; :hook (after-init . doom-modeline-mode)
   :init
   (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
     "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline")
-    "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding"))
+    "t m e" '(lgreen/toggle-doom-modeline-buffer-encoding :which-key "toggle modeline encoding")
+    "t m i" '(lgreen/toggle-doom-modeline-indent-info :which-key "toggle modeline indent-info"))
   :config
   (doom-modeline-mode 1)
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
     (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding)))
+  (defun lgreen/toggle-doom-modeline-indent-info ()
+    "Toggle the `doom-modeline-indent-info` variable."
+    (interactive)
+    (setq doom-modeline-indent-info (not doom-modeline-indent-info)))
   (defun lgreen/toggle-mode-line ()
     "Toggle the visibility of the mode line."
     (interactive)

@@ -42,7 +42,8 @@
     (interactive)
     (if (bound-and-true-p eglot--managed-mode)
         (eglot-format-buffer)
-      (call-interactively #'apheleia-format-buffer)))
+      (call-interactively #'apheleia-format-buffer))
+    (untabify (point-min) (point-max)))
 
   (defun lgreen/set-java-home-from-jenv ()
     "Set JAVA_HOME environment variable from jenv."

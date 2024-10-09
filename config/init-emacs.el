@@ -13,7 +13,10 @@
   (use-short-answers t)
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
+
+  ;; Default text settings
   (indent-tabs-mode nil)
+  (tab-width 4)
 
   :config
   ;; Fonts

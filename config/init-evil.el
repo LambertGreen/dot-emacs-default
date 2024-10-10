@@ -214,10 +214,7 @@
   :after evil)
 
 ;;; Evil-Little-Word
-;; handle the sub ("little") words in CamelCase
-;; NOTE: The evil-little-words.el comes with predefined bindings that fail, and I
-;; had to manually comment them out.
-;; FIXME: Fork the evil-little-word github project with your fix
+;; handle the sub ("little") words in AnyCamelCase
 (use-package evil-little-word
   :ensure (:fetcher github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
   :after evil

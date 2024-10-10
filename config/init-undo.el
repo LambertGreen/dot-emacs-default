@@ -17,9 +17,9 @@
   (evil-local-mode . turn-on-undo-tree-mode)
   :general
   (:states 'normal
-	   "U" 'undo-tree-visualize)
+           "U" 'undo-tree-visualize)
   :bind (:map undo-tree-map
-	      ("C-/" . nil))
+              ("C-/" . nil))
   :config
   (global-undo-tree-mode))
 

@@ -15,11 +15,11 @@
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
     (cons (format "[CRM%s] %s"
-		  (replace-regexp-in-string
-		   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-		   crm-separator)
-		  (car args))
-	  (cdr args)))
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
   :hook
   (minibuffer-setup-hook . cursor-intangible-mode)
@@ -32,7 +32,7 @@
   ;; Vertico commands are hidden in normal buffers.
   ;; TODO Evaluate if you want to keep this setting
   (setq read-extended-command-predicate
-	#'command-completion-default-include-p))
+        #'command-completion-default-include-p))
 
 ;; _
 (provide 'init-minibuffer)

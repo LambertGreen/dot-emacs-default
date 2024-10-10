@@ -16,7 +16,7 @@
   :if (memq window-system '(mac ns))
   :config
   (setq insert-directory-program "gls"
-	dired-use-ls-dired t)
+        dired-use-ls-dired t)
 
   ;; Set Homebrew prefix
   (defvar homebrew-prefix)
@@ -71,7 +71,7 @@
       (interactive)
       (let ((explicit-shell-file-name "cmdproxy")
             (shell-file-name "cmdproxy") (comint-dynamic-complete t))
-	(shell)))))
+        (shell)))))
 
 ;;; Ns-Auto-Titlebar
 ;; On macOS make the titlebar look better
@@ -99,11 +99,11 @@
     (require 'mouse)
     (xterm-mouse-mode t)
     (global-set-key [mouse-4] (lambda ()
-				(interactive)
-				(scroll-down 1)))
+                                (interactive)
+                                (scroll-down 1)))
     (global-set-key [mouse-5] (lambda ()
-				(interactive)
-				(scroll-up 1)))
+                                (interactive)
+                                (scroll-up 1)))
     (defun track-mouse (_))
     (setq mouse-sel-mode t)
     )

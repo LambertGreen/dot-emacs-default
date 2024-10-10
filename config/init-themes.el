@@ -33,9 +33,9 @@
      ;; For macOS, sync with system appearance
      ((memq window-system '(mac ns))
       (defun lgreen/sync-theme-with-system-appearance (appearance)
-	"Load theme taking current system APPEARANCE into account."
-	(mapc #'disable-theme custom-enabled-themes)
-	(pcase appearance
+        "Load theme taking current system APPEARANCE into account."
+        (mapc #'disable-theme custom-enabled-themes)
+        (pcase appearance
           ('light (load-theme 'doom-one-light t))
           ('dark (load-theme 'doom-one t))))
       (add-hook 'ns-system-appearance-change-functions #'lgreen/sync-theme-with-system-appearance)

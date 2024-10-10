@@ -14,22 +14,22 @@
     "Determine if DIR is a Projectile project."
     (let ((projectile-file (expand-file-name ".projectile" dir)))
       (if (file-exists-p projectile-file)
-	  (list 'vc 'Git dir)
-	nil)))
+          (list 'vc 'Git dir)
+        nil)))
 
   (defun lgreen/get-justfile-recipes ()
     "Return a list of recipes from the Justfile by calling `just --summary`."
     (let ((default-directory (project-root (project-current t))))
       (condition-case err
           (let* ((output (string-trim-right (shell-command-to-string "just --summary")))
-		 (recipes (split-string output " " t)))
+                 (recipes (split-string output " " t)))
             (if recipes
-		recipes
+                recipes
               (error "No recipes found in Justfile")))
-	;; Error handling
-	(error
-	 (message "Error fetching recipes: %s" (error-message-string err))
-	 nil))))
+        ;; Error handling
+        (error
+         (message "Error fetching recipes: %s" (error-message-string err))
+         nil))))
 
   (defun lgreen/run-justfile-recipe ()
     "Prompt user to select and run a Justfile recipe."
@@ -38,7 +38,7 @@
       (if recipes
           (let ((recipe (completing-read "Select project task: " recipes)))
             (compile (concat "just " recipe)))
-	(message "No valid recipes found or an error occurred."))))
+        (message "No valid recipes found or an error occurred."))))
 
   :custom
   (project-switch-commands 'project-find-file)

@@ -35,7 +35,6 @@
 
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
-;;;;; --------------
     "SPC" '(execute-extended-command :wk "M-x")
     "!" '(shell-command :wk "Shell command")
     ":" '(pp-eval-expression :wk "Eval expression")
@@ -45,36 +44,29 @@
     "u" '(universal-argument :wk "Universal Argument")
 
 ;;;;; Local Leader
-;;;;; ------------
     "m" '(:ignore t :wk "localleader")
 
 ;;;;; Find files and things
-;;;;; ---------------------
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
     "f r" '(recentf :wk "Recent files")
     "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config")
 
 ;;;;; Search
-;;;;; ---------------
     "s" '(:ignore t :wk "search")
 
 ;;;;; Code
-;;;;; ---------------
     "c" '(:ignore t :wk "code")
     "c C" '(compile :wk "Compile")
     "c c" '(recompile :wk "Rerun last compile")
 
 ;;;;; Projects
-;;;;; --------
     "p" '(:ignore t :wk "project")
 
 ;;;;; Git Interface
-;;;;; -------------
     "g" '(:ignore t :wk "git")
 
 ;;;;; Buffer Management
-;;;;; -----------------
     "b" '(:ignore t :wk "buffer")
     "b b" '(switch-to-buffer :wk "Switch buffer")
     "b d" '(evil-delete-buffer :wk "Delete buffer")
@@ -87,7 +79,6 @@
     "b S" '(evil-write-all :wk "Save all buffers")
 
 ;;;;; Window Management
-;;;;; -----------------
     "w" '(:ignore t :wk "window")
     "w =" '(balance-windows :wk "Balance windows")
     "w h" '(evil-window-left :wk "Window left")
@@ -109,38 +100,33 @@
     "w L" '(evil-window-move-far-right :wk "Move window far right")
 
 ;;;;; Insert
-;;;;; ------
-;;;;; TODO Add other useful bindings from Doom Emacs
+    ;; TODO Add other useful bindings from Doom Emacs
     "i" '(:ignore t :wk "insert")
     "i f" '(lgreen/insert-current-filename :wk "Current filename")
 
 ;;;;; Help
-;;;;; ----
     "h" '(:ignore t :wk "help")
     "h b" '(describe-bindings :wk "Describe bindings")
     "h m" '(describe-mode :wk "Describe mode")
 
 ;;;;; Open
-;;;;; ----
     "o" '(:ignore t :wk "open")
     "o s" '(scratch-buffer :wk "Scratch buffer")
 
 ;;;;; Toggles
-;;;;; -------
     "t" '(:ignore t :wk "toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t h" '(hl-line-mode :wk "Toggle highlight line")
     "t w" '(visual-line-mode :wk "Toggle truncated lines")
 
 ;;;;; Quit
-;;;;; ----
     "q" '(:ignore t :wk "quit")
     "q q" '(save-buffers-kill-terminal :wk "Quit")
 
 ;;;;; Checks
-;;;;; ------
     "x" '(:ignore t :wk "checks")))
 
+;;;; ------------
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.
 

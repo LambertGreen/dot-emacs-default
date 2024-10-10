@@ -41,7 +41,6 @@
   ;; Visuals
   (when (display-graphic-p)
     (scroll-bar-mode -1)        ; Disable visible scroll-bar
-    (set-fringe-mode 3)         ; Give some breathing room
     )
 
   (tool-bar-mode -1)          ; Disable the tool-bar

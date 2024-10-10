@@ -8,8 +8,8 @@
 (use-package dabbrev
   :ensure nil
   :bind (
-	 ("C-;" . dabbrev-expand)
-	 ("C-/" . dabbrev-completion)))
+         ("C-;" . dabbrev-expand)
+         ("C-/" . dabbrev-completion)))
 
 ;;; Company
 ;; Not a crowd
@@ -18,8 +18,8 @@
   :disabled t
   :init
   (setq company-idle-delay 0.1  ; Show suggestions after a small delay
-	company-minimum-prefix-length 2 ; Start completing after 2 characters
-	company-show-numbers t) ; Show numbers for easy selection
+        company-minimum-prefix-length 2 ; Start completing after 2 characters
+        company-show-numbers t) ; Show numbers for easy selection
   :config
   (global-company-mode t)) ; Enable Company mode globally
 
@@ -37,19 +37,19 @@
   (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind (:map corfu-map
-	      ("C-n" . 'corfu-next)
-	      ("C-p" . 'corfu-previous)
-	      ("C-j" . 'corfu-next)
-	      ("C-k" . 'corfu-previous)
-	      ;; ("<escape>" . 'corfu-quit)
-	      ("<return>" . 'corfu-insert)
-	      ("<tab>" . 'corfu-next)
-	      ("S-<tab>" . 'corfu-previous)
-	      ("H-SPC" . 'corfu-insert-separator)
-	      ;; "SPC" #'corfu-insert-separator ; Use when `corfu-quit-at-boundary' is non-nil
-	      ("M-d" . 'corfu-show-documentation)
-	      ;; ("C-g" . 'corfu-quit)
-	      ("M-l" . 'corfu-show-location))
+              ("C-n" . 'corfu-next)
+              ("C-p" . 'corfu-previous)
+              ("C-j" . 'corfu-next)
+              ("C-k" . 'corfu-previous)
+              ;; ("<escape>" . 'corfu-quit)
+              ("<return>" . 'corfu-insert)
+              ("<tab>" . 'corfu-next)
+              ("S-<tab>" . 'corfu-previous)
+              ("H-SPC" . 'corfu-insert-separator)
+              ;; "SPC" #'corfu-insert-separator ; Use when `corfu-quit-at-boundary' is non-nil
+              ("M-d" . 'corfu-show-documentation)
+              ;; ("C-g" . 'corfu-quit)
+              ("M-l" . 'corfu-show-location))
 
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable
@@ -70,7 +70,7 @@
   :ensure nil
   :after corfu
   :bind (:map corfu-map
-	      ("C-q" . corfu-quick-insert)))
+              ("C-q" . corfu-quick-insert)))
 
 ;;; Corfu-History
 (use-package corfu-history
@@ -88,22 +88,22 @@
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
   :bind (("C-c p p" . completion-at-point) ;; capf
-	 ("C-c p t" . complete-tag)        ;; etags
-	 ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
-	 ("C-c p h" . cape-history)
-	 ("C-c p f" . cape-file)
-	 ("C-c p k" . cape-keyword)
-	 ("C-c p s" . cape-elisp-symbol)
-	 ("C-c p e" . cape-elisp-block)
-	 ("C-c p a" . cape-abbrev)
-	 ("C-c p l" . cape-line)
-	 ("C-c p w" . cape-dict)
-	 ("C-c p :" . cape-emoji)
-	 ("C-c p \\" . cape-tex)
-	 ("C-c p _" . cape-tex)
-	 ("C-c p ^" . cape-tex)
-	 ("C-c p &" . cape-sgml)
-	 ("C-c p r" . cape-rfc1345))
+         ("C-c p t" . complete-tag)        ;; etags
+         ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+         ("C-c p h" . cape-history)
+         ("C-c p f" . cape-file)
+         ("C-c p k" . cape-keyword)
+         ("C-c p s" . cape-elisp-symbol)
+         ("C-c p e" . cape-elisp-block)
+         ("C-c p a" . cape-abbrev)
+         ("C-c p l" . cape-line)
+         ("C-c p w" . cape-dict)
+         ("C-c p :" . cape-emoji)
+         ("C-c p \\" . cape-tex)
+         ("C-c p _" . cape-tex)
+         ("C-c p ^" . cape-tex)
+         ("C-c p &" . cape-sgml)
+         ("C-c p r" . cape-rfc1345))
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the

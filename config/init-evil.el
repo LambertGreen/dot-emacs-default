@@ -94,8 +94,8 @@
   :after evil
   :general
   (:states '(visual normal)
-	   "gx" 'evil-exchange
-	   "gX" 'evil-exchange-cancel))
+           "gx" 'evil-exchange
+           "gX" 'evil-exchange-cancel))
 
 ;;; Evil-Expat
 ;; additional ex commands
@@ -121,8 +121,8 @@
   :after evil
   :general
   (:states '(visual normal)
-	   "gl" 'evil-lion-left
-	   "gL" 'evil-lion-right))
+           "gl" 'evil-lion-left
+           "gL" 'evil-lion-right))
 
 ;;; Evil-Numbers
 ;; Up and down we go
@@ -184,29 +184,29 @@
     "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
   (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
     "]f" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "function.outer"))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer"))
     "[f" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
     "]F" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
     "[F" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
     "]c" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "class.outer"))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer"))
     "[c" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
     "]C" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
     "[C" (lambda ()
-	   (interactive)
-	   (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
 
 ;;; Evil-Visualstar
 ;;  the star of the show

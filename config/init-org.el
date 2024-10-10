@@ -12,7 +12,7 @@
   (org-ellipsis "⤵")
   (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
-				(plain-list-item . auto)))
+                                (plain-list-item . auto)))
   (org-directory "~/dev/my/org")
   (org-todo-keywords
    '((sequence
@@ -182,56 +182,56 @@
     "Beautify org mode keywords."
     (interactive)
     (setq prettify-symbols-alist '(("TODO" . "")
-	                           ("STRT" . "")
-	                           ("WAIT" . "")
-				   ("KILL" . "")
-				   ("DONE" . "")
-				   ("PROJ" . " ")
-				   ("[#A]" . "")
-				   ("[#B]" . "")
-				   ("[#C]" . "")
-				   ("[ ]" . "")
-				   ("[X]" . "")
-				   ("[-]" . "")
-				   ("#+BEGIN_SRC" . "")
-				   ("#+END_SRC" . "")
-				   ("#+BEGIN_QUOTE" . "")
-				   ("#+END_QUOTE" . "")
-				   (":PROPERTIES:" . "")
-				   (":END:" . "―")
-				   ("#+STARTUP:" . "")
-				   ("#+TITLE: " . "⋮")
-				   ("#+RESULTS:" . "")
-				   ("#+NAME:" . "")
-				   ("#+ROAM_TAGS:" . "")
-				   ("#+FILETAGS:" . "")
-				   ("#+HTML_HEAD:" . "")
-				   ("#+SUBTITLE:" . "")
-				   ("#+AUTHOR:" . "")
-				   ("#+begin_src" . "")
-				   ("#+end_src" . "")
-				   ("#+begin_quote" . "")
-				   ("#+end_quote" . "")
-				   (":properties:" . "")
-				   (":end:" . "―")
-				   ("#+startup:" . "")
-				   ("#+title: " . "⋮")
-				   ("#+results:" . "")
-				   ("#+name:" . "")
-				   ("#+roam_tags:" . "")
-				   ("#+filetags:" . "")
-				   ("#+html_head:" . "")
-				   ("#+subtitle:" . "")
-				   ("#+author:" . "")
-				   (":Effort:" . "")
-				   ("SCHEDULED:" . "")
-				   ("DEADLINE:" . "")))
+                                   ("STRT" . "")
+                                   ("WAIT" . "")
+                                   ("KILL" . "")
+                                   ("DONE" . "")
+                                   ("PROJ" . " ")
+                                   ("[#A]" . "")
+                                   ("[#B]" . "")
+                                   ("[#C]" . "")
+                                   ("[ ]" . "")
+                                   ("[X]" . "")
+                                   ("[-]" . "")
+                                   ("#+BEGIN_SRC" . "")
+                                   ("#+END_SRC" . "")
+                                   ("#+BEGIN_QUOTE" . "")
+                                   ("#+END_QUOTE" . "")
+                                   (":PROPERTIES:" . "")
+                                   (":END:" . "―")
+                                   ("#+STARTUP:" . "")
+                                   ("#+TITLE: " . "⋮")
+                                   ("#+RESULTS:" . "")
+                                   ("#+NAME:" . "")
+                                   ("#+ROAM_TAGS:" . "")
+                                   ("#+FILETAGS:" . "")
+                                   ("#+HTML_HEAD:" . "")
+                                   ("#+SUBTITLE:" . "")
+                                   ("#+AUTHOR:" . "")
+                                   ("#+begin_src" . "")
+                                   ("#+end_src" . "")
+                                   ("#+begin_quote" . "")
+                                   ("#+end_quote" . "")
+                                   (":properties:" . "")
+                                   (":end:" . "―")
+                                   ("#+startup:" . "")
+                                   ("#+title: " . "⋮")
+                                   ("#+results:" . "")
+                                   ("#+name:" . "")
+                                   ("#+roam_tags:" . "")
+                                   ("#+filetags:" . "")
+                                   ("#+html_head:" . "")
+                                   ("#+subtitle:" . "")
+                                   ("#+author:" . "")
+                                   (":Effort:" . "")
+                                   ("SCHEDULED:" . "")
+                                   ("DEADLINE:" . "")))
     (prettify-symbols-mode))
 
   :hook ((org-mode . visual-line-mode)
-	 (org-mode . lgreen/setup-org-calendar-navigation)
-	 (org-mode . lgreen/org-font-setup)
-	 (org-mode . lgreen/org-prettify-symbols))
+         (org-mode . lgreen/setup-org-calendar-navigation)
+         (org-mode . lgreen/org-font-setup)
+         (org-mode . lgreen/org-prettify-symbols))
 
   :config
   (org-load-modules-maybe t)
@@ -254,12 +254,12 @@
     "Toggle hiding/showing of org emphasize markers."
     (interactive)
     (if org-hide-emphasis-markers
-	(set-variable 'org-hide-emphasis-markers nil)
+        (set-variable 'org-hide-emphasis-markers nil)
       (set-variable 'org-hide-emphasis-markers t))
     (org-mode-restart))
 
   (advice-add 'load-theme
-	      :after 'lgreen/org-font-setup))
+              :after 'lgreen/org-font-setup))
 
 ;;; Org-Contrib
 (use-package org-contrib
@@ -274,7 +274,7 @@
 (use-package evil-org
   :after (evil org)
   :hook ((org-mode . evil-org-mode)
-	 (evil-org-mode . evil-org-set-key-theme))
+         (evil-org-mode . evil-org-set-key-theme))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift leader todo heading)))
 
@@ -290,8 +290,8 @@
     "o a" '(org-agenda :wk "Open agenda"))
   :config
   (setq org-agenda-files
-	(append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
-		(directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
+        (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
+                (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
   )
 
 ;;; Evil-Org-Agenda
@@ -333,28 +333,28 @@
     "X" '(org-capture :wk "Org capture"))
   :config
   (setq lgreen/org-capture-todo-file (expand-file-name "personal/todo.org" org-directory)
-	lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
-	lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
-	lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
-	org-capture-templates
-	'(("t" "todo" entry
-	   (file+headline lgreen/org-capture-todo-file "Inbox")
-	   "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-	  ("n" "notes" entry
-	   (file+headline lgreen/org-capture-notes-file "Inbox")
-	   "* %u %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-	  ("m" "email" entry
-	   (file+olp lgreen/org-capture-todo-file "Inbox")
-	   "* TODO Mail:%u %?\n%i\n%a" :prepend t)
-	  ("j" "Journal" entry
-	   (file+olp+datetree lgreen/org-capture-journal-file)
-	   "* %U %?\n%i\n%a" :prepend t)
-	  ("p" "Protocol" entry
-	   (file+headline lgreen/org-capture-notes-file "Inbox")
-	   "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	  ("L" "Protocol Link" entry
-	   (file+headline lgreen/org-capture-notes-file "Inbox")
-	   "* %? [[%:link][%:description]] \nCaptured On: %U")))
+        lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
+        lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
+        lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
+        org-capture-templates
+        '(("t" "todo" entry
+           (file+headline lgreen/org-capture-todo-file "Inbox")
+           "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
+          ("n" "notes" entry
+           (file+headline lgreen/org-capture-notes-file "Inbox")
+           "* %u %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
+          ("m" "email" entry
+           (file+olp lgreen/org-capture-todo-file "Inbox")
+           "* TODO Mail:%u %?\n%i\n%a" :prepend t)
+          ("j" "Journal" entry
+           (file+olp+datetree lgreen/org-capture-journal-file)
+           "* %U %?\n%i\n%a" :prepend t)
+          ("p" "Protocol" entry
+           (file+headline lgreen/org-capture-notes-file "Inbox")
+           "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+          ("L" "Protocol Link" entry
+           (file+headline lgreen/org-capture-notes-file "Inbox")
+           "* %? [[%:link][%:description]] \nCaptured On: %U")))
   )
 
 ;;; Org-Indent
@@ -390,7 +390,7 @@
   :disabled t
   :after org
   :custom (org-contacts-files (list (expand-file-name "personal/contacts.org" org-directory)
-				    (expand-file-name "personal/contacts_imported_from_gmail.org" org-directory))))
+                                    (expand-file-name "personal/contacts_imported_from_gmail.org" org-directory))))
 
 ;;; Org-Checklist
 ;; Auto-reset of checkbox state for repeating items

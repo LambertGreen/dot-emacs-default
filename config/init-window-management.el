@@ -17,7 +17,7 @@
 ;; - Use the universal argument twice for toggling all
 (use-package popper
   :bind (("C-'" . popper-toggle)
-	 ("C-M-'" . popper-cycle))
+         ("C-M-'" . popper-cycle))
   :custom
   (popper-reference-buffers
    '("\\*eat\\*"
@@ -43,12 +43,12 @@
   :config
   ;; Make terminal (eat) buffer show in right window
   (add-to-list 'display-buffer-alist
-	       '("\\*.*eat\\*"
-		 (display-buffer-in-side-window)
-		 (side . bottom)
-		 (display-buffer-reuse-window
-		  display-buffer-at-bottom)
-		 (window-height . 0.4)))
+               '("\\*.*eat\\*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (display-buffer-reuse-window
+                  display-buffer-at-bottom)
+                 (window-height . 0.4)))
 
   (defun close-window-on-eat-buffer-kill ()
     "Close the window when an eat buffer is killed."
@@ -64,10 +64,10 @@
   ;; Make compilation buffer show in right window
   (add-to-list 'display-buffer-alist
                '("\\*compilation\\*"
-		 (display-buffer-in-side-window)
-		 (side . right)
-		 (slot . 1)
-		 (window-width . 0.5)))
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (slot . 1)
+                 (window-width . 0.5)))
 
   (require 'ansi-color)
   (defun lgreen/colorize-compilation-buffer ()

@@ -211,16 +211,6 @@
   ;; Disable auto-pairing of single quotes in emacs-lisp-mode
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil))
 
-;;; Dtrt-Indent
-;; Guess file indentation
-(use-package dtrt-indent
-  :config (dtrt-indent-mode 1))
-
-;;; Whitespace Cleanup
-;; TODO Validate this package indeed works as advertised
-(use-package whitespace-cleanup-mode
-  :hook (prog-mode . whitespace-cleanup-mode))
-
 ;;; Ripgrep in Emacs
 ;; -- "What was lost is now found"
 (use-package rg
@@ -240,20 +230,6 @@
 ;;; Dumb-Jump
 ;; Give it your best shot
 (use-package dumb-jump)
-
-;;; Whitespace-Mode
-;; Getting red in the face for the trailing space
-(use-package whitespace
-  :ensure nil
-  :after display-fill-column-indicator
-  :custom (whitespace-style '(face lines tabs trailing))
-  (whitespace-line-column fill-column)
-  :hook ((text-mode prog-mode) . whitespace-mode)
-  :init
-  (lgreen/leader-define-key
-    "x w" '(:ignore t :which-key "whitespace")
-    "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
-    "x w r" '(whitespace-report :which-key "Whitespace Report")))
 
 ;;; Proced
 ;; Reach for this before htop/btop/etc.

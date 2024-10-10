@@ -49,6 +49,7 @@
     "s p" '(consult-ripgrep :wk "Search project files")
     "s i" '(consult-imenu :wk "Jump to symbol")
     "s I" '(consult-imenu-multi :wk "Jump to symbol (multi-file)")
+    "s o" '(consult-outline :wk "Jump to heading")
     "s d" '(consult-locate :wk "Search current directory"))
 
   ;; Optionally configure the register formatting. This improves the register

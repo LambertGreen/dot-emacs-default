@@ -139,6 +139,7 @@
    ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
 ;;; Language modes
+;;;; AutoHotkey
 ;; Make Emacs a babel-fish
 (use-package ahk-mode
   :config
@@ -149,17 +150,30 @@
     (require 'newcomment)
     (ahk-comment-dwim arg)))
 
+;;;; Apple Script
 (use-package apples-mode)
+
+;;;; Bash Automated Testing System
 (use-package bats-mode)
+
+;;;; Character Separated Values
 (use-package csv-mode)
+
+;;;; Fennel language
 (use-package fennel-mode)
+
+;;;; Generate Ninja (GN)
 (use-package gn-mode)
+
+;;;; Git
 (use-package git-modes
   :mode (("\\.gitconfig\\'" . gitconfig-mode)
          ("\\.gitignore\\'" . gitignore-mode)))
 
+;;;; Groovy
 (use-package groovy-mode)
 
+;;;; Jq scripts
 (use-package jq-mode
   :after org
   :mode ("\\.jq\\'" . jq-mode)
@@ -167,11 +181,14 @@
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((jq . t))))
 
+;;;; Justfiles
 (use-package just-mode)
 
+;;;; Lua
 (use-package lua-mode
   :custom (lua-indent-level 3))
 
+;;;; Markdown
 (use-package markdown-mode
   :after general
   :init
@@ -181,10 +198,16 @@
     "c" '(:keymap markdown-mode-command-map :wk "command"))
   :hook (markdown-mode . outline-minor-mode))
 
+;;;; Mermaid
 (use-package mermaid-mode)
+
+;;;; Nix
 (use-package nix-mode)
+
+;;;; RFC
 (use-package rfc-mode)
 
+;;;; Shell scripts
 (use-package sh-mode
   :ensure nil
   :custom
@@ -192,13 +215,23 @@
   (sh-indentation 4)
   :hook (sh-mode . hs-minor-mode))
 
+;;;; STrace output
 (use-package strace-mode)
+
+;;;; TOML configs
 (use-package toml-mode)
+
+;;;; Vim scripts
 (use-package vimrc-mode)
+
+;;;; YAML configs
 (use-package yaml-mode
   :mode ("\\.(yaml|yml)\\'" . yaml-mode))
 
+;;;; PowerShell scripts
 (use-package powershell)
+
+;;;; Kotlin
 (use-package kotlin-mode)
 
 ;; _

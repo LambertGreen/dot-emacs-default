@@ -15,8 +15,10 @@
     "e d" 'eval-defun
     "e e" 'eval-last-sexp
     "e r" 'eval-region)
-  :hook
-  (emacs-lisp-mode . hs-minor-mode))
+  (defun lgreen/imenu-elisp-sections ()
+    (add-to-list 'imenu-generic-expression '("Package" "^\\s-*(use-package\\s-+\\(\\_<.*?\\_>\\)" 1)))
+  :hook ((emacs-lisp-mode . hs-minor-mode)
+         (emacs-lisp-mode . lgreen/imenu-elisp-sections)))
 
 ;;; Eros
 ;; Evaluation Result Overlays for Emacs Lisp

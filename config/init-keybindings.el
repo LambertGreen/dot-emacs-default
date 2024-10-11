@@ -39,7 +39,7 @@
     "!" '(shell-command :wk "Shell command")
     ":" '(pp-eval-expression :wk "Eval expression")
     ";" '(comment-dwim :wk "Comment")
-    "." '(find-file :wk "Find file")
+    "." '(repeat :wk "Repeat")
     "/" '(consult-line :wk "Search buffer")
     "u" '(universal-argument :wk "Universal Argument")
 

@@ -45,12 +45,26 @@
 
   :init
   (general-def
+    :states '(normal)
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading
     "C-," nil
     "C-'" nil
-    "RET" 'lgreen/org-enter-key
-    )
+    "RET" '(:ignore lgreen/org-enter-key)
+
+    :prefix "SPC z"
+    :prefix-command 'org-outline
+    :prefix-map 'org-visibility-map
+    "a" '(org-fold-show-all :wk "Show all")
+    "m" '(org-overview :wk "Fold all")
+    "c" '(org-fold-hide-subtree :wk "Hide subtree")
+    "o" '(org-fold-show-subtree :wk "Show subtree")
+    "t" '(org-cycle :wk "Toggle subtree")
+    "r" '(org-reveal :wk "Reveal subtree")
+    "s" '(org-show-todo-tree :wk "Show TODO tree")
+    "d" '(org-toggle-link-display :wk "Toggle links")
+    "l" '(org-toggle-latex-fragment :wk "Toggle LaTeX"))
+
 
   (lgreen/local-leader-define-key
     :states 'normal

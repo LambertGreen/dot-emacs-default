@@ -181,17 +181,42 @@
   (lgreen/leader-define-key
     "t i" '(indent-bars-mode :wk "Toggle indent bars")))
 
+;;; Outline
+;; The beginning of something.. useful hopefully
+(use-package outline
+  :ensure nil
+  :config
+  (general-def
+    :states '(normal)
+    :keymaps 'outline-mode-map
+
+    :prefix "SPC z"
+    :prefix-command 'outline
+    :prefix-map 'outline-visibility-map
+
+    "a" '(outline-show-all :wk "Show all")
+    "m" '(outline-hide-body :wk "Fold all")
+    "c" '(outline-hide-subtree :wk "Hide sub-tree")
+    "o" '(outline-show-subtree :wk "Show sub-tree")
+    "t" '(outline-toggle-children :wk "Toggle sub-tree")
+
+    "u" '(outline-up-heading :wk "Up heading")
+    "n" '(outline-next-visible-heading :wk "Next heading")
+    "p" '(outline-previous-visible-heading :wk "Previous heading")))
+
 ;;; Outshine
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
-  :hook ((prog-mode . outshine-mode)
+  :hook ((emacs-lisp-mode . outshine-mode)
          (conf-mode . outshine-mode))
-  :general
-  (:keymaps 'outline-mode-map
-            :states 'normal
-            "<tab>" 'outline-cycle
-            "<backtab>" 'outshine-cycle-buffer
-            "gh" 'outline-up-heading))
+  :init
+  (general-def
+    :keymaps 'outline-mode-map
+    :states 'normal
+    "<tab>" 'outline-cycle
+    "<backtab>" 'outshine-cycle-buffer
+    "gh" 'outline-up-heading
+    "RET" 'outline-cycle))
 
 ;;; Nerd-Icons
 ;; Fancy icons

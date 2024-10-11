@@ -62,6 +62,11 @@
 
 ;;;;; Projects
     "p" '(:ignore t :wk "project")
+    "p p" '(project-switch-project :wk "Switch project")
+    "p f" '(project-find-file :wk "Find file in project")
+    "p c" '(project-compile :wk "Compile in project")
+    "p d" '(project-dired :wk "Dired in project")
+    "p b" '(project-switch-to-buffer :wk "Switch buffer in project")
 
 ;;;;; Git Interface
     "g" '(:ignore t :wk "git")

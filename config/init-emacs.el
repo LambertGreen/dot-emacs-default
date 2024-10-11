@@ -9,7 +9,6 @@
   (user-full-name "Lambert Green")
   (user-mail-address "lambert.green@gmail.com")
 
-  (custom-file (expand-file-name "custom.el" user-emacs-directory))
   (use-short-answers t)
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
@@ -62,7 +61,6 @@
   (setq grep-command "rg --no-heading --color=never ")
   (setq grep-find-command "rg --files ")
 
-  (load custom-file 'noerror)
 
   ;; Enable desktop save  mode
   ;; TODO I don't think I want this option enabled as I use multiple Emacs instances
@@ -71,6 +69,9 @@
   ;; (desktop-save-mode 1)
 
   (global-auto-revert-mode 1))
+;;;; Custom file
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (load custom-file 'noerror))
 
 ;;; No-Littering
 ;; Let's put the mess in './var'

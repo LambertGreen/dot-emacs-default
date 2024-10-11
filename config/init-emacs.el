@@ -88,6 +88,11 @@
   ;; Store lockfiles in the no-littering directory
   (setq lock-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "lockfiles/") t))))
 
+;;; Persistent Scratch
+(use-package persistent-scratch
+  :config
+  (persistent-scratch-setup-default))
+
 ;;; Exec-Path-From-Shell
 ;; Get on the right $PATH
 ;; TODO Read the docs (on github) on how to use this in a performant manner

@@ -40,13 +40,12 @@
 
 ;;;; Visuals
   (when (display-graphic-p)
-    (scroll-bar-mode -1)        ; Disable visible scroll-bar
+    (scroll-bar-mode -1)
     )
-
-  (tool-bar-mode -1)          ; Disable the tool-bar
-  (menu-bar-mode -1)          ; Disable the menu-bar
-  (tooltip-mode -1)           ; Disable tooltips
-
+  (if (not (eq system-type 'darwin))
+      (menu-bar-mode -1))
+  (tool-bar-mode -1)
+  (tooltip-mode -1)
   ;; Make the frame title include the project name
   ;; Allows for easy switching to Emacs frame by project name
   (setq frame-title-format

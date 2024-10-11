@@ -14,6 +14,7 @@
   :after (general transient)
   :custom
   (magit-diff-refine-hunk t)
+  (magit-save-repository-buffers 'dontask)
   (magit-diff-hide-trailing-cr-characters t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init

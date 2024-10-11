@@ -4,7 +4,7 @@
 ;;; Treesit-fold
 (use-package treesit-fold
   :ensure (:fetcher github :repo "emacs-tree-sitter/treesit-fold")
-  :after outline
+  :after evil
   :hook (prog-mode . treesit-fold-mode)
   :config
   (setq evil-fold-list '(((treesit-fold-mode)
@@ -18,7 +18,7 @@
 ;; Enable Vim like code folding
 (use-package origami
   :hook (prog-mode . origami-mode)
-  :after (outline treesit-fold)
+  :after (evil treesit-fold)
   :config
   (add-to-list 'evil-fold-list
                '((origami-mode)
@@ -32,7 +32,7 @@
 ;;; Evil-Vimish-Fold
 ;; Allows manual creation/deletion of free-form folds
 (use-package evil-vimish-fold
-  :after outline
+  :after evil
   :config
   (add-to-list 'evil-fold-list
                '((vimish-fold-mode)

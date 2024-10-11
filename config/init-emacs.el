@@ -249,5 +249,5 @@
 (provide 'init-emacs)
 
 ;; Local Variables:
-;; jinx-local-words: "Aile Eldoc Iosevka Orderless Propo btop dwim eldoc elisp emacs github htop minibuffer modeline parens rg setq tooltips unicode whitespace"
+;; jinx-local-words: "Aile Eldoc Iosevka Orderless Propo btop dwim eldoc elisp emacs github htop lockfiles minibuffer modeline parens rg setq tooltips unicode whitespace"
 ;; End:

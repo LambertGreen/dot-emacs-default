@@ -19,7 +19,7 @@
   (tab-width 4)
 
   :config
-  ;; Fonts
+;;;; Fonts
   ;; Default font
   (if (eq system-type 'darwin)
       (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128))
@@ -38,7 +38,7 @@
   (if (eq system-type 'windows-nt)
       (set-face-attribute 'variable-pitch nil :family "Iosevka NFP"))
 
-  ;; Visuals
+;;;; Visuals
   (when (display-graphic-p)
     (scroll-bar-mode -1)        ; Disable visible scroll-bar
     )

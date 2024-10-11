@@ -56,11 +56,6 @@
                (let ((project-name (file-name-nondirectory (directory-file-name (project-root project)))))
                  (format " in [%s] - Emacs" project-name)))))))
 
-  ;; Better find and grep
-  ;; TODO Investigation actual usage of these grep commands
-  (setq grep-command "rg --no-heading --color=never ")
-  (setq grep-find-command "rg --files ")
-
 
   ;; Enable desktop save  mode
   ;; TODO I don't think I want this option enabled as I use multiple Emacs instances
@@ -69,6 +64,12 @@
   ;; (desktop-save-mode 1)
 
   (global-auto-revert-mode 1))
+;;;; Search programs
+  ;; Better find and grep
+  ;; TODO Investigation actual usage of these grep commands
+  (setq grep-command "rg --no-heading --color=never ")
+  (setq grep-find-command "rg --files ")
+
 ;;;; Custom file
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file 'noerror))

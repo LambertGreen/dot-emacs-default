@@ -33,6 +33,7 @@
     :prefix lgreen/general-local-leader-key
     :non-normal-prefix lgreen/general-local-leader-alt-key)
 
+;;;; Keys
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
     "SPC" '(execute-extended-command :wk "M-x")
@@ -43,17 +44,19 @@
     "/" '(consult-line :wk "Search buffer")
     "u" '(universal-argument :wk "Universal Argument")
 
-;;;;; Local Leader
-    "m" '(:ignore t :wk "localleader")
-
-;;;;; Find files and things
+;;;;; Files
     "f" '(:ignore t :wk "file")
     "f f" '(find-file :wk "Find file")
+    "f l" '(locate :wk "Locate")
     "f r" '(recentf :wk "Recent files")
-    "f c" '((lambda () (interactive) (find-file "~/.emacs.default/README.org")) :wk "Edit emacs config")
+    "f j" '(dired-jump :wk "Jump to directory")
 
 ;;;;; Search
     "s" '(:ignore t :wk "search")
+    "s i" '(imenu :wk "Symbol")
+    "s b" '(isearch-forward :wk "Search buffer")
+    "s d" '(find-name-dired :wk "Search current directory")
+    "s p" '(project-find-regexp :wk "Search project files")
 
 ;;;;; Code
     "c" '(:ignore t :wk "code")
@@ -107,7 +110,6 @@
 ;;;;; Insert
     ;; TODO Add other useful bindings from Doom Emacs
     "i" '(:ignore t :wk "insert")
-    "i f" '(lgreen/insert-current-filename :wk "Current filename")
 
 ;;;;; Help
     "h" '(:ignore t :wk "help")

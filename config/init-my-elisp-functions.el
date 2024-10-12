@@ -7,6 +7,7 @@
   :ensure nil
   :config
 
+;;;; Visuals
   ;; Set transparency of emacs
   (defun lgreen/transparency (value)
     "Sets the transparency of the frame window. 0=transparent/100=opaque"
@@ -21,14 +22,46 @@
     (unless (display-graphic-p frame)
       (set-face-background 'default "unspecified-bg" frame)))
 
-  ;; Insert the current filename at point
-  (defun lgreen/insert-current-filename ()
-    "Insert the current file name at the point."
+  )
+
+;;; Filename handling
+(use-package emacs
+  :ensure nil
+  :after general
+  :config
+  (lgreen/leader-define-key
+    "f y" '(:ignore t :wk "yank")
+    "f y y" '(lgreen/yank-full-filename :wk "full-filename")
+    "f y f" '(lgreen/yank-filename :wk "filename")
+    "f y d" '(lgreen/yank-parent-directory :wk "parent-directory-name"))
+
+  (defun lgreen/yank-full-filename ()
+    "Copy the full path of the current buffer's file to the clipboard."
     (interactive)
-    (let ((filename (if (buffer-file-name)
-			(file-name-nondirectory (buffer-file-name))
-		      "Buffer has no file name.")))
-      (insert filename))))
+    (if buffer-file-name
+        (progn
+          (kill-new (file-truename buffer-file-name))
+          (message "Full filename copied: %s" (file-truename buffer-file-name)))
+      (message "No file associated with this buffer.")))
+
+  (defun lgreen/yank-filename ()
+    "Copy the name of the current buffer's file to the clipboard."
+    (interactive)
+    (if buffer-file-name
+        (progn
+          (kill-new (file-name-nondirectory buffer-file-name))
+          (message "Filename copied: %s" (file-name-nondirectory buffer-file-name)))
+      (message "No file associated with this buffer.")))
+
+  (defun lgreen/yank-parent-directory ()
+    "Copy the parent directory of the current buffer's file to the clipboard."
+    (interactive)
+    (if buffer-file-name
+        (progn
+          (kill-new (file-name-directory (file-truename buffer-file-name)))
+          (message "Parent directory copied: %s" (file-name-directory (file-truename buffer-file-name))))
+      (message "No file associated with this buffer.")))
+  )
 
 ;; _
 (provide 'init-my-elisp-functions)

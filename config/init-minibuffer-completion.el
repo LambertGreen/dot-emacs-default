@@ -14,7 +14,7 @@
   :hook (minibuffer-setup . vertico-repeat-save)
   :config
   (lgreen/leader-define-key
-    "'" '(vertico-repeat :wk "Repeat Search")))
+    "'" '(vertico-repeat :wk "repeat search")))
 
 ;;; Marginalia
 ;; Annotations for minibuffer completions

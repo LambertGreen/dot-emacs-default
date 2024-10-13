@@ -32,8 +32,8 @@
   (popper-display-control 'user)
   :init
   (lgreen/leader-define-key
-    "`" '(popper-toggle :wk "Toggle popup")
-    "t p" '(popper-toggle-type :wk "Toggle popup type"))
+    "`" '(popper-toggle :wk "toggle popup")
+    "t p" '(popper-toggle-type :wk "toggle popup type"))
   (popper-mode +1)
   (popper-echo-mode +1))
 

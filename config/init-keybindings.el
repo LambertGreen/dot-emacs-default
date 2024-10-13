@@ -36,102 +36,114 @@
 ;;;; Keys
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
-    "SPC" '(execute-extended-command :wk "M-x")
-    "!" '(shell-command :wk "Shell command")
-    ":" '(pp-eval-expression :wk "Eval expression")
-    ";" '(comment-dwim :wk "Comment")
-    "." '(repeat :wk "Repeat")
-    "/" '(consult-line :wk "Search buffer")
-    "u" '(universal-argument :wk "Universal Argument")
+    "SPC" '(execute-extended-command :wk "execute command")
+    "!" '(shell-command :wk "shell command")
+    ":" '(pp-eval-expression :wk "eval expression")
+    ";" '(comment-dwim :wk "comment")
+    "." '(repeat :wk "repeat last command")
+    "/" '(consult-line :wk "search buffer")
+    "u" '(universal-argument :wk "universal argument")
 
 ;;;;; Files
-    "f" '(:ignore t :wk "file")
-    "f f" '(find-file :wk "Find file")
-    "f l" '(locate :wk "Locate")
-    "f r" '(recentf :wk "Recent files")
-    "f j" '(dired-jump :wk "Jump to directory")
+    "f" '(:ignore t :wk "File")
+    "f f" '(find-file :wk "find file")
+    "f d" '(find-name-dired :wk "find file recursively")
+    "f l" '(locate :wk "locate")
+    "f r" '(recentf :wk "recent files")
+    "f j" '(dired-jump :wk "jump to directory")
 
 ;;;;; Search
-    "s" '(:ignore t :wk "search")
-    "s i" '(imenu :wk "Symbol")
-    "s b" '(isearch-forward :wk "Search buffer")
-    "s d" '(find-name-dired :wk "Search current directory")
-    "s p" '(project-find-regexp :wk "Search project files")
+    "s" '(:ignore t :wk "Search")
+    "s i" '(imenu :wk "symbols")
+    "s b" '(isearch-forward :wk "search buffer")
+    "s s" '(rgrep :wk "grep search")
 
 ;;;;; Code
-    "c" '(:ignore t :wk "code")
-    "c C" '(compile :wk "Compile")
-    "c c" '(recompile :wk "Rerun last compile")
+    "c" '(:ignore t :wk "Code")
+    "c C" '(compile :wk "compile")
+    "c c" '(recompile :wk "rerun last compile")
 
 ;;;;; Projects
-    "p" '(:ignore t :wk "project")
-    "p p" '(project-switch-project :wk "Switch project")
-    "p f" '(project-find-file :wk "Find file in project")
-    "p c" '(project-compile :wk "Compile in project")
-    "p d" '(project-dired :wk "Dired in project")
-    "p b" '(project-switch-to-buffer :wk "Switch buffer in project")
+    "p" '(:ignore t :wk "Project")
+    "p p" '(project-switch-project :wk "switch project")
+    "p f" '(project-find-file :wk "find file")
+    "p c" '(project-compile :wk "compile")
+    "p d" '(project-dired :wk "dired")
+    "p b" '(project-switch-to-buffer :wk "switch buffer")
 
 ;;;;; Git Interface
-    "g" '(:ignore t :wk "git")
+    "g" '(:ignore t :wk "Git")
 
 ;;;;; Buffer Management
-    "b" '(:ignore t :wk "buffer")
-    "b b" '(switch-to-buffer :wk "Switch buffer")
-    "b d" '(evil-delete-buffer :wk "Delete buffer")
-    "b n" '(next-buffer :wk "Next buffer")
-    "b N" '(evil-buffer-new :wk "New buffer")
-    "b p" '(previous-buffer :wk "Previous buffer")
-    "b r" '(revert-buffer :wk "Reload buffer")
-    "b R" '(rename-buffer :wk "Rename buffer")
-    "b s" '(save-buffer :wk "Save buffer")
-    "b S" '(evil-write-all :wk "Save all buffers")
+    "b" '(:ignore t :wk "Buffer")
+    "b b" '(switch-to-buffer :wk "switch buffer")
+    "b d" '(evil-delete-buffer :wk "delete buffer")
+    "b n" '(next-buffer :wk "next buffer")
+    "b N" '(evil-buffer-new :wk "new buffer")
+    "b p" '(previous-buffer :wk "previous buffer")
+    "b r" '(revert-buffer :wk "reload buffer")
+    "b R" '(rename-buffer :wk "rename buffer")
+    "b s" '(save-buffer :wk "save buffer")
+    "b S" '(evil-write-all :wk "save all buffers")
 
 ;;;;; Window Management
-    "w" '(:ignore t :wk "window")
-    "w =" '(balance-windows :wk "Balance windows")
-    "w h" '(evil-window-left :wk "Window left")
-    "w k" '(evil-window-up :wk "Window up")
-    "w j" '(evil-window-down :wk "Window down")
-    "w l" '(evil-window-right :wk "Window right")
-    "w q" '(evil-quit :wk "Window close")
-    "w d" '(delete-window :wk "Delete window")
-    "w s" '(split-window-below :wk "Split window below")
-    "w v" '(split-window-right :wk "Split window right")
-    "w o" '(delete-other-windows :wk "Delete other windows")
-    "w f" '(toggle-frame-fullscreen :wk "Toggle fullscreen")
-    "w m" '(toggle-frame-maximized :wk "Toggle maximized")
+    "w" '(:ignore t :wk "Window")
 
-    "w w" '(evil-window-next :wk "Toggle maximized")
-    "w H" '(evil-window-move-far-left :wk "Move window far left")
-    "w K" '(evil-window-move-very-top :wk "Move window very top")
-    "w J" '(evil-window-move-very-bottom :wk "Move window very bottom")
-    "w L" '(evil-window-move-far-right :wk "Move window far right")
+    ;; Window creation
+    "w s" '(split-window-below :wk "split window below")
+    "w v" '(split-window-right :wk "split window right")
+
+    ;; Window navigation
+    "w w" '(evil-window-next :wk "next window")
+    "w h" '(evil-window-left :wk "window left")
+    "w k" '(evil-window-up :wk "window up")
+    "w j" '(evil-window-down :wk "window down")
+    "w l" '(evil-window-right :wk "window right")
+
+    ;; Window moving
+    "w H" '(evil-window-move-far-left :wk "move window far left")
+    "w K" '(evil-window-move-very-top :wk "move window very top")
+    "w J" '(evil-window-move-very-bottom :wk "move window very bottom")
+    "w L" '(evil-window-move-far-right :wk "move window far right")
+
+    ;; Window sizing
+    "w =" '(balance-windows :wk "balance windows")
+    "w f" '(toggle-frame-fullscreen :wk "toggle fullscreen")
+    "w m" '(toggle-frame-maximized :wk "toggle maximized")
+
+    ;; Window destruction
+    "w q" '(evil-quit :wk "window close")
+    "w d" '(delete-window :wk "delete window")
+    "w o" '(delete-other-windows :wk "delete other windows")
+
+;;;;; Act
+    "a" '(:ignore t :wk "Act")
 
 ;;;;; Insert
     ;; TODO Add other useful bindings from Doom Emacs
-    "i" '(:ignore t :wk "insert")
+    "i" '(:ignore t :wk "Insert")
 
 ;;;;; Help
-    "h" '(:ignore t :wk "help")
-    "h b" '(describe-bindings :wk "Describe bindings")
-    "h m" '(describe-mode :wk "Describe mode")
+    "h" '(:ignore t :wk "Help")
+    "h b" '(describe-bindings :wk "describe bindings")
+    "h m" '(describe-mode :wk "describe mode")
 
 ;;;;; Open
-    "o" '(:ignore t :wk "open")
-    "o s" '(scratch-buffer :wk "Scratch buffer")
+    "o" '(:ignore t :wk "Open")
+    "o s" '(scratch-buffer :wk "scratch buffer")
 
 ;;;;; Toggles
-    "t" '(:ignore t :wk "toggle")
-    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-    "t h" '(hl-line-mode :wk "Toggle highlight line")
-    "t w" '(visual-line-mode :wk "Toggle truncated lines")
-
-;;;;; Quit
-    "q" '(:ignore t :wk "quit")
-    "q q" '(save-buffers-kill-terminal :wk "Quit")
+    "t" '(:ignore t :wk "Toggle")
+    "t l" '(display-line-numbers-mode :wk "toggle line numbers")
+    "t h" '(hl-line-mode :wk "toggle highlight line")
+    "t w" '(visual-line-mode :wk "toggle truncated lines")
 
 ;;;;; Checks
-    "x" '(:ignore t :wk "checks")))
+    "x" '(:ignore t :wk "Checks")))
+
+;;;;; Quit
+"q" '(:ignore t :wk "Quit")
+"q q" '(save-buffers-kill-terminal :wk "quit")
 
 ;;;; ------------
 (elpaca-wait)

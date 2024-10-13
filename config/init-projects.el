@@ -46,7 +46,7 @@
 
   :init
   (lgreen/leader-define-key
-    "p t" '(lgreen/run-justfile-recipe :wk "Run a Justfile recipe"))
+    "p e" '(lgreen/run-justfile-recipe :wk "execute Just recipe"))
 
   :config (add-to-list 'project-find-functions 'lgreen/project-try-projectile))
 

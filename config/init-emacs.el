@@ -168,9 +168,9 @@
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
   (lgreen/leader-define-key
-    "a" '(embark-act :wk "Actions")
-    "A" '(embark-dwim :wk "Actions-dwim")
-    "h B" '(embark-bindings :wk "Embark bindings"))
+    "a a" '(embark-dwim :wk "act [dwim]")
+    "a A" '(embark-act :wk "act")
+    "h B" '(embark-bindings :wk "explore bindings"))
 
   :config
   ;; Hide the mode line of the Embark live/completions buffers
@@ -192,12 +192,12 @@
   :init
   (setq evil-lookup-func #'helpful-at-point)
   (lgreen/leader-define-key
-    "h f" '(helpful-function :wk "Describe function")
-    "h v" '(helpful-variable :wk "Describe variable")
-    "h k" '(helpful-key :wk "Describe key")
-    "h c" '(helpful-command :wk "Describe command")
-    "h C" '(helpful-callable :wk "Describe callable")
-    "h s" '(helpful-symbol :wk "Describe symbol")
+    "h f" '(helpful-function :wk "describe function")
+    "h v" '(helpful-variable :wk "describe variable")
+    "h k" '(helpful-key :wk "describe key")
+    "h c" '(helpful-command :wk "describe command")
+    "h C" '(helpful-callable :wk "describe callable")
+    "h s" '(helpful-symbol :wk "describe symbol")
     )
   :bind
   ([remap describe-key] . helpful-key)

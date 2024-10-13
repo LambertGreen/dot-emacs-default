@@ -344,7 +344,7 @@
   :after org
   :init
   (lgreen/leader-define-key
-    "X" '(org-capture :wk "Org capture"))
+    "X" '(org-capture :wk "org capture"))
   :config
   (setq lgreen/org-capture-todo-file (expand-file-name "personal/todo.org" org-directory)
         lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)

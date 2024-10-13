@@ -153,5 +153,5 @@
 (provide 'init-keybindings)
 
 ;; Local Variables:
-;; jinx-local-words: "localleader"
+;; jinx-local-words: "dired eval fullscreen localleader"
 ;; End:

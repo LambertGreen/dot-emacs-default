@@ -1,15 +1,13 @@
 ;; init-completion.el --- -*- lexical-binding: t; -*-
 
 
-;; FIXME Fix auto-completion issue where fast typing can result in mistaken acceptance of incorrect completion
-
 ;;; Dabbrev
 ;; Short and sweet
 (use-package dabbrev
   :ensure nil
   :bind (
-         ("C-;" . dabbrev-expand)
-         ("C-/" . dabbrev-completion)))
+         ("C-/" . dabbrev-expand)
+         ("C-;" . dabbrev-completion)))
 
 ;;; Company
 ;; Not a crowd
@@ -26,36 +24,69 @@
 ;;; Corfu
 ;; Just completion-at-point UI
 (use-package corfu
+  :after dabbrev
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
+  (corfu-preselect 'first)       ;; Pre-select the prompt
+  (corfu-auto-delay 0.2)         ;; Delay auto popup slightly
+  (corfu-auto-prefix 3)          ;; Require at least 3 characters before auto popup
   (corfu-separator ?\s)          ;; Orderless field separator
-  (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
   (corfu-preview-current nil)    ;; Disable current candidate preview
-  (corfu-preselect 'prompt)      ;; Pre-select the prompt
-  (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  (corfu-scroll-margin 5)        ;; Use scroll margin
-  :bind (:map corfu-map
-              ("C-n" . 'corfu-next)
-              ("C-p" . 'corfu-previous)
-              ("C-j" . 'corfu-next)
-              ("C-k" . 'corfu-previous)
-              ;; ("<escape>" . 'corfu-quit)
-              ("<return>" . 'corfu-insert)
-              ("<tab>" . 'corfu-next)
-              ("S-<tab>" . 'corfu-previous)
-              ("H-SPC" . 'corfu-insert-separator)
-              ;; "SPC" #'corfu-insert-separator ; Use when `corfu-quit-at-boundary' is non-nil
-              ("M-d" . 'corfu-show-documentation)
-              ;; ("C-g" . 'corfu-quit)
-              ("M-l" . 'corfu-show-location))
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+  :bind
+  ("C-;" . completion-at-point)
+  (:map corfu-map
+        ("C-;" . corfu-next)
+        ("C-n" . 'corfu-next)
+        ("C-p" . 'corfu-previous)
+        ("<tab>" . 'lgreen/corfu-complete-common-prefix))
+
+  :init
+  (defun lgreen/corfu-complete-common-prefix ()
+    "Complete the longest common prefix of all candidates."
+    (interactive)
+    (let* ((bounds (bounds-of-thing-at-point 'symbol))
+           (start (car bounds))
+           (end (cdr bounds))
+           (prefix (buffer-substring-no-properties start end))
+           (common (try-completion prefix corfu--candidates)))
+      (if (and (stringp common)
+               (not (string= prefix common)))
+          (progn
+            (delete-region start end)
+            (insert common))
+        (corfu-next))))
 
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable
   ;; `global-corfu-modes' to exclude certain modes.
-  :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+
+;;;; Corfu-Quick
+  (use-package corfu-quick
+    :ensure nil
+    :bind (:map corfu-map
+                ("M-;" . corfu-quick-insert)))
+
+;;;; Corfu-History
+  (use-package corfu-history
+    :ensure nil
+    :hook (corfu-mode . corfu-history-mode))
+
+;;;; Corfu-Info
+  (use-package corfu-info
+    :ensure nil)
+
+ ;;;; Corfu-PopupInfo
+  (use-package corfu-popupinfo
+    :ensure nil
+    :hook (corfu-mode . corfu-popupinfo-mode)
+    :config
+    (setq corfu-popupinfo-delay 0.5)))
 
 ;;; Corfu-Terminal
 ;; Do it without child-frames
@@ -65,45 +96,19 @@
   (unless (display-graphic-p)
     (corfu-terminal-mode t)))
 
-;;; Corfu-Quick
-(use-package corfu-quick
-  :ensure nil
-  :after corfu
-  :bind (:map corfu-map
-              ("C-q" . corfu-quick-insert)))
-
-;;; Corfu-History
-(use-package corfu-history
-  :ensure nil
-  :after corfu
-  :hook (corfu-mode . corfu-history-mode))
-
 ;;; Nerd-Icons-Corfu
 (use-package nerd-icons-corfu
   :after corfu
   :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;;; Cape
+;; Completing things like a superhero
+;; NOTE Press `C-c ; ?' for help
 (use-package cape
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  :bind (("C-c p p" . completion-at-point) ;; capf
-         ("C-c p t" . complete-tag)        ;; etags
-         ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
-         ("C-c p h" . cape-history)
-         ("C-c p f" . cape-file)
-         ("C-c p k" . cape-keyword)
-         ("C-c p s" . cape-elisp-symbol)
-         ("C-c p e" . cape-elisp-block)
-         ("C-c p a" . cape-abbrev)
-         ("C-c p l" . cape-line)
-         ("C-c p w" . cape-dict)
-         ("C-c p :" . cape-emoji)
-         ("C-c p \\" . cape-tex)
-         ("C-c p _" . cape-tex)
-         ("C-c p ^" . cape-tex)
-         ("C-c p &" . cape-sgml)
-         ("C-c p r" . cape-rfc1345))
+  :after general
+  :general
+  (general-def
+    "C-c ;" '(:keymap cape-prefix-map :which-key "Completions using [Cape]"))
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the
@@ -111,17 +116,23 @@
   ;; completion functions takes precedence over the global list.
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
-  )
+  (add-to-list 'completion-at-point-functions #'cape-history)
+  (defun lgreen/prog-mode-completion-setup ()
+    "Set up cape completion for programming modes."
+    (add-to-list 'completion-at-point-functions #'cape-keyword))
+  (defun lgreen/emacs-lisp-completion-setup ()
+    "Set up cape completion for Emacs Lisp mode."
+    (add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+    (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+  (defun lgreen/text-mode-completion-setup ()
+    "Set up cape completion for text modes."
+    (add-to-list 'completion-at-point-functions #'cape-dict)
+    (add-to-list 'completion-at-point-functions #'cape-emoji))
+  :hook
+  (emacs-lisp-mode . lgreen/emacs-lisp-completion-setup)
+  (prog-mode . lgreen/prog-mode-completion-setup)
+  (text-mode . lgreen/text-mode-completion-setup)
+  (markdown-mode . lgreen/text-mode-completion-setup))
 
 ;; A few more useful configurations...
 (use-package emacs

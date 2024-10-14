@@ -139,11 +139,11 @@
     "t w" '(visual-line-mode :wk "toggle truncated lines")
 
 ;;;;; Checks
-    "x" '(:ignore t :wk "Checks")))
+    "x" '(:ignore t :wk "Checks")
 
 ;;;;; Quit
-"q" '(:ignore t :wk "Quit")
-"q q" '(save-buffers-kill-terminal :wk "quit")
+    "q" '(:ignore t :wk "Quit")
+    "q q" '(save-buffers-kill-terminal :wk "quit")))
 
 ;;;; ------------
 (elpaca-wait)

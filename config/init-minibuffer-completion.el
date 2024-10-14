@@ -24,16 +24,8 @@
   :init (marginalia-mode))
 
 ;;; Consult
-;; Making buffer completions nicer
+;; Making minibuffer completions nicer
 ;;
-;; NOTE: narrowing in the minibuffer is supported with the following keys:
-;; - <SPC>     -> ephemeral buffers
-;; - <* SPC>   -> modified buffers
-;; - <b SPC>   -> only buffers
-;; - <f SPC>   -> Files
-;;
-;; NOTE: For some reason the `*Messages*' buffer does not show using `consult-buffer'
-;; Use <C-x C-b> as a workaround
 (use-package consult
   :after general
   :bind
@@ -41,16 +33,36 @@
   ([remap previous-matching-history-element] . consult-history)
   :init
   (lgreen/leader-define-key
-    "*" '(lgreen/ripgrep-symbol-at-point :wk "Symbol search")
-    "b b" '(consult-project-buffer :wk "Switch buffer (project)")
-    "b B" '(consult-buffer :wk "Switch buffer")
-    "h t" '(consult-theme :wk "Switch theme")
+    ;; Symbol-at-point
+    "*" '(lgreen/ripgrep-symbol-at-point :wk "symbol search")
+
+    ;; File
+    "f d" '(lgreen/consult-fd-default-dir-with-args :wk "find file with [fd]")
+    "f l" '(consult-locate :wk "find file with [locate]")
+
+    ;; Search
     "s b" '(consult-line :wk "Search buffer")
-    "s p" '(consult-ripgrep :wk "Search project files")
-    "s i" '(consult-imenu :wk "Jump to symbol")
-    "s I" '(consult-imenu-multi :wk "Jump to symbol (multi-file)")
-    "s o" '(consult-outline :wk "Jump to heading")
-    "s d" '(consult-locate :wk "Search current directory"))
+    "s s" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search with [ripgrep]")
+    "s i" '(consult-imenu :wk "jump to symbol")
+    "s I" '(consult-imenu-multi :wk "jump to symbol (multi-file)")
+    "s o" '(consult-outline :wk "jump to heading")
+
+    ;; Buffer
+    ;; NOTE: narrowing in the minibuffer is supported with the following keys:
+    ;; - <SPC>     -> ephemeral buffers
+    ;; - <* SPC>   -> modified buffers
+    ;; - <b SPC>   -> only buffers
+    ;; - <f SPC>   -> Files
+    "b b" '(consult-buffer :wk "switch buffer")
+
+    ;; Project
+    "p d" '(lgreen/consult-fd-with-args :wk "find file with [fd]")
+    "p b" '(consult-project-buffer :wk "switch buffer")
+    "p s" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
+
+    ;; Theme
+    "h t" '(consult-theme :wk "switch theme")
+    )
 
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -77,6 +89,50 @@
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
+
+  (defun lgreen/consult-fd-with-args (&optional args)
+    "Run `consult-fd' with the option to modify arguments when `C-u' is provided.
+    If no universal argument is given, it runs with the original `consult-fd-args'."
+    (interactive "P")
+    (if args
+        ;; TODO Open an issue on `consult-fd' to make `consult-fd-args' a string
+        (let* ((default-args "fd --full-path --color=never ")
+               (input-args (read-string (format "fd args (%s): " default-args) default-args)))
+          (let ((consult-fd-args (split-string input-args)))
+            (consult-fd)))
+      (consult-fd)))
+
+  (defun lgreen/consult-fd-with-args-in-default-directory (&optional args)
+    "Run `lgreen/consult-fd-with-args' in the `default-directory', overriding running in `project-directory' if
+    in an project context."
+    (interactive "P")
+    (if args
+        ;; TODO Open an issue on `consult-fd' to make `consult-fd-args' a string
+        (let* ((default-args "fd --full-path --color=never ")
+               (input-args (read-string (format "Fd args (%s): " default-args) default-args)))
+          (let ((consult-fd-args (split-string input-args)))
+            (consult-fd default-directory)))
+      (consult-fd default-directory)))
+
+  (defun lgreen/consult-ripgrep-with-args (&optional args)
+    "Run `consult-ripgrep' with the option to modify arguments when `C-u' is provided.
+    If no universal argument is given, it runs with the original `consult-ripgrep-args'."
+    (interactive "P")
+    (if args
+        (let* ((default-args consult-ripgrep-args)
+               (consult-ripgrep-args (read-string (format "Ripgrep args (%s): " default-args) default-args)))
+          (consult-ripgrep))
+      (consult-ripgrep)))
+
+  (defun lgreen/consult-ripgrep-with-args-in-default-directory (&optional args)
+    "Run `lgreen/consult-ripgrep-with-args' in the `default-directory', overriding running in `project-directory' if
+    in an project context."
+    (interactive "P")
+    (if args
+        (let* ((default-args consult-ripgrep-args)
+               (consult-ripgrep-args (read-string (format "Ripgrep args (%s): " default-args) default-args)))
+          (consult-ripgrep default-directory))
+      (consult-ripgrep default-directory)))
 
   (defun lgreen/ripgrep-symbol-at-point ()
     "Performs a search in the current buffer for thing at point."

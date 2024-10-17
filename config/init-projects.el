@@ -10,13 +10,6 @@
   (defvar lgreen/dev-directory-base-path "~/dev/"
     "Base path for development directories")
 
-  (defun lgreen/project-try-projectile (dir)
-    "Determine if DIR is a Projectile project."
-    (let ((projectile-file (expand-file-name ".projectile" dir)))
-      (if (file-exists-p projectile-file)
-          (list 'vc 'Git dir)
-        nil)))
-
   (defun lgreen/get-justfile-recipes ()
     "Return a list of recipes from the Justfile by calling `just --summary`."
     (let ((default-directory (project-root (project-current t))))
@@ -43,12 +36,11 @@
   :custom
   (project-switch-commands 'project-find-file)
   (project-vc-merge-submodules nil)
+  (project-vc-extra-root-markers '(".project" ".projectile"))
 
   :init
   (lgreen/leader-define-key
-    "p e" '(lgreen/run-justfile-recipe :wk "execute Just recipe"))
-
-  :config (add-to-list 'project-find-functions 'lgreen/project-try-projectile))
+    "p e" '(lgreen/run-justfile-recipe :wk "execute Just recipe")))
 
 ;; _
 (provide 'init-projects)

@@ -28,6 +28,8 @@
 ;;
 (use-package consult
   :after general
+  :custom
+  (consult-narrow-key "<")
   :bind
   ([remap next-matching-history-element] . consult-history)
   ([remap previous-matching-history-element] . consult-history)

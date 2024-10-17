@@ -58,6 +58,9 @@
                       ("Asia/Calcutta" "New Delhi")
                       ("Asia/Tokyo" "Tokyo"))))
 
+;;; GNU Plot
+(use-package gnuplot)
+
 ;; _
 (provide 'init-utils)
 

@@ -106,17 +106,19 @@
 ;; Which key? This one.
 ;; NOTE Press "?" to disambiguate long entries with the same prefix
 (use-package which-key
+  :after general
   :custom
   ;; Going with empty ellipsis to avoid alignment issues,
   ;; which is fine given the overlong items are clearly
   ;; up against the limit
-  (which-key-ellipsis "") ;; options: "︙",
+  ;; (which-key-ellipsis "") ;; options: "︙",
   ;; An alternate solution to the alignment issue
-  ;; (which-key-don't-use-unicode t)
-  (which-key-sort-order #'which-key-key-order-alpha)
-  (which-key-sort-uppercase-first nil)
-  (which-key-add-column-padding 1)
-  (which-key-max-display-columns nil)
+  (which-key-don't-use-unicode nil)
+  (which-key-separator " → ")
+  ;; (which-key-sort-order #'which-key-key-order-alpha)
+  ;; (which-key-sort-uppercase-first nil)
+  ;; (which-key-add-column-padding 1)
+  ;; (which-key-max-display-columns nil)
   (which-key-min-display-lines 6)
   ;; Get Which-Key to always show at the bottom
   ;; NOTE: we don't use the below config because while it gets

@@ -21,7 +21,8 @@
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
   (lgreen/leader-define-key
-    "g g" '(magit-status :wk "Status")))
+    "g g" '(magit-status :wk "status")
+    "g b" '(magit-blame :wk "blame")))
 
 ;;; Magit-Todos
 ;; There is always more todo
@@ -36,8 +37,8 @@
   :after magit
   :init
   (lgreen/leader-define-key
-    "g p" '(diff-hl-previous-hunk :wk "Previous hunk")
-    "g n" '(diff-hl-next-hunk :wk "Next hunk"))
+    "g p" '(diff-hl-previous-hunk :wk "previous hunk")
+    "g n" '(diff-hl-next-hunk :wk "next hunk"))
   :config
   (global-diff-hl-mode)
   :hook

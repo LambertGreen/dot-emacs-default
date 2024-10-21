@@ -11,20 +11,32 @@
 ;; Use cases:
 ;; - Common mistyped and misspelled words: hte (the), noone (none/noon)
 (use-package jinx
-  :after general
   :if (not (eq system-type 'windows-nt))
+  :bind
+  ([remap ispell-word] . 'jinx-correct)
+  ("C-," . 'jinx-correct)
   :init
   (lgreen/leader-define-key
-    "t s" '(global-jinx-mode :wk "Toggle spellcheck")
-    "x s" '(:ingore t :wk "spelling")
+    "t s" '(global-jinx-mode :wk "toggle spellcheck")
+    "x s" '(:ignore t :wk "Spelling")
     "x s s" '(jinx-correct :wk "correct")
     "x s a" '(jinx-correct-all :wk "correct all")
     "x s n" '(jinx-next :wk "correct-next")
     "x s p" '(jinx-previous :wk "correct-previous"))
-  :hook (emacs-startup . global-jinx-mode)
-  :bind
-  ([remap ispell-word] . 'jinx-correct)
-  ("C-," . 'jinx-correct))
+  :config
+  (defun lgreen/jinx-skip-c++-includes-for-system-headers (start)
+    "Skip checking #include of system libraries."
+    (save-excursion
+      (goto-char start)
+      (beginning-of-line)
+      (looking-at "^#include <.*>$")))
+  (defun lgreen/jinx-setup-for-c++-modes ()
+    "Set up Jinx predicates and camelCase handling for C++ modes."
+    (add-to-list 'jinx--predicates #'lgreen/jinx-skip-c++-includes-for-system-headers)
+    (add-to-list 'jinx-camel-modes 'c++-mode)
+    (add-to-list 'jinx-camel-modes 'c++-ts-mode))
+  :hook ((emacs-startup . global-jinx-mode)
+         ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes)))
 
 ;; _
 (provide 'init-spellchecking)

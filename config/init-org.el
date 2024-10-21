@@ -50,7 +50,8 @@
     [remap consult-imenu] 'consult-org-heading
     "C-," nil
     "C-'" nil
-    "RET" '(:ignore lgreen/org-enter-key)
+    ;; FIXME Pressing Enter on links is not working
+    ;; "RET" '(:ignore lgreen/org-enter-key)
 
     :prefix "SPC z"
     :prefix-command 'org-outline

@@ -215,8 +215,9 @@
     :states 'normal
     "<tab>" 'outline-cycle
     "<backtab>" 'outshine-cycle-buffer
-    "gh" 'outline-up-heading
-    "RET" 'outline-cycle))
+    ;; FIXME: Double check this
+    ;; "RET" 'outline-cycle
+    "gh" 'outline-up-heading))
 
 ;;; Nerd-Icons
 ;; Fancy icons

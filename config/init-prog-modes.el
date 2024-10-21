@@ -76,7 +76,10 @@
   (setf (alist-get 'stylua apheleia-formatters)
         '("stylua" "-s" "-"))
 
-  (apheleia-global-mode +1))
+  ;; BUG Apheleia being enabled globally results in it auto-formatting files we are simply reading!
+  ;; We need to read up on how to enable formatting while editing files e.g. only format changed sections
+  ;; (apheleia-global-mode +1)
+  )
 
 ;;; Aggressive-Indent-Mode
 ;; Do it now!

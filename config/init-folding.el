@@ -46,6 +46,7 @@
 ;;; Hideshow (hs-minor-mode) for Emacs Lisp
 (use-package hideshow
   :ensure nil
+  :after evil
   :hook ((emacs-lisp-mode . hs-minor-mode)
          (lisp-interaction-mode . hs-minor-mode))
   :config

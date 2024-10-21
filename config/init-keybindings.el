@@ -42,6 +42,7 @@
     ";" '(comment-dwim :wk "comment")
     "." '(repeat :wk "repeat last command")
     "/" '(consult-line :wk "search buffer")
+    "$" '(ispell-word :wk "spellcheck")
     "u" '(universal-argument :wk "universal argument")
 
 ;;;;; Files
@@ -118,6 +119,12 @@
 
 ;;;;; Act
     "a" '(:ignore t :wk "Act")
+
+;;;;; Mode
+    "m" '(:ignore t :wk "Mode")
+
+;;;;; Outline
+    "z" '(:ignore t :wk "Outline")
 
 ;;;;; Insert
     ;; TODO Add other useful bindings from Doom Emacs

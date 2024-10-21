@@ -17,8 +17,8 @@
   ("C-," . 'jinx-correct)
   :init
   (lgreen/leader-define-key
-    "t s" '(global-jinx-mode :wk "Toggle spellcheck")
-    "x s" '(:ignore t :wk "spelling")
+    "t s" '(global-jinx-mode :wk "toggle spellcheck")
+    "x s" '(:ignore t :wk "Spelling")
     "x s s" '(jinx-correct :wk "correct")
     "x s a" '(jinx-correct-all :wk "correct all")
     "x s n" '(jinx-next :wk "correct-next")

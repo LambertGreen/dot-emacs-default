@@ -10,7 +10,7 @@
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'emacs-lisp-mode-map
-    "e" '(:ignore t :wk "eval")
+    "e" '(:ignore t :wk "Eval")
     "e b" 'eval-buffer
     "e d" 'eval-defun
     "e e" 'eval-last-sexp

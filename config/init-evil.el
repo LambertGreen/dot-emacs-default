@@ -39,7 +39,7 @@
 
   (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
-    "a" '(:ignore t :wk "args")
+    "a" '(:ignore t :wk "Args")
     "a n" '(evil-forward-arg :wk "Forward arg")
     "a p" '(evil-backward-arg :wk "Backward arg")
     "a o" '(evil-jump-out-args :wk "Jump out arg")))

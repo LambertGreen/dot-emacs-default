@@ -55,24 +55,24 @@
     :prefix "SPC z"
     :prefix-command 'org-outline
     :prefix-map 'org-visibility-map
-    "a" '(org-fold-show-all :wk "Show all")
-    "m" '(org-overview :wk "Fold all")
-    "c" '(org-fold-hide-subtree :wk "Hide subtree")
-    "o" '(org-fold-show-subtree :wk "Show subtree")
-    "t" '(org-cycle :wk "Toggle subtree")
-    "r" '(org-reveal :wk "Reveal subtree")
-    "s" '(org-show-todo-tree :wk "Show TODO tree")
-    "d" '(org-toggle-link-display :wk "Toggle links")
-    "l" '(org-toggle-latex-fragment :wk "Toggle LaTeX"))
+    "a" '(org-fold-show-all :wk "show all")
+    "m" '(org-overview :wk "fold all")
+    "c" '(org-fold-hide-subtree :wk "hide subtree")
+    "o" '(org-fold-show-subtree :wk "show subtree")
+    "t" '(org-cycle :wk "toggle subtree")
+    "r" '(org-reveal :wk "reveal subtree")
+    "s" '(org-show-todo-tree :wk "show TODO tree")
+    "d" '(org-toggle-link-display :wk "toggle links")
+    "l" '(org-toggle-latex-fragment :wk "toggle LaTeX"))
 
 
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
 
-    "t" '(org-todo :wk "todo")
+    "t" '(org-todo :wk "Todo")
 
-    "c" '(:ignore t :wk "clock")
+    "c" '(:ignore t :wk "Clock")
     "c c" 'org-clock-cancel
     "c d" '(:ignore t :wk "clock-display")
     "c d d" 'org-clock-display
@@ -83,13 +83,13 @@
     "c g" 'org-clock-goto
     "c r" 'org-clock-report
 
-    "d" '(:ignore t :wk "deadline/date")
+    "d" '(:ignore t :wk "Deadline/Date")
     "d d" 'org-deadline
     "d s" 'org-schedule
     "d t" 'org-time-stamp
     "d T" 'org-time-stamp-inactive
 
-    "b" '(:ignore t :wk "tables")
+    "b" '(:ignore t :wk "Tables")
     "b d" '(:ignore t :wk "delete")
     "b d c" 'org-table-delete-column
     "b d r" 'org-table-kill-row
@@ -98,7 +98,7 @@
     "b i h" 'org-table-insert-hline
     "b i r" 'org-table-insert-row
 
-    "l" '(:ignore t :wk "link")
+    "l" '(:ignore t :wk "Link")
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
     "l L" 'org-insert-all-links
@@ -108,23 +108,23 @@
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display
 
-    "p" '(:ignore t :wk "priority")
+    "p" '(:ignore t :wk "Priority")
     "p d" 'org-priority-down
     "p p" 'org-priority
     "p u" 'org-priority-up
 
-    "P" '(:ignore t :wk "publish")
+    "P" '(:ignore t :wk "Publish")
     "P a" 'org-publish-all
     "P f" 'org-publish-current-file
     "P p" 'org-publish
     "P P" 'org-publish-current-project
     "P s" 'org-publish-sitemap
 
-    "r" '(:ignore t :wk "refile")
+    "r" '(:ignore t :wk "Refile")
     "r r" 'org-refile
     "r R" 'org-refile-reverse
 
-    "s" '(:ignore t :wk "subtree")
+    "s" '(:ignore t :wk "Subtree")
     "s a" 'org-toggle-archive-tag
     "s b" 'org-tree-to-indirect-buffer
     "s c" 'org-clone-subtree-with-time-shift
@@ -427,17 +427,17 @@
   (lgreen/local-leader-define-key
     :states 'normal
     :keymaps 'org-mode-map
-    "m" '(:ignore t :wk "roam")
+    "m" '(:ignore t :wk "Roam")
     "m i" 'org-roam-node-insert
     "m f" 'org-roam-node-find
     "m m" 'org-roam-buffer-toggle
 
-    "m d" '(:ignore t :wk "dailies")
+    "m d" '(:ignore t :wk "Dailies")
     "m d d" 'org-roam-dailies-goto-date
     "m d t" 'org-roam-dailies-goto-today
     "m d y" 'org-roam-dailies-goto-yesterday
 
-    "m o" '(:ignore t :wk "node properties")
+    "m o" '(:ignore t :wk "Node Properties")
     "m o a" 'org-roam-alias-add
     "m o A" 'org-roam-alias-remove
     "m o r" 'org-roam-ref-add

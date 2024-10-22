@@ -343,7 +343,6 @@
 ;;; Breadcrumb
 ;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
-  :if (display-graphic-p)
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
   :config (breadcrumb-mode t))
 

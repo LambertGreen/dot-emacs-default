@@ -111,6 +111,13 @@
     "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
     "x w r" '(whitespace-report :which-key "Whitespace Report")))
 
+;;; Eglot
+;; Emacs Polyglot LSP client
+(use-package eglot
+  :ensure nil
+  :config
+  (add-to-list 'eglot-server-programs '((python-ts-mode python-mode) . ("pyright-langserver" "--stdio"))))
+
 ;;; Eglot-Booster
 ;; Boohoo
 (use-package eglot-booster

@@ -113,8 +113,7 @@
   ;; Given hl-todo default does not specify version, but it is required to
   ;; install dependencies we indicate the version.
   :ensure (hl-todo :version (lambda (_) "3.6.0"))
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
+  :hook ((prog-mode org-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
@@ -185,39 +184,32 @@
 ;; The beginning of something.. useful hopefully
 (use-package outline
   :ensure nil
-  :config
-  (general-def
-    :states '(normal)
-    :keymaps 'outline-mode-map
-
-    :prefix "SPC z"
-    :prefix-command 'outline
-    :prefix-map 'outline-visibility-map
-
-    "a" '(outline-show-all :wk "Show all")
-    "m" '(outline-hide-body :wk "Fold all")
-    "c" '(outline-hide-subtree :wk "Hide sub-tree")
-    "o" '(outline-show-subtree :wk "Show sub-tree")
-    "t" '(outline-toggle-children :wk "Toggle sub-tree")
-
-    "u" '(outline-up-heading :wk "Up heading")
-    "n" '(outline-next-visible-heading :wk "Next heading")
-    "p" '(outline-previous-visible-heading :wk "Previous heading")))
-
-;;; Outshine
-;; Org like faces and outlining for non-org modes
-(use-package outshine
-  :hook ((emacs-lisp-mode . outshine-mode)
-         (conf-mode . outshine-mode))
+  :after general
+  :hook ((emacs-lisp-mode conf-mode) . outline-minor-mode)
   :init
   (general-def
     :keymaps 'outline-mode-map
     :states 'normal
     "<tab>" 'outline-cycle
-    "<backtab>" 'outshine-cycle-buffer
-    ;; FIXME: Double check this
-    ;; "RET" 'outline-cycle
-    "gh" 'outline-up-heading))
+    "gh" 'outline-up-heading)
+  (lgreen/leader-define-key
+    :states '(normal)
+    :keymaps 'outline-mode-map
+    "z" '(:ignore t :wk "Outline")
+    "z a" '(outline-show-all :wk "Show all")
+    "z m" '(outline-hide-body :wk "Fold all")
+    "z c" '(outline-hide-subtree :wk "Hide sub-tree")
+    "z o" '(outline-show-subtree :wk "Show sub-tree")
+    "z t" '(outline-toggle-children :wk "Toggle sub-tree")
+    "z u" '(outline-up-heading :wk "Up heading")
+    "z n" '(outline-next-visible-heading :wk "Next heading")
+    "z p" '(outline-previous-visible-heading :wk "Previous heading")))
+
+;;; Outshine
+;; Org like faces and outlining for non-org modes
+(use-package outshine
+  :after outline
+  :hook ((emacs-lisp-mode conf-mode) . outshine-mode))
 
 ;;; Nerd-Icons
 ;; Fancy icons

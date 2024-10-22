@@ -199,14 +199,20 @@
     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
+  ;; NOTE: The symbols unfortunately don't leave any breathing room before the next character is printed.
+  ;; E.g. "This is a todo item.
+  ;; TODO Update the symbols to use the "more breathing room" approach.
+  ;; TODO Only enable these fancy symbols in GUI Emacs
+  ;; The below webpage shows how to address the "not enough breathing room" issue:
+  ;; - https://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html
   (defun lgreen/org-prettify-symbols ()
     "Beautify org mode keywords."
     (interactive)
-    (setq prettify-symbols-alist '(("TODO" . "")
-                                   ("STRT" . "")
-                                   ("WAIT" . "")
-                                   ("KILL" . "")
-                                   ("DONE" . "")
+    (setq prettify-symbols-alist '(("TODO" . (? (Br . Bl) ?\s))
+                                   ("STRT" . (? (Br . Bl) ?\s))
+                                   ("WAIT" . (? (Br . Bl) ?\s))
+                                   ("KILL" . (? (Br . Bl) ?\s))
+                                   ("DONE" . (? (Br . Bl) ?\s))
                                    ("PROJ" . " ")
                                    ("[#A]" . "")
                                    ("[#B]" . "")

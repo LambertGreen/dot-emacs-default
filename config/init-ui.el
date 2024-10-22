@@ -230,6 +230,7 @@
 ;;; Pulsar
 ;; Know what line point is on after movement
 (use-package pulsar
+  :after (evil org)
   :custom
   ((pulsar-pulse t)
    (pulsar-delay 0.05)

@@ -4,7 +4,9 @@
 ;;; Org
 ;; My life in plain text.
 (use-package org
-  :ensure nil
+  :ensure t
+  :defer t
+  :after general
   :custom
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
@@ -43,7 +45,12 @@
   (org-log-into-drawer t)
   (org-export-backends '(ascii html icalendar latex odt md pandoc))
 
-  :init
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . lgreen/setup-org-calendar-navigation)
+         (org-mode . lgreen/org-font-setup)
+         (org-mode . lgreen/org-prettify-symbols))
+
+  :config
   (general-def
     :states '(normal)
     :keymaps 'org-mode-map
@@ -65,7 +72,6 @@
     "s" '(org-show-todo-tree :wk "show TODO tree")
     "d" '(org-toggle-link-display :wk "toggle links")
     "l" '(org-toggle-latex-fragment :wk "toggle LaTeX"))
-
 
   (lgreen/local-leader-define-key
     :states 'normal
@@ -243,13 +249,9 @@
                                    ("DEADLINE:" . "")))
     (prettify-symbols-mode))
 
-  :hook ((org-mode . visual-line-mode)
-         (org-mode . lgreen/setup-org-calendar-navigation)
-         (org-mode . lgreen/org-font-setup)
-         (org-mode . lgreen/org-prettify-symbols))
+  (eval-after-load 'org
+    '(org-load-modules-maybe t))
 
-  :config
-  (org-load-modules-maybe t)
   (require 'ob-C)
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -278,6 +280,7 @@
 
 ;;; Org-Contrib
 (use-package org-contrib
+  :after org
   :config
   (require 'org-collector)
   (require 'org-protocol)
@@ -469,6 +472,7 @@
 
 ;;; Ob-Http
 (use-package ob-http
+  :after org
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -476,6 +480,7 @@
 
 ;;; Ob-Mermaid
 (use-package ob-mermaid
+  :after org
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages

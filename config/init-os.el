@@ -3,11 +3,23 @@
 
 ;;; Environment Setup
 ;;
-;; TODO Add more shell variables that are relevant
 (use-package exec-path-from-shell
   :ensure t
+  :if (memq window-system '(mac ns))
   :config
-  (exec-path-from-shell-copy-envs '("RIPGREP_CONFIG_PATH")))
+  ;; Use bash as the shell for exec-path-from-shell
+  (setq shell-file-name "/bin/bash")
+  (setq exec-path-from-shell-arguments '("-c"))
+  ;; Add all the necessary environment variables in one loop
+  (dolist (var
+           '(
+             "RIPGREP_CONFIG_PATH"
+             "SSH_AGENT_PID"
+             "SSH_AUTH_SOCK"
+             "GPG_AGENT_INFO"
+             ))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
 
 ;;; Darwin/MacOS
 ;; macOS specific config

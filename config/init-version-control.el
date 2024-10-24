@@ -29,6 +29,8 @@
 (use-package magit-todos
   :after magit
   :if (not (eq system-type 'windows-nt))
+  :custom
+  (magit-todos-exclude-globs '(".git/" "*.min.js" "*.log" "node_modules/*"))
   :config (magit-todos-mode 1))
 
 ;;; Diff-Hl

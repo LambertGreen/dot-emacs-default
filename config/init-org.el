@@ -432,7 +432,13 @@
 ;; Knowledge management system... did you not know?
 (use-package org-roam
   :after org
-  :custom (org-roam-directory "~/dev/my/org/roam")
+  :custom
+  (org-roam-directory "~/dev/my/org/roam")
+  (org-roam-dailies-capture-templates
+   '(("d" "daily" entry
+      "* %?"
+      :target (file+head "%<%Y-%m-%d>.org"
+                         "#+title: %<%A, %Y-%m-%d>\n"))))
   :init
   (lgreen/local-leader-define-key
     :states 'normal

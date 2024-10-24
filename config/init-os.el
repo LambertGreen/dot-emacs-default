@@ -9,7 +9,7 @@
   :config
   ;; Use bash as the shell for exec-path-from-shell
   (setq shell-file-name "/bin/bash")
-  (setq exec-path-from-shell-arguments '("-c"))
+  (setq exec-path-from-shell-arguments '("-c" "-l"))
   ;; Add all the necessary environment variables in one loop
   (dolist (var
            '(

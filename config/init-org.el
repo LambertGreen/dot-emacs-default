@@ -444,7 +444,7 @@
    '(("d" "daily" entry
       "* %?"
       :target (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%A, %Y-%m-%d>\n"))))
+                         "#+title: %<%Y-%m-%d, %A>\n"))))
   :init
   (lgreen/local-leader-define-key
     :states 'normal

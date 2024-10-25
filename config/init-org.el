@@ -360,6 +360,7 @@
         lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
         lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
         lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
+        lgreen/org-capture-health-file (expand-file-name "personal/health.org" org-directory)
         org-capture-templates
         '(("t" "todo" entry
            (file+headline lgreen/org-capture-todo-file "Inbox")
@@ -378,7 +379,12 @@
            "* %? [[%:link][%:description]] \nCaptured On: %U\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
           ("L" "Protocol Link" entry
            (file+headline lgreen/org-capture-notes-file "Inbox")
-           "* %? [[%:link][%:description]] \nCaptured On: %U")))
+           "* %? [[%:link][%:description]] \nCaptured On: %U")
+          ("b" "Blood Pressure Reading" entry
+           (file+olp+datetree lgreen/org-capture-health-file "Blood Pressure" "Readings")
+           "* BP Reading\n:PROPERTIES:\n:Captured: %U\n:Systolic: %^{Systolic}\n:Diastolic: %^{Diastolic}\n:Pulse_Rate: %^{Pulse Rate}\n:END:\n"
+           :tree-type month
+           :empty-lines 1)))
   )
 
 ;;; Org-Indent

@@ -347,6 +347,13 @@
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
   :config (breadcrumb-mode t))
 
+;;; Nyan Mode
+;; Rainbow and cat
+(use-package nyan-mode
+  :init
+  (when (display-graphic-p)
+    (nyan-mode)))
+
 ;; _
 (provide 'init-ui)
 

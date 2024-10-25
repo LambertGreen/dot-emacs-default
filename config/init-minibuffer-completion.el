@@ -154,6 +154,13 @@
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
 
+;;; Orderless
+;; Orderless completion style
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
 ;;; Fussy
 ;; Flex matching
 ;; TODO Do we need fussy?

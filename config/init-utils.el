@@ -61,6 +61,12 @@
 ;;; GNU Plot
 (use-package gnuplot)
 
+;;; Proced
+;; Reach for this before htop/btop/etc.
+(use-package proced
+  :ensure nil
+  :custom (proced-enable-color-flag t))
+
 ;; _
 (provide 'init-utils)
 

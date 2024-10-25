@@ -7,9 +7,10 @@
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
 
 (require 'init-package-manager)
+(require 'init-emacs)
 (require 'init-keybindings)
 (require 'init-evil)
-(require 'init-emacs)
+(require 'init-editor)
 (require 'init-undo)
 (require 'init-minibuffer)
 (require 'init-minibuffer-completion)

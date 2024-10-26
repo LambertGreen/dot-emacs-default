@@ -4,6 +4,7 @@
 ;;; Evil
 ;; The root of all money-trees
 (use-package evil
+  :demand t
   :custom
   ;; we set the below since we also using evil-collection
   ;; and it will take care of enabling evil keybindings
@@ -48,6 +49,7 @@
 ;; keybind them all
 (use-package evil-collection
   :after evil
+  :demand t
   :custom
   (evil-collection-setup-minibuffer t)
   (evil-collection-calendar-setup-org-bindings t)
@@ -66,12 +68,14 @@
 ;; no pleading the fifth here
 (use-package evil-commentary
   :after evil
+  :commands (evil-commentary evil-commentary-mode)
   :config (evil-commentary-mode))
 
 ;;; Evil EasyMotion
 ;; get there in one fell swoop
 (use-package evil-easymotion
   :after evil
+  :commands (evilem-default-keybindings)
   :config (evilem-default-keybindings "gs"))
 
 ;;; Evil-Escape
@@ -92,6 +96,7 @@
 ;; Note: using cx like vim-exchange is possible but not as straightforward
 (use-package evil-exchange
   :after evil
+  :commands (evil-exchange)
   :general
   (:states '(visual normal)
            "gx" 'evil-exchange
@@ -99,26 +104,32 @@
 
 ;;; Evil-Expat
 ;; additional ex commands
+;; TODO Remove if not missed now that it is disabled
 (use-package evil-expat
+  :disabled t
   :after evil)
 
 ;;; Evil-Goggles
 ;; visual hints while editing
 (use-package evil-goggles
   :after evil
+  :demand t
   :config
   (evil-goggles-use-diff-faces)
   (evil-goggles-mode))
 
 ;;; Evil-Indent-Plus
+;; text-object on indentation
 (use-package evil-indent-plus
   :after evil
+  :demand t
   :config (evil-indent-plus-default-bindings))
 
 ;;; Evil-Lion
 ;; gl and gL operators, for lining things up
 (use-package evil-lion
   :after evil
+  :commands (evil-lion-left evil-lion-right)
   :general
   (:states '(visual normal)
            "gl" 'evil-lion-left
@@ -126,9 +137,11 @@
 
 ;;; Evil-Numbers
 ;; Up and down we go
+;; Try on this number: 2
 (use-package evil-numbers
-  :after evil
-  :config
+  :after (general evil)
+  :commands (evil-numbers/inc-at-pt evil-numbers/dec-at-pt)
+  :init
   (general-define-key
    :states '(normal visual)
    :keymaps 'global
@@ -139,11 +152,14 @@
 ;; gR operator.  Replace without affecting unnamed register
 (use-package evil-replace-with-register
   :after evil
-  :config (evil-replace-with-register-install))
+  :commands (evil-replace-with-register-install)
+  :init (evil-replace-with-register-install))
 
 ;;; Evil-Snipe
+;; Putting f/F/t/T in the scope of s/S
 (use-package evil-snipe
   :after evil
+  :commands (evil-snipe-s evil-snipe-S)
   :custom
   (evil-snipe-repeat-scope 'visible)
   (evil-snipe-override-mode +1)
@@ -159,7 +175,8 @@
 ;; ys<target><to>: Add Surrounding, adds surrounding <to> chars around <target>
 (use-package evil-surround
   :after evil
-  :config
+  :commands global-evil-surround-mode
+  :init
   (global-evil-surround-mode 1))
 
 ;;; Evil-Textobj-Tree-Sitter
@@ -183,42 +200,47 @@
     ;; "b" (evil-textobj-tree-sitter-get-textobj "block.inner")
     "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
   (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
-    "]f" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer"))
-    "[f" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
-    "]F" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
-    "[F" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
-    "]c" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer"))
-    "[c" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
-    "]C" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
-    "[C" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+                              "]f" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "function.outer"))
+                              "[f" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+                              "]F" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+                              "[F" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+                              "]c" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "class.outer"))
+                              "[c" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+                              "]C" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+                              "[C" (lambda ()
+                                     (interactive)
+                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
 
 ;;; Evil-Visualstar
-;;  the star of the show
+;; the star of the show
+;; Keys: */#
 (use-package evil-visualstar
-  :after evil)
+  :after evil
+  :commands (evil-visualstar/begin-search-forward evil-visualstar/begin-search-backward)
+  :config
+  (global-evil-visualstar-mode 1))
 
 ;;; Evil-Little-Word
 ;; handle the sub ("little") words in AnyCamelCase
 (use-package evil-little-word
   :ensure (:fetcher github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
   :after evil
-  :config
+  :commands (evil-forward-little-word-begin evil-backward-little-word-begin evil-inner-little-word)
+  :init
   (define-key evil-normal-state-map (kbd "M-w") 'evil-forward-little-word-begin)
   (define-key evil-normal-state-map (kbd "M-b") 'evil-backward-little-word-begin)
   (define-key evil-operator-state-map (kbd "M-w") 'evil-forward-little-word-begin)
@@ -232,46 +254,51 @@
 (use-package evil-markdown
   :after (evil markdown-mode)
   :ensure (:fetcher github :repo "Somelauw/evil-markdown")
-  :config
-  (evil-markdown-set-key-theme '(textobjects navigation additional))
+  :commands (evil-markdown-set-key-theme)
+  :init
   (evil-define-key 'normal evil-markdown-mode-map
     (kbd "C-j") 'markdown-next-visible-heading
     (kbd "C-k") 'markdown-previous-visible-heading)
-  )
+  :config
+  (evil-markdown-set-key-theme '(textobjects navigation additional)))
 
 ;;; Evil-Owl
 ;;  "Mark my words! You register?"
 (use-package evil-owl
   :after evil
-  :config (evil-owl-mode))
+  :commands evil-owl-mode
+  :init (evil-owl-mode))
 
 ;;; Targets
 ;; Aiming at that there
 (use-package targets
   :ensure (:fetcher github :repo "dvzubarev/targets.el")
-  :config
-  (setq targets-text-objects nil)
+  :commands (targets-setup targets-define-composite-to targets-define-to)
+  :custom
+  (targets-text-objects nil)
+  :init
   (targets-setup nil)
+  :config
   (targets-define-composite-to any-block
-    (("(" ")" pair)
-     ("[" "]" pair)
-     ("{" "}" pair)
-     ("<" ">" pair))
-    :bind t
-    :next-key "n"
-    :last-key "l"
-    :around-key nil
-    :inside-key nil
-    :keys "b")
+                               (("(" ")" pair)
+                                ("[" "]" pair)
+                                ("{" "}" pair)
+                                ("<" ">" pair))
+                               :bind t
+                               :next-key "n"
+                               :last-key "l"
+                               :around-key nil
+                               :inside-key nil
+                               :keys "b")
   (targets-define-composite-to any-quote
-    (("\"" "\"" quote)
-     ("'" "'" quote))
-    :bind t
-    :next-key "n"
-    :last-key "l"
-    :around-key nil
-    :inside-key nil
-    :keys "q")
+                               (("\"" "\"" quote)
+                                ("'" "'" quote))
+                               :bind t
+                               :next-key "n"
+                               :last-key "l"
+                               :around-key nil
+                               :inside-key nil
+                               :keys "q")
   (targets-define-to double-quote
                      "\"" nil quote
                      :bind t

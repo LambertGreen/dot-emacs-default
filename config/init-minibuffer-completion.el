@@ -25,7 +25,6 @@
 
 ;;; Consult
 ;; Making minibuffer completions nicer
-;;
 (use-package consult
   :after general
   :custom

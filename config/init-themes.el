@@ -25,7 +25,6 @@
 ;;; Sync theme with system appearance
 (use-package emacs
   :ensure nil
-  :after doom-themes
   :init
   (defun lgreen/set-theme-based-on-os ()
     "Set theme based on the operating system."

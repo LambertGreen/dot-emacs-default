@@ -87,7 +87,14 @@
 ;;; Helpful
 ;; A better *help* buffer
 (use-package helpful
-  :after general
+  :after (general evil)
+  :commands (helpful-at-point
+             helpful-function
+             helpful-variable
+             helpful-key
+             helpful-command
+             helpful-callable
+             helpful-symbol)
   :init
   (setq evil-lookup-func #'helpful-at-point)
   (lgreen/leader-define-key
@@ -110,9 +117,10 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;;; Smartparens
-;; Automatically balance inserting of parens
+;; Bringing balance to the force
 (use-package smartparens
-  :config
+  :commands (smartparens-global-mode sp-local-pair)
+  :init
   (require 'smartparens-config)
   (smartparens-global-mode 1)
   ;; Disable auto-pairing of single quotes in emacs-lisp-mode
@@ -121,16 +129,13 @@
 ;;; Ripgrep in Emacs
 ;; -- "What was lost is now found"
 (use-package rg
-  :config (rg-enable-default-bindings))
-
-;;; Affe
-;; An elisp FZF clone
-(use-package affe)
+  :commands (rg-enable-default-bindings)
+  :init (rg-enable-default-bindings))
 
 ;;; Dumb-Jump
 ;; Give it your best shot
+;; TODO Are you using dump-jump or not?
 (use-package dumb-jump)
-
 
 ;; _
 (provide 'init-editor)

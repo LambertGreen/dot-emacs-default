@@ -69,17 +69,21 @@
 ;;;; Corfu-Quick
   (use-package corfu-quick
     :ensure nil
+    :after corfu
     :bind (:map corfu-map
                 ("M-;" . corfu-quick-insert)))
 
 ;;;; Corfu-History
   (use-package corfu-history
     :ensure nil
+    :after corfu
     :hook (corfu-mode . corfu-history-mode))
 
 ;;;; Corfu-Info
   (use-package corfu-info
-    :ensure nil)
+    :ensure nil
+    :after corfu
+    :hook (corfu-mode . corfu-info-mode))
 
  ;;;; Corfu-PopupInfo
   (use-package corfu-popupinfo

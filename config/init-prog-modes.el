@@ -1,33 +1,30 @@
 ;; init-prog-modes.el --- -*- lexical-binding: t; -*-
 
 
-;;; Lisp functions
-(use-package emacs
+;;; Prog Mode
+;; Enter the Matrix
+(use-package prog
   :ensure nil
+  :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :init
   (lgreen/leader-define-key
     "c f" '(lgreen/format-buffer :wk "format buffer"))
-
   (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
     "f" '(:ignore t :wk "Format")
     "f b" '(lgreen/format-buffer :wk "format buffer")
-
     "x" '(:ignore t :wk "Errors")
     "x l" '(consult-flymake :wk "list errors")
     "x p" '(flymake-goto-prev-error :wk "error previous")
     "x n" '(flymake-goto-next-error :wk "error next")
-
     "n" '(:ignore t :wk "Narrow")
     "n r" '(narrow-to-region :wk "narrow to region")
     "n d" '(narrow-to-defun :wk "narrow to defun")
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
-
   (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables"
     (interactive)
-
     ;; Make keywords italic and light weight
     (set-face-attribute 'font-lock-keyword-face nil :slant 'italic :weight 'light)
     ;; Make comments italic and light weight
@@ -36,7 +33,6 @@
     ;; TODO Rather use a relative increase in font size
     (set-face-attribute 'font-lock-function-name-face nil :weight 'normal :height 148)
     )
-
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
     (interactive)
@@ -44,102 +40,104 @@
         (eglot-format-buffer)
       (call-interactively #'apheleia-format-buffer))
     (untabify (point-min) (point-max)))
-
   (defun lgreen/set-java-home-from-jenv ()
     "Set JAVA_HOME environment variable from jenv."
     (interactive)
     (let ((jenv-java-home (shell-command-to-string "jenv prefix")))
       (when (not (string= jenv-java-home ""))
         (setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
-
-  :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :config
   (advice-add 'load-theme
               :after 'lgreen/set-faces-for-prog-mode))
 
 ;;; Treesit-Auto
-;; Get all the syntax
+;; Fast climbing the syntax tree
 (use-package treesit-auto
+  :commands (global-treesit-auto-mode)
   :custom
   (treesit-auto-install 'prompt)
   (treesit-font-lock-level 4)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
+  ;; TODO Remove the below after testing
+  ;; (setq treesit-auto-excluded-major-modes '(org-mode))
   (global-treesit-auto-mode))
-
-;;; Apheleia
+;;; Formatting
+;;;; Apheleia
 ;; Format code with minimal disruption
 (use-package apheleia
+  :commands (apheleia-format-buffer apheleia-mode)
+  :hook (emacs-lisp-mode . apheleia-mode)
   :config
   ;; Remove the existing 'stylua' entry and replace it `-s' usage to perform a recursive search for the `sytlua.toml'
   ;; file
   (setf (alist-get 'stylua apheleia-formatters)
-        '("stylua" "-s" "-"))
+        '("stylua" "-s" "-")))
 
-  ;; BUG Apheleia being enabled globally results in it auto-formatting files we are simply reading!
-  ;; We need to read up on how to enable formatting while editing files e.g. only format changed sections
-  ;; (apheleia-global-mode +1)
-  )
-
-;;; Aggressive-Indent-Mode
-;; Do it now!
+;;; Indentation
+;;;; Aggressive-Indent-Mode
+;; Actively keeping code correctly indented
 (use-package aggressive-indent
   :hook (emacs-lisp-mode . aggressive-indent-mode))
 
-;;; Dtrt-Indent
-;; Guess file indentation
-;; TODO How does fit in with `aggresive-indent' package?
+;;;; Dtrt-Indent
+;; Guess indentation offset from existing indentation in current file
 (use-package dtrt-indent
-  :config (dtrt-indent-mode 1))
+  :hook (prog-mode . dtrt-indent-mode)
+  :init (require 'smie))
 
-;;; Whitespace Cleanup
-;; TODO Validate this package indeed works as advertised
+;;; Whitespace Handling
+;;;; Whitespace Cleanup
+;;Automatically cleanup whitespace on-save for files that were already compliant
 (use-package whitespace-cleanup-mode
-  :hook (prog-mode . whitespace-cleanup-mode))
+  :hook ((org-mode prog-mode) . whitespace-cleanup-mode))
 
-;;; Whitespace-Mode
+;;;; Whitespace-Mode
 ;; Getting red in the face for the trailing space
 (use-package whitespace
   :ensure nil
   :after display-fill-column-indicator
+  :hook ((org-mode prog-mode) . whitespace-mode)
   :custom (whitespace-style '(face lines tabs trailing))
   (whitespace-line-column fill-column)
-  :hook (prog-mode . whitespace-mode)
   :init
   (lgreen/leader-define-key
     "x w" '(:ignore t :which-key "whitespace")
     "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
     "x w r" '(whitespace-report :which-key "Whitespace Report")))
 
-;;; Eglot
+;;; Language Server Protocol
+;;;; Eglot
 ;; Emacs Polyglot LSP client
 (use-package eglot
   :ensure nil
   :config
   (add-to-list 'eglot-server-programs '((python-ts-mode python-mode) . ("pyright-langserver" "--stdio"))))
 
-;;; Eglot-Booster
-;; Boohoo
+;;;; Eglot-Booster
+;; Making LSP usage bearable
 (use-package eglot-booster
   :ensure (:fetcher github :repo "jdtsmith/eglot-booster")
   :after eglot
+  :commands (eglot)
   :init
   (add-to-list 'exec-path "~/dev/pub/emacs-lsp-booster/target/release")
   :config (eglot-booster-mode))
 
-;;; Cmake
+;;; Language Modes
+;;;; Cmake
 ;; Let's make them cpp projects
 (use-package cmake-mode
   :mode
   (("CMakeLists\\.txt\\'" . cmake-mode)
    ("\\.cmake\\'"         . cmake-mode)))
 
-;;; Dockerfile
-;; Contain your excitement
+;;;; Dockerfile
+;; Putting in a container
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 
-;;; SSH config
+;;;; SSH config
 ;; Silently connecting the dots
 (use-package ssh-config-mode
   :mode
@@ -148,7 +146,6 @@
    ("known_hosts\\'"       . ssh-known-hosts-mode)
    ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
-;;; Language modes
 ;;;; AutoHotkey
 ;; Make Emacs a babel-fish
 (use-package ahk-mode
@@ -185,11 +182,11 @@
 
 ;;;; Jq scripts
 (use-package jq-mode
-  :after org
   :mode ("\\.jq\\'" . jq-mode)
-  :config
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((jq . t))))
+  :init
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((jq . t)))))
 
 ;;;; Justfiles
 (use-package just-mode)
@@ -201,12 +198,12 @@
 ;;;; Markdown
 (use-package markdown-mode
   :after general
+  :hook (markdown-mode . outline-minor-mode)
   :init
   (lgreen/local-leader-define-key
     :keymaps 'markdown-mode-map
     "i" '(:keymap markdown-mode-style-map :wk "insert")
-    "c" '(:keymap markdown-mode-command-map :wk "command"))
-  :hook (markdown-mode . outline-minor-mode))
+    "c" '(:keymap markdown-mode-command-map :wk "command")))
 
 ;;;; Mermaid
 (use-package mermaid-mode)
@@ -220,10 +217,10 @@
 ;;;; Shell scripts
 (use-package sh-mode
   :ensure nil
+  :hook (sh-mode . hs-minor-mode)
   :custom
   (sh-basic-offset 4)
-  (sh-indentation 4)
-  :hook (sh-mode . hs-minor-mode))
+  (sh-indentation 4))
 
 ;;;; STrace output
 (use-package strace-mode)
@@ -248,5 +245,5 @@
 (provide 'init-prog-modes)
 
 ;; Local Variables:
-;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia cmake defun eglot emacs gitconfig gitignore jenv jq prog sshd stylua txt uncomment yaml yml"
+;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia cmake defun eglot emacs gitconfig gitignore jenv jq prog sshd stylua txt uncomment whitespace yaml yml"
 ;; End:

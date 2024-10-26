@@ -2,6 +2,8 @@
 
 
 (use-package dashboard
+  :after evil
+  :demand t
   :custom
   (dashboard-center-content t)
   (dashboard-startup-banner 'logo)
@@ -10,8 +12,6 @@
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  ;;TODO Remove if finally moving from projectile to project.el
-  ;; (dashboard-projects-switch-function 'projectile-persp-switch-project)
   (dashboard-items '((recents   . 5)
                      (projects  . 5)
                      (bookmarks . 5)

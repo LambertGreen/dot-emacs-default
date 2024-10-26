@@ -5,8 +5,9 @@
 ;; My life in plain text.
 (use-package org
   :ensure t
-  :defer t
   :after general
+  :mode ("\\.org\\'" . org-mode)
+  :commands (org-capture org-agenda)
   :custom
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
@@ -44,12 +45,10 @@
   ;; Log state changes into drawer
   (org-log-into-drawer t)
   (org-export-backends '(ascii html icalendar latex odt md pandoc))
-
   :hook ((org-mode . visual-line-mode)
          (org-mode . lgreen/setup-org-calendar-navigation)
          (org-mode . lgreen/org-font-setup)
          (org-mode . lgreen/org-prettify-symbols))
-
   :config
   (general-def
     :states '(normal)
@@ -290,6 +289,8 @@
   :config
   (require 'org-collector)
   (require 'org-protocol)
+  ;; TODO Is org-checklist causing perf issues?
+  ;; (require 'org-checklist)
   ;; (require 'org-man)
   )
 
@@ -313,6 +314,11 @@
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
   :config
+  ;; TODO See if we can include the roam directory
+  ;; (setq org-agenda-files
+  ;;       (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
+  ;;               (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")
+  ;;               (directory-files-recursively (expand-file-name "roam" org-directory) "\\.org$")))
   (setq org-agenda-files
         (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
                 (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
@@ -352,6 +358,7 @@
 (use-package org-capture
   :ensure nil
   :after org
+  :commands org-capture
   :init
   (lgreen/leader-define-key
     "X" '(org-capture :wk "org capture"))
@@ -382,10 +389,10 @@
            "* %? [[%:link][%:description]] \nCaptured On: %U")
           ("b" "Blood Pressure Reading" entry
            (file+olp+datetree lgreen/org-capture-health-file "Blood Pressure" "Readings")
-           "* BP Reading\n:PROPERTIES:\n:Captured: %U\n:Systolic: %^{Systolic}\n:Diastolic: %^{Diastolic}\n:Pulse_Rate: %^{Pulse Rate}\n:END:\n"
+           "* BP Reading\n:PROPERTIES:\n:Captured: %U\n:Systolic: %^{Systolic}\n\
+:Diastolic: %^{Diastolic}\n:Pulse_Rate: %^{Pulse Rate}\n:END:\n"
            :tree-type month
-           :empty-lines 1)))
-  )
+           :empty-lines 1))))
 
 ;;; Org-Indent
 ;; Line things up better
@@ -398,20 +405,19 @@
 ;; Hollywood doing bullet time
 (use-package org-superstar
   :after org
+  :hook (org-mode . org-superstar-mode)
   :custom
   (org-superstar-leading-bullet ?\s)
   (org-superstar-leading-fallback ?\s)
   (org-hide-leading-stars nil)
-  (org-indent-mode-turns-on-hiding-stars nil)
-  :hook (org-mode . org-superstar-mode))
+  (org-indent-mode-turns-on-hiding-stars nil))
 
 ;;; Org-Pretty-Table
 ;; Draw pretty Unicode tables
 (use-package org-pretty-table
   :ensure (:fetcher github :repo "Fuco1/org-pretty-table")
   :after org
-  :hook (org-mode . org-pretty-table-mode)
-  )
+  :hook (org-mode . org-pretty-table-mode))
 
 ;;; Org-Contacts
 ;; Keeping connections
@@ -421,12 +427,6 @@
   :after org
   :custom (org-contacts-files (list (expand-file-name "personal/contacts.org" org-directory)
                                     (expand-file-name "personal/contacts_imported_from_gmail.org" org-directory))))
-
-;;; Org-Checklist
-;; Auto-reset of checkbox state for repeating items
-;; FIXME This package is not found by Elpaca
-;; (use-package org-checklist
-;;   :after org)
 
 ;;; Org-Appear
 ;; Seeing is believing
@@ -438,7 +438,14 @@
 ;; Knowledge management system... did you not know?
 (use-package org-roam
   :after org
+  :commands (org-roam-node-insert org-roam-node-find org-roam-buffer-toggle
+                                  org-roam-dailies-goto-date org-roam-dailies-goto-today
+                                  org-roam-dailies-goto-yesterday org-roam-alias-add
+                                  org-roam-alias-remove org-roam-ref-add org-roam-ref-remove
+                                  org-roam-tag-add org-roam-tag-remove)
   :custom
+  ;; TODO is the causing perf issues?
+  (org-roam-db-autosync-mode nil)
   (org-roam-directory "~/dev/my/org/roam")
   (org-roam-dailies-capture-templates
    '(("d" "daily" entry
@@ -453,12 +460,10 @@
     "m i" 'org-roam-node-insert
     "m f" 'org-roam-node-find
     "m m" 'org-roam-buffer-toggle
-
     "m d" '(:ignore t :wk "Dailies")
     "m d d" 'org-roam-dailies-goto-date
     "m d t" 'org-roam-dailies-goto-today
     "m d y" 'org-roam-dailies-goto-yesterday
-
     "m o" '(:ignore t :wk "Node Properties")
     "m o a" 'org-roam-alias-add
     "m o A" 'org-roam-alias-remove
@@ -472,8 +477,7 @@
 ;; Seeing is believing
 (use-package org-roam-ui
   :after org-roam
-  :commands (org-roam-ui-mode)
-  :config (org-roam-db-autosync-mode))
+  :commands (org-roam-ui-mode))
 
 ;;; Consult-Org-Roam
 ;; TODO Evaluate this package
@@ -484,21 +488,24 @@
 ;; on this package.
 (use-package consult-org-roam
   :after org-roam
-  :init
-  (require 'consult-org-roam)
+  :commands (consult-org-roam-mode)
+  :config
   (consult-org-roam-mode 1))
 
-;;; Ob-Http
+;;; Org Babel languages
+;;;; Ob-Http
 (use-package ob-http
   :after org
+  :commands (org-babel-do-load-languages)
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((http . t))))
 
-;;; Ob-Mermaid
+;;;; Ob-Mermaid
 (use-package ob-mermaid
   :after org
+  :commands (org-babel-do-load-languages)
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages

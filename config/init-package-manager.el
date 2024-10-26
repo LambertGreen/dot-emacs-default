@@ -42,7 +42,9 @@
 ;;; Install use-package support
 (setq use-package-verbose t
       use-package-compute-statistics t
-      use-package-always-ensure t)
+      use-package-always-ensure t
+      use-package-always-defer t
+      )
 
 (elpaca elpaca-use-package
   (elpaca-use-package-mode))

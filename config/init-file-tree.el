@@ -5,9 +5,10 @@
 ;; Squinting at the forest
 (use-package treemacs
   :after general
+  :commands treemacs
   :custom
   (treemacs-project-follow-mode t)
-  :config
+  :init
   (treemacs-resize-icons 18)
   (lgreen/leader-define-key
     "o p" '(treemacs :wk "Open project tree")))

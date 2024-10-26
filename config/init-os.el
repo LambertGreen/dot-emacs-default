@@ -6,6 +6,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns))
+  :defer 5
   :config
   ;; Use bash as the shell for exec-path-from-shell
   (setq shell-file-name "/bin/bash")
@@ -91,6 +92,7 @@
 ;; (set-frame-parameter nil 'ns-appearance 'dark/light)
 ;; (set-frame-parameter nil 'ns-transparent-titlebar t)
 (use-package ns-auto-titlebar
+  :demand t
   :when (and (eq system-type 'darwin)
              (or (display-graphic-p) (daemonp)))
   :config (ns-auto-titlebar-mode))

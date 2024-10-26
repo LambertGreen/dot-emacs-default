@@ -1,17 +1,19 @@
 ;; init-version-control.el --- -*- lexical-binding: t; -*-
 
 
-;;; Emacs
-(use-package emacs
+;;; Version Control
+(use-package vc
   :ensure nil
   :custom (vc-follow-symlinks t))
 
+;;; Tansient
 (use-package transient)
 
 ;;; Magit
 ;; Git porcelain inside Emacs
 (use-package magit
   :after (general transient)
+  :commands (magit-status magit-blame)
   :custom
   (magit-diff-refine-hunk t)
   (magit-save-repository-buffers 'dontask)
@@ -29,22 +31,22 @@
 (use-package magit-todos
   :after magit
   :if (not (eq system-type 'windows-nt))
+  :commands magit-todos-mode
   :custom
   (magit-todos-exclude-globs '(".git/" "*.min.js" "*.log" "node_modules/*"))
-  :config (magit-todos-mode 1))
+  :hook (magit-mode . magit-todos-mode))
 
 ;;; Diff-Hl
 ;; Show git status in the fringe
 (use-package diff-hl
-  :after magit
+  :commands (diff-hl-previous-hunk diff-hl-next-hunk)
   :init
   (lgreen/leader-define-key
     "g p" '(diff-hl-previous-hunk :wk "previous hunk")
     "g n" '(diff-hl-next-hunk :wk "next hunk"))
-  :config
-  (global-diff-hl-mode)
   :hook
-  (focus-in . diff-hl-update))
+  ((focus-in . diff-hl-update)
+   (after-init . global-diff-hl-mode)))
 
 ;; _
 (provide 'init-version-control)

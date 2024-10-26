@@ -37,28 +37,8 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
-;;; Customize eat terminal popup windows
-(use-package emacs
-  :ensure nil
-  :config
-  ;; Make terminal (eat) buffer show in right window
-  (add-to-list 'display-buffer-alist
-               '("\\*.*eat\\*"
-                 (display-buffer-in-side-window)
-                 (side . bottom)
-                 (display-buffer-reuse-window
-                  display-buffer-at-bottom)
-                 (window-height . 0.4)))
-
-  (defun close-window-on-eat-buffer-kill ()
-    "Close the window when an eat buffer is killed."
-    (when (string-match-p "\\*.*eat\\*" (buffer-name))
-      (delete-window)))
-
-  (add-hook 'kill-buffer-hook 'close-window-on-eat-buffer-kill))
-
 ;;; Customize compilation windows
-(use-package emacs
+(use-package compilation-mode
   :ensure nil
   :config
   ;; Make compilation buffer show in right window

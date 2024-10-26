@@ -1,22 +1,25 @@
 ;; init-tty.el --- -*- lexical-binding: t; -*-
 
-
-(use-package emacs
+;;; Terminal
+(use-package term
   :ensure nil
-  :config
+  :init
   (unless (display-graphic-p)
     (setq xterm-set-window-title t)))
 
 ;;; Clipetty
 ;; Use OSC 52 escape sequences to enable copy/paste in the terminal
 (use-package clipetty
-  :config
-  (global-clipetty-mode 1))
+  :if (not (display-graphic-p))
+  :init
+  (unless (display-graphic-p)
+    (global-clipetty-mode 1)))
 
 ;;; Evil-Terminal-Cursor-Changer
 ;; Changing cursor shape and color in the terminal
 (use-package evil-terminal-cursor-changer
-  :config
+  :if (not (display-graphic-p))
+  :init
   (unless (display-graphic-p)
     (evil-terminal-cursor-changer-activate)))
 

@@ -4,6 +4,7 @@
 ;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline
+  :demand t
   :custom
   ;; (doom-modeline-column-number t) - Deprecated
   (column-number-mode 1)
@@ -94,11 +95,12 @@
 ;;; Minions
 ;; Keeping the minor modes in line, instead sprawled in the mode line
 (use-package minions
-  :config (minions-mode 1))
+  :init (minions-mode 1))
 
 ;;; Solaire-Mode
 ;; Darken popup buffers
 (use-package solaire-mode
+  :demand t
   :config
   (solaire-global-mode 1)
   ;; Prevent solaire-mode from overriding the modeline faces. The difference in
@@ -295,7 +297,7 @@
       evil-scroll-page-down
       eshell-previous-prompt
       eshell-next-prompt)))
-  :config
+  :init
   (pulsar-global-mode 1))
 
 ;;; Olivetti
@@ -345,7 +347,7 @@
 ;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
-  :config (breadcrumb-mode t))
+  :init (breadcrumb-mode t))
 
 ;;; Nyan Mode
 ;; Rainbow and cat

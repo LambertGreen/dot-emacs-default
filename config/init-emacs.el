@@ -4,6 +4,7 @@
 ;;; No-Littering
 ;; Let's put the mess in './var'
 (use-package no-littering
+  :demand t
   :init
   ;; Store backup files in the no-littering directory
   (setq backup-directory-alist `(("." . ,(no-littering-expand-var-file-name "backups/"))))
@@ -17,6 +18,7 @@
 ;;; Emacs
 (use-package emacs
   :ensure nil
+  :demand t
   :custom
   ;; Set personal info
   (user-full-name "Lambert Green")

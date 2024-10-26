@@ -21,7 +21,7 @@
 ;; Re-use environment variables: `SSH_AUTH_SOCK' `SSH_AGENT_PID' `GPG_AGENT'
 (use-package keychain-environment
   :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
-  :config (keychain-refresh-environment))
+  :hook (after-init . keychain-refresh-environment))
 
 ;;; GPG
 ;; NOTE: Not sure if we need `pinentry' or just this config
@@ -34,17 +34,21 @@
 (use-package pinentry
   :after (epg keychain-environment)
   :if (not (eq system-type 'windows-nt))
-  :config
-  (pinentry-start))
+  :hook (after-init . pinentry-start))
 
 ;;; Direnv
 (use-package direnv
   :if (not (eq system-type 'windows-nt))
-  :config (direnv-mode))
+  :hook (project-find-functions . (lambda (_)
+                                    (direnv-enable-mode))))
 
 ;;; EditorConfig
+;; Follow the conventions of the repo
 (use-package editorconfig
-  :config (editorconfig-mode 1))
+  :hook (project-find-functions . (lambda (_)
+                                    (editorconfig-mode 1)))
+  :config
+  (add-to-list 'editorconfig-exclude-modes 'org-mode))
 
 ;;; World-Clock
 (use-package emacs

@@ -6,9 +6,20 @@
 (use-package project
   :ensure nil
   :preface
-
   (defvar lgreen/dev-directory-base-path "~/dev/"
     "Base path for development directories")
+
+  (defun lgreen/project-open-default-file ()
+    "Open any `README` file in project root if available, otherwise prompt."
+    (interactive)
+    (let* ((project-root (project-root (project-current t)))
+           ;; Search for any file starting with 'README' in a case-insensitive manner
+           (readme-file (seq-find (lambda (file)
+                                    (string-match-p "\\`readme" (downcase file)))
+                                  (directory-files project-root))))
+      (if readme-file
+          (find-file (expand-file-name readme-file project-root))
+        (call-interactively #'project-find-file))))
 
   (defun lgreen/get-justfile-recipes ()
     "Return a list of recipes from the Justfile by calling `just --summary`."
@@ -34,7 +45,7 @@
         (message "No valid recipes found or an error occurred."))))
 
   :custom
-  (project-switch-commands 'project-find-file)
+  (project-switch-commands 'lgreen/project-open-default-file)
   (project-vc-merge-submodules nil)
   (project-vc-extra-root-markers '(".project" ".projectile"))
 

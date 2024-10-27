@@ -283,6 +283,13 @@
   (advice-add 'load-theme
               :after 'lgreen/org-font-setup))
 
+;;; Org-Habit
+(use-package org-habit
+  :ensure nil
+  :after org
+  :custom
+  (org-habit-graph-column 60))
+
 ;;; Org-Contrib
 (use-package org-contrib
   :after org

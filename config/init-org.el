@@ -314,9 +314,11 @@
 ;; I love it when a plan comes together
 (use-package org-agenda
   :ensure nil
-  :after org
+  :after (general org)
+  :commands org-agenda
   :custom
   (org-agenda-log-mode-items '(closed clock state))
+  (org-agenda-window-setup 'only-window)
   :init
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))

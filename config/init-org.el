@@ -342,24 +342,8 @@
 ;; have a leader key while the agenda window is active.
 (use-package evil-org-agenda
   :ensure nil
-  :after (evil-org org-agenda)
-  ;; TODO Make final decision on whether leader key can be enabled in agenda mode
-  ;; :hook (org-agenda-mode . lgreen/org-agenda-mode-setup)
-  :config
-  (evil-org-agenda-set-keys)
-  ;; (defun lgreen/org-agenda-mode-setup ()
-  ;;   ;; Ensure keys are defined correctly for default and motion states.
-  ;;   (general-def
-  ;;     :keymaps 'org-agenda-mode-map
-  ;;     "SPC" nil
-  ;;     "<tab>" 'org-agenda-show-and-scroll-up
-  ;;     "RET" 'org-agenda-goto)
-  ;;   (general-def
-  ;;     :keymaps 'org-agenda-mode-map
-  ;;     :states 'motion
-  ;;     "SPC" nil
-  ;;     "<tab>" 'org-agenda-show-and-scroll-up
-  ;;     "RET" 'org-agenda-goto))
+  :after evil-org
+  :hook (org-agenda-mode . evil-org-agenda-set-keys)
   )
 
 ;;; Org-Capture

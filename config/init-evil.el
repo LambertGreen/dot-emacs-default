@@ -68,8 +68,7 @@
 ;; no pleading the fifth here
 (use-package evil-commentary
   :after evil
-  :commands (evil-commentary evil-commentary-mode)
-  :config (evil-commentary-mode))
+  :init (evil-commentary-mode))
 
 ;;; Evil EasyMotion
 ;; get there in one fell swoop

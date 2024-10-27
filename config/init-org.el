@@ -447,11 +447,12 @@
 ;; Knowledge management system... did you not know?
 (use-package org-roam
   :after org
-  :commands (org-roam-node-insert org-roam-node-find org-roam-buffer-toggle
-                                  org-roam-dailies-goto-date org-roam-dailies-goto-today
-                                  org-roam-dailies-goto-yesterday org-roam-alias-add
-                                  org-roam-alias-remove org-roam-ref-add org-roam-ref-remove
-                                  org-roam-tag-add org-roam-tag-remove)
+  :commands (org-roam-node-insert
+             org-roam-node-find org-roam-buffer-toggle
+             org-roam-dailies-goto-date org-roam-dailies-goto-today
+             org-roam-dailies-goto-yesterday org-roam-alias-add
+             org-roam-alias-remove org-roam-ref-add org-roam-ref-remove
+             org-roam-tag-add org-roam-tag-remove)
   :custom
   ;; TODO is the causing perf issues?
   (org-roam-db-autosync-mode nil)

@@ -9,9 +9,17 @@
   :custom
   (treemacs-project-follow-mode t)
   :init
-  (treemacs-resize-icons 18)
   (lgreen/leader-define-key
-    "o p" '(treemacs :wk "Open project tree")))
+    "o p" '(treemacs :wk "Open project tree"))
+
+  ;; Ensure Treemacs is not overriding the universal leader key
+  (general-define-key
+   :states '(normal motion)
+   :keymaps 'treemacs-mode-map
+   lgreen/general-leader-key nil)
+
+  :config
+  (treemacs-resize-icons 18))
 
 ;; TODO Remove if you decide to stay with project.el over projectile
 ;; (use-package treemacs-projectile

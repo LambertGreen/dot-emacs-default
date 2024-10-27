@@ -21,7 +21,7 @@
 ;;;; Leader key definer
   ;; set up 'SPC' as the global leader key
   (general-create-definer lgreen/leader-define-key
-    :states '(normal insert visual emacs treemacs)
+    :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix lgreen/general-leader-key
     :non-normal-prefix lgreen/general-leader-alt-key)

@@ -329,8 +329,8 @@
   ;;               (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")
   ;;               (directory-files-recursively (expand-file-name "roam" org-directory) "\\.org$")))
   (setq org-agenda-files
-        (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")
-                (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")))
+        (append (directory-files-recursively (expand-file-name "personal/agenda" org-directory) "\\.org$")
+                (directory-files-recursively (expand-file-name "work/agenda" org-directory) "\\.org$")))
   )
 
 ;;; Evil-Org-Agenda

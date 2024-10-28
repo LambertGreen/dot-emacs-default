@@ -313,6 +313,10 @@
   :custom
   (org-agenda-log-mode-items '(closed clock state))
   (org-agenda-window-setup 'only-window)
+  (org-agenda-start-with-log-mode t)
+  (org-agenda-skip-scheduled-if-done nil)
+  (org-agenda-skip-deadline-if-done nil)
+  (org-agenda-skip-timestamp-if-done nil)
   :init
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
@@ -393,7 +397,7 @@
           ("b" "Blood Pressure Reading" entry
            (file+olp+datetree lgreen/org-capture-health-file "Blood Pressure" "Readings")
            "* BP Reading\n:PROPERTIES:\n:Captured: %U\n:Systolic: %^{Systolic}\n\
-:Diastolic: %^{Diastolic}\n:Pulse_Rate: %^{Pulse Rate}\n:END:\n"
+           :Diastolic: %^{Diastolic}\n:Pulse_Rate: %^{Pulse Rate}\n:END:\n"
            :tree-type month
            :empty-lines 1))))
 

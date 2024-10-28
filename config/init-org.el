@@ -45,6 +45,7 @@
   ;; Log state changes into drawer
   (org-log-into-drawer t)
   (org-export-backends '(ascii html icalendar latex odt md pandoc))
+  (org-archive-location "%s_archive::datetree/")
   :hook ((org-mode . visual-line-mode)
          (org-mode . lgreen/setup-org-calendar-navigation)
          (org-mode . lgreen/org-font-setup)

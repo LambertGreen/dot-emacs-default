@@ -291,8 +291,7 @@
   :config
   (require 'org-collector)
   (require 'org-protocol)
-  ;; TODO Is org-checklist causing perf issues?
-  ;; (require 'org-checklist)
+  (require 'org-checklist)
   ;; (require 'org-man)
   )
 

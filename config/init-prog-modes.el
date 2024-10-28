@@ -97,14 +97,25 @@
 (use-package whitespace
   :ensure nil
   :after display-fill-column-indicator
-  :hook ((org-mode prog-mode) . whitespace-mode)
-  :custom (whitespace-style '(face lines tabs trailing))
+  :hook ((prog-mode . whitespace-prog-mode-setup)
+         (org-mode . whitespace-org-mode-setup))
+  :custom
   (whitespace-line-column fill-column)
   :init
   (lgreen/leader-define-key
     "x w" '(:ignore t :which-key "whitespace")
     "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
-    "x w r" '(whitespace-report :which-key "Whitespace Report")))
+    "x w r" '(whitespace-report :which-key "Whitespace Report"))
+
+  (defun whitespace-prog-mode-setup ()
+    "Configure whitespace settings for prog-mode."
+    (setq-local whitespace-style '(face lines tabs trailing))
+    (whitespace-mode 1))
+
+  (defun whitespace-org-mode-setup ()
+    "Configure whitespace settings for org-mode."
+    (setq-local whitespace-style '(face tabs trailing)) ;; No long line highlighting
+    (whitespace-mode 1)))
 
 ;;; Language Server Protocol
 ;;;; Eglot

@@ -285,13 +285,6 @@
   (advice-add 'load-theme
               :after 'lgreen/org-font-setup))
 
-;;; Org-Habit
-(use-package org-habit
-  :ensure nil
-  :after org
-  :custom
-  (org-habit-graph-column 60))
-
 ;;; Org-Contrib
 (use-package org-contrib
   :after org
@@ -347,6 +340,22 @@
   :after evil-org
   :hook (org-agenda-mode . evil-org-agenda-set-keys)
   )
+
+;;; Org-Habit
+(use-package org-habit
+  :ensure nil
+  :after org-agenda
+  :custom
+  (org-habit-graph-column 60)
+  (org-habit-show-done-always-green t)
+  (org-habit-show-habits-only-for-today t)
+  :config
+  (setq org-agenda-custom-commands
+        '(("m" "Missed Habits"
+           agenda ""
+           ((org-agenda-overriding-header "Missed Habits")
+            (org-agenda-entry-types '(:habit)))))))
+
 
 ;;; Org-Capture
 ;; Gotta capture them all

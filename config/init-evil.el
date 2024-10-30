@@ -24,7 +24,13 @@
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
 
   ;; Set keybinding for evil-avy-goto-char-timer in motion state
-  (evil-define-key '(normal visual) 'global (kbd "g s SPC") 'evil-avy-goto-char-timer)
+  (evil-define-key '(normal visual) 'global
+    (kbd "g s SPC") 'evil-avy-goto-char-timer       ;; Existing binding for timed char search
+    (kbd "g s k")   'evil-avy-goto-line-above       ;; Go to line above
+    (kbd "g s j")   'evil-avy-goto-line-below       ;; Go to line below
+    (kbd "g s w")   'evil-avy-goto-word-0           ;; Go to the start of word
+    (kbd "g s e")   'evil-avy-goto-word-1           ;; Go to any position in word
+    (kbd "g s l")   'evil-avy-goto-line)            ;; Go to any line
 
   ;; Activate evil-mode
   (evil-mode 1))

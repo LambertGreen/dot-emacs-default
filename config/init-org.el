@@ -1,6 +1,5 @@
 ;; init-org.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Org
 ;; My life in plain text.
 (use-package org
@@ -50,9 +49,9 @@
   (org-log-into-drawer t)
   (org-export-backends '(ascii html icalendar latex odt md pandoc))
   (org-archive-location "%s_archive::datetree/")
-  (org-refile-targets '((nil :maxlevel . 3)
-                        (org-agenda-files :maxlevel . 3)))
-  (org-refile-use-outline-path t)
+  (org-refile-targets '((nil :maxlevel . 4)
+                        (org-agenda-files :maxlevel . 4)))
+  (org-reverse-note-order t)
   :hook ((org-mode . visual-line-mode)
          (org-mode . lgreen/setup-org-calendar-navigation)
          (org-mode . lgreen/org-font-setup)
@@ -335,9 +334,7 @@
   ;;               (directory-files-recursively (expand-file-name "work" org-directory) "\\.org$")
   ;;               (directory-files-recursively (expand-file-name "roam" org-directory) "\\.org$")))
   (setq org-agenda-files
-        (append (directory-files-recursively (expand-file-name "personal/agenda" org-directory) "\\.org$")
-                (directory-files-recursively (expand-file-name "work/agenda" org-directory) "\\.org$")))
-  )
+        (append (directory-files-recursively (expand-file-name "agenda" org-directory) "\\.org$"))))
 
 ;;; Evil-Org-Agenda
 ;; Making evil plans
@@ -378,7 +375,7 @@
   (lgreen/leader-define-key
     "X" '(org-capture :wk "org capture"))
   :config
-  (setq lgreen/org-capture-todo-file (expand-file-name "personal/todo.org" org-directory)
+  (setq lgreen/org-capture-todo-file (expand-file-name "agenda/todo.org" org-directory)
         lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
         lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
         lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)

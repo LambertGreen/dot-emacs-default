@@ -39,13 +39,20 @@
       "|"
       "OKAY(o)"
       "YES(y)"
-      "NO(n)")))
+      "NO(n)")
+     (sequence
+      "HABIT(H)"  ; New sequence for habits
+      "|"
+      "DONE(d!)")))
   ;; Log DONE with timestamp
   (org-log-done 'time)
   ;; Log state changes into drawer
   (org-log-into-drawer t)
   (org-export-backends '(ascii html icalendar latex odt md pandoc))
   (org-archive-location "%s_archive::datetree/")
+  (org-refile-targets '((nil :maxlevel . 3)
+                        (org-agenda-files :maxlevel . 3)))
+  (org-refile-use-outline-path t)
   :hook ((org-mode . visual-line-mode)
          (org-mode . lgreen/setup-org-calendar-navigation)
          (org-mode . lgreen/org-font-setup)
@@ -214,6 +221,7 @@
                                    ("KILL" . (? (Br . Bl) ?\s))
                                    ("DONE" . (? (Br . Bl) ?\s))
                                    ("PROJ" . (? (Br . Bl) ?\s))
+                                   ("HABIT" . (?↺ (Br . Bl) ?\s))
                                    ("[#A]" . "")
                                    ("[#B]" . "")
                                    ("[#C]" . "")

@@ -28,6 +28,7 @@
   (enable-recursive-minibuffers t)
   ;; Do not allow the cursor in the minibuffer prompt
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
+  :config
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
   ;; Vertico commands are hidden in normal buffers.
   ;; TODO Evaluate if you want to keep this setting

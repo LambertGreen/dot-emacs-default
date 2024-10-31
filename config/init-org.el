@@ -100,6 +100,10 @@
     "d s" 'org-schedule
     "d t" 'org-time-stamp
     "d T" 'org-time-stamp-inactive
+    ;; Insert menu
+    "i" '(:ignore t :wk "Insert")
+    "i h" '(lgreen/org-insert-heading :wk "Heading")
+    "i s" '(lgreen/org-insert-subheading :wk "Subheading")
     ;; Tables menu
     "b" '(:ignore t :wk "Tables")
     "b d" '(:ignore t :wk "delete")
@@ -151,6 +155,21 @@
     "s A" 'org-archive-subtree
     "s N" 'widen
     "s S" 'org-sort)
+
+  (defun lgreen/org-insert-heading ()
+    "Insert a new Org heading and enter insert mode."
+    (interactive)
+    (org-insert-heading)
+    (when (evil-normal-state-p)
+      (evil-append 1)))
+
+  (defun lgreen/org-insert-subheading (&optional arg)
+    "Insert a subheading and enter insert mode immediately if in normal state.
+Passes ARG to `org-insert-subheading`."
+    (interactive "P")  ;; allows handling prefix arguments like C-u for ARG
+    (org-insert-subheading arg)
+    (when (evil-normal-state-p)
+      (evil-append 1)))
 
   (defun lgreen/org-enter-key ()
     "Context-aware `RET` key for Org mode in Normal state."

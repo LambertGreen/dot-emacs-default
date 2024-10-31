@@ -87,8 +87,10 @@
 
 ;;; Evil EasyMotion
 ;; get there in one fell swoop
+;; TODO Do we need evil-easymotion or is our config of Avy good enough
 (use-package evil-easymotion
   :after evil
+  :disabled t
   :commands (evilem-default-keybindings)
   :config (evilem-default-keybindings "gs"))
 

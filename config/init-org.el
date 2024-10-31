@@ -80,7 +80,6 @@
     "l" '(org-toggle-latex-fragment :wk "toggle LaTeX"))
 
   (lgreen/local-leader-define-key
-    :states 'normal
     :keymaps 'org-mode-map
 
     "t" '(org-todo :wk "Todo")
@@ -467,7 +466,6 @@
                          "#+title: %<%Y-%m-%d, %A>\n"))))
   :init
   (lgreen/local-leader-define-key
-    :states 'normal
     :keymaps 'org-mode-map
     "m" '(:ignore t :wk "Roam")
     "m i" 'org-roam-node-insert

@@ -10,7 +10,6 @@
   :init
   (dolist (mode '(emacs-lisp-mode-map lisp-interaction-mode-map))
     (lgreen/local-leader-define-key
-      :states 'normal
       :keymaps mode
       "e" '(:ignore t :wk "Eval")
       "e b" 'eval-buffer

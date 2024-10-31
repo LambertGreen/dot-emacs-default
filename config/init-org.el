@@ -281,22 +281,6 @@ Passes ARG to `org-insert-subheading`."
                                    ("DEADLINE:" . "")))
     (prettify-symbols-mode))
 
-  (eval-after-load 'org
-    '(org-load-modules-maybe t))
-
-  (require 'ob-C)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (C . t)
-     (dot . t)
-     (gnuplot . t)
-     (org . t)
-     (js . t)
-     (sqlite . t)
-     (shell . t)
-     ))
-
   ;; Below code snippet acquired from here:
   ;; - https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
   (defun lgreen/org-toggle-emphasis ()
@@ -306,6 +290,9 @@ Passes ARG to `org-insert-subheading`."
         (set-variable 'org-hide-emphasis-markers nil)
       (set-variable 'org-hide-emphasis-markers t))
     (org-mode-restart))
+
+  (eval-after-load 'org
+    '(org-load-modules-maybe t))
 
   (advice-add 'load-theme
               :after 'lgreen/org-font-setup))
@@ -522,24 +509,27 @@ Passes ARG to `org-insert-subheading`."
   :config
   (consult-org-roam-mode 1))
 
-;;; Org Babel languages
-;;;; Ob-Http
-(use-package ob-http
+;;; Org Babel
+(use-package org-babel
+  :ensure nil
   :after org
-  :commands (org-babel-do-load-languages)
   :config
+  (use-package ob-http :commands (org-babel-do-load-languages))
+  (use-package ob-mermaid :commands (org-babel-do-load-languages))
+  (require 'ob-C)
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((http . t))))
+   '((python . t)
+     (C . t)
+     (dot . t)
+     (gnuplot . t)
+     (org . t)
+     (js . t)
+     (sqlite . t)
+     (shell . t)
+     (http . t)
+     (mermaid . t))))
 
-;;;; Ob-Mermaid
-(use-package ob-mermaid
-  :after org
-  :commands (org-babel-do-load-languages)
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((mermaid . t))))
 
 ;; _
 (provide 'init-org)

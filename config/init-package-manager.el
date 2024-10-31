@@ -53,7 +53,7 @@
 (elpaca-wait)
 ;; Use-package can be used beyond this point
 
-;; _
+;;; _
 (provide 'init-package-manager)
 
 ;; Local Variables:

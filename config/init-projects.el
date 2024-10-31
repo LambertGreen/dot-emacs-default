@@ -53,7 +53,7 @@
   (lgreen/leader-define-key
     "p e" '(lgreen/run-justfile-recipe :wk "execute Just recipe")))
 
-;; _
+;;; _
 (provide 'init-projects)
 
 ;; Local Variables:

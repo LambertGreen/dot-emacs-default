@@ -13,15 +13,17 @@
   (vertico-mode)
   :hook (minibuffer-setup . vertico-repeat-save)
   :config
+;;;; Keymaps
   (lgreen/leader-define-key
     "'" '(vertico-repeat :wk "repeat search")))
 
 ;;; Marginalia
 ;; Annotations for minibuffer completions
 (use-package marginalia
+  :init (marginalia-mode)
+;;;; Keymaps
   :bind (:map minibuffer-local-map
-              ("M-a" . marginalia-cycle))
-  :init (marginalia-mode))
+              ("M-a" . marginalia-cycle)))
 
 ;;; Consult
 ;; Making minibuffer completions nicer
@@ -33,6 +35,7 @@
   ([remap next-matching-history-element] . consult-history)
   ([remap previous-matching-history-element] . consult-history)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     ;; Symbol-at-point
     "*" '(lgreen/ripgrep-symbol-at-point :wk "symbol search")
@@ -42,6 +45,7 @@
     "f l" '(consult-locate :wk "find file with [locate]")
 
     ;; Search
+    "s SPC" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search [DWIM]")
     "s b" '(consult-line :wk "Search buffer")
     "s s" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search with [ripgrep]")
     "s i" '(consult-imenu :wk "jump to symbol")
@@ -88,6 +92,7 @@
                    #'completion--in-region)
                  args)))
 
+;;;; Functions
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
 
@@ -149,6 +154,7 @@
 (use-package consult-todo
   :after (general consult hl-todo)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
@@ -168,7 +174,7 @@
   :disabled t
   :config (push 'fussy completion-styles))
 
-;; _
+;;; _
 (provide 'init-minibuffer-completion)
 
 ;; Local Variables:

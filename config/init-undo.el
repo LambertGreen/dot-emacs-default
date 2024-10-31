@@ -16,11 +16,13 @@
   :hook
   (evil-local-mode . turn-on-undo-tree-mode)
   :general
+;;;; Keymaps
   (:states 'normal
            "U" 'undo-tree-visualize)
   :bind (:map undo-tree-map
               ("C-/" . nil))
   :config
+;;;; Functions
   ;; Suppress undo-tree save messages
   (defun lgreen/undo-tree-suppress-save-message (orig-fun &rest args)
     (let ((inhibit-message t))  ;; Temporarily disable messages
@@ -28,7 +30,7 @@
   (advice-add 'undo-tree-save-history :around #'lgreen/undo-tree-suppress-save-message)
   (global-undo-tree-mode))
 
-;; _
+;;; _
 (provide 'init-undo)
 
 ;; Local Variables:

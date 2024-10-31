@@ -541,7 +541,7 @@ Passes ARG to `org-insert-subheading`."
      (mermaid . t))))
 
 
-;; _
+;;; _
 (provide 'init-org)
 
 ;; Local Variables:

@@ -102,7 +102,7 @@
   (add-hook 'notmuch-hello-mode-hook
             (lambda () (display-line-numbers-mode 0))))
 
-;; _
+;;; _
 (provide 'init-email)
 
 ;; Local Variables:

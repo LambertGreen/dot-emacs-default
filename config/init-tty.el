@@ -23,7 +23,7 @@
   (unless (display-graphic-p)
     (evil-terminal-cursor-changer-activate)))
 
-;; _
+;;; _
 (provide 'init-tty)
 
 ;; Local Variables:

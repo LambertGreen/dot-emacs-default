@@ -356,7 +356,7 @@
   (when (display-graphic-p)
     (nyan-mode)))
 
-;; _
+;;; _
 (provide 'init-ui)
 
 ;; Local Variables:

@@ -48,5 +48,5 @@
   ((focus-in . diff-hl-update)
    (after-init . global-diff-hl-mode)))
 
-;; _
+;;; _
 (provide 'init-version-control)

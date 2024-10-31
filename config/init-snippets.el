@@ -16,5 +16,5 @@
 ;;; Lorem-Ipsum
 (use-package lorem-ipsum)
 
-;; _
+;;; _
 (provide 'init-snippets)

@@ -22,7 +22,7 @@
 
   :config (dashboard-setup-startup-hook))
 
-;; _
+;;; _
 (provide 'init-dashboard)
 
 ;; Local Variables:

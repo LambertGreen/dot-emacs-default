@@ -57,7 +57,7 @@
       "f y f" '(lgreen/yank-filename :wk "filename")
       "f y d" '(lgreen/yank-parent-directory :wk "parent-directory-name"))))
 
-;; _
+;;; _
 (provide 'init-my-elisp-functions)
 
 ;; Local Variables:

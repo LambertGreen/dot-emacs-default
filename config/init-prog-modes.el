@@ -7,21 +7,29 @@
   :ensure nil
   :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :init
+;;;; Keymaps
+
+;;;;; Formatting
   (lgreen/leader-define-key
     "c f" '(lgreen/format-buffer :wk "format buffer"))
   (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
     "f" '(:ignore t :wk "Format")
     "f b" '(lgreen/format-buffer :wk "format buffer")
+
+;;;;; Errors
     "x" '(:ignore t :wk "Errors")
     "x l" '(consult-flymake :wk "list errors")
     "x p" '(flymake-goto-prev-error :wk "error previous")
     "x n" '(flymake-goto-next-error :wk "error next")
+
+;;;;; Narrowing
     "n" '(:ignore t :wk "Narrow")
     "n r" '(narrow-to-region :wk "narrow to region")
     "n d" '(narrow-to-defun :wk "narrow to defun")
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
+;;;; Functions
   (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables"
     (interactive)
@@ -47,6 +55,7 @@
       (when (not (string= jenv-java-home ""))
         (setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
   :config
+;;;; Advice
   (advice-add 'load-theme
               :after 'lgreen/set-faces-for-prog-mode))
 
@@ -252,7 +261,7 @@
 ;;;; Kotlin
 (use-package kotlin-mode)
 
-;; _
+;;; _
 (provide 'init-prog-modes)
 
 ;; Local Variables:

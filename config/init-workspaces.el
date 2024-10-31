@@ -44,7 +44,7 @@
     (add-to-list 'consult-buffer-sources 'consult--source-workspace))
   )
 
-;; _
+;;; _
 (provide 'init-workspaces)
 
 ;; Local Variables:

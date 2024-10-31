@@ -86,7 +86,7 @@
                  :close vimish-fold-refold)
                'append))
 
-;; _
+;;; _
 (provide 'init-folding)
 
 ;; Local Variables:

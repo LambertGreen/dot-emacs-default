@@ -63,7 +63,7 @@
 ;;   :config
 ;;   (shackle-mode 1))
 
-;; _
+;;; _
 (provide 'init-window-management)
 
 ;; Local Variables:

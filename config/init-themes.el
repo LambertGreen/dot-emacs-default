@@ -51,7 +51,7 @@
   ;; Execute the function to set the theme based on OS
   (lgreen/set-theme-based-on-os))
 
-;; _
+;;; _
 (provide 'init-themes)
 
 ;; Local Variables:

@@ -71,7 +71,7 @@
   :ensure nil
   :custom (proced-enable-color-flag t))
 
-;; _
+;;; _
 (provide 'init-utils)
 
 ;; Local Variables:

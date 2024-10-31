@@ -38,5 +38,5 @@
   :hook ((emacs-startup . global-jinx-mode)
          ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes)))
 
-;; _
+;;; _
 (provide 'init-spellchecking)

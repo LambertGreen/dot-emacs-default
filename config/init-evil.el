@@ -18,11 +18,14 @@
   (evil-undo-system 'undo-tree)
 
   :config
+;;;; Keymaps
+;;;;; Insert mode
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
 
+;;;;; Avy Goto
   ;; Set keybinding for evil-avy-goto-char-timer in motion state
   (evil-define-key '(normal visual) 'global
     (kbd "g s SPC") 'evil-avy-goto-char-timer       ;; Existing binding for timed char search
@@ -40,6 +43,9 @@
 (use-package evil-args
   :after evil
   :init
+
+;;;; Keymaps
+;;;;; Text-Object Args
   ;; bind evil-args text objects
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
@@ -61,14 +67,17 @@
   (evil-collection-calendar-setup-org-bindings t)
   :config
   (evil-collection-init)
-  ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
-  ;; TODO Validate that you really need to unmap these keys
+
+;;;; Keymaps
+;;;;; Unbind SPC and RET
   (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
+    ;; Unbind RET in both Normal and Motion states as
+    ;; the default is to enter newline, and we don't need
+    ;; buffer changes in normal mode
+    (define-key evil-normal-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
-    ;; We need to disable the below to have 'C-i' bound to `evil-jump-forward'
-    ;; (define-key evil-motion-state-map (kbd "TAB") nil)
-    ))
+
+    (define-key evil-motion-state-map (kbd "SPC") nil)))
 
 ;;; Evil-Commentary
 ;; no pleading the fifth here
@@ -103,13 +112,15 @@
   :after evil
   :commands (evil-exchange)
   :general
+;;;; Keymaps
+;;;;; Use gx/X
   (:states '(visual normal)
            "gx" 'evil-exchange
            "gX" 'evil-exchange-cancel))
 
 ;;; Evil-Expat
 ;; additional ex commands
-;; TODO Remove if not missed now that it is disabled
+;; TODO Remove evil-expat if not missed now that it is disabled
 (use-package evil-expat
   :disabled t
   :after evil)
@@ -136,6 +147,8 @@
   :after evil
   :commands (evil-lion-left evil-lion-right)
   :general
+;;;; Keymaps
+;;;;; Use gl/L
   (:states '(visual normal)
            "gl" 'evil-lion-left
            "gL" 'evil-lion-right))
@@ -147,6 +160,8 @@
   :after (general evil)
   :commands (evil-numbers/inc-at-pt evil-numbers/dec-at-pt)
   :init
+;;;; Keymaps
+;;;;; Use g(=/-)
   (general-define-key
    :states '(normal visual)
    :keymaps 'global
@@ -246,6 +261,8 @@
   :after evil
   :commands (evil-forward-little-word-begin evil-backward-little-word-begin evil-inner-little-word)
   :init
+;;;; Keymaps
+;;;;; Use M-(w/b)
   (define-key evil-normal-state-map (kbd "M-w") 'evil-forward-little-word-begin)
   (define-key evil-normal-state-map (kbd "M-b") 'evil-backward-little-word-begin)
   (define-key evil-operator-state-map (kbd "M-w") 'evil-forward-little-word-begin)
@@ -261,6 +278,8 @@
   :ensure (:fetcher github :repo "Somelauw/evil-markdown")
   :commands (evil-markdown-set-key-theme)
   :init
+;;;; Keymaps
+;;;;; Use C-(j/k)
   (evil-define-key 'normal evil-markdown-mode-map
     (kbd "C-j") 'markdown-next-visible-heading
     (kbd "C-k") 'markdown-previous-visible-heading)
@@ -314,7 +333,7 @@
                      :keys "q"
                      :hooks (emacs-lisp-mode-hook)))
 
-;; _
+;;; _
 (provide 'init-evil)
 
 ;; Local Variables:

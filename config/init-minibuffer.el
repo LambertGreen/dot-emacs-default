@@ -5,12 +5,14 @@
 (use-package minibuffer
   :ensure nil
   :init
+;;;; Keymaps
   (general-def :keymaps 'minibuffer-local-map
     :states '(normal insert)
     "C-n" 'next-line-or-history-element
     "C-p" 'previous-line-or-history-element
     "C-;" 'embark-act)
 
+;;;; Functions
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
@@ -35,7 +37,7 @@
   (setq read-extended-command-predicate
         #'command-completion-default-include-p))
 
-;; _
+;;; _
 (provide 'init-minibuffer)
 
 ;; Local Variables:

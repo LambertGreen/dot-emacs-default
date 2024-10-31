@@ -56,7 +56,7 @@
 
   (add-hook 'kill-buffer-hook 'close-window-on-eat-buffer-kill))
 
-;; _
+;;; _
 (provide 'init-terminal)
 
 ;; Local Variables:

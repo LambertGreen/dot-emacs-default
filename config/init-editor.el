@@ -97,6 +97,7 @@
              helpful-symbol)
   :init
   (setq evil-lookup-func #'helpful-at-point)
+;;;; Keymaps
   (lgreen/leader-define-key
     "h f" '(helpful-function :wk "describe function")
     "h v" '(helpful-variable :wk "describe variable")
@@ -137,7 +138,7 @@
 ;; TODO Are you using dump-jump or not?
 (use-package dumb-jump)
 
-;; _
+;;; _
 (provide 'init-editor)
 
 ;; Local Variables:

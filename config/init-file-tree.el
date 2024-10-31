@@ -52,7 +52,7 @@
   :after (treemacs)
   :config (treemacs-set-scope-type 'Tabs))
 
-;; _
+;;; _
 (provide 'init-file-tree)
 
 ;; Local Variables:

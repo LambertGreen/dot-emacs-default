@@ -184,7 +184,7 @@
   ;; function unless you use something similar
   (add-hook 'kb/themes-hooks #'(lambda () (interactive) (kind-icon-reset-cache))))
 
-;; _
+;;; _
 (provide 'init-completion)
 
 ;; Local Variables:

@@ -33,7 +33,7 @@
     :prefix lgreen/general-local-leader-key
     :non-normal-prefix lgreen/general-local-leader-alt-key)
 
-;;;; Keys
+;;;; Keymaps
   (lgreen/leader-define-key
 ;;;;; Top Level Keys
     "SPC" '(execute-extended-command :wk "execute command")
@@ -152,11 +152,11 @@
     "q" '(:ignore t :wk "Quit")
     "q q" '(save-buffers-kill-terminal :wk "quit")))
 
-;;;; ------------
+;;;; -
 (elpaca-wait)
 ;; use-package declarations beyond this point may use the `:general' use-package keyword.
 
-;; _
+;;; _
 (provide 'init-keybindings)
 
 ;; Local Variables:

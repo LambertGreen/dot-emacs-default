@@ -8,6 +8,11 @@
   :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :init
 ;;;; Keymaps
+;;;;; Navigation
+  (general-define-key
+   :keymaps '(prog-mode-map)
+   "M-n" (lambda () (interactive) (forward-evil-defun 1))
+   "M-p" (lambda () (interactive) (forward-evil-defun -1)))
 
 ;;;;; Formatting
   (lgreen/leader-define-key

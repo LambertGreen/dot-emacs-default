@@ -57,6 +57,7 @@
          (org-mode . lgreen/org-font-setup)
          (org-mode . lgreen/org-prettify-symbols))
   :config
+;;;; Keymaps
   (general-def
     :states '(normal)
     :keymaps 'org-mode-map
@@ -65,7 +66,6 @@
     "C-'" nil
     ;; FIXME Pressing Enter on links is not working
     ;; "RET" '(:ignore lgreen/org-enter-key)
-
     :prefix "SPC z"
     :prefix-command 'org-outline
     :prefix-map 'org-visibility-map
@@ -81,9 +81,9 @@
 
   (lgreen/local-leader-define-key
     :keymaps 'org-mode-map
-
+    ;; Todo menu
     "t" '(org-todo :wk "Todo")
-
+    ;; Clock menu
     "c" '(:ignore t :wk "Clock")
     "c c" 'org-clock-cancel
     "c d" '(:ignore t :wk "clock-display")
@@ -94,13 +94,13 @@
     "c o" 'org-clock-out
     "c g" 'org-clock-goto
     "c r" 'org-clock-report
-
+    ;; Deadline/Date menu
     "d" '(:ignore t :wk "Deadline/Date")
     "d d" 'org-deadline
     "d s" 'org-schedule
     "d t" 'org-time-stamp
     "d T" 'org-time-stamp-inactive
-
+    ;; Tables menu
     "b" '(:ignore t :wk "Tables")
     "b d" '(:ignore t :wk "delete")
     "b d c" 'org-table-delete-column
@@ -109,7 +109,7 @@
     "b i c" 'org-table-insert-column
     "b i h" 'org-table-insert-hline
     "b i r" 'org-table-insert-row
-
+    ;; Link menu
     "l" '(:ignore t :wk "Link")
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
@@ -119,23 +119,23 @@
     "l s" 'org-store-link
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display
-
+    ;; Priority menu
     "p" '(:ignore t :wk "Priority")
     "p d" 'org-priority-down
     "p p" 'org-priority
     "p u" 'org-priority-up
-
+    ;; Publish menu
     "P" '(:ignore t :wk "Publish")
     "P a" 'org-publish-all
     "P f" 'org-publish-current-file
     "P p" 'org-publish
     "P P" 'org-publish-current-project
     "P s" 'org-publish-sitemap
-
+    ;; Refile menu
     "r" '(:ignore t :wk "Refile")
     "r r" 'org-refile
     "r R" 'org-refile-reverse
-
+    ;; Subtree menu
     "s" '(:ignore t :wk "Subtree")
     "s a" 'org-toggle-archive-tag
     "s b" 'org-tree-to-indirect-buffer

@@ -66,6 +66,8 @@
     "C-'" nil
     ;; FIXME Pressing Enter on links is not working
     ;; "RET" '(:ignore lgreen/org-enter-key)
+
+;;;;; Outline
     :prefix "SPC z"
     :prefix-command 'org-outline
     :prefix-map 'org-visibility-map
@@ -81,9 +83,10 @@
 
   (lgreen/local-leader-define-key
     :keymaps 'org-mode-map
-    ;; Todo menu
+;;;;; Todo
     "t" '(org-todo :wk "Todo")
-    ;; Clock menu
+
+;;;;; Clock
     "c" '(:ignore t :wk "Clock")
     "c c" 'org-clock-cancel
     "c d" '(:ignore t :wk "clock-display")
@@ -94,17 +97,20 @@
     "c o" 'org-clock-out
     "c g" 'org-clock-goto
     "c r" 'org-clock-report
-    ;; Deadline/Date menu
+
+;;;;; Deadline/Date
     "d" '(:ignore t :wk "Deadline/Date")
     "d d" 'org-deadline
     "d s" 'org-schedule
     "d t" 'org-time-stamp
     "d T" 'org-time-stamp-inactive
-    ;; Insert menu
+
+;;;;; Insert
     "i" '(:ignore t :wk "Insert")
     "i h" '(lgreen/org-insert-heading :wk "Heading")
     "i s" '(lgreen/org-insert-subheading :wk "Subheading")
-    ;; Tables menu
+
+;;;;; Tables
     "b" '(:ignore t :wk "Tables")
     "b d" '(:ignore t :wk "delete")
     "b d c" 'org-table-delete-column
@@ -113,7 +119,8 @@
     "b i c" 'org-table-insert-column
     "b i h" 'org-table-insert-hline
     "b i r" 'org-table-insert-row
-    ;; Link menu
+
+  ;;;;; Link
     "l" '(:ignore t :wk "Link")
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
@@ -123,23 +130,27 @@
     "l s" 'org-store-link
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display
-    ;; Priority menu
+
+  ;;;;; Priority
     "p" '(:ignore t :wk "Priority")
     "p d" 'org-priority-down
     "p p" 'org-priority
     "p u" 'org-priority-up
-    ;; Publish menu
+
+  ;;;;; Publish menu
     "P" '(:ignore t :wk "Publish")
     "P a" 'org-publish-all
     "P f" 'org-publish-current-file
     "P p" 'org-publish
     "P P" 'org-publish-current-project
     "P s" 'org-publish-sitemap
-    ;; Refile menu
+
+  ;;;;; Refile menu
     "r" '(:ignore t :wk "Refile")
     "r r" 'org-refile
     "r R" 'org-refile-reverse
-    ;; Subtree menu
+
+  ;;;;; Subtree menu
     "s" '(:ignore t :wk "Subtree")
     "s a" 'org-toggle-archive-tag
     "s b" 'org-tree-to-indirect-buffer
@@ -156,13 +167,14 @@
     "s N" 'widen
     "s S" 'org-sort)
 
+;;;; Functions
+;;;;; Used by keybinds
   (defun lgreen/org-insert-heading ()
     "Insert a new Org heading and enter insert mode."
     (interactive)
     (org-insert-heading)
     (when (evil-normal-state-p)
       (evil-append 1)))
-
   (defun lgreen/org-insert-subheading (&optional arg)
     "Insert a subheading and enter insert mode immediately if in normal state.
 Passes ARG to `org-insert-subheading`."
@@ -170,7 +182,6 @@ Passes ARG to `org-insert-subheading`."
     (org-insert-subheading arg)
     (when (evil-normal-state-p)
       (evil-append 1)))
-
   (defun lgreen/org-enter-key ()
     "Context-aware `RET` key for Org mode in Normal state."
     (interactive)
@@ -181,7 +192,6 @@ Passes ARG to `org-insert-subheading`."
      ((org-at-heading-p) (org-cycle))
      ;; Execute custom behaviors or fallback
      (t (org-cycle))))
-
   (defun lgreen/setup-org-calendar-navigation ()
     (general-def
       :keymaps 'org-read-date-minibuffer-local-map
@@ -191,6 +201,7 @@ Passes ARG to `org-insert-subheading`."
       "C-l" (lambda () (interactive) (org-eval-in-calendar '(calendar-forward-day 1)))
       "C-h" (lambda () (interactive) (org-eval-in-calendar '(calendar-backward-day 1)))))
 
+;;;;; Visuals
   (defun lgreen/org-font-setup ()
     "Sets the fonts to specific sizes for org-mode"
     (interactive)
@@ -222,7 +233,6 @@ Passes ARG to `org-insert-subheading`."
     (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
-
   ;; NOTE: The symbols unfortunately don't leave any breathing room before the next character is printed.
   ;; E.g. "This is a todo item.
   ;; TODO Update the symbols to use the "more breathing room" approach.
@@ -280,7 +290,6 @@ Passes ARG to `org-insert-subheading`."
                                    ("SCHEDULED:" . "")
                                    ("DEADLINE:" . "")))
     (prettify-symbols-mode))
-
   ;; Below code snippet acquired from here:
   ;; - https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
   (defun lgreen/org-toggle-emphasis ()
@@ -291,9 +300,11 @@ Passes ARG to `org-insert-subheading`."
       (set-variable 'org-hide-emphasis-markers t))
     (org-mode-restart))
 
+;;;; Modules
   (eval-after-load 'org
     '(org-load-modules-maybe t))
 
+;;;; Advice
   (advice-add 'load-theme
               :after 'lgreen/org-font-setup))
 
@@ -368,7 +379,6 @@ Passes ARG to `org-insert-subheading`."
            agenda ""
            ((org-agenda-overriding-header "Missed Habits")
             (org-agenda-entry-types '(:habit)))))))
-
 
 ;;; Org-Capture
 ;; Gotta capture them all

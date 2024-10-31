@@ -47,6 +47,7 @@
 
 ;;;;; Files
     "f" '(:ignore t :wk "File")
+    "f SPC" '(project-find-file :wk "find file [DWIM]")
     "f f" '(find-file :wk "find file")
     "f d" '(find-name-dired :wk "find file recursively")
     "f l" '(locate :wk "locate")

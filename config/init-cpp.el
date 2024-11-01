@@ -1,6 +1,7 @@
 ;; init-cpp.el --- -*- lexical-binding: t; -*-
 
-
+;;; C/C++
+;; Seeing above the assembly
 (use-package cc-mode
   :ensure nil
   :config

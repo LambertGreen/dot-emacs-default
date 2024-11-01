@@ -3,9 +3,10 @@
 ;;; ======================
 ;;; Lambert's Emacs Config
 ;;; ======================
-
+;;; Load Path
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
 
+;;; Requires
 (require 'init-package-manager)
 (require 'init-emacs)
 (require 'init-keybindings)
@@ -38,4 +39,4 @@
 (require 'init-tty)
 (require 'init-email)
 
-;; _
+;;; _

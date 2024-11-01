@@ -9,6 +9,7 @@
   :custom
   (tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "t t" '(toggle-frame-tab-bar :wk "Toggle tab bar")
     "TAB" '(:ignore t :wk "Workspaces")
@@ -20,11 +21,13 @@
 (use-package tabspaces
   :hook (after-init . tabspaces-mode)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "TAB TAB" '(tabspaces-switch-or-create-workspace :wk "Switch workspace")
     "TAB b" '(tabspaces-switch-buffer-and-tab :wk "Switch to buffer")
     "TAB d" '(tabspaces-close-workspace :wk "Close workspace")
     "TAB o" '(tabspaces-open-or-create-project-and-workspace :wk "Open workspace"))
+;;;; -
   :config
   ;; Filter Buffers for Consult-Buffer
   (with-eval-after-load 'consult

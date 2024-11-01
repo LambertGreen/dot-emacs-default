@@ -116,11 +116,12 @@
   :custom
   (whitespace-line-column fill-column)
   :init
+;;;;; Keymaps
   (lgreen/leader-define-key
     "x w" '(:ignore t :which-key "whitespace")
     "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
     "x w r" '(whitespace-report :which-key "Whitespace Report"))
-
+;;;;; Functions
   (defun whitespace-prog-mode-setup ()
     "Configure whitespace settings for prog-mode."
     (setq-local whitespace-style '(face lines tabs trailing))
@@ -225,6 +226,7 @@
   :after general
   :hook (markdown-mode . outline-minor-mode)
   :init
+;;;;; Keymaps
   (lgreen/local-leader-define-key
     :keymaps 'markdown-mode-map
     "i" '(:keymap markdown-mode-style-map :wk "insert")

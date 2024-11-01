@@ -80,7 +80,7 @@
     "s" '(org-show-todo-tree :wk "show TODO tree")
     "d" '(org-toggle-link-display :wk "toggle links")
     "l" '(org-toggle-latex-fragment :wk "toggle LaTeX"))
-
+;;;;; _
   (lgreen/local-leader-define-key
     :keymaps 'org-mode-map
 ;;;;; Todo
@@ -120,7 +120,7 @@
     "b i h" 'org-table-insert-hline
     "b i r" 'org-table-insert-row
 
-  ;;;;; Link
+;;;;; Link
     "l" '(:ignore t :wk "Link")
     "l i" 'org-id-store-link
     "l l" 'org-insert-link
@@ -131,13 +131,13 @@
     "l S" 'org-insert-last-stored-link
     "l t" 'org-toggle-link-display
 
-  ;;;;; Priority
+;;;;; Priority
     "p" '(:ignore t :wk "Priority")
     "p d" 'org-priority-down
     "p p" 'org-priority
     "p u" 'org-priority-up
 
-  ;;;;; Publish menu
+;;;;; Publish
     "P" '(:ignore t :wk "Publish")
     "P a" 'org-publish-all
     "P f" 'org-publish-current-file
@@ -145,12 +145,12 @@
     "P P" 'org-publish-current-project
     "P s" 'org-publish-sitemap
 
-  ;;;;; Refile menu
+;;;;; Refile
     "r" '(:ignore t :wk "Refile")
     "r r" 'org-refile
     "r R" 'org-refile-reverse
 
-  ;;;;; Subtree menu
+;;;;; Subtree
     "s" '(:ignore t :wk "Subtree")
     "s a" 'org-toggle-archive-tag
     "s b" 'org-tree-to-indirect-buffer
@@ -341,6 +341,7 @@ Passes ARG to `org-insert-subheading`."
   (org-agenda-skip-deadline-if-done nil)
   (org-agenda-skip-timestamp-if-done nil)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
   :config
@@ -387,8 +388,10 @@ Passes ARG to `org-insert-subheading`."
   :after org
   :commands org-capture
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "X" '(org-capture :wk "org capture"))
+;;;; _
   :config
   (setq lgreen/org-capture-todo-file (expand-file-name "agenda/todo.org" org-directory)
         lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
@@ -448,7 +451,7 @@ Passes ARG to `org-insert-subheading`."
 
 ;;; Org-Contacts
 ;; Keeping connections
-;; TODO I am disabling to see if this package is causing performance issues
+;; FIXME I am disabling to see if this package is causing performance issues
 (use-package org-contacts
   :disabled t
   :after org
@@ -481,16 +484,21 @@ Passes ARG to `org-insert-subheading`."
       :target (file+head "%<%Y-%m-%d>.org"
                          "#+title: %<%Y-%m-%d, %A>\n"))))
   :init
+;;;; Keymaps
   (lgreen/local-leader-define-key
-    :keymaps 'org-mode-map
+    :keymaps 'org-mode-roam-map
     "m" '(:ignore t :wk "Roam")
     "m i" 'org-roam-node-insert
     "m f" 'org-roam-node-find
     "m m" 'org-roam-buffer-toggle
+
+;;;;; Dailies
     "m d" '(:ignore t :wk "Dailies")
     "m d d" 'org-roam-dailies-goto-date
     "m d t" 'org-roam-dailies-goto-today
     "m d y" 'org-roam-dailies-goto-yesterday
+
+;;;;; Node Properties
     "m o" '(:ignore t :wk "Node Properties")
     "m o a" 'org-roam-alias-add
     "m o A" 'org-roam-alias-remove
@@ -539,7 +547,6 @@ Passes ARG to `org-insert-subheading`."
      (shell . t)
      (http . t)
      (mermaid . t))))
-
 
 ;;; _
 (provide 'init-org)

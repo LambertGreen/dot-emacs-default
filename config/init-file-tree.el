@@ -9,6 +9,7 @@
   :custom
   (treemacs-project-follow-mode t)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "o p" '(treemacs :wk "Open project tree"))
 

@@ -10,7 +10,7 @@
 (use-package devdocs)
 
 ;;; Speed-Type
-;; pump up those wpm numbers
+;; Pump up those wpm numbers
 (use-package speed-type)
 
 ;;; Typit

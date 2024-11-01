@@ -22,6 +22,7 @@
   (magit-diff-hide-trailing-cr-characters t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "g g" '(magit-status :wk "status")
     "g b" '(magit-blame :wk "blame")))
@@ -40,13 +41,14 @@
 ;; Show git status in the fringe
 (use-package diff-hl
   :commands (diff-hl-previous-hunk diff-hl-next-hunk)
-  :init
-  (lgreen/leader-define-key
-    "g p" '(diff-hl-previous-hunk :wk "previous hunk")
-    "g n" '(diff-hl-next-hunk :wk "next hunk"))
   :hook
   ((focus-in . diff-hl-update)
-   (after-init . global-diff-hl-mode)))
+   (after-init . global-diff-hl-mode))
+  :init
+;;;; Keymaps
+  (lgreen/leader-define-key
+    "g p" '(diff-hl-previous-hunk :wk "previous hunk")
+    "g n" '(diff-hl-next-hunk :wk "next hunk")))
 
 ;;; _
 (provide 'init-version-control)

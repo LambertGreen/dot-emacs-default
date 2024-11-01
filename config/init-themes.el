@@ -26,6 +26,7 @@
 (use-package emacs
   :ensure nil
   :init
+;;;; Functions
   (defun lgreen/set-theme-based-on-os ()
     "Set theme based on the operating system."
     (cond
@@ -40,11 +41,9 @@
       (add-hook 'ns-system-appearance-change-functions #'lgreen/sync-theme-with-system-appearance)
       ;; Determine current appearance and set the appropriate theme at startup
       (lgreen/sync-theme-with-system-appearance 'ns-system-appearance))
-
      ;; For Windows and Linux, just set a default theme
      ((eq system-type 'windows-nt)
       (load-theme 'doom-one t))
-
      ((eq system-type 'gnu/linux)
       (load-theme 'doom-one t))))
 

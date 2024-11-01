@@ -11,7 +11,16 @@
              lgreen/yank-filename
              lgreen/yank-parent-directory)
   :init
-;;;; Visuals
+;;;; Keymaps
+;;;;; File
+  (with-eval-after-load 'general
+    (lgreen/leader-define-key
+      "f y" '(:ignore t :wk "yank")
+      "f y y" '(lgreen/yank-full-filename :wk "full-filename")
+      "f y f" '(lgreen/yank-filename :wk "filename")
+      "f y d" '(lgreen/yank-parent-directory :wk "parent-directory-name")))
+;;;; Functions
+;;;;; Visuals
   ;; Set transparency of emacs
   (defun lgreen/transparency (value)
     "Sets the transparency of the frame window. 0=transparent/100=opaque"
@@ -24,7 +33,7 @@
     (or frame (setq frame (selected-frame)))
     (unless (display-graphic-p frame)
       (set-face-background 'default "unspecified-bg" frame)))
-;;;; Filename handling
+;;;;; Filename handling
   (defun lgreen/yank-full-filename ()
     "Copy the full path of the current buffer's file to the clipboard."
     (interactive)
@@ -48,14 +57,7 @@
         (progn
           (kill-new (file-name-directory (file-truename buffer-file-name)))
           (message "Parent directory copied: %s" (file-name-directory (file-truename buffer-file-name))))
-      (message "No file associated with this buffer.")))
-;;;; Filename Keybinds
-  (with-eval-after-load 'general
-    (lgreen/leader-define-key
-      "f y" '(:ignore t :wk "yank")
-      "f y y" '(lgreen/yank-full-filename :wk "full-filename")
-      "f y f" '(lgreen/yank-filename :wk "filename")
-      "f y d" '(lgreen/yank-parent-directory :wk "parent-directory-name"))))
+      (message "No file associated with this buffer."))))
 
 ;;; _
 (provide 'init-my-elisp-functions)

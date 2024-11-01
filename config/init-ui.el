@@ -6,18 +6,15 @@
 (use-package doom-modeline
   :demand t
   :custom
-  ;; (doom-modeline-column-number t) - Deprecated
   (column-number-mode 1)
-
   (doom-modeline-height 24)
   (doom-modeline-indent-info t)
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-workspace-name nil)
   (doom-modeline-persp-name nil)
   (doom-modeline-minor-modes t)
-
-  ;; :hook (after-init . doom-modeline-mode)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "t m" '(:ignore t :wk "modeline")
     "t m m" '(lgreen/toggle-mode-line :wk "Toggle modeline")
@@ -25,6 +22,7 @@
     "t m i" '(lgreen/toggle-doom-modeline-indent-info :which-key "toggle modeline indent-info"))
   :config
   (doom-modeline-mode 1)
+;;;; Functions
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
@@ -141,9 +139,11 @@
                  empty-bullet ?◦)
               'double-pipe))
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "t f" '(lgreen/toggle-fill-column-indicator :wk "Toggle fill-column indicator"))
   :config
+;;;; Functions
   (defun lgreen/set-face-for-fill-column-indicator()
     "Sets the fill column indicator face to match the current theme's comment color."
     (interactive)
@@ -153,7 +153,6 @@
                         :weight 'thin
                         :height 0.5)
     )
-
   (defun lgreen/toggle-fill-column-indicator ()
     "Toggle the fill column indicator."
     (interactive)
@@ -179,6 +178,7 @@
   (indent-bars-treesit-support t)
   :hook (prog-mode . indent-bars-mode)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "t i" '(indent-bars-mode :wk "Toggle indent bars")))
 
@@ -189,13 +189,13 @@
   :after general
   :hook ((emacs-lisp-mode conf-mode) . outline-minor-mode)
   :init
+;;;; Keymaps
   (general-def
     :keymaps 'outline-mode-map
     :states 'normal
     "<tab>" 'outline-cycle
     "gh" 'outline-up-heading)
   (lgreen/leader-define-key
-    :states '(normal)
     :keymaps 'outline-mode-map
     "z" '(:ignore t :wk "Outline")
     "z a" '(outline-show-all :wk "Show all")
@@ -305,14 +305,15 @@
 (use-package olivetti
   :custom
   (olivetti-body-width 130)
-  :init
-  (lgreen/leader-define-key
-    "t o" '(olivetti-mode :wk "Toggle olivetti"))
   :hook ((org-mode
           text-mode
           dired-mode
           magit-mode
-          emacs-lisp-mode) . olivetti-mode))
+          emacs-lisp-mode) . olivetti-mode)
+  :init
+;;;; Keymaps
+  (lgreen/leader-define-key
+    "t o" '(olivetti-mode :wk "Toggle olivetti")))
 
 ;;; Perfect-Margin
 ;; Give yourself some breathing room

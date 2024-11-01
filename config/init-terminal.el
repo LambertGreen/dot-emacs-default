@@ -16,6 +16,7 @@
   (vterm-toggle-fullscreen-p nil)
   (vterm-toggle-scope 'project)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "o t" '(vterm-toggle :wk "Open vterm")))
 
@@ -27,19 +28,25 @@
 (use-package eat
   :disabled t
   :after project
+  :hook ((eat-mode . lgreen/eat-startup-in-line-mode)
+         (kill-buffer . close-window-on-eat-buffer-kill))
   :bind ([remap project-shell] . eat-project)
   :custom (eat-kill-buffer-on-exit t)
   :init
+;;;; Keymaps
   (lgreen/leader-define-key
     "o t" '(eat :wk "Open term")
     "p s" '(eat-project :wk "Shell in project"))
-  :config
+;;;; Functions
   (defun lgreen/eat-startup-in-line-mode ()
     "Start `eat' in line edit mode."
     (when (derived-mode-p 'eat-mode)
       (eat-line-mode)))
-  (add-hook 'eat-mode-hook 'lgreen/eat-startup-in-line-mode)
-
+  (defun close-window-on-eat-buffer-kill ()
+    "Close the window when an eat buffer is killed."
+    (when (string-match-p "\\*.*eat\\*" (buffer-name))
+      (delete-window)))
+  :config
   ;; Make terminal (eat) buffer show in right window
   (add-to-list 'display-buffer-alist
                '("\\*.*eat\\*"
@@ -47,14 +54,7 @@
                  (side . bottom)
                  (display-buffer-reuse-window
                   display-buffer-at-bottom)
-                 (window-height . 0.4)))
-
-  (defun close-window-on-eat-buffer-kill ()
-    "Close the window when an eat buffer is killed."
-    (when (string-match-p "\\*.*eat\\*" (buffer-name))
-      (delete-window)))
-
-  (add-hook 'kill-buffer-hook 'close-window-on-eat-buffer-kill))
+                 (window-height . 0.4))))
 
 ;;; _
 (provide 'init-terminal)

@@ -5,6 +5,7 @@
 ;; Short and sweet
 (use-package dabbrev
   :ensure nil
+;;;; Keymaps
   :bind (
          ("C-/" . dabbrev-expand)
          ("C-;" . dabbrev-completion)))
@@ -38,13 +39,14 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
   :bind
+;;;; Keymaps
   ("C-;" . completion-at-point)
   (:map corfu-map
         ("C-;" . corfu-next)
         ("C-n" . 'corfu-next)
         ("C-p" . 'corfu-previous)
         ("<tab>" . 'lgreen/corfu-complete-common-prefix))
-
+;;;; _
   :init
   (defun lgreen/corfu-complete-common-prefix ()
     "Complete the longest common prefix of all candidates."
@@ -70,6 +72,7 @@
   (use-package corfu-quick
     :ensure nil
     :after corfu
+;;;;; Keymaps
     :bind (:map corfu-map
                 ("M-;" . corfu-quick-insert)))
 
@@ -110,9 +113,15 @@
 ;; NOTE Press `C-c ; ?' for help
 (use-package cape
   :after general
+  :hook ((emacs-lisp-mode . lgreen/emacs-lisp-completion-setup)
+         (prog-mode . lgreen/prog-mode-completion-setup)
+         (text-mode . lgreen/text-mode-completion-setup)
+         (markdown-mode . lgreen/text-mode-completion-setup))
   :general
+;;;; Keymaps
   (general-def
     "C-c ;" '(:keymap cape-prefix-map :which-key "Completions using [Cape]"))
+;;;; _
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the
@@ -121,6 +130,7 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-history)
+;;;; Functions
   (defun lgreen/prog-mode-completion-setup ()
     "Set up cape completion for programming modes."
     (add-to-list 'completion-at-point-functions #'cape-keyword))
@@ -131,12 +141,7 @@
   (defun lgreen/text-mode-completion-setup ()
     "Set up cape completion for text modes."
     (add-to-list 'completion-at-point-functions #'cape-dict)
-    (add-to-list 'completion-at-point-functions #'cape-emoji))
-  :hook
-  (emacs-lisp-mode . lgreen/emacs-lisp-completion-setup)
-  (prog-mode . lgreen/prog-mode-completion-setup)
-  (text-mode . lgreen/text-mode-completion-setup)
-  (markdown-mode . lgreen/text-mode-completion-setup))
+    (add-to-list 'completion-at-point-functions #'cape-emoji)))
 
 ;; A few more useful configurations...
 (use-package emacs

@@ -531,22 +531,32 @@ Passes ARG to `org-insert-subheading`."
 (use-package org-babel
   :ensure nil
   :after org
-  :config
-  (use-package ob-http :commands (org-babel-do-load-languages))
-  (use-package ob-mermaid :commands (org-babel-do-load-languages))
-  (require 'ob-C)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (C . t)
-     (dot . t)
-     (gnuplot . t)
-     (org . t)
-     (js . t)
-     (sqlite . t)
-     (shell . t)
-     (http . t)
-     (mermaid . t))))
+  :custom
+  (org-confirm-babel-evaluate nil)
+  (org-src-fontify-natively t)
+  (org-src-tab-acts-natively t)
+  :init
+  (defvar load-language-list
+    '((emacs-lisp . t)
+      (python . t)
+      (C . t)
+      (java . t)
+      (dot . t)
+      (gnuplot . t)
+      (org . t)
+      (js . t)
+      (sqlite . t)
+      (shell . t)
+      (java . t)
+      (plantuml . t)))
+
+  (use-package ob-mermaid
+    :init (cl-pushnew '(mermaid . t) load-language-list))
+
+  (use-package ob-http
+    :init (cl-pushnew '(http . t) load-language-list))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               load-language-list))
 
 ;;; _
 (provide 'init-org)

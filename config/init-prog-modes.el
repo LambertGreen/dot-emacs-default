@@ -211,8 +211,8 @@
   :mode ("\\.jq\\'" . jq-mode)
   :init
   (with-eval-after-load 'org
-    (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((jq . t)))))
+    (add-to-list 'org-babel-load-languages '(jq . t))
+    (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)))
 
 ;;;; Justfiles
 (use-package just-mode)

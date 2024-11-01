@@ -4,6 +4,7 @@
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
+  :demand t
   :after (evil no-littering)
   :custom
   ;; Disabling for now because it is a pretty noisy option
@@ -13,15 +14,13 @@
   ;; (undo-tree-enable-undo-in-region t)
   (undo-tree-visualizer-diff t)
   (undo-tree-visualizer-timestamps t)
-  :hook
-  (evil-local-mode . turn-on-undo-tree-mode)
   :general
 ;;;; Keymaps
   (:states 'normal
            "U" 'undo-tree-visualize)
   :bind (:map undo-tree-map
               ("C-/" . nil))
-  :config
+  :init
 ;;;; Functions
   ;; Suppress undo-tree save messages
   (defun lgreen/undo-tree-suppress-save-message (orig-fun &rest args)

@@ -66,6 +66,11 @@
 
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+;;;; Keymaps
+  (general-def embark-command-map
+    "y" 'embark-copy-as-kill)
+
   (lgreen/leader-define-key
     "a a" '(embark-dwim :wk "act [dwim]")
     "a A" '(embark-act :wk "act")

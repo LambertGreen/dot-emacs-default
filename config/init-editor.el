@@ -3,7 +3,7 @@
 
 ;;; Persistent Scratch
 (use-package persistent-scratch
-  :config
+  :init
   (persistent-scratch-setup-default))
 
 ;;; Which-Key

@@ -105,6 +105,13 @@
   (unless (display-graphic-p)
     (corfu-terminal-mode t)))
 
+;;; Corfu-Prescient
+;; Ranking completions-at-point
+(use-package corfu-prescient
+  :after (corfu prescient)
+  :hook (corfu-mode . corfu-prescient-mode)
+  :custom (corfu-prescient-enable-filtering nil "Orderless handles filtering"))
+
 ;;; Nerd-Icons-Corfu
 (use-package nerd-icons-corfu
   :after corfu

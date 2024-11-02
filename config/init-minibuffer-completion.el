@@ -17,6 +17,21 @@
   (lgreen/leader-define-key
     "'" '(vertico-repeat :wk "repeat search")))
 
+;;; Prescient
+;; Ranking it all
+(use-package prescient
+  :after no-littering
+  :demand t
+  :config (prescient-persist-mode 1))
+
+;;; Vertico Prescient
+;; Ranking it all again
+(use-package vertico-prescient
+  :after (vertico prescient)
+  :hook (vertico-mode . vertico-prescient-mode)
+  :custom (vertico-prescient-enable-filtering nil "`orderless' manages the filtering part.")
+  :config (vertico-prescient-mode 1))
+
 ;;; Marginalia
 ;; Annotations for minibuffer completions
 (use-package marginalia

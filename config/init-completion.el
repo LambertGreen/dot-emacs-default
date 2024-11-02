@@ -83,8 +83,10 @@
     :hook (corfu-mode . corfu-history-mode))
 
 ;;;; Corfu-Info
+  ;; TODO Remove `corfu-info' package as it is sufficient to use `corfu-popupinfo'
   (use-package corfu-info
     :ensure nil
+    :disabled t
     :after corfu
     :hook (corfu-mode . corfu-info-mode))
 

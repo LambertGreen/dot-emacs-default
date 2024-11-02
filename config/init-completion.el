@@ -143,6 +143,21 @@
     (add-to-list 'completion-at-point-functions #'cape-dict)
     (add-to-list 'completion-at-point-functions #'cape-emoji)))
 
+;;; Yasnippet-Capf
+(use-package yasnippet-capf
+  :after (yasnippet cape)
+  :hook ((prog-mode text-mode) . lgreen/add-yasnippet-capf)
+  :preface
+  (defun lgreen/add-yasnippet-capf ()
+    "Add yasnippet-capf to completion-at-point-functions for the current buffer."
+    (interactive)
+    (add-hook 'completion-at-point-functions #'yasnippet-capf nil t))
+  :general
+;;;; Keymaps
+  (general-def
+    :keymaps 'cape-prefix-map
+    "y" '(yasnippet-capf :which-key "Yasnippet CAPF")))
+
 ;; A few more useful configurations...
 (use-package emacs
   :ensure nil

@@ -201,6 +201,17 @@
   :init
   (global-evil-surround-mode 1))
 
+;;; Evil-Textobj-Line
+;; operate on line items
+(use-package evil-textobj-line
+  :after evil
+  :commands (evil-inner-line evil-a-line)
+  :general
+  (:keymaps 'evil-inner-text-objects-map
+            "l" 'evil-inner-line)
+  (:keymaps 'evil-outer-text-objects-map
+            "l" 'evil-a-line))
+
 ;;; Evil-Textobj-Tree-Sitter
 ;; FIXME Enable for prog modes that have treesitter support
 (use-package evil-textobj-tree-sitter
@@ -222,30 +233,30 @@
     ;; "b" (evil-textobj-tree-sitter-get-textobj "block.inner")
     "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
   (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
-                              "]f" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "function.outer"))
-                              "[f" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
-                              "]F" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
-                              "[F" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
-                              "]c" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "class.outer"))
-                              "[c" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
-                              "]C" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
-                              "[C" (lambda ()
-                                     (interactive)
-                                     (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+    "]f" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer"))
+    "[f" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+    "]F" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+    "[F" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+    "]c" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer"))
+    "[c" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+    "]C" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+    "[C" (lambda ()
+           (interactive)
+           (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
 
 ;;; Evil-Visualstar
 ;; the star of the show
@@ -306,34 +317,32 @@
   (targets-setup nil)
   :config
   (targets-define-composite-to any-block
-                               (("(" ")" pair)
-                                ("[" "]" pair)
-                                ("{" "}" pair)
-                                ("<" ">" pair))
-                               :bind t
-                               :next-key "n"
-                               :last-key "l"
-                               :around-key nil
-                               :inside-key nil
-                               :keys "b")
+    (("(" ")" pair)
+     ("[" "]" pair)
+     ("{" "}" pair)
+     ("<" ">" pair))
+    :bind t
+    :next-key "N"
+    :last-key "L"
+    :around-key nil
+    :inside-key nil
+    :keys "b")
   (targets-define-composite-to any-quote
-                               (("\"" "\"" quote)
-                                ("'" "'" quote))
-                               :bind t
-                               :next-key "n"
-                               :last-key "l"
-                               :around-key nil
-                               :inside-key nil
-                               :keys "q")
+    (("\"" "\"" quote) ("'" "'" quote))
+    :bind t
+    :next-key "N"
+    :last-key "L"
+    :around-key nil
+    :inside-key nil
+    :keys "q")
   (targets-define-to double-quote
-                     "\"" nil quote
+                     ("\"" nil quote)
                      :bind t
-                     :next-key "n"
-                     :last-key "l"
+                     :next-key "N"
+                     :last-key "L"
                      :around-key nil
                      :inside-key nil
-                     :keys "q"
-                     :hooks (emacs-lisp-mode-hook)))
+                     :keys "q"))
 
 ;;; _
 (provide 'init-evil)

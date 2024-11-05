@@ -5,7 +5,7 @@
 ;; brace yourself!
 (use-package emacs-lisp-mode
   :ensure nil
-  :hook (((emacs-lisp-mode-map lisp-interaction-mode-map) . hs-minor-mode)
+  :hook (((emacs-lisp-mode lisp-interaction-mode) . hs-minor-mode)
          (emacs-lisp-mode . lgreen/imenu-elisp-sections))
   :init
 ;;;; Keymaps

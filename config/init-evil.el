@@ -344,6 +344,12 @@
                      :inside-key nil
                      :keys "q"))
 
+;;; Expand-Region
+;; just like the universe is doing
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)
+         ("C--" . er/contract-region )))
+
 ;;; _
 (provide 'init-evil)
 

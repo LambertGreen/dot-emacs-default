@@ -12,7 +12,11 @@
   (general-define-key
    :keymaps '(prog-mode-map)
    "M-n" (lambda () (interactive) (forward-evil-defun 1))
-   "M-p" (lambda () (interactive) (forward-evil-defun -1)))
+   "M-p" (lambda () (interactive) (forward-evil-defun -1))
+
+   "C-j" (lambda () (interactive) (forward-evil-defun 1))
+   "C-k" (lambda () (interactive) (forward-evil-defun -1))
+   )
 
 ;;;;; Formatting
   (lgreen/leader-define-key

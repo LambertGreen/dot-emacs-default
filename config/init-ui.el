@@ -128,6 +128,7 @@
 ;;; Display-Fill-Column-Indicator
 (use-package display-fill-column-indicator
   :ensure nil
+  :after theme-settings
   :hook (prog-mode . display-fill-column-indicator-mode)
   :custom
   (fill-column 120)

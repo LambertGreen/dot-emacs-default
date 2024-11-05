@@ -8,7 +8,8 @@
   (catppuccin-flavor 'mocha))
 
 ;;; Doom Themes
-(use-package doom-themes)
+(use-package doom-themes
+  :demand t)
 
 ;;; EF Themes
 (use-package ef-themes)
@@ -23,8 +24,9 @@
 (use-package chocolate-theme)
 
 ;;; Sync theme with system appearance
-(use-package emacs
+(use-package theme-settings
   :ensure nil
+  :after doom-themes
   :init
 ;;;; Functions
   (defun lgreen/set-theme-based-on-os ()

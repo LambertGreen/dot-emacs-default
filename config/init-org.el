@@ -340,6 +340,17 @@ Passes ARG to `org-insert-subheading`."
   (org-agenda-skip-scheduled-if-done nil)
   (org-agenda-skip-deadline-if-done nil)
   (org-agenda-skip-timestamp-if-done nil)
+  (org-agenda-category-icon-alist
+   `(("Work"     ,(list (propertize "💼")))
+     ("Music"    ,(list (propertize "🎶")))
+     ("Home"     ,(list (propertize "🏡")))
+     ("Inbox"    ,(list (propertize "📥")))
+     ("Ideas"    ,(list (propertize "💡")))
+     ("Habits"   ,(list (propertize "🔄")))
+     ("Health"   ,(list (propertize "💪")))
+     ("Planning" ,(list (propertize "📝")))
+     ("Training" ,(list (propertize "📚")))
+     ("Sprint"   ,(list (propertize "💻")))))
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key

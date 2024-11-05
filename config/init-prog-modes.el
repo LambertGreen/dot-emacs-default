@@ -38,18 +38,16 @@
     "n d" '(narrow-to-defun :wk "narrow to defun")
     "n p" '(narrow-to-page :wk "narrow to page")
     "n w" '(widen :wk "widen"))
+
 ;;;; Functions
   (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables"
     (interactive)
     ;; Make keywords italic and light weight
     (set-face-attribute 'font-lock-keyword-face nil :slant 'italic :weight 'light)
-    ;; Make comments italic and light weight
-    (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'light)
-    ;; Make function names more prominent by increasing size
-    ;; TODO Rather use a relative increase in font size
-    (set-face-attribute 'font-lock-function-name-face nil :weight 'normal :height 148)
-    )
+    ;; Make comments light weight
+    (set-face-attribute 'font-lock-comment-face nil :weight 'light))
+
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
     (interactive)
@@ -57,16 +55,17 @@
         (eglot-format-buffer)
       (call-interactively #'apheleia-format-buffer))
     (untabify (point-min) (point-max)))
+
   (defun lgreen/set-java-home-from-jenv ()
     "Set JAVA_HOME environment variable from jenv."
     (interactive)
     (let ((jenv-java-home (shell-command-to-string "jenv prefix")))
       (when (not (string= jenv-java-home ""))
         (setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
+
   :config
 ;;;; Advice
-  (advice-add 'load-theme
-              :after 'lgreen/set-faces-for-prog-mode))
+  (advice-add 'load-theme :after 'lgreen/set-faces-for-prog-mode))
 
 ;;; Treesit-Auto
 ;; Fast climbing the syntax tree
@@ -80,7 +79,9 @@
   ;; TODO Remove the below after testing
   ;; (setq treesit-auto-excluded-major-modes '(org-mode))
   (global-treesit-auto-mode))
+
 ;;; Formatting
+
 ;;;; Apheleia
 ;; Format code with minimal disruption
 (use-package apheleia
@@ -89,10 +90,11 @@
   :config
   ;; Remove the existing 'stylua' entry and replace it `-s' usage to perform a recursive search for the `sytlua.toml'
   ;; file
-  (setf (alist-get 'stylua apheleia-formatters)
-        '("stylua" "-s" "-")))
+  (setf (alist-get 'stylua apheleia-formatters) '("stylua" "-s" "-")))
+
 
 ;;; Indentation
+
 ;;;; Aggressive-Indent-Mode
 ;; Actively keeping code correctly indented
 (use-package aggressive-indent
@@ -104,7 +106,9 @@
   :hook (prog-mode . dtrt-indent-mode)
   :init (require 'smie))
 
+
 ;;; Whitespace Handling
+
 ;;;; Whitespace Cleanup
 ;;Automatically cleanup whitespace on-save for files that were already compliant
 (use-package whitespace-cleanup-mode
@@ -125,6 +129,7 @@
     "x w" '(:ignore t :which-key "whitespace")
     "x w t" '(whitespace-toggle-options :which-key "Whitespace Toggle Options")
     "x w r" '(whitespace-report :which-key "Whitespace Report"))
+
 ;;;;; Functions
   (defun whitespace-prog-mode-setup ()
     "Configure whitespace settings for prog-mode."
@@ -137,6 +142,7 @@
     (whitespace-mode 1)))
 
 ;;; Language Server Protocol
+
 ;;;; Eglot
 ;; Emacs Polyglot LSP client
 (use-package eglot
@@ -155,6 +161,7 @@
   :config (eglot-booster-mode))
 
 ;;; Language Modes
+
 ;;;; Cmake
 ;; Let's make them cpp projects
 (use-package cmake-mode

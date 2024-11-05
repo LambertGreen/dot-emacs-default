@@ -55,7 +55,9 @@
   :hook ((org-mode . visual-line-mode)
          (org-mode . lgreen/setup-org-calendar-navigation)
          (org-mode . lgreen/org-font-setup)
-         (org-mode . lgreen/org-prettify-symbols))
+         (org-mode . lgreen/org-prettify-symbols)
+         (before-save . lgreen/update-org-todo-statistics)
+         (org-cycle . lgreen/update-todo-cookies-on-visibility-change))
   :config
 ;;;; Keymaps
   (general-def
@@ -301,6 +303,23 @@ Passes ARG to `org-insert-subheading`."
         (set-variable 'org-hide-emphasis-markers nil)
       (set-variable 'org-hide-emphasis-markers t))
     (org-mode-restart))
+
+;;;;; Todos
+  (defun lgreen/update-org-todo-statistics ()
+    "Update all `TODO' statistics cookies in the current Org buffer."
+    (when (derived-mode-p 'org-mode)
+      (org-update-all-dblocks) ;; Update any dynamic blocks if present
+      (org-map-entries (lambda () (org-update-statistics-cookies nil)))))
+
+  (defun lgreen/update-todo-cookies-on-visibility-change ()
+    "Update all `TODO' statistics cookies when visibility changes."
+    (when (derived-mode-p 'org-mode)
+      (org-map-entries (lambda () (org-update-statistics-cookies nil)))))
+
+  (defun lgreen/update-all-todo-cookies ()
+    "Manually update all `TODO' statistics cookies in the current Org buffer."
+    (interactive)
+    (org-map-entries (lambda () (org-update-statistics-cookies nil))))
 
 ;;;; Modules
   (eval-after-load 'org

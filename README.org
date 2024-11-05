@@ -81,10 +81,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [0/1]
-*** TODO Prettify =org-agenda=
-+ https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j
-
+** Open [1/2]
 *** TODO Use the faster =Rust= based search tools if installed (=ripgrep=, =fd=) [0/2]
 **** [ ] Update =xref=
 **** [ ] Update =consult=
@@ -257,3 +254,10 @@ CLOSED: [2024-10-10 Thu 12:55]
 - State "DONE"       from "STRT"          [2024-10-10 Thu 12:55]
 :END:
 - State "STRT"       from "TODO"       [2024-04-28 Sun 21:56]
+
+*** DONE Prettify =org-agenda=
+CLOSED: [2024-11-04 Mon 23:17]
+:LOGBOOK:
+- State "DONE"       from "TODO"         [2024-11-04 Mon 23:17]
+:END:
++ https://www.reddit.com/r/emacs/comments/sd10q9/comment/hubjy3j

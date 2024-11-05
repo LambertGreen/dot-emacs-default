@@ -3,7 +3,7 @@
 
 ;;; Prog Mode
 ;; Enter the Matrix
-(use-package prog
+(use-package prog-mode
   :ensure nil
   :hook (prog-mode . lgreen/set-faces-for-prog-mode)
   :init

@@ -362,16 +362,36 @@ Passes ARG to `org-insert-subheading`."
   (org-agenda-skip-deadline-if-done nil)
   (org-agenda-skip-timestamp-if-done nil)
   (org-agenda-category-icon-alist
-   `(("Work"     ,(list (propertize "💼")))
-     ("Music"    ,(list (propertize "🎶")))
-     ("Home"     ,(list (propertize "🏡")))
-     ("Inbox"    ,(list (propertize "📥")))
-     ("Ideas"    ,(list (propertize "💡")))
-     ("Habits"   ,(list (propertize "🔄")))
-     ("Health"   ,(list (propertize "💪")))
-     ("Planning" ,(list (propertize "📝")))
-     ("Training" ,(list (propertize "📚")))
-     ("Sprint"   ,(list (propertize "💻")))))
+   `(
+     ;; Work.todo.org categories
+     ("Inbox         " ,(list (propertize "📥")))
+     ("Sprint        " ,(list (propertize "📈")))
+     ("Project       " ,(list (propertize "🗂️")))
+     ("Tracking      " ,(list (propertize "📊")))
+     ("Maintenance   " ,(list (propertize "🛠️")))
+     ("Training      " ,(list (propertize "📚")))
+     ("Idea          " ,(list (propertize "💡")))
+     ("comms         " ,(list (propertize "💬")))
+     ("Career        " ,(list (propertize "🌱")))
+     ("Feedback      " ,(list (propertize "📝")))
+     ("Archive       " ,(list (propertize "📦")))
+
+     ;; Personal.todo.org categories
+     ("DeskEnv       " ,(list (propertize "🖥️")))
+     ("Sci&Phi       " ,(list (propertize "🧪")))
+     ("Fun&Games     " ,(list (propertize "🎮")))
+     ("Vacation      " ,(list (propertize "🌴")))
+     ("Misc.         " ,(list (propertize "📎")))
+     ("Spiritual     " ,(list (propertize "🙏")))
+     ("Health        " ,(list (propertize "💪")))
+     ("Social        " ,(list (propertize "👥")))
+     ("Charity       " ,(list (propertize "🤲")))
+     ("Politcs       " ,(list (propertize "🇺🇸")))
+     ("SoftDev       " ,(list (propertize "💻")))
+     ("Org-mode      " ,(list (propertize "📑")))
+     ("SoftwareDev   " ,(list (propertize "💻")))
+     ("IDE           " ,(list (propertize "🔧")))))
+
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key

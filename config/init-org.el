@@ -378,41 +378,52 @@ Passes ARG to `org-insert-subheading`."
   (org-agenda-skip-deadline-if-done nil)
   (org-agenda-skip-timestamp-if-done nil)
   (org-agenda-category-icon-alist
-   `(
-     ;; Work.todo.org categories
-     ("Inbox         " ,(list (propertize "📥")))
-     ("Sprint        " ,(list (propertize "📈")))
-     ("Project       " ,(list (propertize "🗂️")))
-     ("Tracking      " ,(list (propertize "📊")))
-     ("Maintenance   " ,(list (propertize "🛠️")))
-     ("Training      " ,(list (propertize "📚")))
-     ("Idea          " ,(list (propertize "💡")))
-     ("comms         " ,(list (propertize "💬")))
-     ("Career        " ,(list (propertize "🌱")))
-     ("Feedback      " ,(list (propertize "📝")))
-     ("Archive       " ,(list (propertize "📦")))
-
-     ;; Personal.todo.org categories
-     ("DeskEnv       " ,(list (propertize "🖥️")))
-     ("Sci&Phi       " ,(list (propertize "🧪")))
-     ("Fun&Games     " ,(list (propertize "🎮")))
-     ("Vacation      " ,(list (propertize "🌴")))
-     ("Misc.         " ,(list (propertize "📎")))
-     ("Spiritual     " ,(list (propertize "🙏")))
-     ("Health        " ,(list (propertize "💪")))
-     ("Social        " ,(list (propertize "👥")))
-     ("Charity       " ,(list (propertize "🤲")))
-     ("Politcs       " ,(list (propertize "🇺🇸")))
-     ("SoftDev       " ,(list (propertize "💻")))
-     ("Org-mode      " ,(list (propertize "📑")))
-     ("SoftwareDev   " ,(list (propertize "💻")))
-     ("IDE           " ,(list (propertize "🔧")))))
-
+   `(("Inbox"          ,(list (propertize "📥")))
+     ("Sprint"         ,(list (propertize "📈")))
+     ("Project"        ,(list (propertize "🗂️")))
+     ("Tracking"       ,(list (propertize "📊")))
+     ("Maintenance"    ,(list (propertize "🛠️")))
+     ("Training"       ,(list (propertize "📚")))
+     ("Idea"           ,(list (propertize "💡")))
+     ("Comms"          ,(list (propertize "💬")))
+     ("Career"         ,(list (propertize "🌱")))
+     ("Feedback"       ,(list (propertize "📝")))
+     ("Archive"        ,(list (propertize "📦")))
+     ("DeskEnv"        ,(list (propertize "🖥️")))
+     ("Sci&Phi"        ,(list (propertize "🧪")))
+     ("Fun&Games"      ,(list (propertize "🎮")))
+     ("Vacation"       ,(list (propertize "🌴")))
+     ("Misc."          ,(list (propertize "📎")))
+     ("Spiritual"      ,(list (propertize "🙏")))
+     ("Health"         ,(list (propertize "💪")))
+     ("Social"         ,(list (propertize "👥")))
+     ("Charity"        ,(list (propertize "🤲")))
+     ("Politcs"        ,(list (propertize "🇺🇸")))
+     ("SoftDev"        ,(list (propertize "💻")))
+     ("IDE"            ,(list (propertize "🔧")))
+     ("Planning"       ,(list (propertize "📝")))
+     ("Meeting"        ,(list (propertize "📅")))))
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
   :config
+  (defun lgreen/add-icons-to-tags-agenda ()
+    "Display icons for certain tags in the Org Agenda view."
+    (font-lock-add-keywords
+     nil
+     '(("\\(:work:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "💼") nil)))
+       ("\\(:personal:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "🏠") nil)))
+       ("\\(:read:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "📖") nil)))
+       ("\\(:watch:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "🎬") nil)))
+       ("\\(:listen:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "🎧") nil)))
+       ("\\(:code:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "💻") nil)))
+       ("\\(:study:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "📚") nil)))
+       ("\\(:write:\\)" (0 (progn (compose-region (match-beginning 1) (match-end 1) "📝") nil))))))
+
+  ;; Activate the font-lock customization in the agenda buffer
+  (add-hook 'org-agenda-finalize-hook 'lgreen/add-icons-to-tags-agenda)
+
   ;; TODO See if we can include the roam directory
   ;; (setq org-agenda-files
   ;;       (append (directory-files-recursively (expand-file-name "personal" org-directory) "\\.org$")

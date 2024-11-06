@@ -23,7 +23,7 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 
 ** Theme: ~Cattpuccin~
 *** Pros
-+ Has a good inbetween light/dark variant
++ Has a good in-between light/dark variant
 + ~diff-hl~ colors
   + Colors match expectation
 

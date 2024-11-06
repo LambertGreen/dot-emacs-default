@@ -81,12 +81,12 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + However this works well if using transparency
 
 * PROJ Work-Items
-** Open [1/2]
+** Open [0/1]
 *** TODO Use the faster =Rust= based search tools if installed (=ripgrep=, =fd=) [0/2]
 **** [ ] Update =xref=
 **** [ ] Update =consult=
 
-** Complete [18/18]
+** Complete [19/19]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list

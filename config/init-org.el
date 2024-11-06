@@ -610,32 +610,48 @@ Passes ARG to `org-insert-subheading`."
 (use-package org-babel
   :ensure nil
   :after org
+  :commands org-babel-do-load-languages
   :custom
   (org-confirm-babel-evaluate nil)
   (org-src-fontify-natively t)
   (org-src-tab-acts-natively t)
+  (org-babel-load-languages '((emacs-lisp . t)
+                              (python . t)
+                              (C . t)
+                              (java . t)
+                              (dot . t)
+                              (gnuplot . t)
+                              (org . t)
+                              (js . t)
+                              (sqlite . t)
+                              (shell . t)
+                              (java . t)
+                              (plantuml . t)))
   :init
-  (defvar load-language-list
-    '((emacs-lisp . t)
-      (python . t)
-      (C . t)
-      (java . t)
-      (dot . t)
-      (gnuplot . t)
-      (org . t)
-      (js . t)
-      (sqlite . t)
-      (shell . t)
-      (java . t)
-      (plantuml . t)))
+  (add-to-list 'org-src-lang-modes '("json" . json-ts))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
-  (use-package ob-mermaid
-    :init (cl-pushnew '(mermaid . t) load-language-list))
+;;;; Ob-Json
+(use-package ob-json
+  :ensure (:fetcher github :repo "sgpthomas/ob-json")
+  :after org
+  :init
+  (add-to-list 'org-babel-load-languages '(json . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
-  (use-package ob-http
-    :init (cl-pushnew '(http . t) load-language-list))
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               load-language-list))
+;;;; Ob-Http
+(use-package ob-http
+  :after org
+  :init
+  (add-to-list 'org-babel-load-languages '(http . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
+
+;;;; Ob-Mermaid
+(use-package ob-mermaid
+  :after org
+  :init
+  (add-to-list 'org-babel-load-languages '(mermaid . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
 ;;; _
 (provide 'init-org)

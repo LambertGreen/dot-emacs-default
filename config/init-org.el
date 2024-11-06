@@ -321,7 +321,7 @@ Passes ARG to `org-insert-subheading`."
     (org-mode-restart))
 
 ;;;;; Todos
-  (defun lgreen/update-org-todo-statistics ()
+  (defun lgreen/update-org-todo-statistics (&rest _)
     "Update all `TODO' statistics cookies in the current Org buffer."
     (when (derived-mode-p 'org-mode)
       (org-update-all-dblocks) ;; Update any dynamic blocks if present

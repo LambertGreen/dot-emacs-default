@@ -144,7 +144,8 @@
     "t" '(:ignore t :wk "Toggle")
     "t l" '(display-line-numbers-mode :wk "toggle line numbers")
     "t h" '(hl-line-mode :wk "toggle highlight line")
-    "t w" '(visual-line-mode :wk "toggle truncated lines")
+    "t w" '(visual-line-mode :wk "toggle visual wrap")
+    "t T" '(toggle-truncate-lines :wk "toggle truncation")
 
 ;;;;; Checks
     "x" '(:ignore t :wk "Checks")

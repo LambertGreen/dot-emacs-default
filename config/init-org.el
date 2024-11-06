@@ -597,7 +597,7 @@ Passes ARG to `org-insert-subheading`."
   :init
 ;;;; Keymaps
   (lgreen/local-leader-define-key
-    :keymaps 'org-mode-roam-map
+    :keymaps 'org-mode-map
     "m" '(:ignore t :wk "Roam")
     "m i" 'org-roam-node-insert
     "m f" 'org-roam-node-find

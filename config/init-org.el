@@ -398,7 +398,7 @@ Passes ARG to `org-insert-subheading`."
      ("Health"         ,(list (propertize "💪")))
      ("Social"         ,(list (propertize "👥")))
      ("Charity"        ,(list (propertize "🤲")))
-     ("Politcs"        ,(list (propertize "🇺🇸")))
+     ("Politics"        ,(list (propertize "🇺🇸")))
      ("SoftDev"        ,(list (propertize "💻")))
      ("IDE"            ,(list (propertize "🔧")))
      ("Planning"       ,(list (propertize "📝")))

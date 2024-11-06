@@ -98,8 +98,7 @@
 ;;; Solaire-Mode
 ;; Darken popup buffers
 (use-package solaire-mode
-  :demand t
-  :config
+  :init
   (solaire-global-mode 1)
   ;; Prevent solaire-mode from overriding the modeline faces. The difference in
   ;; color between normal buffers and special is confusing and annoying.

@@ -442,8 +442,39 @@ Passes ARG to `org-insert-subheading`."
 (use-package evil-org-agenda
   :ensure nil
   :after evil-org
-  :hook (org-agenda-mode . evil-org-agenda-set-keys)
-  )
+  :hook (org-agenda-mode . lgreen/setup-org-agenda-keys)
+  :config
+  (defun lgreen/setup-org-agenda-keys ()
+    (evil-org-agenda-set-keys)
+
+    (evil-define-key 'motion org-agenda-mode-map (kbd "SPC") nil)
+    (evil-define-key 'motion evil-org-agenda-mode-map (kbd "SPC") nil)
+
+;;;; Keymaps
+    ;; Local leader bindings for Org Agenda
+    (lgreen/local-leader-define-key
+      :keymaps 'org-agenda-mode-map
+      :states '(normal motion)
+
+;;;;; View
+      "v" '(org-agenda-view-mode-dispatch :wk "View menu")
+
+;;;;; Todo
+      "t" '(:ignore t :wk "Todo")
+      "t t" '(org-agenda-todo :wk "set todo state")
+      "t d" '(org-agenda-deadline :wk "set deadline")
+      "t s" '(org-agenda-schedule :wk "schedule")
+
+;;;;; Clock
+      "c" '(:ignore t :wk "Clock")
+      "c i" '(org-agenda-clock-in :wk "clock in")
+      "c o" '(org-agenda-clock-out :wk "clock out")
+      "c g" '(org-agenda-clock-goto :wk "goto clocked task")
+
+;;;;; Miscellaneous
+      "e" '(org-agenda-set-effort :wk "Set effort")
+      "r" '(org-agenda-redo :wk "Refresh agenda"))
+    ))
 
 ;;; Org-Habit
 (use-package org-habit

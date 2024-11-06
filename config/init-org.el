@@ -373,6 +373,7 @@ Passes ARG to `org-insert-subheading`."
   :custom
   (org-agenda-log-mode-items '(closed clock state))
   (org-agenda-window-setup 'only-window)
+  (org-agenda-tags-column -150)
   (org-agenda-start-with-log-mode t)
   (org-agenda-skip-scheduled-if-done nil)
   (org-agenda-skip-deadline-if-done nil)
@@ -481,7 +482,7 @@ Passes ARG to `org-insert-subheading`."
   :ensure nil
   :after org-agenda
   :custom
-  (org-habit-graph-column 60)
+  (org-habit-graph-column 100)
   (org-habit-show-done-always-green t)
   (org-habit-show-habits-only-for-today t)
   :config

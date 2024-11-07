@@ -513,7 +513,7 @@ Passes ARG to `org-insert-subheading`."
         lgreen/org-capture-health-file (expand-file-name "personal/health.org" org-directory)
         org-capture-templates
         '(("t" "todo" entry
-           (file+headline lgreen/org-capture-todo-file "Inbox")
+           (file+headline lgreen/org-capture-todo-file "Inbox 📥")
            "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
           ("n" "notes" entry
            (file+headline lgreen/org-capture-notes-file "Inbox")

@@ -329,7 +329,7 @@ Passes ARG to `org-insert-subheading`."
       (org-update-all-dblocks) ;; Update any dynamic blocks if present
       (org-map-entries (lambda () (org-update-statistics-cookies nil)))))
 
-  (defun lgreen/update-todo-cookies-on-visibility-change ()
+  (defun lgreen/update-todo-cookies-on-visibility-change (&rest _)
     "Update all `TODO' statistics cookies when visibility changes."
     (when (derived-mode-p 'org-mode)
       (org-map-entries (lambda () (org-update-statistics-cookies nil)))))

@@ -404,8 +404,8 @@ Passes ARG to `org-insert-subheading`."
      ("Politics"        ,(list (propertize "🇺🇸")))
      ("SoftDev"        ,(list (propertize "💻")))
      ("IDE"            ,(list (propertize "🔧")))
-     ("Planning"       ,(list (propertize "📝")))
-     ("Meeting"        ,(list (propertize "📅")))))
+     ("Plan"       ,(list (propertize "📝")))
+     ("Event"          ,(list (propertize "📅")))))
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key

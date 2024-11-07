@@ -507,7 +507,7 @@ Passes ARG to `org-insert-subheading`."
 ;;;; _
   :config
   (setq lgreen/org-capture-todo-file (expand-file-name "agenda/todo.org" org-directory)
-        lgreen/org-capture-notes-file (expand-file-name "personal/notes.org" org-directory)
+        lgreen/org-capture-events-file (expand-file-name "agenda/events.org" org-directory)
         lgreen/org-capture-journal-file (expand-file-name "personal/journal.org" org-directory)
         lgreen/org-capture-contacts-file (expand-file-name "personal/contacts.org" org-directory)
         lgreen/org-capture-health-file (expand-file-name "personal/health.org" org-directory)
@@ -515,12 +515,9 @@ Passes ARG to `org-insert-subheading`."
         '(("t" "todo" entry
            (file+headline lgreen/org-capture-todo-file "Inbox 📥")
            "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-          ("n" "notes" entry
-           (file+headline lgreen/org-capture-notes-file "Inbox")
-           "* %u %?\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
-          ("m" "email" entry
-           (file+olp lgreen/org-capture-todo-file "Inbox")
-           "* TODO Mail:%u %?\n%i\n%a" :prepend t)
+          ("m" "meeting" entry
+           (file+headline lgreen/org-capture-events-file "Meetings 📅")
+           "* TODO %?\nSCHEDULED: %^t\n:PROPERTIES:\n:CREATED: %U\n:FROM: %a\n:END:\n" :prepend t)
           ("j" "Journal" entry
            (file+olp+datetree lgreen/org-capture-journal-file)
            "* %U %?\n%i\n%a" :prepend t)

@@ -376,7 +376,7 @@ Passes ARG to `org-insert-subheading`."
   (org-agenda-log-mode-items '(closed clock state))
   (org-agenda-window-setup 'only-window)
   (org-agenda-tags-column -150)
-  (org-agenda-start-with-log-mode t)
+  (org-agenda-start-with-log-mode nil)
   (org-agenda-skip-scheduled-if-done nil)
   (org-agenda-skip-deadline-if-done nil)
   (org-agenda-skip-timestamp-if-done nil)

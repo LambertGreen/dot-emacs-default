@@ -8,6 +8,7 @@
   :commands treemacs
   :custom
   (treemacs-project-follow-mode t)
+  (treemacs-width-is-initially-locked nil)
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key

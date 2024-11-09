@@ -23,21 +23,6 @@
   :config
   (treemacs-resize-icons 18))
 
-;; TODO Remove if you decide to stay with project.el over projectile
-;; (use-package treemacs-projectile
-;;   :after (treemacs projectile))
-
-;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-;;   :ensure t
-;;   :config (treemacs-set-scope-type 'Perspectives))
-
-;; (use-package project-treemacs
-;;   :demand t
-;;   :after treemacs
-;;   :config
-;;   (project-treemacs-mode))
-
 ;;; Treemacs-Evil
 ;; The root of all evil
 (use-package treemacs-evil

@@ -18,31 +18,34 @@
   (org-directory "~/dev/my/org")
   (org-todo-keywords
    '((sequence
-      "TODO(t!)"  ; A task that needs doing & is ready to do
-      "PROJ(p!)"  ; A project, which usually contains other tasks
-      "LOOP(r!)"  ; A recurring task
-      "STRT(s!)"  ; A task that is in progress
-      "WAIT(w@/!)"  ; Something external is holding up this task
-      "HOLD(h@/!)"  ; This task is paused/on hold because of me
-      "IDEA(i)"  ; An unconfirmed and unapproved task or notion
+      "TODO(t!)"     ; A task that needs doing & is ready to do
+      "STRT(s!)"     ; A task that is in progress
+      "WAIT(w@/!)"   ; Something external is holding up this task
+      "HOLD(h@/!)"   ; This task is paused/on hold because of me
       "|"
-      "DONE(d!)"  ; Task successfully completed
-      "KILL(k@/!)") ; Task was canceled, aborted or is no longer applicable
+      "DONE(d!)"     ; Task successfully completed
+      "KILL(k@/!)")  ; Task was canceled, aborted or is no longer applicable
+
+     ;; Separate sequence for non-actionable states
+     (type
+      "PROJ(p!)"     ; A project, which usually contains other tasks
+      "IDEA(i)")     ; An unconfirmed and unapproved task or notion
+
+     ;; Task states for checkboxes
      (sequence
-      "[ ](T)"   ; A task that needs doing
-      "[-](S)"   ; Task is in progress
-      "[?](W)"   ; Task is being held up or paused
+      "[ ](T!)"       ; A task that needs doing
+      "[-](S!)"       ; Task is in progress
+      "[?](W)"       ; Task is being held up or paused
       "|"
-      "[X](D)")  ; Task was completed
+      "[X](D!)")      ; Task was completed
+
+     ;; Habit tracking sequence
      (sequence
+      "LOOP(r!)"     ; New sequence for habits
       "|"
-      "OKAY(o)"
-      "YES(y)"
-      "NO(n)")
-     (sequence
-      "HABIT(H)"  ; New sequence for habits
-      "|"
-      "DONE(d!)")))
+      "DONE(d!)"
+      "KILL(k@/!)")))
+
   ;; Log DONE with timestamp
   (org-log-done 'time)
   ;; Log state changes into drawer
@@ -252,7 +255,7 @@ Passes ARG to `org-insert-subheading`."
     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
   ;; NOTE: The symbols unfortunately don't leave any breathing room before the next character is printed.
-  ;; E.g. "This is a todo item.
+  ;; E.g. This is a `todo' item: "Item
   ;; TODO Update the symbols to use the "more breathing room" approach.
   ;; TODO Only enable these fancy symbols in GUI Emacs
   ;; The below webpage shows how to address the "not enough breathing room" issue:
@@ -267,7 +270,7 @@ Passes ARG to `org-insert-subheading`."
             ("KILL" . (? (Br . Bl) ?\s))
             ("DONE" . (? (Br . Bl) ?\s))
             ("PROJ" . (? (Br . Bl) ?\s))
-            ("HABIT" . (?↺(Br . Bl) ?\s))
+            ("LOOP" . ?↺)
             ("IDEA" . ?💡)
             ("[#A]" . "")
             ("[#B]" . "")

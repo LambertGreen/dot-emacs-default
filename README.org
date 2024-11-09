@@ -4,7 +4,7 @@
 
 This is my personal Emacs configuration.
 
-I had started out using a literate configuration, but changed to a pure =elisp= config for the following reasons:
+I had started out using a literate configuration, but changed to a pure =Elisp= config for the following reasons:
  + I did not end up needing an abundance of comments
  + I prefer a modular config so that updates have more useful diffs
  + Working directly in =elisp= mode makes code execution and debugging easier
@@ -79,6 +79,27 @@ I had started out using a literate configuration, but changed to a pure =elisp= 
 + Does not come with a light mode version
 **** The background color: is almost black
 + However this works well if using transparency
+
+* =TODO= Keywords Symbols Testing
+** Typical sequence
+*** TODO Do something
+*** STRT Started something
+*** WAIT Waiting on something
+*** KILL Something died
+*** DONE Something is complete
+** Checkbox sequence
+*** [ ] Check this out
+*** [-] Waiting to check it out
+*** [X] Checked it out
+** Non-sequence
+*** PROJ Do many somethings
+*** IDEA Thought of something
+** Recurrence
+*** LOOP Make a habit of something
+** Priorities
+*** TODO [#A] Urgent
+*** TODO [#B] Important
+*** TODO [#C] Anytime
 
 * PROJ Work-Items
 ** Open [0/1]

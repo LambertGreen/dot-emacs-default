@@ -1,6 +1,5 @@
 ;; init-minibuffer.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Minibuffer
 (use-package minibuffer
   :ensure nil

@@ -1,6 +1,5 @@
 ;; init-keybindings.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Use General for convenient keybindings
 ;; Command the map
 (use-package general

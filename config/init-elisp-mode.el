@@ -1,6 +1,5 @@
 ;; init-elisp.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Emacs-Lisp-Mode
 ;; brace yourself!
 (use-package emacs-lisp-mode

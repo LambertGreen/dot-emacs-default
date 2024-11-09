@@ -1,6 +1,5 @@
 ;; init-workspaces.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Tab-bar
 ;; Put it on my tab
 (use-package tab-bar

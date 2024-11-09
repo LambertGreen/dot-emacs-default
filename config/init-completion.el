@@ -1,6 +1,5 @@
 ;; init-completion.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Dabbrev
 ;; Short and sweet
 (use-package dabbrev
@@ -9,18 +8,6 @@
   :bind (
          ("C-/" . dabbrev-expand)
          ("C-;" . dabbrev-completion)))
-
-;;; Company
-;; Not a crowd
-;; NOTE: Company Disabled: We are using Corfu now
-(use-package company
-  :disabled t
-  :init
-  (setq company-idle-delay 0.1  ; Show suggestions after a small delay
-        company-minimum-prefix-length 2 ; Start completing after 2 characters
-        company-show-numbers t) ; Show numbers for easy selection
-  :config
-  (global-company-mode t)) ; Enable Company mode globally
 
 ;;; Corfu
 ;; Just completion-at-point UI

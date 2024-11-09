@@ -374,6 +374,8 @@ Passes ARG to `org-insert-subheading`."
 (use-package org-agenda
   :ensure nil
   :after (general org)
+  ;; TODO Try get the org pretty symbols to load one time in org-agenda
+  :hook  (org-agenda-mode . lgreen/org-prettify-symbols)
   :commands org-agenda
   :custom
   (org-agenda-log-mode-items '(closed clock state))

@@ -1,6 +1,7 @@
 ;; init-dashboard.el --- -*- lexical-binding: t; -*-
 
-
+;;; Dashboard
+;; In the beginning
 (use-package dashboard
   :after evil
   :demand t

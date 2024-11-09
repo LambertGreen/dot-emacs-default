@@ -1,6 +1,5 @@
 ;; init-ui.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Doom-Modeline
 ;; Add Doom's modeline
 (use-package doom-modeline

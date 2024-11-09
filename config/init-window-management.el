@@ -1,6 +1,5 @@
 ;; init-window-management.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Winner mode
 (use-package winner
   :ensure nil

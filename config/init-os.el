@@ -1,8 +1,7 @@
 ;; init-os.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Environment Setup
-;;
+;; We are products of our environment
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns))

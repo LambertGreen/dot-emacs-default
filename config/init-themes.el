@@ -1,6 +1,5 @@
 ;; init-themes.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Catppuccin theme
 (use-package catppuccin-theme
   :custom

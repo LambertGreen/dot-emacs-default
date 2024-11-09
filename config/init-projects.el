@@ -1,6 +1,5 @@
 ;; init-projects.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Project
 ;; Things need to be done
 (use-package project

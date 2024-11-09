@@ -1,6 +1,5 @@
 ;; init-terminal.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Vterm
 ;; Skynet started somewhere
 (use-package vterm

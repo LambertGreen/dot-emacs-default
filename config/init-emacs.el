@@ -1,6 +1,5 @@
 ;; init-emacs.el --- -*- lexical-binding: t; -*-
 
-
 ;;; No-Littering
 ;; Let's put the mess in './var'
 (use-package no-littering

@@ -1,7 +1,13 @@
 ;; init-file-management.el --- -*- lexical-binding: t; -*-
 
-
 ;; TODO Checkout some of the Dired extension packages e.g. Dired+
+
+;;; Dired
+;; Editing not just files but file meta
+(use-package dired
+  :ensure nil
+  :custom
+  (delete-by-moving-to-trash t))
 
 ;;; Nerd-Icons-Dired
 ;; Fancy icons for Dired

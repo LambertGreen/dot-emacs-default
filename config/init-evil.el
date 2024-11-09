@@ -1,6 +1,5 @@
 ;; init-evil.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Evil
 ;; The root of all money-trees
 (use-package evil

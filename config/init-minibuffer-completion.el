@@ -1,6 +1,5 @@
 ;; init-minibuffer-completion.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Vertico
 ;; Vertical completion UI
 (use-package vertico

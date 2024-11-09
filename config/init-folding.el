@@ -1,6 +1,5 @@
 ;; init-folding.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Treesit-fold
 (use-package treesit-fold
   :ensure (:fetcher github :repo "emacs-tree-sitter/treesit-fold")

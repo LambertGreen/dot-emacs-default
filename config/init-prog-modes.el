@@ -1,6 +1,5 @@
 ;; init-prog-modes.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Prog Mode
 ;; Enter the Matrix
 (use-package prog-mode

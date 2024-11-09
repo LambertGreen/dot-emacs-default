@@ -1,6 +1,5 @@
 ;; init-my-elisp-functions.el --- -*- lexical-binding: t; -*-
 
-
 ;;; My Elisp Functions
 ;; Funky functionals
 (use-package emacs

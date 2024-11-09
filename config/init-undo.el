@@ -1,6 +1,5 @@
 ;; init-undo.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree

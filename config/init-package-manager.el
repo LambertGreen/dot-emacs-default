@@ -1,6 +1,5 @@
 ;; init-package-manager.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Use Elpaca as our package manager
 (defvar elpaca-installer-version 0.8)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))

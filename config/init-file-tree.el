@@ -1,6 +1,5 @@
 ;; init-file-tree.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Treemacs
 ;; Squinting at the forest
 (use-package treemacs

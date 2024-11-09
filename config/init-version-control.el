@@ -1,6 +1,5 @@
 ;; init-version-control.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Version Control
 (use-package vc
   :ensure nil

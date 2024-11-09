@@ -1,6 +1,5 @@
 ;; init-email.el --- -*- lexical-binding: t; -*-
 
-
 ;;; Mu4e
 ;; You got mail!
 (use-package mu4e

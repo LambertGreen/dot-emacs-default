@@ -1,4 +1,3 @@
-
 ;; init-editor.el --- -*- lexical-binding: t; -*-
 
 ;;; Persistent Scratch

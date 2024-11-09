@@ -41,17 +41,20 @@
 ;;; Treemacs-Evil
 ;; The root of all evil
 (use-package treemacs-evil
-  :after (treemacs evil))
+  :after (treemacs evil)
+  :init (eval-after-load 'treemacs '(require 'treemacs-evil)))
 
 ;;; Treemacs-Magit
 ;; Trees and branches
 (use-package treemacs-magit
-  :after (treemacs magit))
+  :after (treemacs magit)
+  :init (eval-after-load 'treemacs '(require 'treemacs-magit)))
 
 ;;; Treemacs-Tab-Bar
 ;; Trees at the workspace level
 (use-package treemacs-tab-bar
   :after (treemacs)
+  :init (eval-after-load 'treemacs '(require 'treemacs-tab-bar))
   :config (treemacs-set-scope-type 'Tabs))
 
 ;;; _

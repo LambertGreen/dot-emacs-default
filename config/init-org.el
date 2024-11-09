@@ -400,7 +400,7 @@ Passes ARG to `org-insert-subheading`."
      ("Fun&Games"      ,(list (propertize "🎮")))
      ("Vacation"       ,(list (propertize "🌴")))
      ("Misc."          ,(list (propertize "📎")))
-     ("Spiritual"      ,(list (propertize "🙏")))
+     ("Spirit"         ,(list (propertize "🙏")))
      ("Health"         ,(list (propertize "💪")))
      ("Social"         ,(list (propertize "👥")))
      ("Charity"        ,(list (propertize "🤲")))

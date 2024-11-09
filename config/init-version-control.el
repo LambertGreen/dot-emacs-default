@@ -38,17 +38,25 @@
   :hook (magit-mode . magit-todos-mode))
 
 ;;; Diff-Hl
-;; Show git status in the fringe
+;; Show diff status in the fringe
 (use-package diff-hl
-  :commands (diff-hl-previous-hunk diff-hl-next-hunk)
   :hook
   ((focus-in . diff-hl-update)
-   (after-init . global-diff-hl-mode))
+   (find-file . lgreen/setup-diff-hl-if-in-vcs))
   :init
-;;;; Keymaps
+  ;; Keybindings for navigating diffs
   (lgreen/leader-define-key
     "g p" '(diff-hl-previous-hunk :wk "previous hunk")
-    "g n" '(diff-hl-next-hunk :wk "next hunk")))
+    "g n" '(diff-hl-next-hunk :wk "next hunk"))
+
+  ;; Function to set up diff-hl in VCS projects
+  (defun lgreen/setup-diff-hl-if-in-vcs ()
+    "Enable diff-hl if the current project is under version control."
+    (let ((project (project-current t)))
+      (when (and project
+                 (eq (car project) 'vc)) ; Check if project is a VCS project
+        (require 'diff-hl)
+        (global-diff-hl-mode)))))
 
 ;;; _
 (provide 'init-version-control)

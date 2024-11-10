@@ -41,7 +41,7 @@
 
      ;; Habit tracking sequence
      (sequence
-      "LOOP(r!)"     ; New sequence for habits
+      "LOOP(r!)"
       "|"
       "DONE(d!)"
       "KILL(k@/!)")))
@@ -416,6 +416,7 @@ Passes ARG to `org-insert-subheading`."
   (lgreen/leader-define-key
     "o a" '(org-agenda :wk "Open agenda"))
   :config
+;;;; Functions
   (defun lgreen/add-icons-to-tags-agenda ()
     "Display icons for certain tags in the Org Agenda view."
     (font-lock-add-keywords
@@ -465,19 +466,21 @@ Passes ARG to `org-insert-subheading`."
       :states '(normal motion)
 
 ;;;;; View
-      "v" '(org-agenda-view-mode-dispatch :wk "View menu")
+      "v" '(org-agenda-view-mode-dispatch :wk "View")
 
 ;;;;; Todo
-      "t" '(:ignore t :wk "Todo")
-      "t t" '(org-agenda-todo :wk "set todo state")
-      "t d" '(org-agenda-deadline :wk "set deadline")
-      "t s" '(org-agenda-schedule :wk "schedule")
+      "t" '(org-agenda-todo :wk "Todo")
 
 ;;;;; Clock
       "c" '(:ignore t :wk "Clock")
       "c i" '(org-agenda-clock-in :wk "clock in")
       "c o" '(org-agenda-clock-out :wk "clock out")
       "c g" '(org-agenda-clock-goto :wk "goto clocked task")
+
+;;;;; Deadline/Date
+      "d" '(:ignore t :wk "Deadline/Date")
+      "d d" 'org-agenda-deadline
+      "d s" 'org-agenda-schedule
 
 ;;;;; Miscellaneous
       "e" '(org-agenda-set-effort :wk "Set effort")

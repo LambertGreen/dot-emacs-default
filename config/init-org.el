@@ -35,8 +35,9 @@
      (sequence
       "[ ](T!)"       ; A task that needs doing
       "[-](S!)"       ; Task is in progress
-      "[?](W)"       ; Task is being held up or paused
+      "[?](W)"        ; Task is being held up or paused
       "|"
+      "[K](K!)"       ; Task was canceled
       "[X](D!)")      ; Task was completed
 
      ;; Habit tracking sequence
@@ -278,6 +279,7 @@ Passes ARG to `org-insert-subheading`."
             ("[ ]" . (? (Br . Bl) ?\s))
             ("[X]" . (? (Br . Bl) ?\s))
             ("[-]" . (? (Br . Bl) ?\s))
+            ("[K]" . (? (Br . Bl) ?\s))
             ("#+BEGIN_SRC" . (? (Br . Bl) ?\s))
             ("#+END_SRC" . (? (Br . Bl) ?\s))
             ("#+BEGIN_QUOTE" . (? (Br . Bl) ?\s))

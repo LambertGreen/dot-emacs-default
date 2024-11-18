@@ -30,7 +30,7 @@
 ;; There is always more todo
 (use-package magit-todos
   :after magit
-  :if (not (eq system-type 'windows-nt))
+  :unless (eq system-type 'windows-nt)
   :commands magit-todos-mode
   :custom
   (magit-todos-exclude-globs '(".git/" "*.min.js" "*.log" "node_modules/*"))

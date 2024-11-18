@@ -10,7 +10,7 @@
 ;; Use cases:
 ;; - Common mistyped and misspelled words: hte (the), noone (none/noon)
 (use-package jinx
-  :if (not (eq system-type 'windows-nt))
+  :unless (eq system-type 'windows-nt)
   :hook ((emacs-startup . global-jinx-mode)
          ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes))
 ;;;; Keymaps

@@ -97,10 +97,9 @@ I had started out using a literate configuration, but changed to a pure =Elisp= 
 ** Recurrence
 *** LOOP Make a habit of something
 ** Priorities
-*** TODO [#A] Urgent
-*** TODO [#B] Important
-*** TODO [#C] Anytime
-
+*** DONE [#A] Urgent
+*** DONE [#B] Important
+*** DONE [#C] Anytime
 * PROJ Work-Items
 ** Open [0/1]
 *** TODO Use the faster =Rust= based search tools if installed (=ripgrep=, =fd=) [0/2]

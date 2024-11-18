@@ -26,7 +26,7 @@
 ;;; Eros
 ;; Evaluation Result Overlays for Emacs Lisp
 (use-package eros
-  :custom (eros-eval-result-prefix "▶ ")
+  :custom (eros-eval-result-prefix "➔ ")
   :init
   ;; Enable early so that mode is ready for use in the *scratch* buffer
   (eros-mode 1))

@@ -26,8 +26,10 @@
 ;;; Eros
 ;; Evaluation Result Overlays for Emacs Lisp
 (use-package eros
-  :hook ((emacs-lisp-mode lisp-interaction-mode) . eros-mode)
-  :config (eros-mode 1))
+  :custom (eros-eval-result-prefix "▶ ")
+  :init
+  ;; Enable early so that mode is ready for use in the *scratch* buffer
+  (eros-mode 1))
 
 ;;; _
 (provide 'init-elisp-mode)

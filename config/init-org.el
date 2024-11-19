@@ -28,7 +28,7 @@
 
      ;; Separate sequence for non-actionable states
      (type
-      "PROJ(p!)"     ; A project, which usually contains other tasks
+      "PROJ(P!)"     ; A project, which usually contains other tasks
       "IDEA(i)")     ; An unconfirmed and unapproved task or notion
 
      ;; Task states for checkboxes
@@ -40,9 +40,18 @@
       "[K](K!)"       ; Task was canceled
       "[X](D!)")      ; Task was completed
 
+     ;; States for test/build runs
+     (sequence
+      "PEND(b)"
+      "RUNG(r)"
+      "|"
+      "PASS(p)"
+      "FAIL(f)"
+      "CANC(c)")
+
      ;; Habit tracking sequence
      (sequence
-      "LOOP(r!)"
+      "LOOP(l!)"
       "|"
       "DONE(d!)"
       "KILL(k@/!)")))
@@ -266,19 +275,24 @@ Passes ARG to `org-insert-subheading`."
     (interactive)
     (setq prettify-symbols-alist
           '(("TODO" . (? (Br . Bl) ?\s))
-            ("STRT" . (? (Br . Bl) ?\s))
-            ("WAIT" . (? (Br . Bl) ?\s))
-            ("KILL" . (? (Br . Bl) ?\s))
-            ("DONE" . (? (Br . Bl) ?\s))
+            ("STRT" . (? (Br . Bl) ?\s))
+            ("WAIT" . (? (Br . Bl) ?\s))
+            ("KILL" . (? (Br . Bl) ?\s))
+            ("DONE" . (? (Br . Bl) ?\s))
             ("PROJ" . (? (Br . Bl) ?\s))
             ("LOOP" . ?↺)
+            ("PEND" . (? (Br . Bl) ?\s))
+            ("RUNG" . (? (Br . Bl) ?\s))
+            ("FAIL" . (? (Br . Bl) ?\s))
+            ("PASS" . (? (Br . Bl) ?\s))
+            ("CANC" . (? (Br . Bl) ?\s))
             ("IDEA" . ?💡)
             ("[#A]" . "")
             ("[#B]" . "")
             ("[#C]" . "")
             ("[ ]" . (? (Br . Bl) ?\s))
             ("[X]" . (? (Br . Bl) ?\s))
-            ("[-]" . (? (Br . Bl) ?\s))
+            ("[-]" . ?◒)
             ("[K]" . (? (Br . Bl) ?\s))
             ("#+BEGIN_SRC" . (? (Br . Bl) ?\s))
             ("#+END_SRC" . (? (Br . Bl) ?\s))

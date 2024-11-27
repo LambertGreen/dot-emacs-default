@@ -22,6 +22,13 @@
   (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
                                 (plain-list-item . auto)))
+  ;; Config for `org-id'
+  ;; NOTE: I tried to various configs to try minimize the creation of IDs for headings as
+  ;; I was wanting to rely mainly `org-roam' file level IDs, but ran into issues, and so
+  ;; settled with embracing the IDs for reliable and consistent linking.
+  (org-id-track-globally t)
+  (org-id-link-to-org-use-id t)
+
   (org-directory "~/dev/my/org")
   (org-todo-keywords
    '((sequence

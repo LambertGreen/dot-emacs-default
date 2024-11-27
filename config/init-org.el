@@ -687,6 +687,7 @@ Passes ARG to `org-insert-subheading`."
                               (gnuplot . t)
                               (org . t)
                               (js . t)
+                              (sql . t)
                               (sqlite . t)
                               (shell . t)
                               (java . t)

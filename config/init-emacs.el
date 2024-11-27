@@ -62,13 +62,20 @@
   ;; Make the frame title include the project name
   ;; Allows for easy switching to Emacs frame by project name
   (setq frame-title-format
-        '(""
-          "%b"
+        '("%b"
           (:eval
-           (let ((project (project-current)))
-             (when project
-               (let ((project-name (file-name-nondirectory (directory-file-name (project-root project)))))
-                 (format " in [%s] - Emacs" project-name)))))))
+           (let* ((project (or (project-current)
+                               ;; Fall back to tabspaces workspace name
+                               (when (bound-and-true-p tabspaces-mode)
+                                 (tabspaces--current-tab-name))))
+                  (project-name (when project
+                                  (if (stringp project)  ;; If it's from tabspaces
+                                      project
+                                    ;; If it's a project object, get the name
+                                    (file-name-nondirectory (directory-file-name (project-root project)))))))
+             (if project-name
+                 (format " in [%s] - %s" project-name invocation-name)
+               (format " - %s" invocation-name))))))
 
 ;;;; Auto Save
   (auto-save-visited-mode 1)

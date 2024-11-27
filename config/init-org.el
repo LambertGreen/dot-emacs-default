@@ -8,7 +8,10 @@
   :mode ("\\.org\\'" . org-mode)
   :commands (org-capture org-agenda)
   :custom
-  (org-modules '(org-capture org-habit org-tempo))
+  (org-modules
+   '(org-checklist
+     org-habit
+     org-tempo))
   (org-return-follows-link t)
   (org-startup-folded 'show3levels)
   ;; NOTE: For org-ellipsis there are characters that look good but don't work consistently and so we
@@ -371,14 +374,9 @@ Passes ARG to `org-insert-subheading`."
               :after 'lgreen/org-font-setup))
 
 ;;; Org-Contrib
+;; NOTE: We use `org-checklist' which is added as a `org-module'
 (use-package org-contrib
-  :after org
-  :config
-  (require 'org-collector)
-  (require 'org-protocol)
-  (require 'org-checklist)
-  ;; (require 'org-man)
-  )
+  :after org)
 
 ;;; Evil-Org
 ;; Taming the chaos with HKJL

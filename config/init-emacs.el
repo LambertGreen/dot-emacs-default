@@ -72,13 +72,12 @@
 
 ;;;; Auto Save
   (auto-save-visited-mode 1)
+
 ;;;; Auto Revert
   (global-auto-revert-mode 1)
-  ;; Enable desktop save  mode
-  ;; TODO I don't think I want this option enabled as I use multiple Emacs instances
-  ;; and don't really want any of their window configurations saved, however I do want
-  ;; recently used files remembered. I need to enable the option that keeps such history.
-  ;; (desktop-save-mode 1)
+
+  ;;;; Recentf
+  (recentf-mode 1)
 
 ;;;; Search programs
   ;; Better find and grep

@@ -11,7 +11,11 @@
   (org-modules '(org-capture org-habit org-tempo))
   (org-return-follows-link t)
   (org-startup-folded 'show3levels)
-  (org-ellipsis "⤵")
+  ;; NOTE: For org-ellipsis there are characters that look good but don't work consistently and so we
+  ;; have to choose something that does not look as good but at least still works.
+  ;; Chars that look good but don't work: ⤵, ⤸, ⤶, ⤷
+  ;; Chars that do work: ►, ⯆, ↴, ↷, …, ⋱
+  (org-ellipsis " ⬎")
   (org-hide-emphasis-markers t)
   (org-blank-before-new-entry '((heading . t)
                                 (plain-list-item . auto)))

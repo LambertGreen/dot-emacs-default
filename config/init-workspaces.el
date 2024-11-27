@@ -19,13 +19,19 @@
 ;; Make tabs work those spaces
 (use-package tabspaces
   :hook (after-init . tabspaces-mode)
+  :custom
+  (tabspaces-initialize-project-with-todo nil)
+  (tabspaces-include-buffers '("*scratch*"))
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
     "TAB TAB" '(tabspaces-switch-or-create-workspace :wk "Switch workspace")
     "TAB b" '(tabspaces-switch-buffer-and-tab :wk "Switch to buffer")
     "TAB d" '(tabspaces-close-workspace :wk "Close workspace")
-    "TAB o" '(tabspaces-open-or-create-project-and-workspace :wk "Open workspace"))
+    "TAB o" '(tabspaces-open-or-create-project-and-workspace :wk "Open workspace")
+
+    ;; Override `switch-project' keybinding
+    "p p" '(tabspaces-open-or-create-project-and-workspace :wk "Switch project"))
 ;;;; -
   :config
   ;; Filter Buffers for Consult-Buffer

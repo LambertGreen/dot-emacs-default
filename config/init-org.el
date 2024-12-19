@@ -621,6 +621,23 @@ Passes ARG to `org-insert-subheading`."
   ;; TODO is the causing perf issues?
   (org-roam-db-autosync-mode nil)
   (org-roam-directory "~/dev/my/org/roam")
+
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+
+     ("w" "Work Item")
+     ("ws" "Story" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+      :target (file+head "work/gus/stories/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:story: \n\n")
+      :unnarrowed t)
+
+     ("wb" "Bug" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+      :target (file+head "work/gus/bugs/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:bug: \n\n")
+      :unnarrowed t)))
+
   (org-roam-dailies-capture-templates
    '(("d" "daily" entry
       "* %?"

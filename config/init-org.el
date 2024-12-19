@@ -222,7 +222,7 @@
       (evil-append 1)))
   (defun lgreen/org-insert-subheading (&optional arg)
     "Insert a subheading and enter insert mode immediately if in normal state.
-Passes ARG to `org-insert-subheading`."
+    Passes ARG to `org-insert-subheading`."
     (interactive "P")  ;; allows handling prefix arguments like C-u for ARG
     (org-insert-subheading arg)
     (when (evil-normal-state-p)
@@ -429,12 +429,13 @@ Passes ARG to `org-insert-subheading`."
      ("Misc."          ,(list (propertize "📎")))
      ("Spirit"         ,(list (propertize "🙏")))
      ("Health"         ,(list (propertize "💪")))
+     ("House"          ,(list (propertize "🏠")))
      ("Social"         ,(list (propertize "👥")))
      ("Charity"        ,(list (propertize "🤲")))
-     ("Politics"        ,(list (propertize "🇺🇸")))
+     ("Politics"       ,(list (propertize "🇺🇸")))
      ("SoftDev"        ,(list (propertize "💻")))
      ("IDE"            ,(list (propertize "🔧")))
-     ("Plan"       ,(list (propertize "📝")))
+     ("Plan"           ,(list (propertize "📝")))
      ("Event"          ,(list (propertize "📅")))))
   :init
 ;;;; Keymaps

@@ -619,9 +619,8 @@
              org-roam-alias-remove org-roam-ref-add org-roam-ref-remove
              org-roam-tag-add org-roam-tag-remove)
   :custom
-  ;; TODO is the causing perf issues?
-  (org-roam-db-autosync-mode nil)
-  (org-roam-directory "~/dev/my/org/roam")
+  (org-roam-db-autosync-mode t)
+  (org-roam-directory "~/dev/my/org")
 
   (org-roam-capture-templates
    '(("d" "default" plain "%?"

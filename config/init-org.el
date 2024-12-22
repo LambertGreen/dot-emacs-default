@@ -636,7 +636,30 @@
      ("wb" "Bug" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/bugs/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:gus:bug: \n\n")
-      :unnarrowed t)))
+      :unnarrowed t)
+
+     ("p" "Personal Item")
+     ("pe" "Entertainment Item")
+     ("pem" "Movie" plain "%?"
+      :target (file+head "personal/entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:movie:\n\n")
+      :unnarrowed t)
+
+     ("pet" "TV-Show" plain "%?"
+      :target (file+head "personal/entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:tv-show:\n\n")
+      :unnarrowed t)
+
+     ("pea" "Actor" plain "%?"
+      :target (file+head "personal/entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:actor:\n\n")
+      :unnarrowed t)
+
+     ("ped" "Director" plain "%?"
+      :target (file+head "personal/entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:director:\n\n")
+      :unnarrowed t)
+     ))
 
   (org-roam-dailies-capture-templates
    '(("d" "daily" entry

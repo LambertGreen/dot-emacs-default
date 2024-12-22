@@ -758,6 +758,11 @@
   (add-to-list 'org-babel-load-languages '(mermaid . t))
   (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
+
+;;; Org-QL
+;; A query language for your Org files
+(use-package org-ql)
+
 ;;; _
 (provide 'init-org)
 

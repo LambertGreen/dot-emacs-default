@@ -32,12 +32,12 @@
 ;; Enter GPG passphrase via Emacs
 (use-package pinentry
   :after (epg keychain-environment)
-  :if (not (eq system-type 'windows-nt))
+  :unless (eq system-type 'windows-nt)
   :hook (after-init . pinentry-start))
 
 ;;; Direnv
 (use-package direnv
-  :if (not (eq system-type 'windows-nt))
+  :unless (eq system-type 'windows-nt)
   :hook (project-find-functions . (lambda (_)
                                     (direnv-enable-mode))))
 

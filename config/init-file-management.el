@@ -31,7 +31,7 @@
 ;;; Fd-Dired
 ;; `find-dired' alternative using `fd'
 (use-package fd-dired
-  :if (executable-find "fd"))
+  :when (executable-find "fd"))
 
 ;;; _
 (provide 'init-file-management)

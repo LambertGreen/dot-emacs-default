@@ -37,6 +37,7 @@
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)
 (require 'init-utils)
+(require 'init-squint)
 (require 'init-tty)
 (require 'init-email)
 

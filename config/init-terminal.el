@@ -3,7 +3,7 @@
 ;;; Vterm
 ;; Skynet started somewhere
 (use-package vterm
-  :if (not (eq system-type 'windows-nt))
+  :unless (eq system-type 'windows-nt)
   :custom (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
 
 ;;; VTerm-toggle

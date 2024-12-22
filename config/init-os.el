@@ -4,7 +4,7 @@
 ;; We are products of our environment
 (use-package exec-path-from-shell
   :ensure t
-  :if (memq window-system '(mac ns))
+  :when (memq window-system '(mac ns))
   :defer 5
   :config
   ;; Use bash as the shell for exec-path-from-shell
@@ -25,7 +25,7 @@
 ;; macOS specific config
 (use-package emacs
   :ensure nil
-  :if (memq window-system '(mac ns))
+  :when (memq window-system '(mac ns))
   :config
   (setq insert-directory-program "gls"
         dired-use-ls-dired t)
@@ -47,7 +47,7 @@
 ;; TODO Add config for Linux that is present in Mac but not here
 (use-package emacs
   :ensure nil
-  :if (eq system-type 'gnu/linux)
+  :when (eq system-type 'gnu/linux)
   :config
   (defvar homebrew-prefix)
   (setq homebrew-prefix "/home/linuxbrew/.linuxbrew/"))
@@ -56,7 +56,7 @@
 ;; Windows specific config
 (use-package emacs
   :ensure nil
-  :if (eq system-type 'windows-nt)
+  :when (eq system-type 'windows-nt)
   :config
   ;; Set find program
   ;; TODO: Check if fd can be used since it so much faster.
@@ -82,7 +82,7 @@
 ;; Knowledge is acquired
 (use-package info
   :ensure nil
-  :if (memq window-system '(mac ns))
+  :when (memq window-system '(mac ns))
   :config
   ;; Add Homebrew Info to Info path
   (add-to-list 'Info-directory-list (concat homebrew-prefix "share/info/")))
@@ -102,7 +102,7 @@
 ;; We need Tom and Jerry
 (use-package mouse
   :ensure nil
-  :if (not window-system)  ;; Load only in terminal
+  :unless window-system  ;; Load only in terminal
   :config
   ;; Enable mouse support in the terminal
   (xterm-mouse-mode t)

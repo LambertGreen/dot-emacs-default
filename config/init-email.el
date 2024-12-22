@@ -4,8 +4,8 @@
 ;; You got mail!
 (use-package mu4e
   :ensure nil
-  :if (and (not (eq system-type 'windows-nt))
-           (executable-find "mu"))
+  :when (and (not (eq system-type 'windows-nt))
+             (executable-find "mu"))
   :after org
   :commands (mu4e mu4e-compose-new mu4e-update-index)
   :custom

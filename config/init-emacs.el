@@ -33,23 +33,20 @@
 
   :config
 ;;;; Fonts
-  ;; Default font
-  (if (eq system-type 'darwin)
-      (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128))
-  (if (eq system-type 'windows-nt)
-      (set-face-attribute 'default nil :font "Iosevka NF" :height 128))
-
-  ;; Fixed-Pitch font
-  (if (eq system-type 'darwin)
-      (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono"))
-  (if (eq system-type 'windows-nt)
-      (set-face-attribute 'fixed-pitch nil :family "Iosevka NFM"))
-
-  ;; Variable-Pitch font
-  (if (eq system-type 'darwin)
-      (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
-  (if (eq system-type 'windows-nt)
-      (set-face-attribute 'variable-pitch nil :family "Iosevka NFP"))
+  ;; Default, Fixed-Pitch, and Variable-Pitch fonts based on system type
+  (cond
+   ((eq system-type 'darwin)
+    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128)
+    (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
+    (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
+   ((eq system-type 'linux)
+    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128)
+    (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
+    (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
+   ((eq system-type 'windows-nt)
+    (set-face-attribute 'default nil :font "Iosevka NF" :height 128)
+    (set-face-attribute 'fixed-pitch nil :family "Iosevka NFM")
+    (set-face-attribute 'variable-pitch nil :family "Iosevka NFP")))
 
 ;;;; Visuals
   (when (display-graphic-p)

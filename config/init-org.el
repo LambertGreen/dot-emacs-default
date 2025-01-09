@@ -255,34 +255,37 @@
   (defun lgreen/org-font-setup ()
     "Sets the fonts to specific sizes for org-mode"
     (interactive)
-    ;; TODO Is this needed?
-    (require 'org-faces)
+    (if (not (display-graphic-p))
+        (message "lgreen/org-font-setup: Skipping because we are in terminal mode.")
 
-    ;; Make the document title a bit bigger
-    (set-face-attribute 'org-document-title nil :weight 'bold :height 1.5)
-    ;; Set faces for heading levels
-    (dolist (face '((org-level-1 . 1.3)
-                    (org-level-2 . 1.20)
-                    (org-level-3 . 1.17)
-                    (org-level-4 . 1.15)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
+      ;; TODO Is this needed?
+      (require 'org-faces)
 
-    ;; Make sure org-indent face is available
-    (require 'org-indent)
+      ;; Make the document title a bit bigger
+      (set-face-attribute 'org-document-title nil :weight 'bold :height 1.5)
+      ;; Set faces for heading levels
+      (dolist (face '((org-level-1 . 1.3)
+                      (org-level-2 . 1.20)
+                      (org-level-3 . 1.17)
+                      (org-level-4 . 1.15)
+                      (org-level-5 . 1.1)
+                      (org-level-6 . 1.1)
+                      (org-level-7 . 1.1)
+                      (org-level-8 . 1.1)))
+        (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
 
-    ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
-    (set-face-attribute 'org-block nil :foreground 'unspecified :inherit 'fixed-pitch)
-    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+      ;; Make sure org-indent face is available
+      (require 'org-indent)
+
+      ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+      (set-face-attribute 'org-block nil :foreground 'unspecified :inherit 'fixed-pitch)
+      (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)))
   ;; NOTE: The symbols unfortunately don't leave any breathing room before the next character is printed.
   ;; E.g. This is a `todo' item: "Item
   ;; TODO Update the symbols to use the "more breathing room" approach.
@@ -383,7 +386,8 @@
 
 ;;;; Advice
   (advice-add 'load-theme
-              :after 'lgreen/org-font-setup))
+              :after (lambda (&rest _)
+                       (lgreen/org-font-setup))))
 
 ;;; Org-Contrib
 ;; NOTE: We use `org-checklist' which is added as a `org-module'

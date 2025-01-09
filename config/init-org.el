@@ -26,8 +26,13 @@
   ;; NOTE: I tried to various configs to try minimize the creation of IDs for headings as
   ;; I was wanting to rely mainly `org-roam' file level IDs, but ran into issues, and so
   ;; settled with embracing the IDs for reliable and consistent linking.
-  (org-id-track-globally t)
-  (org-id-link-to-org-use-id t)
+  ;; NOTE: (UPDATE: 01/09/26): I am confused by the above comment as now I am indeed relying
+  ;; Org-Roam for atomic note creation with IDs, and while I am indeed using IDs for headings
+  ;; in org files where I want Roam to process them, I am fine creating those IDs manually
+  ;; as I don't want IDs for every heading.  So we now disable the below config.
+  ;; (org-id-link-to-org-use-id t)
+  ;; NOTE: The help doc indicates that using this is best for single instance use of Emacs
+  ;; (org-id-track-globally t)
 
   (org-directory "~/dev/my/org")
   (org-todo-keywords

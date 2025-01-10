@@ -630,7 +630,6 @@
   :custom
   (org-roam-db-autosync-mode t)
   (org-roam-directory "~/dev/my/org")
-
   (org-roam-capture-templates
    '(("d" "default" plain "%?"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
@@ -698,7 +697,23 @@
     "m o R" 'org-roam-ref-remove
     "m o t" 'org-roam-tag-add
     "m o T" 'org-roam-tag-remove
-    ))
+    )
+
+  :config
+  ;; FIXME: Put the Entertainment and any other project specific Elisp in a project
+  ;; specific location, rather than in your global Emacs config
+  (defun get-movies-node-id ()
+    "Retrieve the ID of the 'Movies' Org-Roam node."
+    (org-roam-node-id (org-roam-node-from-title-or-alias "Movies")))
+
+  (defun add-movie-index-backlink ()
+    "Add an 'Index' section with a backlink to the 'Movies' node in the current buffer."
+    (when (and (boundp 'org-capture-current-plist)
+               (string= "pm" (plist-get org-capture-current-plist :key)))
+      (save-excursion
+        (goto-char (point-max))
+        (insert (format "\n* Index\n[[id:%s][Movies]]\n" (get-movies-node-id)))
+        (save-buffer)))))
 
 ;;; Org-Roam-Ui
 ;; Seeing is believing

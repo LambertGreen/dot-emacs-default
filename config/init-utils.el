@@ -70,6 +70,12 @@
   :ensure nil
   :custom (proced-enable-color-flag t))
 
+;;; PDF-Tools
+(use-package pdf-tools
+  :magic ("%PDF" . pdf-view-mode)
+  :config
+  (pdf-tools-install))
+
 ;;; _
 (provide 'init-utils)
 

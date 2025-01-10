@@ -93,6 +93,17 @@
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file 'noerror))
 
+;;;; Ultra-Scroll
+;; Making the touchpad relevant again
+(use-package ultra-scroll
+  :ensure (:fetcher github :repo "jdtsmith/ultra-scroll")
+  :demand t
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))
+
 ;;; _
 (provide 'init-emacs)
 

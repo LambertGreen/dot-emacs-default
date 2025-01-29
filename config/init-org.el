@@ -787,6 +787,28 @@
 ;; A query language for your Org files
 (use-package org-ql)
 
+;;; Org-Pretty-Tags
+(use-package org-pretty-tags
+  :hook (org-mode . org-pretty-tags-global-mode)
+  :custom
+  (org-pretty-tags-surrogate-strings
+   `(
+     ("work" . "💼")
+     ("personal" . "🏠")
+     ("read" . "📖")
+     ("watch" . "🎬")
+     ("listen" . "🎧")
+     ("code" . "💻")
+     ("study" . "📚")
+     ("write" . "✍️")
+     ("daily" . "📅")
+     ("meeting" . "📋")
+     ("team" . "👥")
+     ("spirit" . "🙏")
+     ("maintenance" . "🛠️")
+     )))
+
+
 ;;; _
 (provide 'init-org)
 

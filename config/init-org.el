@@ -532,7 +532,7 @@
   (org-habit-show-habits-only-for-today t)
   :config
   (setq org-agenda-custom-commands
-        '(("m" "Missed Habits"
+        '(("h" "Missed Habits"
            agenda ""
            ((org-agenda-overriding-header "Missed Habits")
             (org-agenda-entry-types '(:habit)))))))

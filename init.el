@@ -32,7 +32,6 @@
 (require 'init-snippets)
 (require 'init-org)
 (require 'init-prog-modes)
-(require 'init-cpp)
 (require 'init-python)
 (require 'init-elisp-mode)
 (require 'init-my-elisp-functions)

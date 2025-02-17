@@ -92,7 +92,15 @@
 ;;; Minions
 ;; Keeping the minor modes in line, instead sprawled in the mode line
 (use-package minions
-  :init (minions-mode 1))
+  :defer 1
+  :config (minions-mode 1))
+
+;;; Anzu
+;; Display current match and total matches in search modes
+(use-package anzu
+  :defer 1
+  :config (global-anzu-mode 1))
+
 ;;; Yascroll
 ;; An indicator to how long the papyrus is
 (use-package yascroll
@@ -107,6 +115,7 @@
                                                 :foreground ,(face-background 'highlight))))))))
   (add-hook 'after-load-theme-hook #'lgreen/yascroll-update-colors)
   (global-yascroll-bar-mode 1))
+
 
 ;;; Solaire-Mode
 ;; Darken popup buffers

@@ -76,6 +76,13 @@
   :config
   (pdf-tools-install))
 
+(use-package dictionary
+  :ensure nil
+  :custom (dictionary-server "dict.org")
+  :init
+  (lgreen/leader-define-key
+    "x d" '(dictionary-lookup-definition :wk "lookup definition")))
+
 ;;; _
 (provide 'init-utils)
 

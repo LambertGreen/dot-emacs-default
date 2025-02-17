@@ -93,6 +93,20 @@
 ;; Keeping the minor modes in line, instead sprawled in the mode line
 (use-package minions
   :init (minions-mode 1))
+;;; Yascroll
+;; An indicator to how long the papyrus is
+(use-package yascroll
+  :defer 2
+  :config
+  (defun lgreen/yascroll-update-colors ()
+    "Set `yascroll' scroll-bar color to match the `highlight` face."
+    (interactive)
+    (when (face-background 'highlight)
+      (custom-set-faces
+       `(yascroll:thumb-fringe ((t (:background ,(face-background 'highlight)
+                                                :foreground ,(face-background 'highlight))))))))
+  (add-hook 'after-load-theme-hook #'lgreen/yascroll-update-colors)
+  (global-yascroll-bar-mode 1))
 
 ;;; Solaire-Mode
 ;; Darken popup buffers

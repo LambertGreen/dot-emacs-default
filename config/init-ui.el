@@ -103,8 +103,11 @@
 
 ;;; Yascroll
 ;; An indicator to how long the papyrus is
+;; NOTE: Does not render correctly in Org-Mode source blocks,
+;; hence disabling
 (use-package yascroll
   :defer 2
+  :disabled t
   :config
   (defun lgreen/yascroll-update-colors ()
     "Set `yascroll' scroll-bar color to match the `highlight` face."
@@ -115,7 +118,6 @@
                                                 :foreground ,(face-background 'highlight))))))))
   (add-hook 'after-load-theme-hook #'lgreen/yascroll-update-colors)
   (global-yascroll-bar-mode 1))
-
 
 ;;; Solaire-Mode
 ;; Darken popup buffers

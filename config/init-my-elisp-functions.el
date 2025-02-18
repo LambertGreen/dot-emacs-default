@@ -60,7 +60,3 @@
 
 ;;; _
 (provide 'init-my-elisp-functions)
-
-;; Local Variables:
-;; jinx-local-words: "Unsets elisp emacs functionals nTransparency"
-;; End:

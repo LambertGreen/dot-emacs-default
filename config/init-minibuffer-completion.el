@@ -190,7 +190,3 @@
 
 ;;; _
 (provide 'init-minibuffer-completion)
-
-;; Local Variables:
-;; jinx-local-words: "Vertico args magit minibuffer ripgrep uu"
-;; End:

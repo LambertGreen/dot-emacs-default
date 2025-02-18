@@ -33,7 +33,3 @@
 
 ;;; _
 (provide 'init-elisp-mode)
-
-;; Local Variables:
-;; jinx-local-words: "elisp emacs eval"
-;; End:

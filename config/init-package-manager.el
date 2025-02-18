@@ -54,7 +54,3 @@
 
 ;;; _
 (provide 'init-package-manager)
-
-;; Local Variables:
-;; jinx-local-words: "autoloads elpaca eval"
-;; End:

@@ -54,7 +54,3 @@
 
 ;;; _
 (provide 'init-projects)
-
-;; Local Variables:
-;; jinx-local-words: "Dired Justfile"
-;; End:

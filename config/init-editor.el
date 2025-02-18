@@ -144,7 +144,3 @@
 
 ;;; _
 (provide 'init-editor)
-
-;; Local Variables:
-;; jinx-local-words: "Aile Eldoc Iosevka Orderless Propo btop dwim eldoc elisp emacs github htop lockfiles minibuffer modeline parens rg setq tooltips unicode whitespace"
-;; End:

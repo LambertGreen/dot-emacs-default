@@ -103,7 +103,3 @@
 
 ;;; _
 (provide 'init-email)
-
-;; Local Variables:
-;; jinx-local-words: "Verda gmail smtp"
-;; End:

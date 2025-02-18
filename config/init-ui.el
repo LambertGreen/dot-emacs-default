@@ -383,7 +383,3 @@
 
 ;;; _
 (provide 'init-ui)
-
-;; Local Variables:
-;; jinx-local-words: "elpaca hl jdtsmith joaotavora minibuffer modeline olivetti setq solaire ui vc"
-;; End:

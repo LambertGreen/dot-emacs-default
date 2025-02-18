@@ -25,7 +25,3 @@
 
 ;;; _
 (provide 'init-tty)
-
-;; Local Variables:
-;; jinx-local-words: "tty"
-;; End:

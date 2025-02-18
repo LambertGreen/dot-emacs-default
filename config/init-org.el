@@ -811,7 +811,3 @@
 
 ;;; _
 (provide 'init-org)
-
-;; Local Variables:
-;; jinx-local-words: "Elpaca Iosevka Propo defun filetags gmail goto html keymaps lgreen minibuffer nCaptured src subtree"
-;; End:

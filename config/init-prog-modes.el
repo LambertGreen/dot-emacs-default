@@ -318,7 +318,3 @@
 
 ;;; _
 (provide 'init-prog-modes)
-
-;; Local Variables:
-;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia cmake defun eglot emacs gitconfig gitignore jenv jq prog sshd stylua txt uncomment whitespace yaml yml"
-;; End:

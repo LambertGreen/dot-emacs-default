@@ -85,7 +85,3 @@
 
 ;;; _
 (provide 'init-utils)
-
-;; Local Variables:
-;; jinx-local-words: "LambertGreen keychain utils"
-;; End:

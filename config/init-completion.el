@@ -202,7 +202,3 @@
 
 ;;; _
 (provide 'init-completion)
-
-;; Local Variables:
-;; jinx-local-words: "Dabbrev Orderless capf corfu dabbrev dir elisp emacs etags formatter formatters ispell setq sgml svg tex"
-;; End:

@@ -30,7 +30,3 @@
 
 ;;; _
 (provide 'init-undo)
-
-;; Local Variables:
-;; jinx-local-words: "alist"
-;; End:

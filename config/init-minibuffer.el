@@ -38,7 +38,3 @@
 
 ;;; _
 (provide 'init-minibuffer)
-
-;; Local Variables:
-;; jinx-local-words: "Vertico minibuffer minibuffers"
-;; End:

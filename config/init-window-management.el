@@ -77,7 +77,3 @@
 
 ;;; _
 (provide 'init-window-management)
-
-;; Local Variables:
-;; jinx-local-words: "eshell vterm"
-;; End:

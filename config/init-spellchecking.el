@@ -1,7 +1,5 @@
 ;; init-spellchecking.el --- -*- lexical-binding: t; -*-
 
-;; TODO Setup personal dictionary and project specific dictionary
-
 ;;; Jinx
 ;; Misspelled it first!
 ;;

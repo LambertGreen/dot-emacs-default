@@ -12,7 +12,9 @@
 (use-package jinx
   :unless (eq system-type 'windows-nt)
   :hook ((emacs-startup . global-jinx-mode)
-         ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes))
+         ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes)
+         (hack-local-variables . lgreen/override-jinx-local-words))
+
 ;;;; Keymaps
   :bind
   ([remap ispell-word] . 'jinx-correct)
@@ -125,11 +127,7 @@ Returns the extracted words as a plain string or nil if not found."
         (setq-local jinx-local-words
                     (if file-local-words
                         (concat file-local-words " " project-words) ;; Merge both
-                      project-words)))))
-
-  (add-hook 'hack-local-variables-hook #'lgreen/override-jinx-local-words)
-  )
-
+                      project-words))))))
 
 ;;; _
 (provide 'init-spellchecking)

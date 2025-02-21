@@ -106,15 +106,23 @@ Returns the extracted words as a plain string or nil if not found."
   (defvar lgreen-project-jinx-words nil
     "Holds project-wide words for `jinx-local-words`.")
 
+  (defvar lgreen/loading-project-jinx-words nil
+    "Prevent recursive execution of lgreen/load-project-jinx-words.")
+
   (defun lgreen/load-project-jinx-words ()
     "Load words from `.project-words` into `lgreen-project-jinx-words`."
-    (when-let* ((project-root (project-root (project-current)))
-                (project-words-file (expand-file-name ".project-words" project-root)))
-      (when (file-exists-p project-words-file)
-        (with-temp-buffer
-          (insert-file-contents project-words-file)
-          (setq lgreen-project-jinx-words
-                (string-join (split-string (buffer-string) "\n" t) " ")))))) ;; Store as a global string
+    (unless lgreen/loading-project-jinx-words
+      (let ((lgreen/loading-project-jinx-words t))
+        (let* ((project-root (and (not lgreen/loading-project-jinx-words)
+                                  (project-root (project-current))))
+               (project-words-file (and project-root
+                                        (expand-file-name ".project-words" project-root))))
+          (when (and project-words-file (file-exists-p project-words-file))
+            (let ((temp-buffer (generate-new-buffer " *temp*" t)))
+              (unwind-protect
+                  (with-current-buffer temp-buffer
+                    (insert-file-contents project-words-file))
+                (kill-buffer temp-buffer))))))))
 
   (defun lgreen/override-jinx-local-words ()
     "Ensure `jinx-local-words` always includes project-wide words, overriding file-local values."

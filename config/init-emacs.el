@@ -34,19 +34,21 @@
   :config
 ;;;; Fonts
   ;; Default, Fixed-Pitch, and Variable-Pitch fonts based on system type
-  (cond
-   ((eq system-type 'darwin)
-    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128)
-    (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
-    (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
-   ((eq system-type 'linux)
-    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 128)
-    (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
-    (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
-   ((eq system-type 'windows-nt)
-    (set-face-attribute 'default nil :font "Iosevka NF" :height 128)
-    (set-face-attribute 'fixed-pitch nil :family "Iosevka NFM")
-    (set-face-attribute 'variable-pitch nil :family "Iosevka NFP")))
+  ;; TODO: Update to using `Aporetic' font for `Windows' and `Linux'
+  (when (display-graphic-p)
+    (cond
+     ((eq system-type 'darwin)
+      (set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 132)
+      (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono")
+      (set-face-attribute 'variable-pitch nil :family "Aporetic Sans Mono"))
+     ((eq system-type 'linux)
+      (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 132)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")
+      (set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font Propo"))
+     ((eq system-type 'windows-nt)
+      (set-face-attribute 'default nil :font "Iosevka NF" :height 132)
+      (set-face-attribute 'fixed-pitch nil :family "Iosevka NFM")
+      (set-face-attribute 'variable-pitch nil :family "Iosevka NFP"))))
 
 ;;;; Visuals
   (when (display-graphic-p)

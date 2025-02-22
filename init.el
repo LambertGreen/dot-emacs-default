@@ -40,5 +40,6 @@
 (require 'init-squint)
 (require 'init-tty)
 (require 'init-email)
+(require 'init-ai-utils)
 
 ;;; _

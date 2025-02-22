@@ -43,7 +43,3 @@
 
 ;;; _
 (provide 'init-file-tree)
-
-;; Local Variables:
-;; jinx-local-words: "persp treemacs"
-;; End:

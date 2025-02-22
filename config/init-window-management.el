@@ -10,6 +10,15 @@
     "w r" 'winner-redo
     "w u" 'winner-undo))
 
+;;; Ace Window
+(use-package ace-window
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+;;;; Keymaps
+  :init
+  (lgreen/leader-define-key
+    "w SPC " 'ace-window))
+
 ;;; Popper
 ;; What's popping?
 ;; Usage notes:
@@ -68,7 +77,3 @@
 
 ;;; _
 (provide 'init-window-management)
-
-;; Local Variables:
-;; jinx-local-words: "eshell vterm"
-;; End:

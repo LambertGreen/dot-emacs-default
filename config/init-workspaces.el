@@ -54,7 +54,3 @@
 
 ;;; _
 (provide 'init-workspaces)
-
-;; Local Variables:
-;; jinx-local-words: "workspaces"
-;; End:

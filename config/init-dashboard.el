@@ -25,7 +25,3 @@
 
 ;;; _
 (provide 'init-dashboard)
-
-;; Local Variables:
-;; jinx-local-words: "persp"
-;; End:

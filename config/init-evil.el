@@ -351,7 +351,3 @@
 
 ;;; _
 (provide 'init-evil)
-
-;; Local Variables:
-;; jinx-local-words: "CamelCase Somelauw arg args avy capslock cx ds dvzubarev gL gR gX github gl goto gx jk kbd prog setq tarao textobj treesitter unmap ys"
-;; End:

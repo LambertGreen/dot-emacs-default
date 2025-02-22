@@ -117,7 +117,3 @@
 
 ;;; _
 (provide 'init-os)
-
-;; Local Variables:
-;; jinx-local-words: "auth authinfo cmd cmdproxy emacs exe fd gls gpg homebrew linuxbrew mdfind ns os titlebar usr"
-;; End:

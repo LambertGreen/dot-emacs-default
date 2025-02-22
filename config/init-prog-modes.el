@@ -12,10 +12,8 @@
    :keymaps '(prog-mode-map)
    "M-n" (lambda () (interactive) (forward-evil-defun 1))
    "M-p" (lambda () (interactive) (forward-evil-defun -1))
-
    "C-j" (lambda () (interactive) (forward-evil-defun 1))
-   "C-k" (lambda () (interactive) (forward-evil-defun -1))
-   )
+   "C-k" (lambda () (interactive) (forward-evil-defun -1)))
 
 ;;;;; Formatting
   (lgreen/leader-define-key
@@ -40,12 +38,52 @@
 
 ;;;; Functions
   (defun lgreen/set-faces-for-prog-mode (&rest _)
-    "Set faces for programming font lock variables"
+    "Set faces for programming font lock variables and function definitions."
     (interactive)
     ;; Make keywords italic and light weight
     (set-face-attribute 'font-lock-keyword-face nil :slant 'italic :weight 'light)
     ;; Make comments light weight
-    (set-face-attribute 'font-lock-comment-face nil :weight 'light))
+    (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'light)
+
+    ;; Apply Tree-sitter-based font adjustments if available
+    (when (treesit-available-p)
+      (let ((rules
+             '((python-ts-mode
+                :language 'python
+                :rules '((function_definition name: (identifier) @function-name)))
+
+               (c-ts-mode
+                :language 'c
+                :rules '((function_definition declarator: (identifier) @function-name)))
+
+               (cpp-ts-mode
+                :language 'cpp
+                :rules '((function_definition declarator: (identifier) @function-name)))
+
+               (js-ts-mode
+                :language 'javascript
+                :rules '((function_declaration name: (identifier) @function-name)))
+
+               (tsx-ts-mode
+                :language 'tsx
+                :rules '((function_declaration name: (identifier) @function-name)))
+
+               (emacs-lisp-ts-mode
+                :language 'elisp
+                :rules '((function_definition name: (symbol) @function-name))))))
+
+        ;; Apply rules dynamically
+        (dolist (entry rules)
+          (let ((mode (nth 0 entry))
+                (lang (plist-get (cdr entry) :language))
+                (rule (plist-get (cdr entry) :rules)))
+            (when (derived-mode-p mode)
+              (treesit-font-lock-rules mode
+                                       :override t
+                                       :language lang
+                                       rule
+                                       :features
+                                       '((function-name . (:inherit font-lock-function-name-face :height 1.4))))))))))
 
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
@@ -280,7 +318,3 @@
 
 ;;; _
 (provide 'init-prog-modes)
-
-;; Local Variables:
-;; jinx-local-words: "CMakeLists Dockerfile Treesitter apheleia cmake defun eglot emacs gitconfig gitignore jenv jq prog sshd stylua txt uncomment whitespace yaml yml"
-;; End:

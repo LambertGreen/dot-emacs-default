@@ -26,8 +26,13 @@
   ;; NOTE: I tried to various configs to try minimize the creation of IDs for headings as
   ;; I was wanting to rely mainly `org-roam' file level IDs, but ran into issues, and so
   ;; settled with embracing the IDs for reliable and consistent linking.
-  (org-id-track-globally t)
-  (org-id-link-to-org-use-id t)
+  ;; NOTE: (UPDATE: 01/09/26): I am confused by the above comment as now I am indeed relying
+  ;; Org-Roam for atomic note creation with IDs, and while I am indeed using IDs for headings
+  ;; in org files where I want Roam to process them, I am fine creating those IDs manually
+  ;; as I don't want IDs for every heading.  So we now disable the below config.
+  ;; (org-id-link-to-org-use-id t)
+  ;; NOTE: The help doc indicates that using this is best for single instance use of Emacs
+  ;; (org-id-track-globally t)
 
   (org-directory "~/dev/my/org")
   (org-todo-keywords
@@ -250,34 +255,37 @@
   (defun lgreen/org-font-setup ()
     "Sets the fonts to specific sizes for org-mode"
     (interactive)
-    ;; TODO Is this needed?
-    (require 'org-faces)
+    (if (not (display-graphic-p))
+        (message "lgreen/org-font-setup: Skipping because we are in terminal mode.")
 
-    ;; Make the document title a bit bigger
-    (set-face-attribute 'org-document-title nil :weight 'bold :height 1.5)
-    ;; Set faces for heading levels
-    (dolist (face '((org-level-1 . 1.3)
-                    (org-level-2 . 1.20)
-                    (org-level-3 . 1.17)
-                    (org-level-4 . 1.15)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
+      ;; TODO Is this needed?
+      (require 'org-faces)
 
-    ;; Make sure org-indent face is available
-    (require 'org-indent)
+      ;; Make the document title a bit bigger
+      (set-face-attribute 'org-document-title nil :weight 'bold :height 1.5)
+      ;; Set faces for heading levels
+      (dolist (face '((org-level-1 . 1.3)
+                      (org-level-2 . 1.20)
+                      (org-level-3 . 1.17)
+                      (org-level-4 . 1.15)
+                      (org-level-5 . 1.1)
+                      (org-level-6 . 1.1)
+                      (org-level-7 . 1.1)
+                      (org-level-8 . 1.1)))
+        (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
 
-    ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
-    (set-face-attribute 'org-block nil :foreground 'unspecified :inherit 'fixed-pitch)
-    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+      ;; Make sure org-indent face is available
+      (require 'org-indent)
+
+      ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+      (set-face-attribute 'org-block nil :foreground 'unspecified :inherit 'fixed-pitch)
+      (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)))
   ;; NOTE: The symbols unfortunately don't leave any breathing room before the next character is printed.
   ;; E.g. This is a `todo' item: "Item
   ;; TODO Update the symbols to use the "more breathing room" approach.
@@ -287,64 +295,65 @@
   (defun lgreen/org-prettify-symbols ()
     "Beautify org mode keywords."
     (interactive)
-    (setq prettify-symbols-alist
-          '(("TODO" . (? (Br . Bl) ?\s))
-            ("STRT" . (? (Br . Bl) ?\s))
-            ("WAIT" . (? (Br . Bl) ?\s))
-            ("KILL" . (? (Br . Bl) ?\s))
-            ("DONE" . (? (Br . Bl) ?\s))
-            ("PROJ" . (? (Br . Bl) ?\s))
-            ("LOOP" . ?↺)
-            ("PEND" . (? (Br . Bl) ?\s))
-            ("RUNG" . (? (Br . Bl) ?\s))
-            ("FAIL" . (? (Br . Bl) ?\s))
-            ("PASS" . (? (Br . Bl) ?\s))
-            ("CANC" . (? (Br . Bl) ?\s))
-            ("IDEA" . ?💡)
-            ("[#A]" . "")
-            ("[#B]" . "")
-            ("[#C]" . "")
-            ("[ ]" . (? (Br . Bl) ?\s))
-            ("[X]" . (? (Br . Bl) ?\s))
-            ("[-]" . ?◒)
-            ("[K]" . (? (Br . Bl) ?\s))
-            ("#+BEGIN_SRC" . (? (Br . Bl) ?\s))
-            ("#+END_SRC" . (? (Br . Bl) ?\s))
-            ("#+BEGIN_QUOTE" . (? (Br . Bl) ?\s))
-            ("#+END_QUOTE" . (? (Br . Bl) ?\s))
-            (":PROPERTIES:" . (? (Br . Bl) ?\s))
-            (":END:" . "―")
-            (":LOGBOOK:" . (?📝(Br . Bl) ?\s))
-            ("#+STARTUP:" . "")
-            ("#+TITLE: " . "⋮")
-            ("#+CATEGORY:" . (? (Br . Bl) ?\s))
-            ("#+RESULTS:" . "")
-            ("#+NAME:" . "")
-            ("#+ROAM_TAGS:" . "")
-            ("#+FILETAGS:" . "")
-            ("#+HTML_HEAD:" . "")
-            ("#+SUBTITLE:" . "")
-            ("#+AUTHOR:" . "")
-            ("#+begin_src" . "")
-            ("#+end_src" . "")
-            ("#+begin_quote" . "")
-            ("#+end_quote" . "")
-            (":properties:" . "")
-            (":end:" . "―")
-            ("#+startup:" . "")
-            ("#+title: " . "⋮")
-            ("#+category:" . (? (Br . Bl) ?\s))
-            ("#+results:" . "")
-            ("#+name:" . "")
-            ("#+roam_tags:" . "")
-            ("#+filetags:" . "")
-            ("#+html_head:" . "")
-            ("#+subtitle:" . "")
-            ("#+author:" . "")
-            (":Effort:" . "")
-            ("SCHEDULED:" . "")
-            ("DEADLINE:" . "")))
-    (prettify-symbols-mode))
+    (when (display-graphic-p)  ;; Only apply in GUI mode
+      (setq prettify-symbols-alist
+            '(("TODO" . (? (Br . Bl) ?\s))
+              ("STRT" . (? (Br . Bl) ?\s))
+              ("WAIT" . (? (Br . Bl) ?\s))
+              ("KILL" . (? (Br . Bl) ?\s))
+              ("DONE" . (? (Br . Bl) ?\s))
+              ("PROJ" . (? (Br . Bl) ?\s))
+              ("LOOP" . ?↺)
+              ("PEND" . (? (Br . Bl) ?\s))
+              ("RUNG" . (? (Br . Bl) ?\s))
+              ("FAIL" . (? (Br . Bl) ?\s))
+              ("PASS" . (? (Br . Bl) ?\s))
+              ("CANC" . (? (Br . Bl) ?\s))
+              ("IDEA" . ?💡)
+              ("[#A]" . "")
+              ("[#B]" . "")
+              ("[#C]" . "")
+              ("[ ]" . (? (Br . Bl) ?\s))
+              ("[X]" . (? (Br . Bl) ?\s))
+              ("[-]" . ?◒)
+              ("[K]" . (? (Br . Bl) ?\s))
+              ("#+BEGIN_SRC" . (? (Br . Bl) ?\s))
+              ("#+END_SRC" . (? (Br . Bl) ?\s))
+              ("#+BEGIN_QUOTE" . (? (Br . Bl) ?\s))
+              ("#+END_QUOTE" . (? (Br . Bl) ?\s))
+              (":PROPERTIES:" . (? (Br . Bl) ?\s))
+              (":END:" . "―")
+              (":LOGBOOK:" . (?📝(Br . Bl) ?\s))
+              ("#+STARTUP:" . "")
+              ("#+TITLE: " . "⋮")
+              ("#+CATEGORY:" . (? (Br . Bl) ?\s))
+              ("#+RESULTS:" . "")
+              ("#+NAME:" . "")
+              ("#+ROAM_TAGS:" . "")
+              ("#+FILETAGS:" . "")
+              ("#+HTML_HEAD:" . "")
+              ("#+SUBTITLE:" . "")
+              ("#+AUTHOR:" . "")
+              ("#+begin_src" . "")
+              ("#+end_src" . "")
+              ("#+begin_quote" . "")
+              ("#+end_quote" . "")
+              (":properties:" . "")
+              (":end:" . "―")
+              ("#+startup:" . "")
+              ("#+title: " . "⋮")
+              ("#+category:" . (? (Br . Bl) ?\s))
+              ("#+results:" . "")
+              ("#+name:" . "")
+              ("#+roam_tags:" . "")
+              ("#+filetags:" . "")
+              ("#+html_head:" . "")
+              ("#+subtitle:" . "")
+              ("#+author:" . "")
+              (":Effort:" . "")
+              ("SCHEDULED:" . "")
+              ("DEADLINE:" . "")))
+      (prettify-symbols-mode)))
   ;; Below code snippet acquired from here:
   ;; - https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
   (defun lgreen/org-toggle-emphasis ()
@@ -378,7 +387,8 @@
 
 ;;;; Advice
   (advice-add 'load-theme
-              :after 'lgreen/org-font-setup))
+              :after (lambda (&rest _)
+                       (lgreen/org-font-setup))))
 
 ;;; Org-Contrib
 ;; NOTE: We use `org-checklist' which is added as a `org-module'
@@ -523,7 +533,7 @@
   (org-habit-show-habits-only-for-today t)
   :config
   (setq org-agenda-custom-commands
-        '(("m" "Missed Habits"
+        '(("h" "Missed Habits"
            agenda ""
            ((org-agenda-overriding-header "Missed Habits")
             (org-agenda-entry-types '(:habit)))))))
@@ -621,7 +631,6 @@
   :custom
   (org-roam-db-autosync-mode t)
   (org-roam-directory "~/dev/my/org")
-
   (org-roam-capture-templates
    '(("d" "default" plain "%?"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
@@ -689,7 +698,23 @@
     "m o R" 'org-roam-ref-remove
     "m o t" 'org-roam-tag-add
     "m o T" 'org-roam-tag-remove
-    ))
+    )
+
+  :config
+  ;; FIXME: Put the Entertainment and any other project specific Elisp in a project
+  ;; specific location, rather than in your global Emacs config
+  (defun get-movies-node-id ()
+    "Retrieve the ID of the 'Movies' Org-Roam node."
+    (org-roam-node-id (org-roam-node-from-title-or-alias "Movies")))
+
+  (defun add-movie-index-backlink ()
+    "Add an 'Index' section with a backlink to the 'Movies' node in the current buffer."
+    (when (and (boundp 'org-capture-current-plist)
+               (string= "pm" (plist-get org-capture-current-plist :key)))
+      (save-excursion
+        (goto-char (point-max))
+        (insert (format "\n* Index\n[[id:%s][Movies]]\n" (get-movies-node-id)))
+        (save-buffer)))))
 
 ;;; Org-Roam-Ui
 ;; Seeing is believing
@@ -763,9 +788,27 @@
 ;; A query language for your Org files
 (use-package org-ql)
 
+;;; Org-Pretty-Tags
+(use-package org-pretty-tags
+  :hook (org-mode . org-pretty-tags-global-mode)
+  :custom
+  (org-pretty-tags-surrogate-strings
+   `(
+     ("work" . "💼")
+     ("personal" . "🏠")
+     ("read" . "📖")
+     ("watch" . "🎬")
+     ("listen" . "🎧")
+     ("code" . "💻")
+     ("study" . "📚")
+     ("write" . "✍️")
+     ("daily" . "📅")
+     ("meeting" . "📋")
+     ("team" . "👥")
+     ("spirit" . "🙏")
+     ("maintenance" . "🛠️")
+     )))
+
+
 ;;; _
 (provide 'init-org)
-
-;; Local Variables:
-;; jinx-local-words: "Elpaca Iosevka Propo defun filetags gmail goto html keymaps lgreen minibuffer nCaptured src subtree"
-;; End:

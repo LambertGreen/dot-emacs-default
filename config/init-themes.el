@@ -53,7 +53,3 @@
 
 ;;; _
 (provide 'init-themes)
-
-;; Local Variables:
-;; jinx-local-words: "macchiato"
-;; End:

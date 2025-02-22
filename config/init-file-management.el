@@ -35,7 +35,3 @@
 
 ;;; _
 (provide 'init-file-management)
-
-;; Local Variables:
-;; jinx-local-words: "Dired dired fd"
-;; End:

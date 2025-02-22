@@ -57,7 +57,3 @@
 
 ;;; _
 (provide 'init-terminal)
-
-;; Local Variables:
-;; jinx-local-words: "Skynet defun lgreen vterm"
-;; End:

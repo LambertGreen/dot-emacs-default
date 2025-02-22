@@ -87,7 +87,3 @@
 
 ;;; _
 (provide 'init-folding)
-
-;; Local Variables:
-;; jinx-local-words: "emacs treesit"
-;; End:

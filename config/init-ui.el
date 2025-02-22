@@ -21,15 +21,21 @@
     "t m i" '(lgreen/toggle-doom-modeline-indent-info :which-key "toggle modeline indent-info"))
   :config
   (doom-modeline-mode 1)
+  (doom-modeline-def-modeline 'main
+    '(bar matches buffer-info remote-host buffer-position parrot selection-info)
+    '(misc-info minor-modes input-method buffer-encoding major-mode process vcs "  "))
+
 ;;;; Functions
   (defun lgreen/toggle-doom-modeline-buffer-encoding ()
     "Toggle the doom-modeline-buffer-encoding variable"
     (interactive)
     (setq doom-modeline-buffer-encoding (not doom-modeline-buffer-encoding)))
+
   (defun lgreen/toggle-doom-modeline-indent-info ()
     "Toggle the `doom-modeline-indent-info` variable."
     (interactive)
     (setq doom-modeline-indent-info (not doom-modeline-indent-info)))
+
   (defun lgreen/toggle-mode-line ()
     "Toggle the visibility of the mode line."
     (interactive)

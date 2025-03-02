@@ -21,8 +21,10 @@
     "t m i" '(lgreen/toggle-doom-modeline-indent-info :which-key "toggle modeline indent-info"))
   :config
   (doom-modeline-mode 1)
+  ;; NOTE: We are trying to address the right side of the modeline getting truncated by
+  ;; adding a spaces at the end
   (doom-modeline-def-modeline 'main
-    '(bar matches buffer-info remote-host buffer-position parrot selection-info)
+    '(bar modals matches buffer-info remote-host buffer-position parrot selection-info)
     '(misc-info minor-modes input-method buffer-encoding major-mode process vcs "  "))
 
 ;;;; Functions

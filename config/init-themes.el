@@ -8,7 +8,8 @@
 
 ;;; Doom Themes
 (use-package doom-themes
-  :demand t)
+  :demand t
+  :custom (doom-one-padded-modeline t))
 
 ;;; EF Themes
 (use-package ef-themes)

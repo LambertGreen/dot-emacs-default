@@ -41,4 +41,5 @@
 (require 'init-email)
 (require 'init-ai-utils)
 
+(put 'dired-find-alternate-file 'disabled nil)
 ;;; _

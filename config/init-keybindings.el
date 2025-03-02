@@ -47,11 +47,11 @@
 ;;;;; Files
     "f" '(:ignore t :wk "File")
     "f SPC" '(project-find-file :wk "find file [DWIM]")
+    "f ." '(dired-jump :wk "jump to directory")
     "f f" '(find-file :wk "find file")
     "f d" '(find-name-dired :wk "find file recursively")
     "f l" '(locate :wk "locate")
     "f r" '(recentf :wk "recent files")
-    "f j" '(dired-jump :wk "jump to directory")
 
 ;;;;; Search
     "s" '(:ignore t :wk "Search")

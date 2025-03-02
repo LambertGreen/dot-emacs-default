@@ -649,23 +649,23 @@
 
      ("p" "Personal Item")
      ("pe" "Entertainment Item")
-     ("pem" "Movie" plain "%?"
-      :target (file+head "entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+filetags: :entertainment:movie:\n\n")
+     ("pem" "Movie Title" plain "%?"
+      :target (file+head "entertainment/movie_title/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:movie_title:\n\n")
       :unnarrowed t)
 
-     ("pet" "TV-Show" plain "%?"
-      :target (file+head "entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+filetags: :entertainment:tv-show:\n\n")
+     ("pet" "TV-Show Title" plain "%?"
+      :target (file+head "entertainment/tv-show_title/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :entertainment:tv-show_title:\n\n")
       :unnarrowed t)
 
      ("pea" "Actor" plain "%?"
-      :target (file+head "entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+      :target (file+head "entertainment/cast_crew/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:cast_crew:actor:\n\n")
       :unnarrowed t)
 
      ("ped" "Director" plain "%?"
-      :target (file+head "entertainment/%<%Y%m%d%H%M%S>-${slug}.org"
+      :target (file+head "entertainment/cast_crew/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:cast_crew:director:\n\n")
       :unnarrowed t)
      ))

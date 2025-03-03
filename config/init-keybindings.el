@@ -151,7 +151,8 @@
 
 ;;;;; Quit
     "q" '(:ignore t :wk "Quit")
-    "q q" '(save-buffers-kill-terminal :wk "quit")))
+    "q q" '(save-buffers-kill-terminal :wk "quit")
+    "q f" '(delete-frame :wk "frame")))
 
 ;;;; -
 (elpaca-wait)

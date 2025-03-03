@@ -7,32 +7,50 @@
 (use-package dired
   :ensure nil
   :after (evil general)
+  :commands (dired dired-jump)
   :hook ((dired-mode . lgreen/setup-dired-mode-map)
-         (dired-mode . (lambda () (dired-omit-mode 1))))
+         (dired-mode . (lambda () (dired-omit-mode 1)))
+         (dired-mode . dired-hide-details-mode))
   :custom
   (delete-by-moving-to-trash t)
   (dired-dwim-target t)
   (dired-auto-revert-buffer t)
+  (dired-listing-switches "-alh")
   (dired-omit-files "^\\.[^.].*")
   :init
+;;;; Keymaps
   (defun lgreen/setup-dired-mode-map ()
     ;; NOTE: The `dired-mode-map' is setup in a strange way such that
     ;; we need to add the local leader prefix `SPC m' using `evil-define-key'
-    ;; and we have to put the `dired-narrow' binding here instead of in
-    ;; the `dired-narrow' `use-package' block.
-    (evil-define-key 'normal dired-mode-map (kbd "SPC") nil)
-    (evil-define-key 'normal dired-mode-map (kbd "<RET>") 'dired-find-alternate-file)
-    (evil-define-key 'normal dired-mode-map (kbd "<TAB>") 'dired-subtree-toggle)
-    (evil-define-key 'normal dired-mode-map (kbd "SPC m") (make-sparse-keymap))
-    (evil-define-key 'normal dired-mode-map (kbd "SPC m /") 'dired-narrow)
-    (evil-define-key 'normal dired-mode-map (kbd "SPC m t o") 'dired-omit-mode)
-    (evil-define-key 'normal dired-mode-map (kbd "SPC m t c") 'dired-collapse-mode))
+    (general-def
+      :keymaps 'dired-mode-map
+      :states 'normal
+      "SPC" nil
+      "." 'dired-omit-mode
+      "<RET>" 'dired-find-alternate-file
+      "<TAB>" 'dired-subtree
+      "C-k" 'dired-up-directory)
+
+    (evil-define-key 'normal dired-mode-map (kbd "SPC m") (make-sparse-keymap)))
   )
 
 ;;; Dired-Narrow
 ;; Find the files on the straight-&-narrow
 (use-package dired-narrow
-  :after (general dired))
+  :after dired
+  :init
+;;;; Keymaps
+  (defun lgreen/setup-dired-narrow-keys ()
+    (lgreen/local-leader-define-key
+      :keymaps 'dired-mode-map
+      "n" '(:ignore t :wk "Narrow")
+      "n n" '(dired-narrow :wk "narrow")
+      "n f" '(dired-narrow-fuzzy :wk "fuzzy")
+      "n r" '(dired-narrow-regexp :wk "regexp")))
+
+  ;; NOTE: Using dired-mode-hook does not work due to dired delayed loading
+  (advice-add 'lgreen/setup-dired-mode-map :after #'lgreen/setup-dired-narrow-keys)
+  )
 
 ;;; Nerd-Icons-Dired
 ;; Fancy icons for Dired
@@ -49,7 +67,18 @@
 ;;; Dired-Subtree
 ;; Inline sub-tree expansion
 (use-package dired-subtree
-  :after dired)
+  :after dired
+  :init
+;;;; Keymaps
+  (defun lgreen/setup-dired-subtree-keys ()
+    (general-def
+      :keymaps 'dired-mode-map
+      :states 'normal
+      "<TAB>" 'dired-subtree-toggle))
+  ;; NOTE: Using dired-mode-hook does not work due to dired delayed loading
+  (advice-add 'lgreen/setup-dired-mode-map :after #'lgreen/setup-dired-subtree-keys)
+  )
+
 
 ;;; Dired-Collapse
 ;; Flatten the emptiness

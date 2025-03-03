@@ -71,17 +71,26 @@
   :custom (proced-enable-color-flag t))
 
 ;;; PDF-Tools
+;; Read PDFs in Emacs
 (use-package pdf-tools
   :magic ("%PDF" . pdf-view-mode)
   :config
   (pdf-tools-install))
 
+;;; Dictionary
+;; Definite definitions
 (use-package dictionary
   :ensure nil
   :custom (dictionary-server "dict.org")
   :init
   (lgreen/leader-define-key
     "x d" '(dictionary-lookup-definition :wk "lookup definition")))
+
+;;; PCRE2el
+;; Expressions without the Emacs escaping required
+(use-package pcre2el
+  :defer 1
+  :config (pcre-mode))
 
 ;;; _
 (provide 'init-utils)

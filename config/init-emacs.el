@@ -27,9 +27,11 @@
   (auto-revert-check-vc-info t)
   (global-auto-revert-non-file-buffers t)
 
+  :init
   ;; Default text settings
-  (indent-tabs-mode nil)
-  (tab-width 4)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq-default truncate-lines t)
 
   :config
 ;;;; Fonts

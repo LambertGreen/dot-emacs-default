@@ -9,13 +9,15 @@
   :after (evil general)
   :commands (dired dired-jump)
   :hook ((dired-mode . lgreen/setup-dired-mode-map)
+         (dired-mode . dired-hide-details-mode)
          (dired-mode . (lambda () (dired-omit-mode 1)))
-         (dired-mode . dired-hide-details-mode))
+         (dired-mode . (lambda () (toggle-truncate-lines))))
   :custom
   (delete-by-moving-to-trash t)
   (dired-dwim-target t)
   (dired-auto-revert-buffer t)
-  (dired-listing-switches "-alh")
+  (dired-listing-switches "-lhtA --group-directories-first")
+  (ls-lisp-dirs-first t)
   (dired-omit-files "^\\.[^.].*")
   :init
 ;;;; Keymaps

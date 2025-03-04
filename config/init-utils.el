@@ -65,7 +65,7 @@
 (use-package gnuplot)
 
 ;;; Proced
-;; Reach for this before htop/btop/etc.
+;; Reach for this before `htop'/`btop'/etc.
 (use-package proced
   :ensure nil
   :custom (proced-enable-color-flag t))
@@ -88,8 +88,10 @@
 
 ;;; PCRE2el
 ;; Expressions without the Emacs escaping required
+;; FIXME: Works well for regexp in Dired, but is impacting, normal `Evil' search
 (use-package pcre2el
   :defer 1
+  :disabled t
   :config (pcre-mode))
 
 ;;; _

@@ -631,20 +631,44 @@
   :custom
   (org-roam-db-autosync-mode t)
   (org-roam-directory "~/dev/my/org")
+  ;;;; Capture Templates
   (org-roam-capture-templates
-   '(("d" "default" plain "%?"
+   '(
+      ;;;;; Default
+     ("d" "default" plain "%?"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
       :unnarrowed t)
 
-     ("w" "Work Item")
-     ("ws" "Story" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
-      :target (file+head "work/gus/stories/%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+filetags: :work:gus:story: \n\n")
+     ;;;;; Work
+     ("w" "Work")
+     ;;;;;; Work Default
+     ("wd" "Default Work" plain "%?"
+      :target (file+head "work/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:\n")
       :unnarrowed t)
 
+     ;;;;;; Work Sprint
+     ("wS" "Sprint" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+      :target (file+head "work/gus/sprints/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:sprint: \n\n")
+      :unnarrowed t)
+
+     ;;;;;; GUS General Work-Item
+     ("wi" "Work-Item" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+      :target (file+head "work/gus/workitems/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:workitem: \n\n")
+      :unnarrowed t)
+
+     ;;;;;; Work Story
+     ("ws" "Story" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+      :target (file+head "work/gus/workitems/stories/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:workitem:story: \n\n")
+      :unnarrowed t)
+
+     ;;;;;; Work Bug
      ("wb" "Bug" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
-      :target (file+head "work/gus/bugs/%<%Y%m%d%H%M%S>-${slug}.org"
-                         "#+title: ${title}\n#+filetags: :work:gus:bug: \n\n")
+      :target (file+head "work/gus/workitems/bugs/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:gus:work_item:bug: \n\n")
       :unnarrowed t)
 
      ("p" "Personal Item")

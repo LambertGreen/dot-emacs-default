@@ -13,6 +13,7 @@
 (use-package magit
   :after (general transient)
   :commands (magit-status magit-blame)
+  :hook (magit-status-mode . (lambda () (toggle-truncate-lines)))
   :custom
   (magit-diff-refine-hunk t)
   (magit-save-repository-buffers 'dontask)

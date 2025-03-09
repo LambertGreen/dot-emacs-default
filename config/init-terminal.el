@@ -14,6 +14,8 @@
   :custom
   (vterm-toggle-fullscreen-p nil)
   (vterm-toggle-scope 'project)
+  :hook (vterm-mode . (lambda () (setq-local face-font-rescale-alist
+                                             '(("Symbols Nerd Font Mono" . 0.8)))))
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key

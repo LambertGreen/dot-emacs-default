@@ -631,15 +631,15 @@
   :custom
   (org-roam-db-autosync-mode t)
   (org-roam-directory "~/dev/my/org/roam/")
-  ;;;; Capture Templates
+;;;; Capture Templates
   (org-roam-capture-templates
    '(
-      ;;;;; Default
+;;;;; Default
      ("d" "default" plain "%?"
       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
       :unnarrowed t)
 
-     ;;;;; Work
+;;;;; Work
      ("w" "Work")
      ;;;;;; Work Default
      ("wd" "Default Work" plain "%?"
@@ -671,24 +671,38 @@
                          "#+title: ${title}\n#+filetags: :work:gus:work_item:bug: \n\n")
       :unnarrowed t)
 
-     ("p" "Personal Item")
-     ("pe" "Entertainment Item")
-     ("pem" "Movie Title" plain "%?"
+;;;;; Contacts
+     ("c" "Contact Item")
+     ("cd" "Default Contact" plain "%?"
+      :target (file+head "people/persons/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :person:\n\n")
+      :unnarrowed t)
+
+     ("cw" "Work Contact" plain "%?"
+      :target (file+head "people/persons/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :person:work:\n\n")
+      :unnarrowed t)
+
+;;;;; Fun
+     ("f" "Fun Item")
+;;;;;; Entertainment
+     ("fe" "Entertainment Item")
+     ("fem" "Movie Title" plain "%?"
       :target (file+head "entertainment/movie_title/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:movie_title:\n\n")
       :unnarrowed t)
 
-     ("pet" "TV-Show Title" plain "%?"
+     ("fet" "TV-Show Title" plain "%?"
       :target (file+head "entertainment/tv-show_title/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:tv-show_title:\n\n")
       :unnarrowed t)
 
-     ("pea" "Actor" plain "%?"
+     ("fea" "Actor" plain "%?"
       :target (file+head "entertainment/cast_crew/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:cast_crew:actor:\n\n")
       :unnarrowed t)
 
-     ("ped" "Director" plain "%?"
+     ("fed" "Director" plain "%?"
       :target (file+head "entertainment/cast_crew/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :entertainment:cast_crew:director:\n\n")
       :unnarrowed t)

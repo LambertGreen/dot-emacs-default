@@ -109,6 +109,7 @@
     "h c" '(helpful-command :wk "describe command")
     "h C" '(helpful-callable :wk "describe callable")
     "h s" '(helpful-symbol :wk "describe symbol")
+    "h '" '(describe-char :wk "describe char")
     )
   :bind
   ([remap describe-key] . helpful-key)

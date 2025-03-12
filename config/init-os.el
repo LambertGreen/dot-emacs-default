@@ -88,15 +88,20 @@
   (add-to-list 'Info-directory-list (concat homebrew-prefix "share/info/")))
 
 ;;; Ns-Auto-Titlebar
-;; On macOS make the titlebar look better
+;; On macOS make the `titlebar' look better
 ;; The package essentially handles the below config:
 ;; (set-frame-parameter nil 'ns-appearance 'dark/light)
 ;; (set-frame-parameter nil 'ns-transparent-titlebar t)
 (use-package ns-auto-titlebar
   :demand t
-  :when (and (eq system-type 'darwin)
-             (or (display-graphic-p) (daemonp)))
-  :config (ns-auto-titlebar-mode))
+  :if (eq system-type 'darwin)
+  :hook (after-make-frame-functions . (lambda (frame)
+                                        (with-selected-frame frame
+                                          (when (display-graphic-p)
+                                            (ns-auto-titlebar-mode)))))
+  :config
+  (unless (daemonp)
+    (ns-auto-titlebar-mode)))
 
 ;;; Mouse
 ;; We need Tom and Jerry

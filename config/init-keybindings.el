@@ -138,6 +138,7 @@
 ;;;;; Open
     "o" '(:ignore t :wk "Open")
     "o s" '(scratch-buffer :wk "scratch buffer")
+    "o f" '(make-frame :wk "make frame")
 
 ;;;;; Toggles
     "t" '(:ignore t :wk "Toggle")

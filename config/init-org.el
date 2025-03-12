@@ -719,7 +719,7 @@
    '(("d" "daily" entry
       "* %?"
       :target (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%Y-%m-%d, %A>\n"))))
+                         "#+title: %<%Y-%m-%d, %A>\n#+filetags: :daily:\n"))))
   :init
 ;;;; Keymaps
   (lgreen/local-leader-define-key

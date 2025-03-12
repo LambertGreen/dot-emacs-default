@@ -685,6 +685,13 @@
 
 ;;;;; Fun
      ("f" "Fun Item")
+;;;;;; Gaming
+     ("fg" "Game Item")
+     ("fgd" "Default" plain "%?"
+      :target (file+head "game/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :game:\n\n")
+      :unnarrowed t)
+
 ;;;;;; Entertainment
      ("fe" "Entertainment Item")
      ("fem" "Movie Title" plain "%?"

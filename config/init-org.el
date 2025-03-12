@@ -647,6 +647,18 @@
                          "#+title: ${title}\n#+filetags: :work:\n")
       :unnarrowed t)
 
+     ;;;;;; Work Doc
+     ("wD" "Doc" plain "\n\n* Links\n+ [[%^{URL}][Doc Link]]\n"
+      :target (file+head "work/docs/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:doc: \n\n")
+      :unnarrowed t)
+
+     ;;;;;; Work Meeting
+     ("wm" "Meeting" plain "\n\n* Links\n+ [[%^{URL}][Doc Link]]\n"
+      :target (file+head "work/meetings/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:meeting: \n\n")
+      :unnarrowed t)
+
      ;;;;;; Work Sprint
      ("wS" "Sprint" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/sprints/%<%Y%m%d%H%M%S>-${slug}.org"

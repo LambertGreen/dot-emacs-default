@@ -641,55 +641,85 @@
 
 ;;;;; Work
      ("w" "Work")
-     ;;;;;; Work Default
+;;;;;; Work -> Default
      ("wd" "Default Work" plain "%?"
       :target (file+head "work/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:\n")
       :unnarrowed t)
 
-     ;;;;;; Work Doc
+;;;;;; Work -> Doc
      ("wD" "Doc" plain "\n\n* Links\n+ [[%^{URL}][Doc Link]]\n"
       :target (file+head "work/docs/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:doc: \n\n")
       :unnarrowed t)
 
-     ;;;;;; Work Meeting
-     ("wm" "Meeting" plain "\n\n* Links\n+ [[%^{URL}][Doc Link]]\n"
+;;;;;; Work -> Review
+     ("wr" "Review")
+;;;;;;; Work -> Review Default
+     ("wrd" "Default" plain "\n\n* Links\n+ [[%^{URL}][Link]]\n"
+      :target (file+head "work/reviews/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:review: \n\n")
+      :unnarrowed t)
+
+;;;;;;; Work -> Review -> Doc
+     ("wrD" "Doc" plain "\n\n* Links\n+ [[%^{URL}][Link]]\n"
+      :target (file+head "work/reviews/docs/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:review:doc: \n\n")
+      :unnarrowed t)
+
+;;;;;;; Work -> Review -> Code
+     ("wrc" "Code" plain "\n\n* Links\n+ [[%^{URL}][Link]]\n"
+      :target (file+head "work/reviews/code/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:review:code: \n\n")
+      :unnarrowed t)
+
+;;;;;; Work -> Meeting
+     ("wm" "Meeting" plain "\n\n* Links\n+ [[%^{URL}][Meeting Link]]\n"
       :target (file+head "work/meetings/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:meeting: \n\n")
       :unnarrowed t)
 
-     ;;;;;; Work Sprint
-     ("wS" "Sprint" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+;;;;;; Work -> Slack
+     ("wS" "Slack" plain "\n\n* Links\n+ [[%^{URL}][Slack Link]]\n"
+      :target (file+head "work/slack/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+filetags: :work:slack: \n\n")
+      :unnarrowed t)
+
+;;;;;; Work -> Scrum
+     ("ws" "Work Scrum")
+;;;;;;; Work -> Scrum -> Sprint
+     ("wsS" "Sprint" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/sprints/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:gus:sprint: \n\n")
       :unnarrowed t)
 
-     ;;;;;; GUS General Work-Item
-     ("wi" "Work-Item" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+;;;;;;; Work -> Scrum -> Work-Item
+     ("wsi" "Work-Item" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/workitems/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:gus:workitem: \n\n")
       :unnarrowed t)
 
-     ;;;;;; Work Story
-     ("ws" "Story" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+;;;;;;; Work -> Scrum -> Story
+     ("wss" "Story" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/workitems/stories/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:gus:workitem:story: \n\n")
       :unnarrowed t)
 
-     ;;;;;; Work Bug
-     ("wb" "Bug" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
+;;;;;;; Work -> Scrum -> Bug
+     ("wsb" "Bug" plain "\n\n* Links\n+ [[%^{URL}][GUS Link]]\n"
       :target (file+head "work/gus/workitems/bugs/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :work:gus:work_item:bug: \n\n")
       :unnarrowed t)
 
 ;;;;; Contacts
      ("c" "Contact Item")
+;;;;;; Contacts -> Default
      ("cd" "Default Contact" plain "%?"
       :target (file+head "people/persons/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :person:\n\n")
       :unnarrowed t)
 
+;;;;;; Contacts -> Work
      ("cw" "Work Contact" plain "%?"
       :target (file+head "people/persons/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :person:work:\n\n")
@@ -697,14 +727,14 @@
 
 ;;;;; Fun
      ("f" "Fun Item")
-;;;;;; Gaming
+;;;;;; Fun -> Gaming
      ("fg" "Game Item")
      ("fgd" "Default" plain "%?"
       :target (file+head "game/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :game:\n\n")
       :unnarrowed t)
 
-;;;;;; Entertainment
+;;;;;; Func -> Entertainment
      ("fe" "Entertainment Item")
      ("fem" "Movie Title" plain "%?"
       :target (file+head "entertainment/movie_title/%<%Y%m%d%H%M%S>-${slug}.org"

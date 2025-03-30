@@ -4,7 +4,8 @@
 ;; Skynet started somewhere
 (use-package vterm
   :unless (eq system-type 'windows-nt)
-  :custom (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+  :custom (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
+  :hook (vterm-mode . #'lgreen/set-shell-theme-env))
 
 ;;; VTerm-toggle
 ;; I'll be back
@@ -19,7 +20,7 @@
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
-    "o t" '(vterm-toggle :wk "Open vterm")))
+    "o t" '(vterm-toggle :wk "Open Vterm")))
 
 ;;; EAT
 ;; Emulate A Terminal

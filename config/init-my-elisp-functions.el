@@ -32,6 +32,13 @@
     (or frame (setq frame (selected-frame)))
     (unless (display-graphic-p frame)
       (set-face-background 'default "unspecified-bg" frame)))
+;;;;; Shell theme
+  (defun lgreen/set-shell-theme-env ()
+    "Set LGREEN_SHELL_THEME_MODE for shells based on Emacs theme background mode."
+    (let ((mode (if (eq (frame-parameter nil 'background-mode) 'light)
+                    "light"
+                  "dark")))
+      (setenv "LGREEN_SHELL_THEME_MODE" mode)))
 ;;;;; Filename handling
   (defun lgreen/yank-full-filename ()
     "Copy the full path of the current buffer's file to the clipboard."

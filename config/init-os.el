@@ -5,7 +5,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :when (memq window-system '(mac ns))
-  :defer 5
+  :defer 1
   :config
   ;; Use bash as the shell for exec-path-from-shell
   (setq shell-file-name "/bin/bash")

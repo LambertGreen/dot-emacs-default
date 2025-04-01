@@ -349,5 +349,20 @@
   :bind (("C-=" . er/expand-region)
          ("C--" . er/contract-region )))
 
+;;; Evil Clever Parens
+;; Moving with top form
+;; TODO Decide if this package is worth using for elisp mode
+;; NOTE The package is put in disabled state because it was impacting
+;; unimpaired bindings i.e. those beginning with "[" and "]"
+(use-package evil-cleverparens
+  :ensure t
+  :disabled t
+  :after (evil smartparens)
+  :hook ((emacs-lisp-mode lisp-mode) . evil-cleverparens-mode)
+  :config
+  (evil-define-key 'normal evil-cleverparens-mode-map
+    (kbd "]m") #'evil-cp-end-of-defun
+    (kbd "[m") #'evil-cp-beginning-of-defun))
+
 ;;; _
 (provide 'init-evil)

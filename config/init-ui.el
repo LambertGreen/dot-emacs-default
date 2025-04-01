@@ -219,14 +219,19 @@
 (use-package outline
   :ensure nil
   :after general
-  :hook ((emacs-lisp-mode conf-mode) . outline-minor-mode)
+  :hook (((emacs-lisp-mode conf-mode) . outline-minor-mode)
+         (outline-minor-mode . lgreen/setup-outline-mode-map))
   :init
 ;;;; Keymaps
-  (general-def
-    :keymaps 'outline-mode-map
-    :states 'normal
-    "<tab>" 'outline-cycle
-    "gh" 'outline-up-heading)
+  (defun lgreen/setup-outline-mode-map ()
+    "Unbind conflicting evil keys in outline-mode-map."
+    (general-def
+      :keymaps 'outline-mode-map
+      :states 'normal
+      "[[" nil
+      "]]" nil
+      "<tab>" 'outline-cycle
+      "gh" 'outline-up-heading))
   (lgreen/leader-define-key
     :keymaps 'outline-mode-map
     "z" '(:ignore t :wk "Outline")

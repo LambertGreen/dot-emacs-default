@@ -2,15 +2,17 @@
 
 ;;; Vterm
 ;; Skynet started somewhere
+;; TODO Disabling Vterm because color is now getting messed up
 (use-package vterm
   :unless (eq system-type 'windows-nt)
+  :disabled t
   :custom (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
   :hook (vterm-mode . #'lgreen/set-shell-theme-env))
 
 ;;; VTerm-toggle
 ;; I'll be back
 (use-package vterm-toggle
-  :after general
+  :after (general vterm)
   :commands (vterm-toggle)
   :custom
   (vterm-toggle-fullscreen-p nil)
@@ -24,15 +26,20 @@
 
 ;;; EAT
 ;; Emulate A Terminal
-;;
 ;; NOTE: Disabled: Vterm copy/paste binds and reliability is better
 ;; NOTE: On first use you may need to run `eat-compile-terminfo'
 (use-package eat
-  :disabled t
   :after project
-  :hook ((eat-mode . lgreen/eat-startup-in-line-mode)
-         (kill-buffer . close-window-on-eat-buffer-kill))
+  :custom (eat-kill-buffer-on-exit nil)
+  :hook ((eat-mode . lgreen/set-shell-theme-env)
+         (kill-buffer . close-window-on-eat-buffer-kill)
+         (eat-mode . (lambda () (setq-local face-font-rescale-alist
+                                            '(("Symbols Nerd Font Mono" . 0.8))))))
   :bind ([remap project-shell] . eat-project)
+  ;; Add s-v and fallback binding inside eat-mode
+  :bind (:map eat-mode-map
+              ("s-v" . eat-yank)
+              ("C-c C-y" . eat-yank))
   :custom (eat-kill-buffer-on-exit t)
   :init
 ;;;; Keymaps
@@ -40,10 +47,6 @@
     "o t" '(eat :wk "Open term")
     "p s" '(eat-project :wk "Shell in project"))
 ;;;; Functions
-  (defun lgreen/eat-startup-in-line-mode ()
-    "Start `eat' in line edit mode."
-    (when (derived-mode-p 'eat-mode)
-      (eat-line-mode)))
   (defun close-window-on-eat-buffer-kill ()
     "Close the window when an eat buffer is killed."
     (when (string-match-p "\\*.*eat\\*" (buffer-name))

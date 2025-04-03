@@ -77,7 +77,9 @@
     ;; Project
     "p d" '(lgreen/consult-fd-with-args :wk "find file with [fd]")
     "p b" '(consult-project-buffer :wk "switch buffer")
-    "p s" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
+
+    ;; Search
+    "s p" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
 
     ;; Theme
     "h t" '(consult-theme :wk "switch theme")

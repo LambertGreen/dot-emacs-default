@@ -94,5 +94,8 @@
   :disabled t
   :config (pcre-mode))
 
+(use-package anki-editor
+  :after org)
+
 ;;; _
 (provide 'init-utils)

@@ -263,7 +263,9 @@
     (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)))
 
 ;;;; Justfiles
-(use-package just-mode)
+(use-package just-mode
+  :mode (("justfile\\'" . just-mode)
+         ("\\.justfile\\'" . just-mode)))
 
 ;;;; Lua
 (use-package lua-mode

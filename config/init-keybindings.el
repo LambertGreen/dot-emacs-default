@@ -109,6 +109,7 @@
 
     ;; Window sizing
     "w =" '(balance-windows :wk "balance windows")
+    "w e" '(balance-windows :wk "balance windows")
     "w f" '(toggle-frame-fullscreen :wk "toggle fullscreen")
     "w m" '(toggle-frame-maximized :wk "toggle maximized")
 

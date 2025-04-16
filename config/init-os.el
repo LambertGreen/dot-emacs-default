@@ -40,7 +40,18 @@
   ;; Set auth-sources
   (setq auth-sources '(macos-keychain-generic macos-keychain-internet "~/.authinfo.gpg"))
   ;; Use `mdfind' instead of `locate'
-  (setq consult-locate-args "mdfind -name "))
+  (setq consult-locate-args "mdfind -name ")
+
+  ;; Remap Cmd to Super and Option to Meta
+  (setq mac-command-modifier 'super)
+  (setq mac-option-modifier 'meta)
+
+  ;; macOS-style keybindings
+  (global-set-key (kbd "s-c") 'kill-ring-save)
+  (global-set-key (kbd "s-v") 'yank)
+  (global-set-key (kbd "s-x") 'kill-region)
+  (global-set-key (kbd "s-a") 'mark-whole-buffer)
+  (global-set-key (kbd "s-z") 'undo))
 
 ;;; GNU/Linux
 ;; Linux specific config

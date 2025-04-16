@@ -36,10 +36,19 @@
   :hook (after-init . pinentry-start))
 
 ;;; Direnv
+;; TODO Trying out `envrc' instead
 (use-package direnv
+  :disabled t
   :unless (eq system-type 'windows-nt)
   :hook (project-find-functions . (lambda (_)
                                     (direnv-enable-mode))))
+
+;;; Envrc
+;; Automatically become a product of the environment
+(use-package envrc
+  :unless (eq system-type 'windows-nt)
+  :config
+  (envrc-global-mode))
 
 ;;; EditorConfig
 ;; Follow the conventions of the repo

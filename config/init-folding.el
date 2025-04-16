@@ -18,16 +18,54 @@
   :ensure nil
   :after (evil treesit-fold)
   :hook ((emacs-lisp-mode . hs-minor-mode)
-         (lisp-interaction-mode . hs-minor-mode))
+         (lisp-interaction-mode . hs-minor-mode)
+         (sh-mode . hs-minor-mode))
   :init
   (add-to-list 'evil-fold-list
                '((hs-minor-mode)
                  :open-all hs-show-all
                  :close-all hs-hide-all
-                 :toggle hs-toggle-hiding
-                 :open hs-show-block
-                 :close hs-hide-block)
-               'append))
+                 :toggle lgreen/hs-toggle-from-function-line
+                 :open lgreen/hs-open-from-function-line
+                 :close lgreen/hs-close-from-function-line)
+               'append)
+  (add-to-list 'hs-special-modes-alist
+               '(sh-mode
+                 "^[[:space:]]*[[:word:]_]+()[[:space:]]*{$"  ; start
+                 "^[[:space:]]*}"                             ; end
+                 "#"                                          ; comment
+                 lgreen/hs-forward-sexp-sh
+                 nil))
+  (defun lgreen/hs-forward-sexp-sh (_arg)
+    "Move forward over a shell function body for hs-minor-mode."
+    (unless (looking-at "{")
+      (re-search-forward "{"))
+    (backward-char)
+    (forward-sexp))
+  (defun lgreen/hs-open-from-function-line ()
+    "Open a fold at function line in sh-mode using hs-minor-mode."
+    (interactive)
+    (save-excursion
+      (beginning-of-line)
+      (when (re-search-forward hs-block-start-regexp (line-end-position) t)
+        (goto-char (match-beginning 0)))
+      (hs-show-block)))
+  (defun lgreen/hs-close-from-function-line ()
+    "Close a fold at function line in sh-mode using hs-minor-mode."
+    (interactive)
+    (save-excursion
+      (beginning-of-line)
+      (when (re-search-forward hs-block-start-regexp (line-end-position) t)
+        (goto-char (match-beginning 0)))
+      (hs-hide-block)))
+  (defun lgreen/hs-toggle-from-function-line ()
+    "Smarter toggle that works from anywhere on the function definition line."
+    (interactive)
+    (save-excursion
+      (beginning-of-line)
+      (when (re-search-forward hs-block-start-regexp (line-end-position) t)
+        (goto-char (match-beginning 0)))
+      (hs-toggle-hiding))))
 
 ;;; Origami and Evil Integration
 ;; Enable Vim-like code folding

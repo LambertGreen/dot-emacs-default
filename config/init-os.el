@@ -7,17 +7,16 @@
   :when (memq window-system '(mac ns))
   :defer 1
   :config
-  ;; Use bash as the shell for exec-path-from-shell
-  (setq shell-file-name "/bin/bash")
+  (setq shell-file-name "/bin/zsh")
   (setq exec-path-from-shell-arguments '("-c" "-l"))
   ;; Add all the necessary environment variables in one loop
-  (dolist (var
-           '(
-             "RIPGREP_CONFIG_PATH"
-             "SSH_AGENT_PID"
-             "SSH_AUTH_SOCK"
-             "GPG_AGENT_INFO"
-             ))
+  (dolist (var '("RIPGREP_CONFIG_PATH"
+                 "SSH_AGENT_PID"
+                 "SSH_AUTH_SOCK"
+                 "GPG_AGENT_INFO"
+                 "LANG"
+                 "LC_CTYPE"
+                 "PATH"))
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 

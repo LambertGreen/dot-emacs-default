@@ -114,6 +114,12 @@
   (unless (daemonp)
     (ns-auto-titlebar-mode)))
 
+;;; Osx Trash
+;; Use the system trash
+(use-package osx-trash
+  :if (eq system-type 'darwin)
+  :config (osx-trash-setup))
+
 ;;; Mouse
 ;; We need Tom and Jerry
 (use-package mouse

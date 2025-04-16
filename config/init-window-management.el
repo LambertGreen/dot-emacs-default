@@ -49,9 +49,10 @@
   (popper-echo-mode +1))
 
 ;;; Customize compilation windows
-(use-package compilation-mode
+(use-package compile
   :ensure nil
   :hook (compilation-filter . lgreen/colorize-compilation-buffer)
+  :custom (compilation-scroll-output 'first-error)
   :config
   ;; Make compilation buffer show in right window
   (add-to-list 'display-buffer-alist

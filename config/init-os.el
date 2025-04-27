@@ -41,16 +41,23 @@
   ;; Use `mdfind' instead of `locate'
   (setq consult-locate-args "mdfind -name ")
 
+;;;; Keybinds
+;;;;; Cmd and Option
   ;; Remap Cmd to Super and Option to Meta
   (setq mac-command-modifier 'super)
   (setq mac-option-modifier 'meta)
 
-  ;; macOS-style keybindings
+;;;;; Copy/Paste
   (global-set-key (kbd "s-c") 'kill-ring-save)
   (global-set-key (kbd "s-v") 'yank)
   (global-set-key (kbd "s-x") 'kill-region)
   (global-set-key (kbd "s-a") 'mark-whole-buffer)
-  (global-set-key (kbd "s-z") 'undo))
+  (global-set-key (kbd "s-z") 'undo)
+
+;;;;; Text size zoom
+  (global-set-key (kbd "s--") 'text-scale-decrease)
+  (global-set-key (kbd "s-=") 'text-scale-increase)
+  (global-set-key (kbd "s-0") (lambda () (interactive) (text-scale-set 0))))
 
 ;;; GNU/Linux
 ;; Linux specific config

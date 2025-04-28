@@ -24,15 +24,16 @@
 ;; Usage notes:
 ;; - Use the universal argument before toggling to keep popups showing
 ;; - Use the universal argument twice for toggling all
+;; NOTE: we don't use this for EAT/Vterm as we don't want those to ever
+;; be side window limited i.e. we want to be able to maximize and move the
+;; terminal windows around
 (use-package popper
   :custom
   (popper-reference-buffers
-   '("\\*eat\\*"
-     "\\*.*-eat\\*"
+   '(
      eshell-mode    ; eshell as popups
      shell-mode     ; shell as popups
      term-mode      ; term as popups
-     vterm-mode     ; vterm as popups
      help-mode      ; help windows
      compilation-mode)) ; compilation buffers
   (popper-group-function #'popper-group-by-project)

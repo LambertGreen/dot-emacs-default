@@ -39,6 +39,37 @@
                     "light"
                   "dark")))
       (setenv "LGREEN_SHELL_THEME_MODE" mode)))
+;;;;; Font Diagnostics
+  (defun lgreen/nerd-font-test-sheet ()
+    "Insert a test sheet of Nerd Font icons into a new scratch buffer."
+    (interactive)
+    (let ((buf (generate-new-buffer "*Nerd Font Test Sheet*")))
+      (switch-to-buffer buf)
+      (insert (propertize "🖋 Nerd Font Icon Test Sheet\n\n" 'face '(:height 2.0 :weight bold)))
+      (dolist (char '(
+                      ;; Popular Nerd Font icons (private use area)
+                      #xe5ff ; Folder
+                      #xf015 ; Home
+                      #xf07b ; Folder open
+                      #xf0c5 ; Copy
+                      #xf0e7 ; Lightning bolt
+                      #xf11c ; Hdd
+                      #xf120 ; Terminal
+                      #xf121 ; Code
+                      #xf13b ; File text
+                      #xf17b ; GitHub
+                      #xf1c9 ; File pdf
+                      #xf1d8 ; Linux
+                      #xf1e0 ; Server
+                      #xf1f9 ; Apple
+                      #xf23a ; Windows
+                      #xf2f1 ; Battery
+                      #xf3ed ; Docker
+                      ;; Add more if you like!
+                      ))
+        (insert (format "%s  (U+%04X)\n" (char-to-string char) char)))
+      (goto-char (point-min))
+      (read-only-mode 1)))
 ;;;;; Filename handling
   (defun lgreen/yank-full-filename ()
     "Copy the full path of the current buffer's file to the clipboard."

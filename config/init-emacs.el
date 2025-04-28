@@ -43,7 +43,10 @@
       (set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 132)
       (set-face-attribute 'fixed-pitch nil :family "Aporetic Sans Mono")
       (set-face-attribute 'variable-pitch nil :family "Aporetic Sans Mono")
-      (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'append))
+      ;; Use Symbols Nerd Font Mono as the fallback font
+      (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'prepend)
+      (set-fontset-font t '(#xe000 . #xf8ff) "Symbols Nerd Font Mono" nil 'prepend)
+      (set-fontset-font t '(#xf000 . #xf1ff) "Symbols Nerd Font Mono" nil 'prepend))
      ((eq system-type 'linux)
       (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 132)
       (set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font Mono")

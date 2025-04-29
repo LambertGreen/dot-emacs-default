@@ -1,6 +1,9 @@
 ;; init-package-manager.el --- -*- lexical-binding: t; -*-
 
 ;;; Use Elpaca as our package manager
+;; Suppress Elpaca version assignment warnings
+(setq warning-suppress-log-types '((elpaca)))
+
 (defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))

@@ -34,7 +34,8 @@
       "C-k" 'dired-up-directory)
 
     (evil-define-key 'normal dired-mode-map (kbd "SPC m") (make-sparse-keymap)))
-  )
+  :config
+  (put 'dired-find-alternate-file 'disabled nil))
 
 ;;; Dired-Narrow
 ;; Find the files on the straight-&-narrow

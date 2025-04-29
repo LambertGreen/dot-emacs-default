@@ -730,7 +730,7 @@
 ;;;;;; Fun -> Gaming
      ("fg" "Game Item")
      ("fgd" "Default" plain "%?"
-      :target (file+head "game/%<%Y%m%d%H%M%S>-${slug}.org"
+      :target (file+head "games/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+filetags: :game:\n\n")
       :unnarrowed t)
 

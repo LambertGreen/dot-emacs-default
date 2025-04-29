@@ -3,6 +3,7 @@
 ;;; ======================
 ;;; Lambert's Emacs Config
 ;;; ======================
+
 ;;; Load Path
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
 
@@ -40,5 +41,13 @@
 (require 'init-tty)
 (require 'init-email)
 (require 'init-ai-utils)
+
+;;; Topgrade upgrade support
+(when (and noninteractive (getenv "DOTFILES_EMACS_UPDATE"))
+  (princ "Running elpaca-wait...\n")
+  (elpaca-wait)
+  (princ "Running elpaca-update...\n")
+  (elpaca-update-all)
+  (princ "Elpaca update finished!\n"))
 
 ;;; _

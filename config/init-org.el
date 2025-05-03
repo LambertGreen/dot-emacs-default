@@ -402,7 +402,7 @@
   :hook ((org-mode . evil-org-mode)
          (evil-org-mode . evil-org-set-key-theme))
   :config
-  (evil-org-set-key-theme '(textobjects insert navigation additional shift leader todo heading)))
+  (evil-org-set-key-theme '(textobjects insert additional shift todo heading)))
 
 ;;; Org-Agenda
 ;; I love it when a plan comes together

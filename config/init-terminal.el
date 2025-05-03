@@ -2,7 +2,7 @@
 
 ;;; Vterm
 ;; Skynet started somewhere
-;; TODO: Disabling vterm due to color issue
+;; NOTE: Disabling vterm due to color issue
 (use-package vterm
   :disabled t
   :unless (eq system-type 'windows-nt)

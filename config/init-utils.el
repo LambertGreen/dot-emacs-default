@@ -97,7 +97,7 @@
 
 ;;; PCRE2el
 ;; Expressions without the Emacs escaping required
-;; FIXME: Works well for regexp in Dired, but is impacting, normal `Evil' search
+;; NOTE: Works well for regexp in Dired, but is impacting, normal `Evil' search
 (use-package pcre2el
   :defer 1
   :disabled t

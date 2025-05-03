@@ -76,7 +76,6 @@
   :when (eq system-type 'windows-nt)
   :config
   ;; Set find program
-  ;; TODO: Check if fd can be used since it so much faster.
   (when (eq system-type 'windows-nt)
     (setq find-program (expand-file-name "~/scoop/shims/find.exe")))
   ;; Set exec path

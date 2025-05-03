@@ -106,12 +106,27 @@ I had started out using a literate configuration, but changed to a pure =Elisp= 
 =Org= does not have supported method of rendering tags in pretty fashion.  We can set the ~taglist~ to have UTF8 glyphs, but they get stripped out when actually being applied.
 
 * PROJ Work-Items
-** Open [0/1]
-*** TODO Use the faster =Rust= based search tools if installed (=ripgrep=, =fd=) [0/2]
-**** [ ] Update =xref=
-**** [ ] Update =consult=
+** Open [0/0]
+** Complete [20/20]
+*** DONE Use the faster =Rust= based search tools if installed (=ripgrep=, =fd=) [2/2]
+CLOSED: [2025-05-03 Sat 12:36]
+:LOGBOOK:
+- State "DONE"       from "[X]"         [2025-05-03 Sat 12:36]
+- State "[X]"        from "[X]"         [2025-05-03 Sat 12:36]
+- State "[X]"        from "TODO"         [2025-05-03 Sat 12:36]
+:END:
+**** [K] Update =xref=
+CLOSED: [2025-05-03 Sat 12:35]
+:LOGBOOK:
+- State "[K]"        from "[ ]"         [2025-05-03 Sat 12:35]
+:END:
++ There is no drop in replacement values for ~find-program~ / ~grep-program~
+**** [X] Update =consult=
+CLOSED: [2025-05-03 Sat 12:36]
+:LOGBOOK:
+- State "[X]"        from "[ ]"         [2025-05-03 Sat 12:36]
+:END:
 
-** Complete [19/19]
 *** DONE In ~use-package~ blocks set ~:ensure t~ as default and remove existing entries
 *** DONE Consider all ~:bind~ blocks for ~:general~ applicability
 *** DONE Double check Evil packages against Doom's list

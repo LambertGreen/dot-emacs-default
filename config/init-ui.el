@@ -248,7 +248,7 @@
 ;; Org like faces and outlining for non-org modes
 (use-package outshine
   :after outline
-  :hook ((emacs-lisp-mode conf-mode sh-mode) . outshine-mode))
+  :hook ((emacs-lisp-mode conf-mode sh-mode just-mode) . outshine-mode))
 
 ;;; Nerd-Icons
 ;; Fancy icons

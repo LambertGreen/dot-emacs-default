@@ -10,13 +10,19 @@
   (setq shell-file-name "/bin/zsh")
   (setq exec-path-from-shell-arguments '("-c" "-l"))
   ;; Add all the necessary environment variables in one loop
-  (dolist (var '("RIPGREP_CONFIG_PATH"
-                 "SSH_AGENT_PID"
-                 "SSH_AUTH_SOCK"
-                 "GPG_AGENT_INFO"
+  (dolist (var '(
                  "LANG"
                  "LC_CTYPE"
-                 "PATH"))
+                 "PATH"
+                 "HOMEBREW_CASK_OPTS"
+                 "HOMEBREW_PREFIX"
+                 "HOMEBREW_CELLAR"
+                 "HOMEBREW_REPOSITORY"
+                 "RIPGREP_CONFIG_PATH"
+                 "GPG_AGENT_INFO"
+                 "SSH_AGENT_PID"
+                 "SSH_AUTH_SOCK"
+                 ))
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 

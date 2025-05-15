@@ -4,7 +4,7 @@
 ;; We are products of our environment
 (use-package exec-path-from-shell
   :ensure t
-  :when (memq window-system '(mac ns))
+  :when (memq window-system '(mac ns x pgtk))   ; macOS + Linux GUIs
   :defer 1
   :config
   (setq shell-file-name "/bin/zsh")

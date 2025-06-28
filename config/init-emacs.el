@@ -117,5 +117,7 @@
   :config
   (ultra-scroll-mode 1))
 
+;;; TODO: Remove this suppression when packages are all updated to include the lexical binding cookie
+(setq warning-suppress-log-types '((files)))
 ;;; _
 (provide 'init-emacs)

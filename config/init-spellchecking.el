@@ -9,6 +9,7 @@
 ;; - Common mistyped and misspelled words: hte (the), noone (none/noon)
 (use-package jinx
   :unless (eq system-type 'windows-nt)
+  :after exec-path-from-shell  ; Wait for environment variables
   :hook ((emacs-startup . global-jinx-mode)
          ((c++-mode c++-ts-mode) . lgreen/jinx-setup-for-c++-modes)
          (hack-local-variables . lgreen/override-jinx-local-words))

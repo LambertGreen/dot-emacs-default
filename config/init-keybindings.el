@@ -37,6 +37,7 @@
 ;;;;; Top Level Keys
     "SPC" '(execute-extended-command :wk "execute command")
     "!" '(shell-command :wk "shell command")
+    "|" '(shell-command-on-region :wk "shell command on region")
     ":" '(pp-eval-expression :wk "eval expression")
     ";" '(comment-dwim :wk "comment")
     "." '(repeat :wk "repeat last command")

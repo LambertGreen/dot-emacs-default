@@ -1,6 +1,16 @@
 ;; init-package-manager.el --- -*- lexical-binding: t; -*-
 
 ;;; Use Elpaca as our package manager
+
+;;; Short-circuit if user declines package installation
+;; Only prompt if elpaca is not already installed
+(unless noninteractive
+  (let ((elpaca-dir (expand-file-name "elpaca/" user-emacs-directory)))
+    (unless (file-exists-p elpaca-dir)
+      (unless (y-or-n-p "Elpaca not found. Initialize package manager? (n for vanilla Emacs) ")
+        (provide 'init-package-manager)
+        (throw 'early-exit nil)))))
+
 ;; Suppress Elpaca version assignment warnings
 (setq warning-suppress-log-types '((elpaca)))
 

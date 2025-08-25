@@ -7,23 +7,23 @@
   :disabled t
   :unless (eq system-type 'windows-nt)
   :custom (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
-  :hook (vterm-mode . #'lgreen/set-shell-theme-env))
-
-;;; VTerm-toggle
-;; I'll be back
-(use-package vterm-toggle
-  :after (general vterm)
-  :commands (vterm-toggle)
-  :custom
-  (vterm-toggle-fullscreen-p nil)
-  (vterm-toggle-scope 'project)
-  :hook (vterm-mode . (lambda ()
-                        (setq-local face-font-rescale-alist
-                                    '(("Symbols Nerd Font Mono" . 0.8)))))
-  :init
-;;;; Keymaps
-  (lgreen/leader-define-key
-    "o t" '(vterm-toggle :wk "Open Vterm")))
+  :hook (vterm-mode . #'lgreen/set-shell-theme-env)
+  :config
+  ;;;; VTerm-toggle
+  ;; I'll be back
+  (use-package vterm-toggle
+    :after general
+    :commands (vterm-toggle)
+    :custom
+    (vterm-toggle-fullscreen-p nil)
+    (vterm-toggle-scope 'project)
+    :hook (vterm-mode . (lambda ()
+                          (setq-local face-font-rescale-alist
+                                      '(("Symbols Nerd Font Mono" . 0.8)))))
+    :init
+    ;;;; Keymaps
+    (lgreen/leader-define-key
+      "o t" '(vterm-toggle :wk "Open Vterm"))))
 
 ;;; EAT
 ;; Emulate A Terminal

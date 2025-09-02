@@ -26,7 +26,13 @@
     (let ((inhibit-message t))  ;; Temporarily disable messages
       (apply orig-fun args)))
   (advice-add 'undo-tree-save-history :around #'lgreen/undo-tree-suppress-save-message)
-  (global-undo-tree-mode))
+  (global-undo-tree-mode)
+  ;; Enable undo-tree in non-file buffers for Evil mode
+  (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+
+  ;; Additional hook for buffer switches and mode changes
+  (add-hook 'find-file-hook 'turn-on-undo-tree-mode)
+  (add-hook 'first-change-hook 'turn-on-undo-tree-mode))
 
 ;;; _
 (provide 'init-undo)

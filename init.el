@@ -43,12 +43,26 @@
   (require 'init-email)
   (require 'init-ai-utils))
 
-;;; Topgrade upgrade support
+;;; Dotfiles package manager support
 (when (and noninteractive (getenv "DOTFILES_EMACS_UPDATE"))
   (princ "Running elpaca-wait...\n")
   (elpaca-wait)
   (princ "Running elpaca-update...\n")
   (elpaca-update-all)
   (princ "Elpaca update finished!\n"))
+
+(when (and noninteractive (getenv "DOTFILES_EMACS_CHECK"))
+  (princ "Running elpaca-wait...\n")
+  (elpaca-wait)
+  (princ "Fetching package updates...\n")
+  (elpaca-fetch-all)
+  (princ "Elpaca check finished!\n"))
+
+(when (and noninteractive (getenv "DOTFILES_EMACS_INSTALL"))
+  (princ "Running elpaca-wait...\n")
+  (elpaca-wait)
+  (princ "Processing elpaca queues...\n")
+  (elpaca-process-queues)
+  (princ "Elpaca install finished!\n"))
 
 ;;; _

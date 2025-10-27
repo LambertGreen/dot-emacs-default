@@ -20,11 +20,17 @@
       "f y d" '(lgreen/yank-parent-directory :wk "parent-directory-name")))
 ;;;; Functions
 ;;;;; Visuals
-  ;; Set transparency of emacs
-  (defun lgreen/transparency (value)
+  ;; Set transparency of emacs frame
+  (defun lgreen/set-frame-transparency (value)
     "Sets the transparency of the frame window. 0=transparent/100=opaque"
     (interactive "nTransparency Value 0 - 100 opaque:")
     (set-frame-parameter (selected-frame) 'alpha value))
+  ;; Set transparency of emacs background
+  (defun lgreen/set-background-transparency (value)
+    "Sets the transparency of the background. 0=transparent/100=opaque"
+    (interactive "nTransparency Value 0 - 100 opaque:")
+    (dolist (frame (frame-list))
+      (set-frame-parameter frame 'alpha-background value)))
   ;; Function to make the background transparent when running in a terminal
   (defun lgreen/remove-background-in-terminal (&optional frame)
     "Unsets the background color in terminal mode."

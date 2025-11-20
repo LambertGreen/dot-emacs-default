@@ -220,6 +220,13 @@
    ("known_hosts\\'"       . ssh-known-hosts-mode)
    ("authorized_keys\\'"   . ssh-authorized-keys-mode)))
 
+;;;; Conf mode
+;; Make the key value pairs colorful
+(use-package conf-mode
+  :mode
+  (("/\\.aws/credentials\\'" . conf-mode)
+   ("/\\.aws/config\\'"      . conf-mode)))
+
 ;;;; AutoHotkey
 ;; Make Emacs a babel-fish
 (use-package ahk-mode

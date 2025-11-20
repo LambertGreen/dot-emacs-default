@@ -58,5 +58,29 @@
         (require 'diff-hl)
         (global-diff-hl-mode)))))
 
+;;; Forge
+;; The codesmith pounding the code into useful tools
+(use-package forge
+  :after magit
+  :commands (forge-pull forge-list-pullreqs forge-list-issues)
+  :custom
+  (forge-add-default-bindings nil)  ; Add this line
+  ;; Limit how many topics (PRs/issues) to fetch by default
+  (forge-topic-list-limit '(60 . 0))
+  ;; Only fetch notifications for repos you're watching
+  (forge-owned-accounts '(("lambert-green_sfemu") ("LambertGreen")))
+  :init
+  ;; Keybindings for forge commands
+  (lgreen/leader-define-key
+    "g f " '(:ignore t :wk "Forge")
+    "g f p" '(forge-pull :wk "pull")
+    "g f l" '(forge-list-pullreqs :wk "list PRs")
+    "g f i" '(forge-list-issues :wk "list issues"))
+  :config
+  ;; Map SSH aliases to GitHub
+  (dolist (alias '("github.com-work" "github.com-personal"))
+    (add-to-list 'forge-alist
+                 `(,alias "api.github.com" "github.com" forge-github-repository))))
+
 ;;; _
 (provide 'init-version-control)

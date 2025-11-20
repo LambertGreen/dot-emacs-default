@@ -180,6 +180,7 @@
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
+  (orderless-matching-styles '(orderless-prefixes))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; Fussy

@@ -398,11 +398,10 @@
 ;; Might be just for show?
 ;; The issue is performance
 (use-package minimap
-  :disabled t
   :custom
   ((minimap-window-location 'right)
    (minimap-width-fraction 0.0)
-   (minimap-minimum-width 12))
+   (minimap-minimum-width 10))
   :init
   (when (display-graphic-p)
     (minimap-mode))
@@ -410,6 +409,7 @@
     "t M" '(minimap-mode :wk "minimap")))
 
 (use-package demap
+  :disabled t
   :custom
   ((demap-font "Minimap")
    (demap-minimap-window-side 'right)
@@ -418,7 +418,7 @@
   (lgreen/leader-define-key
     "t M" '(demap-toggle :wk "toggle minimap"))
   :config
-  (set-face-attribute 'demap-minimap-font-face nil :font "Minimap-2")
+  (set-face-attribute 'demap-minimap-font-face nil :font "Minimap")
   )
 
 ;;; _

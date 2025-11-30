@@ -9,6 +9,16 @@
          ("C-/" . dabbrev-expand)
          ("C-;" . dabbrev-completion)))
 
+;;; Completion Preview
+;; You do the starting but the ghost does the ending
+(use-package completion-preview
+  :ensure nil
+  :hook ((text-mode prog-mode) . completion-preview-mode)
+  :bind
+  (:map completion-preview-active-mode-map
+        ("C-j" . completion-preview-next-candidate)
+        ("C-k" . completion-preview-prev-candidate)))
+
 ;;; Corfu
 ;; Just completion-at-point UI
 (use-package corfu

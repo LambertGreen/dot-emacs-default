@@ -23,6 +23,8 @@
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
+  ;; Unbind C-k (evil-insert-digraph) to allow minor modes like completion-preview to use it
+  (evil-define-key 'insert 'global (kbd "C-k") nil)
 
 ;;;;; Avy Goto
   ;; Set keybinding for evil-avy-goto-char-timer in motion state

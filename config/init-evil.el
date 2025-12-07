@@ -23,6 +23,13 @@
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
+  ;; Unbind C-k (evil-insert-digraph) to allow minor modes like completion-preview to use it
+  (evil-define-key 'insert 'global (kbd "C-k") nil)
+
+;;;;; Normal mode
+  ;; Unbind C-. (evil-repeat-pop) to allow embark-act to use it
+  ;; M-. already provides evil-repeat-pop functionality
+  (evil-define-key 'normal 'global (kbd "C-.") nil)
 
 ;;;;; Avy Goto
   ;; Set keybinding for evil-avy-goto-char-timer in motion state

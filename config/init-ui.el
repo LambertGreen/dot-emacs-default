@@ -397,22 +397,10 @@
   (when (display-graphic-p)
     (nyan-mode)))
 
-;;; Minimap
-;; Might be just for show?
-;; The issue is performance
-(use-package minimap
-  :custom
-  ((minimap-window-location 'right)
-   (minimap-width-fraction 0.0)
-   (minimap-minimum-width 10))
-  :init
-  (when (display-graphic-p)
-    (minimap-mode))
-  (lgreen/leader-define-key
-    "t M" '(minimap-mode :wk "minimap")))
-
+;;; Demap
+;; *- See the topography of the code -*
+;; NOTE: `demap' is a more performant than the older `minimap' package
 (use-package demap
-  :disabled t
   :custom
   ((demap-font "Minimap")
    (demap-minimap-window-side 'right)
@@ -421,8 +409,14 @@
   (lgreen/leader-define-key
     "t M" '(demap-toggle :wk "toggle minimap"))
   :config
-  (set-face-attribute 'demap-minimap-font-face nil :font "Minimap")
-  )
+  (defun lgreen/setup-minimap-window ()
+    (when-let ((win (get-buffer-window "*Minimap*")))
+      (with-current-buffer "*Minimap*"
+        (setq-local mode-line-format nil)
+        (setq-local fringe-indicator-alist nil))
+      (set-window-fringes win 0 0)))
+
+  (add-hook 'window-configuration-change-hook #'lgreen/setup-minimap-window))
 
 ;;; _
 (provide 'init-ui)

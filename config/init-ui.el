@@ -385,7 +385,10 @@
 ;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
-  :init (breadcrumb-mode t))
+  :init
+  (breadcrumb-mode t)
+  (lgreen/leader-define-key
+    "t b" '(breadcrumb-mode :wk "toggle breadcrumb bar")))
 
 ;;; Nyan Mode
 ;; Rainbow and cat

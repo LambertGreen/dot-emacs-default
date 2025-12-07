@@ -1,23 +1,42 @@
 ;; init-completion.el --- -*- lexical-binding: t; -*-
 
+;;; General Completion Settings
+(use-package emacs
+  :ensure nil
+  :init
+  ;; TAB cycle if there are only few candidates
+  ;; (setq completion-cycle-threshold 3)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+
+  ;; Emacs 30 and newer: Disable Ispell completion function.
+  ;; We use cape-dict with a frequency-sorted word list instead.
+  (setq text-mode-ispell-word-completion nil)
+
+  ;; Emacs 28 and newer: Hide commands in M-x which do not apply to the current
+  ;; mode.  Corfu commands are hidden, since they are not used via M-x. This
+  ;; setting is useful beyond Corfu.
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+;;;; Keymaps
+  :bind (("C-;" . completion-at-point)))
+
 ;;; Dabbrev
 ;; Short and sweet
+;; NOTE: No explicit binding - dabbrev is available via cape-dabbrev in C-; completion
 (use-package dabbrev
-  :ensure nil
-;;;; Keymaps
-  :bind (
-         ("C-/" . dabbrev-expand)
-         ("C-;" . dabbrev-completion)))
+  :ensure nil)
 
 ;;; Completion Preview
 ;; You do the starting but the ghost does the ending
 (use-package completion-preview
   :ensure nil
   :hook ((text-mode prog-mode) . completion-preview-mode)
-  :bind
-  (:map completion-preview-active-mode-map
-        ("C-j" . completion-preview-next-candidate)
-        ("C-k" . completion-preview-prev-candidate)))
+;;;; Keymaps
+  :bind (:map completion-preview-active-mode-map
+              ("C-j" . completion-preview-next-candidate)
+              ("C-k" . completion-preview-prev-candidate)))
 
 ;;; Corfu
 ;; Just completion-at-point UI
@@ -25,50 +44,41 @@
   :after dabbrev
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-preselect 'first)       ;; Pre-select the prompt
-  (corfu-auto-delay 0.2)         ;; Delay auto popup slightly
-  (corfu-auto-prefix 3)          ;; Require at least 3 characters before auto popup
+  (corfu-auto nil)               ;; Disable auto completion - invoke manually with `completion-at-point' binding
   (corfu-separator ?\s)          ;; Orderless field separator
   (corfu-preview-current nil)    ;; Disable current candidate preview
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  :bind
+  ;; Enable Corfu globally, but exclude fundamental-mode to keep it clean
+  (global-corfu-modes '((not fundamental-mode) t))
 ;;;; Keymaps
-  ("C-;" . completion-at-point)
-  (:map corfu-map
-        ("C-;" . corfu-next)
-        ("C-n" . 'corfu-next)
-        ("C-p" . 'corfu-previous)
-        ("<tab>" . 'lgreen/corfu-complete-common-prefix))
+  :bind (:map corfu-map
+              ("TAB" . corfu-expand)
+              ([tab] . corfu-expand)
+              ("M-m" . corfu-move-to-minibuffer))
+;;;; Functions
+  :preface
+  (defun corfu-move-to-minibuffer ()
+    "Transfer current Corfu completion session to the minibuffer."
+    (interactive)
+    (pcase completion-in-region--data
+      (`(,beg ,end ,table ,pred ,extras)
+       (let ((completion-extra-properties extras)
+             completion-cycle-threshold completion-cycling)
+         (consult-completion-in-region beg end table pred)))))
 ;;;; _
   :init
-  (defun lgreen/corfu-complete-common-prefix ()
-    "Complete the longest common prefix of all candidates."
-    (interactive)
-    (let* ((bounds (bounds-of-thing-at-point 'symbol))
-           (start (car bounds))
-           (end (cdr bounds))
-           (prefix (buffer-substring-no-properties start end))
-           (common (try-completion prefix corfu--candidates)))
-      (if (and (stringp common)
-               (not (string= prefix common)))
-          (progn
-            (delete-region start end)
-            (insert common))
-        (corfu-next))))
-
-  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
-  ;; be used globally (M-/).  See also the customization variable
-  ;; `global-corfu-modes' to exclude certain modes.
+  ;; Enable Corfu globally (recommended since Dabbrev can be used globally with M-/)
   (global-corfu-mode)
+  :config
+  ;; Allow corfu-move-to-minibuffer to continue completion
+  (add-to-list 'corfu-continue-commands #'corfu-move-to-minibuffer)
 
 ;;;; Corfu-Quick
   (use-package corfu-quick
     :ensure nil
-    :after corfu
 ;;;;; Keymaps
     :bind (:map corfu-map
                 ("M-;" . corfu-quick-insert)))
@@ -76,7 +86,6 @@
 ;;;; Corfu-History
   (use-package corfu-history
     :ensure nil
-    :after corfu
     :hook (corfu-mode . corfu-history-mode))
 
 ;;;; Corfu-Info
@@ -84,15 +93,14 @@
   (use-package corfu-info
     :ensure nil
     :disabled t
-    :after corfu
     :hook (corfu-mode . corfu-info-mode))
 
- ;;;; Corfu-PopupInfo
+;;;; Corfu-PopupInfo
   (use-package corfu-popupinfo
     :ensure nil
     :hook (corfu-mode . corfu-popupinfo-mode)
-    :config
-    (setq corfu-popupinfo-delay 0.5)))
+    :custom
+    (corfu-popupinfo-delay 0.5)))
 
 ;;; Corfu-Terminal
 ;; Do it without child-frames
@@ -116,29 +124,31 @@
 
 ;;; Cape
 ;; Completing things like a superhero
-;; NOTE Press `C-c ; ?' for help
+;; NOTE Press `C-' ?' for help
 (use-package cape
   :after general
   :hook ((emacs-lisp-mode . lgreen/emacs-lisp-completion-setup)
          (prog-mode . lgreen/prog-mode-completion-setup)
          (text-mode . lgreen/text-mode-completion-setup)
          (markdown-mode . lgreen/text-mode-completion-setup))
-  :general
 ;;;; Keymaps
-  (general-def
-    "C-c ;" '(:keymap cape-prefix-map :which-key "Completions using [Cape]"))
-;;;; _
-  :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-history)
+  :bind ("C-'" . cape-prefix-map)
+;;;; Custom
+  :custom
+  ;; cape-dict works best with a frequency-sorted word list (most common words first).
+  ;; The default /usr/share/dict/words is alphabetically sorted, which causes grep
+  ;; to return uncommon words. Using google-10000-english gives common words first.
+  ;; Source: https://github.com/first20hours/google-10000-english
+  (cape-dict-file "~/.emacs.d/dictionaries/google-10000-english.txt")
 ;;;; Functions
+  :init
+  (defun lgreen/base-completion-setup ()
+    "Set up base cape completion backends for prog and text modes."
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev))
   (defun lgreen/prog-mode-completion-setup ()
     "Set up cape completion for programming modes."
+    (lgreen/base-completion-setup)
     (add-to-list 'completion-at-point-functions #'cape-keyword))
   (defun lgreen/emacs-lisp-completion-setup ()
     "Set up cape completion for Emacs Lisp mode."
@@ -146,8 +156,10 @@
     (add-to-list 'completion-at-point-functions #'cape-elisp-block))
   (defun lgreen/text-mode-completion-setup ()
     "Set up cape completion for text modes."
-    (add-to-list 'completion-at-point-functions #'cape-dict)
-    (add-to-list 'completion-at-point-functions #'cape-emoji)))
+    (setq-local completion-at-point-functions
+                (list (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-emoji)
+                      #'cape-file
+                      #'cape-history))))
 
 ;;; Yasnippet-Capf
 (use-package yasnippet-capf
@@ -158,31 +170,10 @@
     "Add yasnippet-capf to completion-at-point-functions for the current buffer."
     (interactive)
     (add-hook 'completion-at-point-functions #'yasnippet-capf nil t))
-  :general
 ;;;; Keymaps
-  (general-def
-    :keymaps 'cape-prefix-map
+  :general
+  (general-def :keymaps 'cape-prefix-map
     "y" '(yasnippet-capf :which-key "Yasnippet CAPF")))
-
-;; A few more useful configurations...
-(use-package emacs
-  :ensure nil
-  :init
-  ;; TAB cycle if there are only few candidates
-  ;; (setq completion-cycle-threshold 3)
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  ;; (setq tab-always-indent 'complete)
-
-  ;; Emacs 30 and newer: Disable Ispell completion function. As an alternative,
-  ;; try `cape-dict'.
-  ;; (setq text-mode-ispell-word-completion nil)
-
-  ;; Emacs 28 and newer: Hide commands in M-x which do not apply to the current
-  ;; mode.  Corfu commands are hidden, since they are not used via M-x. This
-  ;; setting is useful beyond Corfu.
-  (setq read-extended-command-predicate #'command-completion-default-include-p))
 
 ;;; Kind-Icon
 (use-package kind-icon
@@ -192,14 +183,13 @@
   (kind-icon-default-face 'corfu-default) ; Have background color be the same as `corfu' face background
   (kind-icon-blend-background nil)  ; Use midpoint color between foreground and background colors ("blended")?
   (kind-icon-blend-frac 0.08)
-  (svg-lib-icons-dir "~/env/emacs/cache/")
   ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
   ;; directory that defaults to the `user-emacs-directory'. Here, I change that
   ;; directory to a location appropriate to `no-littering' conventions, a
   ;; package which moves directories of other packages to sane locations.
-  ;; (svg-lib-icons-dir (no-littering-expand-var-file-name "svg-lib/cache/")) ; Change cache dir
+  (svg-lib-icons-dir (no-littering-expand-var-file-name "svg-lib/cache/")) ; Change cache dir
   :config
-  ;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
 
   ;; Add hook to reset cache so the icon colors match my theme
   ;; NOTE 2022-02-05: This is a hook which resets the cache whenever I switch

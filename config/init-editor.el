@@ -48,12 +48,13 @@
 ;; TODO Refactor: move to a file called "actions"
 (use-package embark
   :after general
-  ;; FIXME Find better embark keybinds as we are using "C-;" for completion
-  ;; FIXME Find better embark keybinds as we are using "C-'" for toggling terminal window
-  ;; :general
-  ;; (evil-normal-state-map
-  ;;  "C-'"  'embark-act
-  ;;  "C-." 'embark-dwim)
+  :bind
+  ;; Keybinding layout: C-; and C-' for completion (top row), C-. and C-/ for actions (bottom row)
+  ("C-." . embark-act)
+  ("C-/" . embark-dwim)
+  :custom
+  ;; Press C-. again to cycle through targets when multiple are available
+  (embark-cycle-key "C-.")
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)

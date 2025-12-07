@@ -176,11 +176,13 @@
     "s T" '(consult-todo-all :wk "Search all todos")))
 
 ;;; Orderless
-;; Orderless completion style
+;; Orderless completion style that matches space-separated components in any order.
+;; Default matching styles: orderless-literal (exact substring) and orderless-regexp.
 (use-package orderless
   :custom
+  ;; Use orderless as primary, basic as fallback (needed for TRAMP, etc.)
   (completion-styles '(orderless basic))
-  (orderless-matching-styles '(orderless-prefixes))
+  ;; Files: use basic + partial-completion for path expansion (e.g., /u/l/b -> /usr/local/bin)
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; Fussy

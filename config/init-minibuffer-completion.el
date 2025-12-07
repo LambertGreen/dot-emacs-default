@@ -43,11 +43,10 @@
 ;; Making minibuffer completions nicer
 (use-package consult
   :after general
-  :custom
-  (consult-narrow-key "<")
-  :bind
-  ([remap next-matching-history-element] . consult-history)
-  ([remap previous-matching-history-element] . consult-history)
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :bind (([remap next-matching-history-element] . consult-history)
+         ([remap previous-matching-history-element] . consult-history))
+  :custom (consult-narrow-key "<")
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
@@ -82,8 +81,7 @@
     "s p" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
 
     ;; Theme
-    "h t" '(consult-theme :wk "switch theme")
-    )
+    "h t" '(consult-theme :wk "switch theme"))
 
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -159,9 +157,7 @@
   (defun lgreen/ripgrep-symbol-at-point ()
     "Performs a search in the current buffer for thing at point."
     (interactive)
-    (consult-ripgrep nil (thing-at-point 'symbol)))
-
-  :hook (completion-list-mode . consult-preview-at-point-mode))
+    (consult-ripgrep nil (thing-at-point 'symbol))))
 
 ;;; Consult-Todo
 ;; NOTE The directory and project based searches are done using a hard coded grep-command

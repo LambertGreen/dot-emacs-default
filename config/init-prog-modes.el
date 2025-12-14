@@ -223,6 +223,7 @@
 ;;;; Conf mode
 ;; Make the key value pairs colorful
 (use-package conf-mode
+  :ensure nil
   :mode
   (("/\\.aws/credentials\\'" . conf-mode)
    ("/\\.aws/config\\'"      . conf-mode)))

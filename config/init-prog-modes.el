@@ -110,14 +110,17 @@
 ;;; Treesit-Auto
 ;; Fast climbing the syntax tree
 (use-package treesit-auto
-  :commands (global-treesit-auto-mode)
+  :defer 0.1
   :custom
   (treesit-auto-install 'prompt)
   (treesit-font-lock-level 4)
+  ;; Only enable tree-sitter for languages we actually use
+  (treesit-auto-langs '(bash c cpp cmake css dockerfile go
+                             groovy html java javascript json
+                             kotlin lua nix python rust
+                             toml tsx typescript yaml))
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
-  ;; TODO Remove the below after testing
-  ;; (setq treesit-auto-excluded-major-modes '(org-mode))
   (global-treesit-auto-mode))
 
 ;;; Formatting

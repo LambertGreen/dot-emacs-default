@@ -4,7 +4,10 @@
 ;; Enter the Matrix
 (use-package prog-mode
   :ensure nil
-  :hook (prog-mode . lgreen/set-faces-for-prog-mode)
+  :hook ((prog-mode . lgreen/set-faces-for-prog-mode)
+         (prog-mode . display-line-numbers-mode))
+  :custom
+  (display-line-numbers-type 'relative)
   :init
 ;;;; Keymaps
 ;;;;; Navigation

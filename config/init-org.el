@@ -108,12 +108,16 @@
          (org-cycle . lgreen/update-todo-cookies-on-visibility-change))
   :config
 ;;;; Keymaps
+  ;; Unbind from the base org-mode-map (no :states)
+  (general-def
+    :keymaps 'org-mode-map
+    "C-'" nil
+    "C-," nil)
+
   (general-def
     :states '(normal)
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading
-    "C-," nil
-    "C-'" nil
     ;; FIXME Pressing Enter on links is not working
     ;; "RET" '(:ignore lgreen/org-enter-key)
 

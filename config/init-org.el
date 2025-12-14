@@ -860,6 +860,16 @@
   (add-to-list 'org-babel-load-languages '(mermaid . t))
   (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
+;;; Org Exporters
+;;;; Ox-Gfm
+;; Export to Github Flavored Markdown
+(use-package ox-gfm
+  :after org)
+
+;;;; Ox-Slack
+;; Export to Slack
+(use-package ox-slack
+  :after org)
 
 ;;; Org-QL
 ;; A query language for your Org files

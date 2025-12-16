@@ -288,13 +288,44 @@
 ;;;; Markdown
 (use-package markdown-mode
   :after general
-  :hook (markdown-mode . outline-minor-mode)
+  :hook ((markdown-mode . outline-minor-mode)
+         (markdown-mode . lgreen/markdown-font-setup))
+  :custom
+  ;; Hide markup like org-hide-emphasis-markers
+  (markdown-hide-markup t)
   :init
 ;;;;; Keymaps
   (lgreen/local-leader-define-key
     :keymaps 'markdown-mode-map
     "i" '(:keymap markdown-mode-style-map :wk "insert")
-    "c" '(:keymap markdown-mode-command-map :wk "command")))
+    "c" '(:keymap markdown-mode-command-map :wk "command")
+    "z" '(:ignore t :wk "Visibility")
+    "z m" '(lgreen/markdown-toggle-markup :wk "toggle markup"))
+  :config
+;;;;; Visuals
+  (defun lgreen/markdown-font-setup ()
+    "Set up markdown faces to match org-mode styling."
+    (interactive)
+    (when (display-graphic-p)
+      ;; Set heading heights to match org-mode
+      (dolist (face '((markdown-header-face-1 . 1.3)
+                      (markdown-header-face-2 . 1.20)
+                      (markdown-header-face-3 . 1.17)
+                      (markdown-header-face-4 . 1.15)
+                      (markdown-header-face-5 . 1.1)
+                      (markdown-header-face-6 . 1.1)))
+        (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
+
+      ;; Style code blocks similarly to org
+      (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch)
+      (set-face-attribute 'markdown-inline-code-face nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'markdown-pre-face nil :inherit 'fixed-pitch)))
+
+  (defun lgreen/markdown-toggle-markup ()
+    "Toggle hiding/showing of markdown markup characters."
+    (interactive)
+    (setq markdown-hide-markup (not markdown-hide-markup))
+    (markdown-reload-extensions)))
 
 ;;;; Mermaid
 (use-package mermaid-mode)

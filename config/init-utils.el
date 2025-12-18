@@ -78,6 +78,19 @@
   :config
   (pdf-tools-install))
 
+;;; Emacs Reader
+;; NOTE Disabling this package as it does not yet support text selection/copy
+;; Otherwise it has the potential to replase PDF Tools
+(use-package reader
+  :disabled t
+  :ensure (:fetcher codeberg :repo "divyaranjan/emacs-reader"
+                    :files (:defaults "render-core.dylib")
+                    :pre-build ("make" "all"))
+  :magic ("%PDF" . reader-mode)
+  :bind ((:map reader-mode-map
+               ("j" . reader-scroll-down-or-next-page)
+               ("k" . reader-scroll-up-or-prev-page))))
+
 ;;; Dictionary
 ;; Definite definitions
 (use-package dictionary

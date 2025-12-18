@@ -73,17 +73,21 @@
   (evil-collection-calendar-setup-org-bindings t)
   :config
   (evil-collection-init)
-
 ;;;; Keymaps
-;;;;; Unbind SPC and RET
+  ;; Unbind SPC and RET
   (with-eval-after-load 'evil-maps
     ;; Unbind RET in both Normal and Motion states as
     ;; the default is to enter newline, and we don't need
     ;; buffer changes in normal mode
     (define-key evil-normal-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "SPC") nil))
+  ;; Magit C-j/C-k for sibling navigation
+  (with-eval-after-load 'evil-collection-magit
+    (evil-collection-define-key 'normal 'magit-mode-map
+   (kbd "C-k") 'magit-section-backward-sibling
+   (kbd "C-j") 'magit-section-forward-sibling)))
 
-    (define-key evil-motion-state-map (kbd "SPC") nil)))
 
 ;;; Evil-Commentary
 ;; no pleading the fifth here

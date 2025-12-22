@@ -76,17 +76,19 @@
 ;;;; Keymaps
   ;; Unbind SPC and RET
   (with-eval-after-load 'evil-maps
-    ;; Unbind RET in both Normal and Motion states as
-    ;; the default is to enter newline, and we don't need
-    ;; buffer changes in normal mode
+    ;; Unbind SPC in motion state to allow leader key to work
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    ;; Unbind RET globally to allow special modes (dashboard, magit, etc.) to use it
     (define-key evil-normal-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "SPC") nil))
+    (define-key evil-motion-state-map (kbd "RET") nil))
+  ;; Block RET from inserting newlines in editing modes
+  (evil-define-key 'normal prog-mode-map (kbd "RET") 'ignore)
+  (evil-define-key 'normal text-mode-map (kbd "RET") 'ignore)
   ;; Magit C-j/C-k for sibling navigation
   (with-eval-after-load 'evil-collection-magit
     (evil-collection-define-key 'normal 'magit-mode-map
-   (kbd "C-k") 'magit-section-backward-sibling
-   (kbd "C-j") 'magit-section-forward-sibling)))
+      (kbd "C-k") 'magit-section-backward-sibling
+      (kbd "C-j") 'magit-section-forward-sibling)))
 
 
 ;;; Evil-Commentary

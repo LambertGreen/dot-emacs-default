@@ -4,7 +4,11 @@
 (use-package treesit-fold
   :ensure (:fetcher github :repo "emacs-tree-sitter/treesit-fold")
   :after evil
-  :hook (prog-mode . treesit-fold-mode)
+  :hook ((prog-mode . treesit-fold-mode)
+         (prog-mode . treesit-fold-indicators-mode))
+  :custom
+  (treesit-fold-summary-show t)
+  (treesit-fold-summary-max-length 80)
   :init
   (setq evil-fold-list '(((treesit-fold-mode)
                           :open-all treesit-fold-open-all
@@ -68,11 +72,15 @@
       (hs-toggle-hiding))))
 
 ;;; Origami and Evil Integration
-;; Enable Vim-like code folding
+;; Fallback folding for non-tree-sitter modes
 (use-package origami
-  :hook (prog-mode . origami-mode)
+  :hook (prog-mode . lgreen/maybe-enable-origami)
   :after (evil treesit-fold hideshow)
   :init
+  (defun lgreen/maybe-enable-origami ()
+    "Enable origami-mode only if treesit-fold-mode is not active."
+    (unless (bound-and-true-p treesit-fold-mode)
+      (origami-mode 1)))
   ;; Define interactive functions for Origami folding operations
   (defun lgreen/origami-open-all-nodes ()
     "Open all folds in the current buffer using Origami."

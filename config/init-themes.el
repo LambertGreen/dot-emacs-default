@@ -26,7 +26,7 @@
 ;;; Sync theme with system appearance
 (use-package theme-settings
   :ensure nil
-  :after doom-themes
+  :after (doom-themes solaire-mode)
   :init
   (defvar lgreen/preferred-light-theme 'doom-one-light
     "Theme to use in light mode.")

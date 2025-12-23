@@ -118,10 +118,12 @@
     :states '(normal)
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading
-    ;; FIXME Pressing Enter on links is not working
-    ;; "RET" '(:ignore lgreen/org-enter-key)
+    "RET" 'lgreen/org-enter-key)
 
 ;;;;; Outline
+  (general-def
+    :states '(normal)
+    :keymaps 'org-mode-map
     :prefix "SPC z"
     :prefix-command 'org-outline
     :prefix-map 'org-visibility-map

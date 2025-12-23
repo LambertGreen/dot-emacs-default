@@ -74,16 +74,9 @@
   :config
   (evil-collection-init)
 ;;;; Keymaps
-  ;; Unbind SPC and RET
   (with-eval-after-load 'evil-maps
     ;; Unbind SPC in motion state to allow leader key to work
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    ;; Unbind RET globally to allow special modes (dashboard, magit, etc.) to use it
-    (define-key evil-normal-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil))
-  ;; Block RET from inserting newlines in editing modes
-  (evil-define-key 'normal prog-mode-map (kbd "RET") 'ignore)
-  (evil-define-key 'normal text-mode-map (kbd "RET") 'ignore)
+    (define-key evil-motion-state-map (kbd "SPC") nil))
   ;; Magit C-j/C-k for sibling navigation
   (with-eval-after-load 'evil-collection-magit
     (evil-collection-define-key 'normal 'magit-mode-map

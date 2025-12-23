@@ -203,10 +203,10 @@
   :custom
   (indent-bars-width-frac 0.2)
   (indent-bars-pad-frac 0.2)
-  (indent-bars-highlight-current-depth '(:blend 0.9))
-  (indent-bars-prefer-character t)
-  (indent-bars-starting-column 0)
-  (indent-bars-display-on-blank-lines nil)
+  (indent-bars-highlight-current-depth '(:blend 0.7))
+  ;; Use character rendering only when not on macOS and not in GUI
+  (indent-bars-prefer-character (and (not (eq system-type 'darwin))
+                                     (not (display-graphic-p))))
   (indent-bars-treesit-support t)
   :hook (prog-mode . indent-bars-mode)
   :init

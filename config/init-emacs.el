@@ -119,5 +119,9 @@
 
 ;;; TODO: Remove this suppression when packages are all updated to include the lexical binding cookie
 (setq warning-suppress-log-types '((files)))
+
+;; Suppress "Package cl is deprecated"
+;; FIXME This is not working
+(setq byte-compile-warnings '(not cl-functions))
 ;;; _
 (provide 'init-emacs)

@@ -30,6 +30,11 @@
   ;; Unbind C-. (evil-repeat-pop) to allow embark-act to use it
   ;; M-. already provides evil-repeat-pop functionality
   (evil-define-key 'normal 'global (kbd "C-.") nil)
+;;;;; Xref
+  ;; Add missing evil navigation bindings
+  (evil-define-key 'normal 'global
+    (kbd "g r") 'xref-find-references
+    (kbd "g D") 'xref-find-definitions-other-window)
 
 ;;;;; Avy Goto
   ;; Set keybindings for evil-avy-goto in normal, visual, and motion states

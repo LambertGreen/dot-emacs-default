@@ -3,12 +3,25 @@
 ;;; Prog Mode
 ;; Enter the Matrix
 (use-package prog-mode
+  :after general
   :ensure nil
   :hook ((prog-mode . lgreen/set-faces-for-prog-mode)
          (prog-mode . display-line-numbers-mode))
   :custom
   (display-line-numbers-type 'relative)
   :init
+  ;; Workaround for https://github.com/noctuid/general.el/issues/193
+  ;; :major-modes doesn't respect derived modes, so we must list them explicitly
+  (defvar lgreen/prog-major-modes
+    '(java-ts-mode
+      c-ts-mode
+      c++-ts-mode
+      python-ts-mode
+      rust-ts-mode
+      emacs-lisp-mode
+      ;; add others as needed
+      )
+    "Major modes that should receive prog-mode local leader bindings.")
 ;;;; Keymaps
 ;;;;; Navigation
   (general-define-key
@@ -18,11 +31,29 @@
    "C-j" (lambda () (interactive) (forward-evil-defun 1))
    "C-k" (lambda () (interactive) (forward-evil-defun -1)))
 
+
 ;;;;; Formatting
   (lgreen/leader-define-key
     "c f" '(lgreen/format-buffer :wk "format buffer"))
+
   (lgreen/local-leader-define-key
     :keymaps 'prog-mode-map
+    :major-modes lgreen/prog-major-modes
+
+;;;;; GoTo/Navigation
+    "g" '(:ignore t :wk "GoTo")
+    "g d" '(xref-find-definitions :wk "definition")
+    "g D" '(xref-find-definitions-other-window :wk "definition other window")
+    "g r" '(xref-find-references :wk "references")
+    "g b" '(xref-go-back :wk "back")
+
+;;;;; LSP
+    "l" '(:ignore t :wk "LSP")
+    "l a" '(lgreen/show-lsp-required-message :wk "actions")
+    "l f" '(lgreen/show-lsp-required-message :wk "format")
+    "l r" '(lgreen/show-lsp-required-message :wk "rename")
+
+;;;;; Formatting
     "f" '(:ignore t :wk "Format")
     "f b" '(lgreen/format-buffer :wk "format buffer")
 
@@ -103,6 +134,10 @@
       (when (not (string= jenv-java-home ""))
         (setenv "JAVA_HOME" (replace-regexp-in-string "\n+$" "" jenv-java-home)))))
 
+  (defun lgreen/show-lsp-required-message ()
+    "Indicates Action requires LSP"
+    (interactive)
+    (message "Action requires LSP. Start elgot with `M-x eglot' or enable in `.dir-locals.el'"))
   :config
 ;;;; Advice
   (advice-add 'load-theme :after 'lgreen/set-faces-for-prog-mode))
@@ -191,7 +226,14 @@
 (use-package eglot
   :ensure nil
   :config
-  (add-to-list 'eglot-server-programs '((python-ts-mode python-mode) . ("pyright-langserver" "--stdio"))))
+  (add-to-list 'eglot-server-programs '((python-ts-mode python-mode) . ("pyright-langserver" "--stdio")))
+;;;;; Keymaps
+  :general
+  (lgreen/local-leader-define-key
+    :keymaps 'eglot-mode-map
+    "l a" '(eglot-code-actions :wk "actions (eglot)")
+    "l f" '(eglot-format :wk "format (eglot)")
+    "l r" '(eglot-rename :wk "rename (eglot)")))
 
 ;;;; Eglot-Booster
 ;; Making LSP usage bearable

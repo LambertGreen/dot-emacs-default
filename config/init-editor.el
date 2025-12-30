@@ -141,8 +141,13 @@
 
 ;;; Dumb-Jump
 ;; Give it your best shot
-;; TODO Are you using dump-jump or not?
-(use-package dumb-jump)
+(use-package dumb-jump
+  :init
+  ;; NOTE Don't replace with :hook as that is specific to mode hooks
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  :custom
+  (dumb-jump-prefer-searcher 'rg)
+  (dumb-jump-force-searcher 'rg))
 
 ;;; _
 (provide 'init-editor)

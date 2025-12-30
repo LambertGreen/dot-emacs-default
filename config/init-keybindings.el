@@ -13,12 +13,19 @@
     "Local leader key for major-mode specific commands")
   (defvar lgreen/general-local-leader-alt-key "M-SPC m"
     "Local leader key for major-mode specific commands for Emacs and Evil Insert states.")
-
+  (defvar lgreen/general-local-leader-alias ","
+    "Alias key for local leader in normal/visual states")
+  (defvar lgreen/general-local-leader-reverse-find-key
+    (concat lgreen/general-local-leader-key " " lgreen/general-local-leader-alias)
+    "Key sequence for reverse find char under local leader (,,)")
+  (defvar lgreen/general-local-leader-simulate-cmd
+    (eval `(general-simulate-key ,lgreen/general-local-leader-key))
+    "Command to simulate local leader key")
   :config
   (general-evil-setup)
 
 ;;;; Leader key definer
-  ;; set up 'SPC' as the global leader key
+  ;; set up the global leader key
   (general-create-definer lgreen/leader-define-key
     :states '(normal insert visual emacs motion)
     :keymaps 'override
@@ -31,6 +38,13 @@
     :states '(normal insert)
     :prefix lgreen/general-local-leader-key
     :non-normal-prefix lgreen/general-local-leader-alt-key)
+
+  ;; Add alias for local-leader
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'override
+   lgreen/general-local-leader-alias lgreen/general-local-leader-simulate-cmd
+   lgreen/general-local-leader-reverse-find-key '(evil-repeat-find-char-reverse :wk "shadowed ,"))
 
 ;;;; Keymaps
   (lgreen/leader-define-key

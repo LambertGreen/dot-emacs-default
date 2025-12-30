@@ -18,18 +18,19 @@
 
   :config
 ;;;; Keymaps
-;;;;; Insert mode
+;;;;; Emacs binds for Insert Mode
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
+
+;;;;; Evil Unbinds
   ;; Unbind C-k (evil-insert-digraph) to allow minor modes like completion-preview to use it
   (evil-define-key 'insert 'global (kbd "C-k") nil)
+  ;; Unbind evil-repeat-pop bindings to preserve Emacs defaults
+  (evil-define-key '(normal motion) 'global (kbd "C-.") nil)
+  (evil-define-key '(normal motion) 'global (kbd "M-.") nil)
 
-;;;;; Normal mode
-  ;; Unbind C-. (evil-repeat-pop) to allow embark-act to use it
-  ;; M-. already provides evil-repeat-pop functionality
-  (evil-define-key 'normal 'global (kbd "C-.") nil)
 ;;;;; Xref
   ;; Add missing evil navigation bindings
   (evil-define-key 'normal 'global

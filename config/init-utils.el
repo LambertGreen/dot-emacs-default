@@ -39,6 +39,7 @@
 ;; Automatically become a product of the environment
 (use-package envrc
   :unless (eq system-type 'windows-nt)
+  :defer 1
   :config
   (envrc-global-mode))
 

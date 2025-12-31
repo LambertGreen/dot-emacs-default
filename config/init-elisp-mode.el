@@ -21,7 +21,7 @@
   (defun lgreen/imenu-elisp-sections ()
     "Extend imenu to include `use-package` sections in Emacs Lisp."
     (add-to-list 'imenu-generic-expression
-                 '("Package" "^\\s-*(use-package\\s-+\\(\\_<.*?\\_>\\)" 1) t)))
+                 '("Packages" "^\\s-*(use-package\\s-+\\(\\_<.*?\\_>\\)" 1) t)))
 
 ;;; Eros
 ;; Evaluation Result Overlays for Emacs Lisp

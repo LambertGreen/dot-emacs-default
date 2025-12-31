@@ -50,20 +50,19 @@
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
-    ;; Symbol-at-point
-    "*" '(lgreen/ripgrep-symbol-at-point :wk "symbol search")
 
     ;; File
     "f d" '(lgreen/consult-fd-default-dir-with-args :wk "find file with [fd]")
     "f l" '(consult-locate :wk "find file with [locate]")
 
     ;; Search
-    "s SPC" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search [DWIM]")
-    "s b" '(consult-line :wk "Search buffer")
-    "s s" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search with [ripgrep]")
-    "s i" '(consult-imenu :wk "jump to symbol")
-    "s I" '(consult-imenu-multi :wk "jump to symbol (multi-file)")
-    "s o" '(consult-outline :wk "jump to heading")
+    "s b" '(consult-line :wk "buffer lines")
+    "s g" '(lgreen/consult-ripgrep-with-args :wk "ripgrep [DWIM]")
+    "s d" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "ripgrep directory")
+    "s *" '(lgreen/consult-ripgrep-symbol-at-point :wk "ripgrep symbol")
+    "s i" '(consult-imenu :wk "symbols")
+    "s I" '(consult-imenu-multi :wk "symbols (multi-file)")
+    "s o" '(consult-outline :wk "outline")
 
     ;; Buffer
     ;; NOTE: narrowing in the minibuffer is supported with the following keys:
@@ -76,9 +75,6 @@
     ;; Project
     "p d" '(lgreen/consult-fd-with-args :wk "find file with [fd]")
     "p b" '(consult-project-buffer :wk "switch buffer")
-
-    ;; Search
-    "s p" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
 
     ;; Theme
     "h t" '(consult-theme :wk "switch theme"))
@@ -154,7 +150,7 @@
           (consult-ripgrep default-directory))
       (consult-ripgrep default-directory)))
 
-  (defun lgreen/ripgrep-symbol-at-point ()
+  (defun lgreen/consult-ripgrep-symbol-at-point ()
     "Performs a search in the current buffer for thing at point."
     (interactive)
     (consult-ripgrep nil (thing-at-point 'symbol))))

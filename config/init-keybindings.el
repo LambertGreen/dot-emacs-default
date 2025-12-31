@@ -56,9 +56,9 @@
 
 ;;;;; Search
     "s" '(:ignore t :wk "Search")
-    "s i" '(imenu :wk "symbols")
     "s b" '(isearch-forward :wk "search buffer")
-    "s s" '(rgrep :wk "grep search")
+    "s g" '(rgrep :wk "grep search")
+    "s i" '(imenu :wk "symbols")
 
 ;;;;; Code
     "c" '(:ignore t :wk "Code")

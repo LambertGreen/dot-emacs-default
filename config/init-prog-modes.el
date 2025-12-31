@@ -227,6 +227,8 @@
   :ensure nil
   :config
   (add-to-list 'eglot-server-programs '((python-ts-mode python-mode) . ("pyright-langserver" "--stdio")))
+  (custom-set-faces
+   '(eglot-semantic-modifier-face ((t (:inherit font-lock-keyword-face)))))
 ;;;;; Keymaps
   :general
   (lgreen/local-leader-define-key

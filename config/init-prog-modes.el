@@ -42,10 +42,13 @@
 
 ;;;;; GoTo/Navigation
     "g" '(:ignore t :wk "GoTo")
-    "g d" '(xref-find-definitions :wk "definition")
+    "g d" '(lgreen/xref-find-definitions-with-fallback :wk "definition")
     "g D" '(xref-find-definitions-other-window :wk "definition other window")
+    "g j" '(lgreen/xref-find-definitions-dumb-jump :wk "definition (force dumb-jump)")
     "g r" '(xref-find-references :wk "references")
+    "g a" '(xref-find-apropos :wk "apropos (workspace symbols)")
     "g b" '(xref-go-back :wk "back")
+    "g f" '(xref-go-forward :wk "forward")
 
 ;;;;; LSP
     "l" '(:ignore t :wk "LSP")
@@ -71,6 +74,26 @@
     "n w" '(widen :wk "widen"))
 
 ;;;; Functions
+  (defun lgreen/xref-find-definitions-dumb-jump ()
+    "Find definitions using dumb-jump backend via xref interface.
+Forces dumb-jump even when LSP is active, useful as fallback when LSP fails."
+    (interactive)
+    (let ((xref-backend-functions '(dumb-jump-xref-activate)))
+      (call-interactively #'xref-find-definitions)))
+
+  (defun lgreen/xref-find-definitions-with-fallback ()
+    "Find definitions with automatic fallback to dumb-jump if primary backend fails.
+Tries the normal xref backend chain (LSP/eglot → treesit → dumb-jump).
+If no definitions found, retries with only dumb-jump backend."
+    (interactive)
+    (condition-case err
+        (call-interactively #'xref-find-definitions)
+      (user-error
+       ;; xref--not-found-error is a user-error, fall back to dumb-jump only
+       (message "LSP failed, trying dumb-jump...")
+       (let ((xref-backend-functions '(dumb-jump-xref-activate)))
+         (call-interactively #'xref-find-definitions)))))
+
   (defun lgreen/set-faces-for-prog-mode (&rest _)
     "Set faces for programming font lock variables and function definitions."
     (interactive)

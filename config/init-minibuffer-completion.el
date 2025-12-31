@@ -171,6 +171,17 @@
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
 
+;;; Consult-Imenu
+;; Enhanced imenu configuration for different modes
+;; NOTE: Only elisp is configured. Programming language modes use default behavior because:
+;; - LSP (eglot/lsp-mode) provides richer imenu categories that vary by language server
+;; - Tree-sitter-based imenu categories differ from LSP-based ones
+;; - Default prefix-based filtering works universally without breaking
+;; - For semantic navigation, use LSP features (xref, consult-lsp-symbols) instead
+(use-package consult-imenu
+  :ensure nil
+  :after consult)
+
 ;;; Orderless
 ;; Orderless completion style that matches space-separated components in any order.
 ;; Default matching styles: orderless-literal (exact substring) and orderless-regexp.

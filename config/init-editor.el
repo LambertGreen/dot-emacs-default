@@ -87,7 +87,12 @@
 ;; Integration between 'embark' and 'consult'
 (use-package embark-consult
   :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+  (embark-collect-mode . consult-preview-at-point-mode)
+  :config
+  ;; Export to Wgrep instead of to Occur
+  ;; Occur keeps nice syntax highlighting, but Wgrep allows for line deletes.
+  (setf (alist-get 'consult-location embark-exporters-alist)
+        #'embark-consult-export-location-grep))
 
 ;;; Helpful
 ;; A better *help* buffer

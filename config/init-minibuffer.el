@@ -5,11 +5,13 @@
   :ensure nil
   :init
 ;;;; Keymaps
+  ;; Keybinding layout: C-. and C-/ for actions (same as global)
   (general-def :keymaps 'minibuffer-local-map
     :states '(normal insert)
     "C-n" 'next-line-or-history-element
     "C-p" 'previous-line-or-history-element
-    "C-;" 'embark-act)
+    "C-." 'embark-act
+    "C-/" 'embark-dwim)
 
 ;;;; Functions
   ;; Add prompt indicator to `completing-read-multiple'.

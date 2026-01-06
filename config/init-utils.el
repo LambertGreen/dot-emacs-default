@@ -39,6 +39,7 @@
 ;; Automatically become a product of the environment
 (use-package envrc
   :unless (eq system-type 'windows-nt)
+  :defer 1
   :config
   (envrc-global-mode))
 
@@ -77,6 +78,19 @@
   :magic ("%PDF" . pdf-view-mode)
   :config
   (pdf-tools-install))
+
+;;; Emacs Reader
+;; NOTE Disabling this package as it does not yet support text selection/copy
+;; Otherwise it has the potential to replase PDF Tools
+(use-package reader
+  :disabled t
+  :ensure (:fetcher codeberg :repo "divyaranjan/emacs-reader"
+                    :files (:defaults "render-core.dylib")
+                    :pre-build ("make" "all"))
+  :magic ("%PDF" . reader-mode)
+  :bind ((:map reader-mode-map
+               ("j" . reader-scroll-down-or-next-page)
+               ("k" . reader-scroll-up-or-prev-page))))
 
 ;;; Dictionary
 ;; Definite definitions

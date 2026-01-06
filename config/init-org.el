@@ -95,8 +95,9 @@
                    ("💼 work" . ?k)
                    ("🏠 personal" . ?p)
                    ("💪 health" . ?h)
-                   ("🙏 spirit" . ?s)
+                   ("🙏 spirit" . ?S)
                    ("🎉 fun" . ?f)
+                   ("🏆 win" . ?W)
                    ("🧪 science" . ?i)
                    ("👥 social" . ?o)
                    ("🌴 vacation" . ?v)))
@@ -108,16 +109,22 @@
          (org-cycle . lgreen/update-todo-cookies-on-visibility-change))
   :config
 ;;;; Keymaps
+  ;; Unbind from the base org-mode-map (no :states)
+  (general-def
+    :keymaps 'org-mode-map
+    "C-'" nil
+    "C-," nil)
+
   (general-def
     :states '(normal)
     :keymaps 'org-mode-map
     [remap consult-imenu] 'consult-org-heading
-    "C-," nil
-    "C-'" nil
-    ;; FIXME Pressing Enter on links is not working
-    ;; "RET" '(:ignore lgreen/org-enter-key)
+    "RET" 'lgreen/org-enter-key)
 
 ;;;;; Outline
+  (general-def
+    :states '(normal)
+    :keymaps 'org-mode-map
     :prefix "SPC z"
     :prefix-command 'org-outline
     :prefix-map 'org-visibility-map
@@ -856,6 +863,16 @@
   (add-to-list 'org-babel-load-languages '(mermaid . t))
   (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
 
+;;; Org Exporters
+;;;; Ox-Gfm
+;; Export to Github Flavored Markdown
+(use-package ox-gfm
+  :after org)
+
+;;;; Ox-Slack
+;; Export to Slack
+(use-package ox-slack
+  :after org)
 
 ;;; Org-QL
 ;; A query language for your Org files

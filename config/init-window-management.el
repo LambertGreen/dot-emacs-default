@@ -39,7 +39,7 @@
   (popper-group-function #'popper-group-by-project)
   (popper-display-control 'user)
 ;;;; Keymaps
-  :bind (("C-'" . popper-toggle)
+  :bind (("M-'" . popper-toggle)
          ("C-M-'" . popper-cycle))
   :init
   (lgreen/leader-define-key

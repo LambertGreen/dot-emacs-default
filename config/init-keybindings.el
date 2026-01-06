@@ -13,12 +13,11 @@
     "Local leader key for major-mode specific commands")
   (defvar lgreen/general-local-leader-alt-key "M-SPC m"
     "Local leader key for major-mode specific commands for Emacs and Evil Insert states.")
-
   :config
   (general-evil-setup)
 
 ;;;; Leader key definer
-  ;; set up 'SPC' as the global leader key
+  ;; set up the global leader key
   (general-create-definer lgreen/leader-define-key
     :states '(normal insert visual emacs motion)
     :keymaps 'override
@@ -57,9 +56,9 @@
 
 ;;;;; Search
     "s" '(:ignore t :wk "Search")
-    "s i" '(imenu :wk "symbols")
     "s b" '(isearch-forward :wk "search buffer")
-    "s s" '(rgrep :wk "grep search")
+    "s g" '(rgrep :wk "grep search")
+    "s i" '(imenu :wk "symbols")
 
 ;;;;; Code
     "c" '(:ignore t :wk "Code")
@@ -68,10 +67,10 @@
 
 ;;;;; Projects
     "p" '(:ignore t :wk "Project")
+    "p ." '(project-dired :wk "dired")
     "p p" '(project-switch-project :wk "switch project")
     "p f" '(project-find-file :wk "find file")
     "p c" '(project-compile :wk "compile")
-    "p d" '(project-dired :wk "dired")
     "p b" '(project-switch-to-buffer :wk "switch buffer")
 
 ;;;;; Git Interface

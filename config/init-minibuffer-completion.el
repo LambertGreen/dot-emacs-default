@@ -43,28 +43,26 @@
 ;; Making minibuffer completions nicer
 (use-package consult
   :after general
-  :custom
-  (consult-narrow-key "<")
-  :bind
-  ([remap next-matching-history-element] . consult-history)
-  ([remap previous-matching-history-element] . consult-history)
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :bind (([remap next-matching-history-element] . consult-history)
+         ([remap previous-matching-history-element] . consult-history))
+  :custom (consult-narrow-key "<")
   :init
 ;;;; Keymaps
   (lgreen/leader-define-key
-    ;; Symbol-at-point
-    "*" '(lgreen/ripgrep-symbol-at-point :wk "symbol search")
 
     ;; File
     "f d" '(lgreen/consult-fd-default-dir-with-args :wk "find file with [fd]")
     "f l" '(consult-locate :wk "find file with [locate]")
 
     ;; Search
-    "s SPC" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search [DWIM]")
-    "s b" '(consult-line :wk "Search buffer")
-    "s s" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "search with [ripgrep]")
-    "s i" '(consult-imenu :wk "jump to symbol")
-    "s I" '(consult-imenu-multi :wk "jump to symbol (multi-file)")
-    "s o" '(consult-outline :wk "jump to heading")
+    "s b" '(consult-line :wk "buffer lines")
+    "s g" '(lgreen/consult-ripgrep-with-args :wk "ripgrep [DWIM]")
+    "s d" '(lgreen/consult-ripgrep-with-args-in-default-directory :wk "ripgrep directory")
+    "s *" '(lgreen/consult-ripgrep-symbol-at-point :wk "ripgrep symbol")
+    "s i" '(consult-imenu :wk "symbols")
+    "s I" '(consult-imenu-multi :wk "symbols (multi-file)")
+    "s o" '(consult-outline :wk "outline")
 
     ;; Buffer
     ;; NOTE: narrowing in the minibuffer is supported with the following keys:
@@ -78,12 +76,8 @@
     "p d" '(lgreen/consult-fd-with-args :wk "find file with [fd]")
     "p b" '(consult-project-buffer :wk "switch buffer")
 
-    ;; Search
-    "s p" '(lgreen/consult-ripgrep-with-args :wk "search files with [ripgrep]")
-
     ;; Theme
-    "h t" '(consult-theme :wk "switch theme")
-    )
+    "h t" '(consult-theme :wk "switch theme"))
 
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -156,12 +150,10 @@
           (consult-ripgrep default-directory))
       (consult-ripgrep default-directory)))
 
-  (defun lgreen/ripgrep-symbol-at-point ()
+  (defun lgreen/consult-ripgrep-symbol-at-point ()
     "Performs a search in the current buffer for thing at point."
     (interactive)
-    (consult-ripgrep nil (thing-at-point 'symbol)))
-
-  :hook (completion-list-mode . consult-preview-at-point-mode))
+    (consult-ripgrep nil (thing-at-point 'symbol))))
 
 ;;; Consult-Todo
 ;; NOTE The directory and project based searches are done using a hard coded grep-command
@@ -175,11 +167,25 @@
     "s t" '(consult-todo :wk "Search todos")
     "s T" '(consult-todo-all :wk "Search all todos")))
 
+;;; Consult-Imenu
+;; Enhanced imenu configuration for different modes
+;; NOTE: Only elisp is configured. Programming language modes use default behavior because:
+;; - LSP (eglot/lsp-mode) provides richer imenu categories that vary by language server
+;; - Tree-sitter-based imenu categories differ from LSP-based ones
+;; - Default prefix-based filtering works universally without breaking
+;; - For semantic navigation, use LSP features (xref, consult-lsp-symbols) instead
+(use-package consult-imenu
+  :ensure nil
+  :after consult)
+
 ;;; Orderless
-;; Orderless completion style
+;; Orderless completion style that matches space-separated components in any order.
+;; Default matching styles: orderless-literal (exact substring) and orderless-regexp.
 (use-package orderless
   :custom
+  ;; Use orderless as primary, basic as fallback (needed for TRAMP, etc.)
   (completion-styles '(orderless basic))
+  ;; Files: use basic + partial-completion for path expansion (e.g., /u/l/b -> /usr/local/bin)
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; Fussy

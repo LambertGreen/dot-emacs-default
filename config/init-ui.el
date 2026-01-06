@@ -203,10 +203,10 @@
   :custom
   (indent-bars-width-frac 0.2)
   (indent-bars-pad-frac 0.2)
-  (indent-bars-highlight-current-depth '(:blend 0.9))
-  (indent-bars-prefer-character t)
-  (indent-bars-starting-column 0)
-  (indent-bars-display-on-blank-lines nil)
+  (indent-bars-highlight-current-depth '(:blend 0.7))
+  ;; Use character rendering only when not on macOS and not in GUI
+  (indent-bars-prefer-character (and (not (eq system-type 'darwin))
+                                     (not (display-graphic-p))))
   (indent-bars-treesit-support t)
   :hook (prog-mode . indent-bars-mode)
   :init
@@ -385,7 +385,10 @@
 ;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
   :ensure (:fetcher github :repo "joaotavora/breadcrumb")
-  :init (breadcrumb-mode t))
+  :init
+  (breadcrumb-mode t)
+  (lgreen/leader-define-key
+    "t b" '(breadcrumb-mode :wk "toggle breadcrumb bar")))
 
 ;;; Nyan Mode
 ;; Rainbow and cat
@@ -394,21 +397,9 @@
   (when (display-graphic-p)
     (nyan-mode)))
 
-;;; Minimap
-;; Might be just for show?
-;; The issue is performance
-(use-package minimap
-  :disabled t
-  :custom
-  ((minimap-window-location 'right)
-   (minimap-width-fraction 0.0)
-   (minimap-minimum-width 12))
-  :init
-  (when (display-graphic-p)
-    (minimap-mode))
-  (lgreen/leader-define-key
-    "t M" '(minimap-mode :wk "minimap")))
-
+;;; Demap
+;; *- See the topography of the code -*
+;; NOTE: `demap' is a more performant than the older `minimap' package
 (use-package demap
   :custom
   ((demap-font "Minimap")
@@ -418,8 +409,14 @@
   (lgreen/leader-define-key
     "t M" '(demap-toggle :wk "toggle minimap"))
   :config
-  (set-face-attribute 'demap-minimap-font-face nil :font "Minimap-2")
-  )
+  (defun lgreen/setup-minimap-window ()
+    (when-let ((win (get-buffer-window "*Minimap*")))
+      (with-current-buffer "*Minimap*"
+        (setq-local mode-line-format nil)
+        (setq-local fringe-indicator-alist nil))
+      (set-window-fringes win 0 0)))
+
+  (add-hook 'window-configuration-change-hook #'lgreen/setup-minimap-window))
 
 ;;; _
 (provide 'init-ui)

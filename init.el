@@ -41,7 +41,8 @@
   (require 'init-squint)
   (require 'init-tty)
   (require 'init-email)
-  (require 'init-ai-utils))
+  (require 'init-ai-utils)
+  (require 'init-server))
 
 ;;; Dotfiles package manager support
 (when (and noninteractive (getenv "DOTFILES_EMACS_UPDATE"))

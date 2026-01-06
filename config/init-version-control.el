@@ -39,9 +39,11 @@
 ;;; Diff-Hl
 ;; Show diff status in the fringe
 (use-package diff-hl
-  :hook
-  ((focus-in . diff-hl-update)
-   (find-file . lgreen/setup-diff-hl-if-in-vcs))
+  :disabled t  ; Disabled in favor of git-gutter
+  :hook ((focus-in . diff-hl-update)
+         (magit-post-refresh diff-hl-magit-post-refresh)
+         (find-file . lgreen/setup-diff-hl-if-in-vcs))
+  :custom (diff-hl-side 'right)
   :init
   ;; Keybindings for navigating diffs
   (lgreen/leader-define-key
@@ -56,6 +58,80 @@
                  (eq (car project) 'vc)) ; Check if project is a VCS project
         (require 'diff-hl)
         (global-diff-hl-mode)))))
+
+;;; Git-Gutter
+;; Show git diff status in the margin (avoids fringe conflicts)
+(use-package git-gutter
+  :after general
+  :custom
+  ;; Update interval for git status checks
+  (git-gutter:update-interval 0.5)
+  ;; Width of the gutter in characters
+  (git-gutter:window-width 2)
+  ;; Visual indicators for changes
+  (git-gutter:modified-sign "┃")
+  (git-gutter:added-sign "┃")
+  (git-gutter:deleted-sign "▁")
+  ;; Hide gutter when there are no changes
+  (git-gutter:hide-gutter t)
+  :hook
+  ((focus-in . git-gutter:update-all-windows)
+   (after-save . git-gutter:update-all-windows)
+   (magit-post-refresh . git-gutter:update-all-windows)
+   (window-configuration-change . git-gutter:update-all-windows)
+   (find-file . lgreen/setup-git-gutter-if-in-vcs))
+  :init
+  ;; Keybindings for navigating diffs
+  (lgreen/leader-define-key
+    "g p" '(git-gutter:previous-hunk :wk "previous hunk")
+    "g n" '(git-gutter:next-hunk :wk "next hunk")
+    "g r" '(git-gutter:revert-hunk :wk "revert hunk")
+    "g s" '(git-gutter:stage-hunk :wk "stage hunk")
+    "t g" '(global-git-gutter-mode :wk "toggle git-gutter")
+    "t G" '(git-gutter :wk "refresh git-gutter"))
+
+  ;; Function to set up git-gutter in VCS projects
+  (defun lgreen/setup-git-gutter-if-in-vcs ()
+    "Enable git-gutter if the current project is under version control."
+    (let ((project (project-current t)))
+      (when (and project
+                 (eq (car project) 'vc)) ; Check if project is a VCS project
+        (require 'git-gutter)
+        (global-git-gutter-mode 1))))
+  :config
+  ;; Update git-gutter colors based on diff faces
+  (defun lgreen/update-git-gutter-colors ()
+    "Update git-gutter colors to match current theme."
+    (set-face-foreground 'git-gutter:modified (face-foreground 'diff-changed))
+    (set-face-foreground 'git-gutter:added (face-foreground 'diff-added))
+    (set-face-foreground 'git-gutter:deleted (face-foreground 'diff-removed)))
+
+  (lgreen/update-git-gutter-colors)
+  (add-hook 'after-load-theme-hook #'lgreen/update-git-gutter-colors))
+
+;;; Forge
+;; The codesmith pounding the code into useful tools
+(use-package forge
+  :after magit
+  :commands (forge-pull forge-list-pullreqs forge-list-issues)
+  :custom
+  (forge-add-default-bindings nil)  ; Add this line
+  ;; Limit how many topics (PRs/issues) to fetch by default
+  (forge-topic-list-limit '(60 . 0))
+  ;; Only fetch notifications for repos you're watching
+  (forge-owned-accounts '(("lambert-green_sfemu") ("LambertGreen")))
+  :init
+  ;; Keybindings for forge commands
+  (lgreen/leader-define-key
+    "g f " '(:ignore t :wk "Forge")
+    "g f p" '(forge-pull :wk "pull")
+    "g f l" '(forge-list-pullreqs :wk "list PRs")
+    "g f i" '(forge-list-issues :wk "list issues"))
+  :config
+  ;; Map SSH aliases to GitHub
+  (dolist (alias '("github.com-work" "github.com-personal"))
+    (add-to-list 'forge-alist
+                 `(,alias "api.github.com" "github.com" forge-github-repository))))
 
 ;;; _
 (provide 'init-version-control)

@@ -18,21 +18,39 @@
 
   :config
 ;;;; Keymaps
-;;;;; Insert mode
+;;;;; Emacs binds for Insert Mode
   ;; Use evil-define-key to set keybindings in insert mode for C-a and C-e
   (evil-define-key 'insert 'global (kbd "C-a") 'move-beginning-of-line)
   (evil-define-key 'insert 'global (kbd "C-e") 'move-end-of-line)
   (evil-define-key 'insert 'global (kbd "C-d") 'delete-char)
 
+;;;;; Evil Unbinds
+  ;; Unbind C-k (evil-insert-digraph) to allow minor modes like completion-preview to use it
+  (evil-define-key 'insert 'global (kbd "C-k") nil)
+  ;; Unbind evil-repeat-pop bindings to preserve Emacs defaults
+  (evil-define-key '(normal motion) 'global (kbd "C-.") nil)
+  (evil-define-key '(normal motion) 'global (kbd "M-.") nil)
+
+;;;;; Xref
+  ;; Add missing evil navigation bindings
+  (evil-define-key 'normal 'global
+    (kbd "g r") 'xref-find-references
+    (kbd "g D") 'xref-find-definitions-other-window)
+
 ;;;;; Avy Goto
-  ;; Set keybinding for evil-avy-goto-char-timer in motion state
-  (evil-define-key '(normal visual) 'global
-    (kbd "g s SPC") 'evil-avy-goto-char-timer       ;; Existing binding for timed char search
-    (kbd "g s k")   'evil-avy-goto-line-above       ;; Go to line above
-    (kbd "g s j")   'evil-avy-goto-line-below       ;; Go to line below
-    (kbd "g s w")   'evil-avy-goto-word-0           ;; Go to the start of word
-    (kbd "g s e")   'evil-avy-goto-word-1           ;; Go to any position in word
-    (kbd "g s l")   'evil-avy-goto-line)            ;; Go to any line
+  ;; Set keybindings for evil-avy-goto in normal, visual, and motion states
+  ;; Primary: Fast anywhere jump
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "g SPC") 'evil-avy-goto-char-timer)        ;; Main: go anywhere with char hints
+
+  ;; Secondary: Specialized jumps
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "g s s") 'evil-avy-goto-char-timer        ;; Main: go anywhere with char hints
+    (kbd "g s j") 'evil-avy-goto-line-below         ;; Go to line below
+    (kbd "g s k") 'evil-avy-goto-line-above         ;; Go to line above
+    (kbd "g s w") 'evil-avy-goto-word-0             ;; Go to start of word
+    (kbd "g s e") 'evil-avy-goto-word-1             ;; Go to any position in word
+    (kbd "g s l") 'evil-avy-goto-line)              ;; Go to any line
 
   ;; Activate evil-mode
   (evil-mode 1))
@@ -66,17 +84,16 @@
   (evil-collection-calendar-setup-org-bindings t)
   :config
   (evil-collection-init)
-
 ;;;; Keymaps
-;;;;; Unbind SPC and RET
   (with-eval-after-load 'evil-maps
-    ;; Unbind RET in both Normal and Motion states as
-    ;; the default is to enter newline, and we don't need
-    ;; buffer changes in normal mode
-    (define-key evil-normal-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
+    ;; Unbind SPC in motion state to allow leader key to work
+    (define-key evil-motion-state-map (kbd "SPC") nil))
+  ;; Magit C-j/C-k for sibling navigation
+  (with-eval-after-load 'evil-collection-magit
+    (evil-collection-define-key 'normal 'magit-mode-map
+      (kbd "C-k") 'magit-section-backward-sibling
+      (kbd "C-j") 'magit-section-forward-sibling)))
 
-    (define-key evil-motion-state-map (kbd "SPC") nil)))
 
 ;;; Evil-Commentary
 ;; no pleading the fifth here
@@ -212,50 +229,38 @@
             "l" 'evil-a-line))
 
 ;;; Evil-Textobj-Tree-Sitter
-;; FIXME Enable for prog modes that have treesitter support
+;; AST-aware text objects for tree-sitter modes
+;; NOTE: `a` shadows evil-args which serves as fallback for non-tree-sitter modes
 (use-package evil-textobj-tree-sitter
-  :disabled t
-  :after evil-collection-unimpaired
-  :config
-  (evil-define-key nil evil-outer-text-objects-map
-    "f" (evil-textobj-tree-sitter-get-textobj "function.outer")
-    "l" (evil-textobj-tree-sitter-get-textobj "loop.outer")
-    "x" (evil-textobj-tree-sitter-get-textobj "conditional.outer")
-    "c" (evil-textobj-tree-sitter-get-textobj "class.outer")
-    ;; "b" (evil-textobj-tree-sitter-get-textobj "block.outer")
-    "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
-  (evil-define-key nil evil-inner-text-objects-map
-    "f" (evil-textobj-tree-sitter-get-textobj "function.inner")
-    "l" (evil-textobj-tree-sitter-get-textobj "loop.inner")
-    "x" (evil-textobj-tree-sitter-get-textobj "conditional.inner")
-    "c" (evil-textobj-tree-sitter-get-textobj "class.inner")
-    ;; "b" (evil-textobj-tree-sitter-get-textobj "block.inner")
-    "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
-  (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
-    "]f" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer"))
-    "[f" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
-    "]F" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
-    "[F" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
-    "]c" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer"))
-    "[c" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
-    "]C" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
-    "[C" (lambda ()
-           (interactive)
-           (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))))
+  :after evil
+  :general
+;;;; Text Objects
+  (:keymaps 'evil-outer-text-objects-map
+            "f" (evil-textobj-tree-sitter-get-textobj "function.outer")
+            "l" (evil-textobj-tree-sitter-get-textobj "loop.outer")
+            "x" (evil-textobj-tree-sitter-get-textobj "conditional.outer")
+            "c" (evil-textobj-tree-sitter-get-textobj "class.outer")
+            "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
+  (:keymaps 'evil-inner-text-objects-map
+            "f" (evil-textobj-tree-sitter-get-textobj "function.inner")
+            "l" (evil-textobj-tree-sitter-get-textobj "loop.inner")
+            "x" (evil-textobj-tree-sitter-get-textobj "conditional.inner")
+            "c" (evil-textobj-tree-sitter-get-textobj "class.inner")
+            "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
+;;;; Navigation
+  (:keymaps 'evil-normal-state-map
+            "]f" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "function.outer"))
+            "[f" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "function.outer" t))
+            "]F" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t))
+            "[F" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))
+            "]c" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "class.outer"))
+            "[c" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "class.outer" t))
+            "]C" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "class.outer" nil t))
+            "[C" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "class.outer" t t))
+            "]a" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "parameter.outer"))
+            "[a" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "parameter.outer" t))
+            "]A" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "parameter.outer" nil t))
+            "[A" (lambda () (interactive) (evil-textobj-tree-sitter-goto-textobj "parameter.outer" t t))))
 
 ;;; Evil-Visualstar
 ;; the star of the show

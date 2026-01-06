@@ -19,7 +19,6 @@
   (magit-save-repository-buffers 'dontask)
   ;; TODO Not sure of impact of `magit-auto-revert-mode' on large repo
   (magit-auto-revert-mode t)
-  (magit-diff-hide-trailing-cr-characters t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
 ;;;; Keymaps

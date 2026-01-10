@@ -430,5 +430,16 @@ If no definitions found, retries with only dumb-jump backend."
 ;;;; Kotlin
 (use-package kotlin-mode)
 
+;;; Compilation
+
+;;;; Compile
+;; Build and run programs
+(use-package compile
+  :ensure nil
+  :hook (compilation-mode . goto-address-mode)
+  :custom
+  ;; Scroll compilation output to first error
+  (compilation-scroll-output 'first-error))
+
 ;;; _
 (provide 'init-prog-modes)

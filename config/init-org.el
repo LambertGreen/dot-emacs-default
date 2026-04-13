@@ -608,7 +608,7 @@
 ;;; Org-Pretty-Table
 ;; Draw pretty Unicode tables
 (use-package org-pretty-table
-  :ensure (:fetcher github :repo "Fuco1/org-pretty-table")
+  :ensure (:host github :repo "Fuco1/org-pretty-table")
   :after org
   :hook (org-mode . org-pretty-table-mode))
 
@@ -843,7 +843,7 @@
 
 ;;;; Ob-Json
 (use-package ob-json
-  :ensure (:fetcher github :repo "sgpthomas/ob-json")
+  :ensure (:host github :repo "sgpthomas/ob-json")
   :after org
   :init
   (add-to-list 'org-babel-load-languages '(json . t))

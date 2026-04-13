@@ -8,6 +8,16 @@
 ;;; Tansient
 (use-package transient)
 
+;;; Magit-Section
+;; Workaround: magit-section shares the magit repo but elpaca can't find
+;; the main file under lisp/ automatically.
+(use-package magit-section
+  :ensure (:host github :repo "magit/magit"
+                  :main "lisp/magit-section.el"
+                  :files ("lisp/magit-section.el"
+                          "lisp/magit-section-pkg.el"
+                          "docs/magit-section.texi")))
+
 ;;; Magit
 ;; Git porcelain inside Emacs
 (use-package magit

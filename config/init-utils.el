@@ -19,7 +19,7 @@
 ;;; Keychain-Environment
 ;; Re-use environment variables: `SSH_AUTH_SOCK' `SSH_AGENT_PID' `GPG_AGENT'
 (use-package keychain-environment
-  :ensure (:fetcher github :repo "LambertGreen/keychain-environment")
+  :ensure (:host github :repo "LambertGreen/keychain-environment")
   :hook (after-init . keychain-refresh-environment))
 
 ;;; GPG
@@ -84,7 +84,7 @@
 ;; Otherwise it has the potential to replase PDF Tools
 (use-package reader
   :disabled t
-  :ensure (:fetcher codeberg :repo "divyaranjan/emacs-reader"
+  :ensure (:host codeberg :repo "divyaranjan/emacs-reader"
                     :files (:defaults "render-core.dylib")
                     :pre-build ("make" "all"))
   :magic ("%PDF" . reader-mode)

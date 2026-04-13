@@ -7,7 +7,7 @@
 ;;; Claude-Code-Ide
 ;; Hey Jarvis... I mean Claude
 (use-package claude-code-ide
-  :ensure (:fetcher github :repo "manzaltu/claude-code-ide.el")
+  :ensure (:host github :repo "manzaltu/claude-code-ide.el")
   :custom (claude-code-ide-terminal-backend 'eat)
   :bind ("C-c a" . claude-code-ide-menu)
   :config

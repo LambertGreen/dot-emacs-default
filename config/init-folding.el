@@ -2,7 +2,7 @@
 
 ;;; Treesit-fold
 (use-package treesit-fold
-  :ensure (:fetcher github :repo "emacs-tree-sitter/treesit-fold")
+  :ensure (:host github :repo "emacs-tree-sitter/treesit-fold")
   :after evil
   :hook ((prog-mode . treesit-fold-mode)
          (prog-mode . treesit-fold-indicators-mode))

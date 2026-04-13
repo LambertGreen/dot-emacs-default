@@ -102,45 +102,12 @@ If no definitions found, retries with only dumb-jump backend."
     ;; Make comments light weight
     (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'light)
 
-    ;; Apply Tree-sitter-based font adjustments if available
-    (when (treesit-available-p)
-      (let ((rules
-             '((python-ts-mode
-                :language 'python
-                :rules '((function_definition name: (identifier) @function-name)))
-
-               (c-ts-mode
-                :language 'c
-                :rules '((function_definition declarator: (identifier) @function-name)))
-
-               (cpp-ts-mode
-                :language 'cpp
-                :rules '((function_definition declarator: (identifier) @function-name)))
-
-               (js-ts-mode
-                :language 'javascript
-                :rules '((function_declaration name: (identifier) @function-name)))
-
-               (tsx-ts-mode
-                :language 'tsx
-                :rules '((function_declaration name: (identifier) @function-name)))
-
-               (emacs-lisp-ts-mode
-                :language 'elisp
-                :rules '((function_definition name: (symbol) @function-name))))))
-
-        ;; Apply rules dynamically
-        (dolist (entry rules)
-          (let ((mode (nth 0 entry))
-                (lang (plist-get (cdr entry) :language))
-                (rule (plist-get (cdr entry) :rules)))
-            (when (derived-mode-p mode)
-              (treesit-font-lock-rules mode
-                                       :override t
-                                       :language lang
-                                       rule
-                                       :features
-                                       '((function-name . (:inherit font-lock-function-name-face :height 1.4))))))))))
+    ;; Make function names slightly larger in tree-sitter modes
+    (when (and (treesit-available-p)
+               (derived-mode-p 'python-ts-mode 'c-ts-mode 'c++-ts-mode
+                               'js-ts-mode 'tsx-ts-mode 'java-ts-mode
+                               'rust-ts-mode))
+      (set-face-attribute 'font-lock-function-name-face nil :height 1.1)))
 
   (defun lgreen/format-buffer ()
     "Format buffer with eglot or apheleia."
@@ -263,7 +230,7 @@ If no definitions found, retries with only dumb-jump backend."
 ;;;; Eglot-Booster
 ;; Making LSP usage bearable
 (use-package eglot-booster
-  :ensure (:fetcher github :repo "jdtsmith/eglot-booster")
+  :ensure (:host github :repo "jdtsmith/eglot-booster")
   :after eglot
   :commands (eglot)
   :init

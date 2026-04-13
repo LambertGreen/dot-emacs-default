@@ -274,7 +274,7 @@
 ;;; Evil-Little-Word
 ;; handle the sub ("little") words in AnyCamelCase
 (use-package evil-little-word
-  :ensure (:fetcher github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
+  :ensure (:host github :repo "tarao/evil-plugins" :files ("evil-little-word.el"))
   :after evil
   :commands (evil-forward-little-word-begin evil-backward-little-word-begin evil-inner-little-word)
   :init
@@ -292,7 +292,7 @@
 ;; Get down with it, get down with it
 (use-package evil-markdown
   :after (evil markdown-mode)
-  :ensure (:fetcher github :repo "Somelauw/evil-markdown")
+  :ensure (:host github :repo "Somelauw/evil-markdown")
   :commands (evil-markdown-set-key-theme)
   :init
 ;;;; Keymaps
@@ -313,7 +313,7 @@
 ;;; Targets
 ;; Aiming at that there
 (use-package targets
-  :ensure (:fetcher github :repo "dvzubarev/targets.el")
+  :ensure (:host github :repo "dvzubarev/targets.el")
   :commands (targets-setup targets-define-composite-to targets-define-to)
   :custom
   (targets-text-objects nil)

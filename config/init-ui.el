@@ -199,7 +199,7 @@
 ;;; Indent-Bars
 ;; Know what vertical you are on
 (use-package indent-bars
-  :ensure (:fetcher github :repo "jdtsmith/indent-bars")
+  :ensure (:host github :repo "jdtsmith/indent-bars")
   :custom
   (indent-bars-width-frac 0.2)
   (indent-bars-pad-frac 0.2)
@@ -384,7 +384,7 @@
 ;;; Breadcrumb
 ;; Like how Hansel & Gretel got back home
 (use-package breadcrumb
-  :ensure (:fetcher github :repo "joaotavora/breadcrumb")
+  :ensure (:host github :repo "joaotavora/breadcrumb")
   :init
   (breadcrumb-mode t)
   (lgreen/leader-define-key

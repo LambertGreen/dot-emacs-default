@@ -109,7 +109,7 @@
 ;;;; Ultra-Scroll
 ;; Making the touchpad relevant again
 (use-package ultra-scroll
-  :ensure (:fetcher github :repo "jdtsmith/ultra-scroll")
+  :ensure (:host github :repo "jdtsmith/ultra-scroll")
   :demand t
   :init
   (setq scroll-conservatively 101 ; important!

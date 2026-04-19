@@ -25,6 +25,7 @@
                  "CXX"
                  "RIPGREP_CONFIG_PATH"
                  "GPG_AGENT_INFO"
+                 "GPG_TTY"
                  "SSH_AGENT_PID"
                  "SSH_AUTH_SOCK"
                  ))

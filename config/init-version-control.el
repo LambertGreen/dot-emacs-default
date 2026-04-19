@@ -74,12 +74,6 @@
   (git-gutter:deleted-sign "▁")
   ;; Hide gutter when there are no changes
   (git-gutter:hide-gutter t)
-  :hook
-  ((focus-in . git-gutter:update-all-windows)
-   (after-save . git-gutter:update-all-windows)
-   (magit-post-refresh . git-gutter:update-all-windows)
-   (window-configuration-change . git-gutter:update-all-windows)
-   (find-file . lgreen/setup-git-gutter-if-in-vcs))
   :init
   ;; Keybindings for navigating diffs
   (lgreen/leader-define-key
@@ -89,16 +83,9 @@
     "g s" '(git-gutter:stage-hunk :wk "stage hunk")
     "t g" '(global-git-gutter-mode :wk "toggle git-gutter")
     "t G" '(git-gutter :wk "refresh git-gutter"))
-
-  ;; Function to set up git-gutter in VCS projects
-  (defun lgreen/setup-git-gutter-if-in-vcs ()
-    "Enable git-gutter if the current project is under version control."
-    (let ((project (project-current t)))
-      (when (and project
-                 (eq (car project) 'vc)) ; Check if project is a VCS project
-        (require 'git-gutter)
-        (global-git-gutter-mode 1))))
   :config
+  (global-git-gutter-mode 1)
+
   ;; Update git-gutter colors based on diff faces
   (defun lgreen/update-git-gutter-colors ()
     "Update git-gutter colors to match current theme."

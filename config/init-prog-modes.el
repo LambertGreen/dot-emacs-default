@@ -397,6 +397,10 @@ If no definitions found, retries with only dumb-jump backend."
 ;;;; Kotlin
 (use-package kotlin-mode)
 
+;;;; Feature Mode (Gherkin/Behave)
+(use-package feature-mode
+  :mode ("\\.feature\\'" . feature-mode))
+
 ;;; Compilation
 
 ;;;; Compile

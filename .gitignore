@@ -13,6 +13,9 @@ semanticdb/
 transient/
 tree-sitter/
 var/
+recentf.eld
+speed-type/
+tutorial/
 /custom.el
 
 # Claude Code settings

@@ -12,7 +12,8 @@
   :custom (doom-one-padded-modeline t))
 
 ;;; EF Themes
-(use-package ef-themes)
+(use-package ef-themes
+  :ensure (:host github :repo "protesilaos/ef-themes"))
 
 ;;; Kaolin Themes
 (use-package kaolin-themes)
@@ -23,7 +24,10 @@
 ;;; Chocolate Theme
 (use-package chocolate-theme)
 
-;;; Sync theme with system appearance
+;;; Theme configuration
+;; Hardcode dark theme on all platforms. Internal shells (EAT, vterm) cannot
+;; dynamically switch, so the editor must match the shell default.
+;; See docs/THEME_STRATEGY.org for full rationale.
 (use-package theme-settings
   :ensure nil
   :after (doom-themes solaire-mode)
@@ -48,13 +52,16 @@ If APPEARANCE is not passed, query frame parameters."
     "Set theme based on the operating system."
     (cond
      ;; macOS (emacs-plus or emacs-mac)
-     ((memq window-system '(mac ns))
-      ;; Attach the hook
-      (add-hook 'ns-system-appearance-change-functions #'lgreen/apply-theme-based-on-appearance)
-      ;; Set initial theme based on current appearance
-      (lgreen/apply-theme-based-on-appearance (frame-parameter nil 'background-mode)))
-     ;; Windows and Linux fallback
-     ((or (eq system-type 'windows-nt)
+     ;; Disabled: follow OS appearance. Preferred behavior but causes mismatch
+     ;; with internal shells that cannot dynamically switch.
+     ;; Uncomment to re-enable if shell theme propagation is solved.
+     ;; ((memq window-system '(mac ns))
+     ;;  (add-hook 'ns-system-appearance-change-functions #'lgreen/apply-theme-based-on-appearance)
+     ;;  (lgreen/apply-theme-based-on-appearance (frame-parameter nil 'background-mode)))
+
+     ;; All platforms: hardcode dark
+     ((or (memq window-system '(mac ns))
+          (eq system-type 'windows-nt)
           (eq system-type 'gnu/linux))
       (load-theme lgreen/preferred-dark-theme t))))
 

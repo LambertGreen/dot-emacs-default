@@ -105,6 +105,7 @@
 ;;; Corfu-Terminal
 ;; Do it without child-frames
 (use-package corfu-terminal
+  :ensure (:host codeberg :repo "akib/emacs-corfu-terminal")
   :after corfu
   :config
   (unless (display-graphic-p)
@@ -177,6 +178,7 @@
 
 ;;; Kind-Icon
 (use-package kind-icon
+  :ensure (:host github :repo "jdtsmith/kind-icon")
   :after corfu
   :custom
   (kind-icon-use-icons t)

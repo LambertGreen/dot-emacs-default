@@ -286,7 +286,8 @@ If no definitions found, retries with only dumb-jump backend."
 (use-package bats-mode)
 
 ;;;; Character Separated Values
-(use-package csv-mode)
+(use-package csv-mode
+  :ensure (:host github :repo "emacsmirror/csv-mode"))
 
 ;;;; Fennel language
 (use-package fennel-mode)

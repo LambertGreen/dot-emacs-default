@@ -3,6 +3,8 @@
 ;;; Undo-Tree
 ;; "What good is a mind if you can't change it"
 (use-package undo-tree
+  :ensure (:host gitlab :repo "tsc25/undo-tree"
+           :build (:not elpaca-check-version))
   :demand t
   :after (evil no-littering)
   :custom

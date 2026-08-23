@@ -29,6 +29,12 @@
 ;; Emulate A Terminal
 ;; NOTE: On first use you may need to run `eat-compile-terminfo'
 (use-package eat
+  :ensure (:host codeberg :repo "akib/emacs-eat"
+           :files ("*.el" ("term" "term/*.el") "*.texi"
+                   "*.ti" ("terminfo/e" "terminfo/e/*")
+                   ("terminfo/65" "terminfo/65/*")
+                   ("integration" "integration/*")
+                   (:exclude ".dir-locals.el" "*-tests.el")))
   :after project
   :custom
   (eat-kill-buffer-on-exit t)

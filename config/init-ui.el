@@ -269,6 +269,7 @@
 ;;; Pulsar
 ;; Know what line point is on after movement
 (use-package pulsar
+  :ensure (:host github :repo "protesilaos/pulsar")
   :after (evil org)
   :custom
   ((pulsar-pulse t)
@@ -379,7 +380,8 @@
 ;;; Rainbow-Mode
 ;; Turning words and numbers into visible light
 ;; Example: Red (#ff0000), Green (#00ff00), Blue (#0000ff)
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :ensure (:host github :repo "emacsmirror/rainbow-mode"))
 
 ;;; Breadcrumb
 ;; Like how Hansel & Gretel got back home

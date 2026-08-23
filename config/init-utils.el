@@ -31,6 +31,7 @@
 ;;; Pinentry
 ;; Enter GPG passphrase via Emacs
 (use-package pinentry
+  :ensure (:host github :repo "emacsmirror/pinentry")
   :after (epg keychain-environment)
   :unless (eq system-type 'windows-nt)
   :hook (after-init . pinentry-start))

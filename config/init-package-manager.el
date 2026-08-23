@@ -53,6 +53,12 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+;;; Disable GNU/NonGNU ELPA menus — those servers are frequently unreachable
+(setq elpaca-menu-functions
+      (seq-remove (lambda (f)
+                    (memq f '(elpaca-menu-gnu-elpa elpaca-menu-nongnu-elpa)))
+                  elpaca-menu-functions))
+
 ;;; Install use-package support
 (setq use-package-verbose t
       use-package-compute-statistics t
@@ -63,7 +69,15 @@
 (elpaca elpaca-use-package
   (elpaca-use-package-mode))
 
-;;; Recipe overrides for broken MELPA recipes
+;;; Recipe overrides — packages from GNU/NonGNU ELPA need explicit repos
+;;; since those archive servers are disabled above.
+;;; Packages with use-package declarations carry their recipe via :ensure.
+;;; These are transitive dependencies with no use-package form:
+(elpaca (compat :host github :repo "emacs-compat/compat"))
+(elpaca (queue :host github :repo "emacsmirror/queue"))
+(elpaca (popon :host codeberg :repo "akib/emacs-popon"))
+(elpaca (svg-lib :host github :repo "rougier/svg-lib"))
+
 ;; simple-httpd: MELPA recipe points to wrong repo (emacs-web-server instead of emacs-http-server)
 (elpaca (simple-httpd :host github :repo "skeeto/emacs-http-server"))
 

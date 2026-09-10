@@ -640,6 +640,9 @@
   :custom
   (org-roam-db-autosync-mode t)
   (org-roam-directory "~/dev/my/org/roam/")
+  (org-roam-node-display-template
+   (concat "${title:*} " (propertize "${tags:*}" 'face 'org-tag)))
+
 ;;;; Capture Templates
   (org-roam-capture-templates
    '(

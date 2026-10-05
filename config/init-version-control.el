@@ -31,10 +31,30 @@
   (magit-auto-revert-mode t)
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :init
+;;;; Worktrees section
+  ;; Measured (magit 4.7.1, git 2.54): +1 git call (~20ms) per refresh when a
+  ;; repo has no extra worktrees, ~22ms per live worktree otherwise (51 → +1s).
+  ;; Opt a heavy repo out via .dir-locals.el (the hook itself is a risky
+  ;; local variable, so toggle this instead):
+  ;;   ((magit-status-mode . ((lgreen/magit-status-show-worktrees . nil))))
+  (defcustom lgreen/magit-status-show-worktrees t
+    "Non-nil means show the Worktrees section in `magit-status'."
+    :type 'boolean
+    :safe #'booleanp
+    :group 'magit-status)
+
+  (defun lgreen/magit-insert-worktrees ()
+    "Insert `magit-insert-worktrees' unless disabled for this repo."
+    (when lgreen/magit-status-show-worktrees
+      (magit-insert-worktrees)))
 ;;;; Keymaps
   (lgreen/leader-define-key
     "g g" '(magit-status :wk "status")
-    "g b" '(magit-blame :wk "blame")))
+    "g b" '(magit-blame :wk "blame"))
+  :config
+  (magit-add-section-hook 'magit-status-sections-hook
+                          #'lgreen/magit-insert-worktrees
+                          'magit-insert-status-headers t))
 
 ;;; Magit-Todos
 ;; There is always more todo

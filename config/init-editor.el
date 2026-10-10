@@ -86,6 +86,7 @@
 ;;; Embark-Consult
 ;; Integration between 'embark' and 'consult'
 (use-package embark-consult
+  :after embark
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
   :config
